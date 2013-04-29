@@ -82,7 +82,7 @@
 							
 							<p id='mainlogo'>
 								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-									<img src="<?php echo get_stylesheet_directory_uri();?>/images/coat-arms.gif" alt="<?php echo get_bloginfo('name');?>"  />
+									<img src="<?php echo get_stylesheet_directory_uri();?>/images/wordpress.png" alt="<?php echo get_bloginfo('name');?>"  />
 								</a>
 							</p>
 							
@@ -106,17 +106,12 @@
 						
 						<div id='navigation' class="row">
 							<div class="twelvecol last">
-								<div id="gradient" class='menu-header'>
+								<div class='menu-header'>
 								
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
 									<a href="#maincontent" class='hiddentext' accesskey='s' title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a>
 		
 								<div id="primarynav" role="navigation" class="touchdown-list">
-								<div class="homeicon">
-								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-									<img src="<?php echo get_stylesheet_directory_uri();?>/images/icon-home.png" alt="<?php echo get_bloginfo('name');?>"  />
-								</a>
-								</div>
 									<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 									<?php 
 										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>

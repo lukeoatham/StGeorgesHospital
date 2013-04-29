@@ -3,7 +3,7 @@ Theme Name: St George's Hospital
 Theme URI: http://
 Description: Custom WordPress theme for BIOT. Based on Starkers + 1140 Grid System by Alex Newman, derived from Elliot Jay Stocks' Starkers Theme (http://starkerstheme.com/) and the 1140 CSS Grid (http://cssgrid.net/).
 Version: 0.1
-Author: Luke Oatham
+Author: Colin Wren & Luke Oatham
 Author URI: http://www.helpfultechnology.com
 Tags: starkers, naked, clean, basic, unicorns
 */
@@ -33,14 +33,22 @@ body {
 }
 
 #utilitystrip .container {
-	background: url('images/coat-arms.png') #fff no-repeat 20px top;
+	background: url('images/logo.png') #fff no-repeat 20px top;
 	height: 60px;
 	padding-left: 90px;
 	max-width: 1080px !important; max-width: 900px !important;
 }
-	#mainlogo   {
-		float: none;
-    }
+
+#mainlogo   {
+	float: none;
+}
+
+#header {
+	background: #fff;
+	height: 220px;
+	overflow: hidden;
+}
+
 #masthead  {
 	text-align: left;
 	padding: 0;
@@ -62,8 +70,6 @@ body {
 	padding: 2em 1em 0 0;
 }
 
-
-
 #searchform #s  {
 	width: 175px;
 }
@@ -74,20 +80,19 @@ body {
 	padding: 1.6em 0 0 1em !important;
 	display: inline-block;
 	width: 75%;
-	color: white !important;
+	color: navy !important;
 	line-height: 110%;
 	font-weight: 200;
-	min-height: 130px;
 	margin-bottom: 0.4em;
 }
 
 #strapline span {
-	color: #fff;
+	color: navy;
 	display: inline-block;
 	margin-bottom: 0.5em;
 }
 #strapline a {
-	color: #fff;
+	color: navy;
 	display: inline-block;
 	margin-bottom: 0.5em;
 	text-decoration: none;
@@ -109,15 +114,11 @@ body {
 
 #topheader {
 	padding: 1em 0 0 0;
-	color: white;
+	color: navy;
 	margin-bottom: 0;
 }
 
-#header {
-	background: #00285B url('images/biot-header.jpg') no-repeat right;
-	height: 294px;
-	overflow: hidden;
-}
+
 
 h1 a, h2 a {
 	text-decoration: none;
@@ -141,46 +142,8 @@ h1 a, h2 a {
 	text-align: center;
 }
 
-#primarynav {
-	display: block;
-	color: white;
-	padding:  0;
-	font-family: "Transport New Light", arial, sans-serif;
-	text-align: left;
-	max-width: 100% !important;
-	margin-top: 0px;
-	background: transparent;
-	margin-left: 2em;
 
-}
 
-#gradient {
-width: 100%;
-min-height: 88px;
-padding-top: 20px;
-
-        /* webkit example */
-        background-image: -webkit-gradient(
-          linear, left bottom, left top, from(rgba(0, 40, 91, 1.0)),
-          to(rgba(0, 40, 91, 0)) 
-        ) !important;
-
-        /* mozilla example - FF3.6+ */
-        background-image: -moz-linear-gradient(
-          left top,
-          rgba(0, 40, 91, 1.0) 20%, rgba(0, 40, 91, 0) 95%
-        ) !important;
-
-        /* IE 5.5 - 7 */
-        filter: progid:DXImageTransform.Microsoft.gradient(
-          gradientType=0, startColor=0, endColorStr=#00285B
-        ) !important;
-
-        /* IE8 uses -ms-filter for whatever reason... */
-        -ms-filter: progid:DXImageTransform.Microsoft.gradient(
-          gradientType=0, startColor=0, endColoStr=#00285B
-        ) !important;
-}
 
 .breadcrumbs {
 	padding: 1em 0;
@@ -194,18 +157,24 @@ ul#menu-top-tasks li {
 	list-style: square;
 	margin-left: 1em !important;
 }
+#primarynav  {
+	background: none;
+	padding: 0;
+	margin-top: 23px;
+}
 
 #primarynav ul  {
-	margin-top: 1em;
+	margin-top: 0;
 }
 
 #primarynav ul li  {
 	display: inline;
-	font-family: "Transport New Light", arial, sans-serif;
+	background: #333;
+	font-family:'Myriad W01 Regular',  verdana,  sans-serif;
 	font-weight: normal;
 	float: left;
 	margin-right: 0.5em;
-	font-size: 1em;
+	font-size: 0.85em;
 	text-align: center;
 }
 
@@ -215,34 +184,31 @@ ul#menu-top-tasks li {
 
 #primarynav ul li a  {
 	display: block;
-	padding: 1.3em 0.95em 1.3em 0.95em;
+	padding: 0.4em 0.75em 0.6em 0.75em;
 	color: #fff;
 	text-decoration: none;
 }
 
 #primarynav ul li a:hover  {
-	background-color: rgba(255,255,255,0.3);
-	color: #fff;
+	background: url('images/bgtexture-light.png');
+	color: #333;
 }
 
-
-
-
+#primarynav ul li.current_menu_item, #primarynav ul li.current_page_item, #primarynav ul li.current-page-ancestor {
+	background: #fff url('images/bgtexture-light.png') !important;
+}
 
 #primarynav ul li.current_menu_item a, #primarynav ul li.current_page_item a, #primarynav ul li.current-page-ancestor a  {
 	color: #333;
-	background: white;
 }
 
 .touchdown-list  {
 	display: block;
 }
 
-
 .touchdown  {
 	display: none;
 }
-
 
 .single.single-post #primarynav ul#menu-primary-navigation #menu-item-29 a {
 	color: #333 !important;
@@ -492,7 +458,7 @@ ul#menu-utilities
 	
 
 ul#menu-utilities a {
-	color: white;
+	color: navy;
 	list-style: none !important;
 }
 
@@ -833,10 +799,9 @@ li.comment .comment-body {
 	padding: 1.7em 0 0 1em !important;
 	display: inline-block;
 	width: 65%;
-	color: white !important;
+	color: navy !important;
 	line-height: 110%;
 	font-weight: 200;
-	min-height: 130px;
 	margin-bottom: 1.2em;
 }
 
@@ -952,18 +917,10 @@ li.comment .comment-body {
 	margin-bottom: 1.2em;
 }
 
-#gradient {
-width: 100%;
-min-height: 88px;
-padding-top: 20px;
-background-image: none !important;
-}
-
 
 #header {
-	background: #00285B url('images/biot-header.jpg') no-repeat center bottom;
+	background: #00285B;
 	height: 294px;
-	overflow: hidden;
 }
 
 #mainlogo {
