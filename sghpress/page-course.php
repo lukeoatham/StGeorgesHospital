@@ -22,12 +22,8 @@ get_header(); ?>
 					</div>
 					
 					<div class="fourcol last">
-					<div class="toptasks">
-		
-					</div>		
+	
 					</div>
-
-				<hr>
 
 
 				</div>
