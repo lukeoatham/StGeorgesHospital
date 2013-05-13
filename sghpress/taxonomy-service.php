@@ -7,7 +7,11 @@
  * @since Starkers 3.0
  */
 
-get_header(); ?>
+get_header();	
+
+if ( have_posts() )
+		the_post();
+		 ?>
 
 				<div class="row">
 					<div class="eightcol" id="content">
@@ -25,7 +29,18 @@ get_header(); ?>
 				 * If you want to overload this in a child theme then include a file
 				 * called loop-category.php and that will be used instead.
 				 */
-				get_template_part( 'loop', 'category' );
+				 $x = explode("/", $_SERVER['REQUEST_URI']);//echo $x[2];
+				 rewind_posts();
+				query_posts(array(
+				'post_type'=>'treatment',
+				'tax_query'=>array(array(
+				'taxonomy'=>'service',
+				'field'=>'slug',
+				'terms'=>$x[2],
+				))
+				))
+				;
+				get_template_part( 'loop', 'archive' );
 				?>
 
 					</div>

@@ -7,136 +7,76 @@ get_header(); ?>
 
 				<div class="row">
 
-					<div class="eightcol">
+					<div class="sevencol">
 					<?php the_content(); ?>
+					<h2>Carousel</h2>
+					St George’s Healthcare provides diagnosis, surgery and chemotherapy for all types of cancer as well as palliative care (care to improve quality of life) and follow-up clinics. It also plays a key part in cancer prevention, offering screening services and treatment for pre-cancer stages. Radiotherapy (using x-rays or other forms of radiation as treatment) for patients is provided at the Royal Marsden Hospital with which St George’s Healthcare is a Joint Cancer Centre. There is close liaison with primary healthcare teams and local hospices to provide seamless care for cancer patients. A 24-hour on-call oncology and palliative care service is available.
 					</div>
 					
-					<div class="fourcol last">
-					<div class="toptasks">
-						<ul class="xoxo">
-								<?php dynamic_sidebar( 'top-tasks-widget-area' ); ?>
-						</ul>			
-					</div>		
+					<div class="fivecol last">
+						<h2>News</h2>
+						St George’s Healthcare provides diagnosis, surgery and chemotherapy for all types of cancer as well as palliative care (care to improve quality of life) and follow-up clinics. It also plays a key part in cancer prevention, offering screening services and treatment for pre-cancer stages. Radiotherapy (using x-rays or other forms of radiation as treatment) for patients is provided at the Royal Marsden Hospital with which St George’s Healthcare is a Joint Cancer Centre. There is close liaison with primary healthcare teams and local hospices to provide seamless care for cancer patients. A 24-hour on-call oncology and palliative care service is available.
 					</div>
 
-				<hr>
-
-
 				</div>
-				
-<br>
 				<div class="row">
 
-
-<?php
-query_posts('post_type=any&tag=promo');
-				$cs_counter = 0;
-				$max_cs_items = 3;
-				
-				if ( have_posts() ) {
-				
-					while ( have_posts() && ($cs_counter <= $max_cs_items) ) {
-						the_post();
-						
-						if ( has_post_thumbnail( $post->ID ) ) {
-								$img = get_the_post_thumbnail($post->ID,'medium') ;
-						} 
-						
-						if ($img != "none") {
-							$img_chunk = "{$img}";
-						} else {
-							$img_chunk = "";
-						}
-						$cs_counter++;
-						$titlesnippet = (strlen(get_the_title())>200) ? substr(get_the_title(),0,200)."&hellip;" : get_the_title();
-						$snippet = (strlen(get_the_excerpt())>150) ? substr(get_the_excerpt(),0,150)."&hellip;" : get_the_excerpt();
-						$plink = get_permalink();
-						echo "<div class='fourcol";
-						if ($cs_counter==3) {echo ' last';}
-						echo "'>";
-						echo "<div class = 'feature-block'>";
-						echo "			
-							  <h3><a href='".$plink."'>".$titlesnippet."</a></h3>
-							<a href='".$plink."'>".$img_chunk."</a>
-							  <p>".$snippet."</p>
-							  <div class='morelinkgrey'><a href='".$plink."'>More</a></div>
-							  
-							  </div>
-							  </div>
-						";
-
-					}
-
+					<div class="sevencol">
+						<div class="fourcol">
+							<h2>Box 1</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+						<div class="fourcol">
+							<h2>Box 2</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+						<div class="fourcol last">
+							<h2>Box 3</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+					</div>
 					
-				}
-				
-				wp_reset_query();
-?>
+					<div class="fivecol last">
+						<div class="sixcol">
+							<h2>Box 4</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+						<div class="sixcol last">
+							<h2>Box 5</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+					</div>
+
+				</div>
+				<div class="row">
+
+					<div class="sevencol">
+						<div class="fourcol">
+							<h2>Box 6</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+						<div class="fourcol">
+							<h2>Box 7</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+						<div class="fourcol last">
+							<h2>Box 8</h2>
+							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+					</div>
+					
+					<div class="fivecol last">
+						<div class="twelvecol last">
+							<h2>Box 9</h2>
+							<img style="width:100%;" src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
+						</div>	
+					</div>
 
 				</div>
 
+				
 
-				
-	<div class="row">
-			<br>
-			<hr>
-			<br>	
-	<div class="eightcol">
-	<h2>News</h2>
-<?php
-query_posts('post_type=post&posts_per_page=2');
-				$cs_counter = 0;
-				$max_cs_items = 2;
-				
-				if ( have_posts() ) {
-				
-					while ( have_posts() && ($cs_counter <= $max_cs_items) ) {
-						the_post();
-						$img='none';
-						if ( has_post_thumbnail( $post->ID ) ) {
-								$img = get_the_post_thumbnail($post->ID,'thumbnail',array('class'=>'alignleft')) ;
-						} 
-						
-						if ($img != "none") {
-							$img_chunk = "{$img}";
-						} else {
-							$img_chunk = "";
-						}
-						$cs_counter++;
-						$titlesnippet = (strlen(get_the_title())>200) ? substr(get_the_title(),0,200)."&hellip;" : get_the_title();
-						$snippet = (strlen(get_the_excerpt())>150) ? substr(get_the_excerpt(),0,150)."&hellip;" : get_the_excerpt();
-						$plink = get_permalink();
-						echo "<div class='news_story clearfix";
-						if ($cs_counter==3) {echo ' last';}
-						echo "'>";
-						echo "<div class = 'feature-block'>";
-						echo "			
-							<a href='".$plink."'>".$img_chunk."</a>
-							  <h3><a href='".$plink."'>".$titlesnippet."</a></h3>
-							  <p>".$snippet."</p>
-							  <div class='morelinkgrey'><a href='".$plink."'>More</a></div>
-							  
-							  </div>
-							  </div>
-						";
-
-					}
-
-					
-				}
-				
-				wp_reset_query();
-?>	
-	
-	</div>
-	
-	<div class="fourcol last">
-								<?php dynamic_sidebar( 'tout-box-widget-area' ); ?>
 		
-	</div>
-
-	
-	</div>				
 				
 
 <?php endwhile; ?>
