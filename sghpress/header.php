@@ -29,8 +29,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 
-	<!-- webfont loading: Myriad -->
-	<script type="text/javascript" src="http://fast.fonts.com/jsapi/d920df51-3d1e-43da-ad8f-255ba255fc3a.js"></script>
+	<!-- webfont loading: -->
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,700' rel='stylesheet' type='text/css'>
 	
 	<!-- 1140px Grid styles for IE -->
 	<!--[if lte IE 9]>
@@ -80,12 +80,12 @@
 
 						<div id='masthead' class="eightcol">
 							
-							<p id='mainlogo'>
+<!--							<p id='mainlogo'>
 								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 									<img src="<?php echo get_stylesheet_directory_uri();?>/images/wordpress.png" alt="<?php echo get_bloginfo('name');?>"  />
 								</a>
-							</p>
-							
+						</p>
+-->								
 							<p id='strapline'>
 								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 									<?php echo get_bloginfo( 'name' ); ?>

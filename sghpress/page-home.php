@@ -19,64 +19,6 @@ get_header(); ?>
 					</div>
 
 				</div>
-				<div class="row">
-
-					<div class="sevencol">
-						<div class="fourcol">
-							<h2>Box 1</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-						<div class="fourcol">
-							<h2>Box 2</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-						<div class="fourcol last">
-							<h2>Box 3</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-					</div>
-					
-					<div class="fivecol last">
-						<div class="sixcol">
-							<h2>Box 4</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-						<div class="sixcol last">
-							<h2>Box 5</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-					</div>
-
-				</div>
-				<div class="row">
-
-					<div class="sevencol">
-						<div class="fourcol">
-							<h2>Box 6</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-						<div class="fourcol">
-							<h2>Box 7</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-						<div class="fourcol last">
-							<h2>Box 8</h2>
-							<img src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-					</div>
-					
-					<div class="fivecol last">
-						<div class="twelvecol last">
-							<h2>Box 9</h2>
-							<img style="width:100%;" src='http://sgh.helpfulclients.com/wp-content/uploads/2013/05/file0001491377628-150x150.jpg' />
-						</div>	
-					</div>
-
-				</div>
-
-				
-
-		
 				
 
 <?php endwhile; ?>

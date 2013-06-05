@@ -635,3 +635,7 @@ function enqueueThemeScripts() {
 	 wp_enqueue_script( 'thickbox' ); // in case we want to do popup layer surveys or alerts... 
 }
 add_action('wp_enqueue_scripts','enqueueThemeScripts');
+
+// listing page thumbnail sizes, e.g. home page
+
+add_image_size( "clinicianthumb", "100", "100", true );

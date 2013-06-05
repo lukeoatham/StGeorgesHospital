@@ -16,7 +16,7 @@ Tags: starkers, naked, clean, basic, unicorns
 body {
 	font-size: 100%;
 	line-height: 140% !important;
-	font-family: arial, helvetica, sans-serif;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 .row {
@@ -44,8 +44,8 @@ body {
 }
 
 #header {
-	background: #fff;
-	height: 220px;
+	background: #0075D8;
+	height: 167px;
 	overflow: hidden;
 }
 
@@ -75,12 +75,12 @@ body {
 }
 
 #masthead #strapline  {
-	font-family: 'Myriad W01 SmBd', arial, sans-serif;
+	font-family: 'Ubuntu', arial, sans-serif;
 	font-size: 1.8em;
 	padding: 1.6em 0 0 1em !important;
 	display: inline-block;
 	width: 75%;
-	color: navy !important;
+	color: white !important;
 	line-height: 110%;
 	font-weight: 200;
 	margin-bottom: 0.4em;
@@ -92,7 +92,7 @@ body {
 	margin-bottom: 0.5em;
 }
 #strapline a {
-	color: navy;
+	color: white;
 	display: inline-block;
 	margin-bottom: 0.5em;
 	text-decoration: none;
@@ -118,7 +118,9 @@ body {
 	margin-bottom: 0;
 }
 
-
+hr {
+	border-top: 3px solid #00857E;
+}
 
 h1 a, h2 a {
 	text-decoration: none;
@@ -169,8 +171,8 @@ ul#menu-top-tasks li {
 
 #primarynav ul li  {
 	display: inline;
-	background: #333;
-	font-family:'Myriad W01 Regular',  verdana,  sans-serif;
+	background: #0075D8;
+	font-family:'Ubuntu',  verdana,  sans-serif;
 	font-weight: normal;
 	float: left;
 	margin-right: 0.5em;
@@ -178,8 +180,8 @@ ul#menu-top-tasks li {
 	text-align: center;
 }
 
-#primarynav ul li:last-child,  #primarynav ul li.last-link  {
-	margin-right: none;
+#primarynav ul li:first-child,  #primarynav ul li.first-link  {
+	margin-left: 1em !important;
 }
 
 #primarynav ul li a  {
@@ -187,19 +189,22 @@ ul#menu-top-tasks li {
 	padding: 0.4em 0.75em 0.6em 0.75em;
 	color: #fff;
 	text-decoration: none;
+	border-right: 1px solid #0075D8;
 }
 
 #primarynav ul li a:hover  {
-	background: url('images/bgtexture-light.png');
-	color: #333;
+	background: #028dff;
+	color: white;
+	border-right: 1px solid #028dff;
 }
 
 #primarynav ul li.current_menu_item, #primarynav ul li.current_page_item, #primarynav ul li.current-page-ancestor {
-	background: #fff url('images/bgtexture-light.png') !important;
+	background: #fff !important;
 }
 
 #primarynav ul li.current_menu_item a, #primarynav ul li.current_page_item a, #primarynav ul li.current-page-ancestor a  {
 	color: #333;
+	border-right: 1px solid navy;
 }
 
 .touchdown-list  {
@@ -214,6 +219,11 @@ ul#menu-top-tasks li {
 	color: #333 !important;
 	background: white;
 }
+.single.single-service #primarynav ul#menu-primary-navigation #menu-item-11 a {
+	color: #333 !important;
+	background: white;
+}
+
 .archive.category.category-news #primarynav ul#menu-primary-navigation #menu-item-29 a {
 	color: #333 !important;
 	background: white;
@@ -228,7 +238,7 @@ ul#menu-top-tasks li {
 	list-style: none;
 	padding: 0;
 	font-size: 0.9em;
-	font-family: "Transport New Light", arial, sans-serif;
+	font-family: "Ubuntu", arial, sans-serif;
 	font-weight: normal;
 	line-height: 130%;
 }
@@ -246,7 +256,7 @@ ul#menu-top-tasks li {
 
 #sectionnav ul li a:hover  {
 	list-style: none;
-	font-family: "Transport New Light", arial, sans-serif;
+	font-family: "Ubuntu", arial, sans-serif;
 	font-weight: normal;
 	background: #DEE0E2 !important;
 	color: #333 !important;
@@ -254,7 +264,7 @@ ul#menu-top-tasks li {
 
 #sectionnav ul li.page_item a:hover,  #sectionnav ul li.current_page_parent a:hover  {
 	list-style: none;
-	font-family: "Transport New Light", arial, sans-serif;
+	font-family: "Ubuntu", arial, sans-serif;
 	font-weight: normal;
 	background: #DEE0E2 !important;
 	color: #333 !important;
@@ -334,6 +344,7 @@ ul#menu-top-tasks li {
 	padding-top: 25px;
 	padding-right: 10px;
 }
+.message { background:#e1f3fc; padding: .5em; margin-bottom: 1em; } 
 
 #promobar {
 	margin: 1em auto 2em auto;
@@ -422,6 +433,10 @@ ul#menu-top-tasks li {
 	display: none;
 }
 
+#sidebar h3 {
+	margin-bottom: 0
+}
+
 ul.sub-menu {
 	padding-left: 1em;
 }
@@ -467,7 +482,7 @@ ul#menu-utilities a {
 
 h1, h2, h3, h4, h5, h6 {
 	color: #00857E;
-	font-family: "Transport New Light", arial, sans-serif;
+	font-family: "Ubuntu", arial, sans-serif;
 	font-weight: lighter;
 	line-height: 130%;
 	margin: 0 0 1em 0;
@@ -514,7 +529,7 @@ a:hover, a:active {
 
 #content p, #content li, #content td, #content dd, #content dt, #sidebar p, #sidebar li, #footer p {
 	margin-bottom: 1em !important;
-	font-family: arial, trebuchet, verdana, sans-serif;
+	font-family: "Ubuntu", arial, trebuchet, verdana, sans-serif;
 	font-weight: lighter;
 	letter-spacing: 0.06em; letter-spacing: 0;
 	font-size: 100%;
@@ -794,7 +809,7 @@ li.comment .comment-body {
 	}
 	
 #masthead #strapline  {
-	font-family: 'Myriad W01 SmBd', arial, sans-serif;
+	font-family: 'Ubuntu', arial, sans-serif;
 	font-size: 1.8em;
 	padding: 1.7em 0 0 1em !important;
 	display: inline-block;
@@ -888,7 +903,7 @@ li.comment .comment-body {
 		position: relative;
 		left: 0;
 		top: 0;
-		font-family: "Transport New Medium Regular", arial, sans-serif;
+		font-family:  arial, sans-serif;
 		font-weight: normal;
 		line-height: 120%;
 		font-size: 200%;
@@ -905,7 +920,7 @@ li.comment .comment-body {
 	}
 	
 #masthead #strapline  {
-	font-family: 'Myriad W01 SmBd', arial, sans-serif;
+	font-family: 'Ubuntu', arial, sans-serif;
 	font-size: 1.4em;
 	padding: 2em 0 0 1em !important;
 	display: inline-block;
@@ -919,7 +934,7 @@ li.comment .comment-body {
 
 
 #header {
-	background: #00285B;
+	background: #0075D8;
 	height: 294px;
 }
 

@@ -6,48 +6,43 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<div class="row">
+					<div class="threecol" iid='secondarynav'>
 
-					<div class="eightcol">
-					<?php the_content(); 
-					$args = array(
-	'show_option_all'    => '',
-	'orderby'            => 'name',
-	'order'              => 'ASC',
-	'style'              => 'list',
-	'show_count'         => 0,
-	'hide_empty'         => 1,
-	'use_desc_for_title' => 1,
-	'child_of'           => 0,
-	'feed'               => '',
-	'feed_type'          => '',
-	'feed_image'         => '',
-	'exclude'            => '',
-	'exclude_tree'       => '',
-	'include'            => '',
-	'hierarchical'       => 1,
-	'title_li'           => __( 'Services' ),
-	'show_option_none'   => __('No services'),
-	'number'             => null,
-	'echo'               => 1,
-	'depth'              => 0,
-	'current_category'   => 0,
-	'pad_counts'         => 0,
-	'taxonomy'           => 'service',
-	'walker'             => null
-);
-						wp_list_categories( $args );
+				<?php 
+				//list all services
+						
+						$allservices = get_posts(
+							array(
+							"post_type" => "service",
+							"posts_per_page" => -1,
+							"orderby" => "title",
+							"order" => "ASC",
+							"post_parent" => 0
+							)
+						);
+						
+					foreach ($allservices as $service){
+						echo "<a href='".$service->guid."'>".$service->post_title."</a><br>";
+					} ?>
+						
+					</div>
+					
+					<div class="eightcol last">
+
+					<?php 
+
+					
+					
+					the_content(); 
+
 						
 					?>
 					
 					</div>
 					
-					<div class="fourcol last">
-					<div class="toptasks">
-		
-					</div>		
-					</div>
 
-				<hr>
+
+		
 
 
 				</div>
