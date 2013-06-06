@@ -48,7 +48,11 @@ global $biotpress_options;
 					</div>
 
 					<div class="threecol last clearfix" id='sidebar'>
+					<?php 
 
+					the_post_thumbnail('medium');
+					
+					?>
 						<ul class="xoxo">
 
 							<?php if ( (comments_open() || have_comments()) && $biotpress_options['radio_commentlayout_input'] == "sidebar") : ?>

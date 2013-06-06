@@ -19,32 +19,73 @@ get_header(); ?>
 				<div class="eightcol" id='content'>
 					<h1><?php the_title(); ?></h1>
 
-					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
-
 					<?php 
+					$protitle = get_post_meta($post->ID, 'professional_title', true);
+					if ($protitle !=''){
+						echo "<h2>".$protitle."</h2>";
+					}	
 					
-					$cimage = get_the_post_thumbnail($post->ID, 'thumbnail', array('class' => 'alignleft'));
-					echo $cimage;
-					the_content(); ?>
+					the_content(); 
+					echo "<h3>Contact</h3>";
+					$email = get_post_meta($post->ID, 'clinician_email', true);
+					if ($email !=''){
+						echo "<p><strong>Email: </strong><a href='mailto:".$email."'>".$email."</a></p>";
+					}	
 
-					<?php if ( (comments_open() || have_comments()) && $commentariatGOVUK_options['radio_commentlayout_input'] == "traditional") : ?>
-						<div id='comments'>
-							<?php comments_template( '', true ); ?>
-						</div>						
-					<?php endif; ?>
+					$telephone = get_post_meta($post->ID, 'clinician_telephone', true);
+					if ($telephone !=''){
+						echo "<p><strong>Telephone: </strong>".$telephone."</p>";
+					}	
+					
+					$secretary = get_post_meta($post->ID, 'secretary_name', true);
+					if ($telephone !=''){
+						echo "<p><strong>Secretary: </strong>".$secretary."</p>";
+					}	
+
+					$secretaryemail = get_post_meta($post->ID, 'secretary_email', true);
+					if ($email !=''){
+						echo "<p><strong>Secretary email: </strong><a href='mailto:".$secretaryemail."'>".$secretaryemail."</a></p>";
+					}	
+
+					$secretarytelephone = get_post_meta($post->ID, 'secretary_telephone', true);
+					if ($secretarytelephone !=''){
+						echo "<p><strong>Secretary telephone: </strong>".$secretarytelephone."</p>";
+					}	
+
+					$clinicalinterests = get_post_meta($post->ID, 'clinical_interests', true);
+					if ($clinicalinterests !=''){
+						echo "<h3>Clinical interests</h3>";
+						echo wpautop($clinicalinterests);
+					}	
+					
+					$proprofile = get_post_meta($post->ID, 'professional_profile', true);
+					if ($proprofile !=''){
+						echo "<h3>Professional profile</h3>";
+						echo wpautop($proprofile);
+					}	
+
+					$other = get_post_meta($post->ID, 'other', true);
+					if ($other !=''){
+						echo wpautop($other);
+					}	
+					
+					?>
+
 				
 				</div>
 				
 				<div class="fourcol last" id='sidebar'>
-					
-						<ul class="xoxo">
-
-							<?php if (is_home() || is_front_page()) : ?>
-								<?php dynamic_sidebar( 'home-sidebar-widget-area' ); ?>
-							<?php else : ?>
-								<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
-							<?php endif; ?>
-						</ul>
+<?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
+					echo $cimage;
+						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
+						echo "<h3>Services</h3><ul>";
+						//check each element in the array to see if it matches this service
+						foreach ($clinicianservices as $clinicianservice){ 
+							$thisservice = get_post($clinicianservice);
+							echo "<li><a href='".$thisservice->guid."'>".$thisservice->post_title."</a></li>";
+						}
+						echo "</ul>";
+	?>				
 	
 				</div>
 	

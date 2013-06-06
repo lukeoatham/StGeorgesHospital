@@ -16,32 +16,34 @@ get_header(); ?>
 
 		<div class="row">
 					<div class="threecol" iid='secondarynav'>
-
+<div id="sectionnav">
+<ul>
 						<?php
-						echo "<a href='/services/a-z/'>Services A-Z</a><br>";
+						echo "<li class='page_item'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>";
 
 						$parentpost = $post->post_parent; 
 						if ($post->post_parent != 0) {
 							$parentservice = get_post($parentpost);
 							//print_r($parentservice);
-						echo "<a href='".$parentservice->guid."'>".$parentservice->post_title."</a><br>";	
+						echo "<li class='page_item'><a href='".$parentservice->guid."'>&laquo; ".$parentservice->post_title."</a></li>";	
 						}
-						echo "<a href='".$post->guid."'>".$post->post_title."</a><br>";	
+						echo "<li class='page_item current_page_item'><a href='".$post->guid."'><strong>".$post->post_title."</strong></a></li>";	
 						
 						$allservices = get_posts(
 						array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "post_title",
+						"orderby" => "title",
 						"order" => "ASC",
 						"post_parent" => $mainid
 						)
 					);
 						
 					foreach ($allservices as $service){
-						echo "<a href='".$service->guid."'>".$service->post_title."</a><br>";
+						echo "<li class='page_item'><a href='".$service->guid."'>".$service->post_title."</a></li>";
 					}	 ?>
-						
+</ul>	
+</div>
 					</div>
 				<div class="sixcol" id='content'>
 					<h1><?php the_title(); ?></h1>
@@ -98,7 +100,7 @@ get_header(); ?>
 						array(
 						"post_type" => "clinician",
 						"posts_per_page" => -1,
-						"orderby" => "post_title",
+						"orderby" => "title",
 						"order" => "ASC",
 						)
 					);

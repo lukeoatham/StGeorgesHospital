@@ -149,6 +149,7 @@ h1 a, h2 a {
 
 .breadcrumbs {
 	padding: 1em 0;
+	font-size: 0.8em;
 	}
 	
 .toptasks {
@@ -473,7 +474,7 @@ ul#menu-utilities
 	
 
 ul#menu-utilities a {
-	color: navy;
+	color: white;
 	list-style: none !important;
 }
 
@@ -489,12 +490,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 1.4em !important;
+	font-size: 1.8em !important;
 	color: #111;
 }
 
 h2 {
-	font-size: 1.4em !important;
+	font-size: 1.6em !important;
 }
 
 h3 {

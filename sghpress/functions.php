@@ -638,4 +638,4 @@ add_action('wp_enqueue_scripts','enqueueThemeScripts');
 
 // listing page thumbnail sizes, e.g. home page
 
-add_image_size( "clinicianthumb", "100", "100", true );
+add_image_size( "clinicianthumb", "72", "72", true );

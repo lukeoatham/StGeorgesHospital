@@ -6,9 +6,16 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<div class="row">
-					<div class="threecol" iid='secondarynav'>
+					<div class="ninecol" iid='secondarynav'>
+
 
 				<?php 
+
+					the_content(); ?>
+					
+<div id="sectionnav">
+<ul>
+<?php
 				//list all services
 						
 						$allservices = get_posts(
@@ -22,20 +29,19 @@ get_header(); ?>
 						);
 						
 					foreach ($allservices as $service){
-						echo "<a href='".$service->guid."'>".$service->post_title."</a><br>";
-					} ?>
-						
+						echo "<li class='page_item'><a href='".$service->guid."'>".$service->post_title."</a></li>";
+					} 
+?>
+</ul>	
+</div>						
 					</div>
 					
-					<div class="eightcol last">
+					<div class="threecol last">
 
 					<?php 
 
+					the_post_thumbnail('medium');
 					
-					
-					the_content(); 
-
-						
 					?>
 					
 					</div>
