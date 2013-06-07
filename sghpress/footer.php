@@ -48,7 +48,7 @@
 
 <script type='text/javascript'>
     jQuery(document).ready(function(){
-        jQuery("#primarynav").Touchdown();
+        //jQuery("#primarynav").Touchdown();
  
  		// add dynamic classes for IE8 last-child support
  		jQuery('#menu-header-links li').last().addClass('last-link');

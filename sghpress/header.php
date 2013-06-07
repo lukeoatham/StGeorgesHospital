@@ -76,49 +76,44 @@
 			<div class="container">								
 
 				<div id='header' class="row">
-					
-
-						<div id='masthead' class="eightcol">
-							
-<!--							<p id='mainlogo'>
-								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-									<img src="<?php echo get_stylesheet_directory_uri();?>/images/wordpress.png" alt="<?php echo get_bloginfo('name');?>"  />
-								</a>
-						</p>
--->								
-							<p id='strapline'>
+					<div id='masthead' class="twelvecol last">
+						<p id='mainlogo'>
+							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+								<!-- <img src="<?php echo get_stylesheet_directory_uri();?>/images/wordpress.png" alt="<?php echo get_bloginfo('name');?>"  /> -->
+								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="St George's Healthcare NHS Trust">
+							</a>
+						</p>							
+							<!-- <p id='strapline'>
 								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 									<?php echo get_bloginfo( 'name' ); ?>
 								</a>
-							</p>
-						</div>
-						
-						<div id='searchblock' class="fourcol last">
-							
-								<?php get_search_form(true); ?>
-														<div id="utilities">	
-							<ul>
-								<?php dynamic_sidebar( 'utilities-widget-area' ); ?>
-							</ul>
-						</div>
-						
+							</p> -->
 					</div>
 						
-						<div id='navigation' class="row">
-							<div class="twelvecol last">
-								<div class='menu-header'>
+						
+					<div id='navigation' class="row">
+						<div class="twelvecol last">
+							<div class='menu-header'>
 								
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
 									<a href="#maincontent" class='hiddentext' accesskey='s' title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a>
 		
-								<div id="primarynav" role="navigation" class="touchdown-list">
+								<div id="primarynav" role="navigation" class="touchdown-list eightcol">
 									<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 									<?php 
 										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
 								</div>
-								</div>						
-							</div>
+								<div id='searchblock' class="fourcol last">
+									<?php get_search_form(true); ?>
+									<!--<div id="utilities">	
+										<ul>
+											<?php //dynamic_sidebar( 'utilities-widget-area' ); ?>
+										</ul>
+									</div>-->
+								</div>
+							</div>						
 						</div>
+					</div>
 				
 				</div>
 				
@@ -132,7 +127,3 @@
 							
     				</div>
 				</div>
-				
-
-
-

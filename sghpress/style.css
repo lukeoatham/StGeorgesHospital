@@ -44,25 +44,37 @@ body {
 }
 
 #header {
-	background: #0075D8;
-	height: 167px;
+	background: #FFFFFF;
+	/* height: 11em; 167px; */
 	overflow: hidden;
+	border-bottom: 3px solid #888888;
 }
 
 #masthead  {
-	text-align: left;
+	text-align: right;
 	padding: 0;
 }
 
 #masthead #mainlogo {
-	float: left;
-	padding: 1.5em 0.5em 2em 0.5em;
+	float: right;
+	padding: 1.5em;
+	padding-right: 0px;
 	background: transparent;
 	margin-left: 1.75em;
 }
 	
 #searchblock {
 
+}
+
+.searchbox{
+	background-image: url('images/search.svg');
+	background-repeat: no-repeat;
+	background-position: 96% center;
+	background-size: 1.5em;
+	border-radius: 15px;
+	border: 2px solid #444444;
+	padding: 0.5em;
 }
  
 #searchblock form {
@@ -71,7 +83,6 @@ body {
 }
 
 #searchform #s  {
-	width: 175px;
 }
 
 #masthead #strapline  {
@@ -163,7 +174,7 @@ ul#menu-top-tasks li {
 #primarynav  {
 	background: none;
 	padding: 0;
-	margin-top: 23px;
+	/* margin-top: 23px; */
 }
 
 #primarynav ul  {
@@ -172,39 +183,99 @@ ul#menu-top-tasks li {
 
 #primarynav ul li  {
 	display: inline;
-	background: #0075D8;
+	background: #FFFFFF;
 	font-family:'Ubuntu',  verdana,  sans-serif;
 	font-weight: normal;
 	float: left;
 	margin-right: 0.5em;
 	font-size: 0.85em;
-	text-align: center;
+	text-align: left;
 }
 
-#primarynav ul li:first-child,  #primarynav ul li.first-link  {
-	margin-left: 1em !important;
-}
+
 
 #primarynav ul li a  {
 	display: block;
 	padding: 0.4em 0.75em 0.6em 0.75em;
-	color: #fff;
+	color: #000000;
 	text-decoration: none;
-	border-right: 1px solid #0075D8;
+	border-bottom: 3px solid #0075D8;
+	height: 3em;
 }
 
 #primarynav ul li a:hover  {
-	background: #028dff;
-	color: white;
-	border-right: 1px solid #028dff;
+	color: #FFFFFF;
+	border-bottom: 3px solid #028dff;
 }
 
-#primarynav ul li.current_menu_item, #primarynav ul li.current_page_item, #primarynav ul li.current-page-ancestor {
-	background: #fff !important;
+/* Colour bars for each topline navigation structure */
+
+#menu-item-52 a{ /* Patients and visitors */
+	border-color: #A00155 !important;
 }
+
+#menu-item-52 a:hover, #menu-item-52.current_page_item{ /* Patients and visitors */
+	background-color: #A00155 !important;
+}
+
+#menu-item-11 a{ /* Services */
+	border-color: #3BBF21 !important;
+}
+
+#menu-item-11 a:hover, #menu-item-11.current_page_item{ /* Services */
+	background-color: #3BBF21 !important;
+}
+
+#menu-item-12 a{ /* About */
+	border-color: #68D3E3 !important;
+}
+
+#menu-item-12 a:hover, #menu-item-12.current_page_item{ /* About */
+	background-color: #68D3E3 !important;
+}
+
+#menu-item-53 a{ /* Work with us */
+	border-color: #93268F !important;
+}
+
+#menu-item-53 a:hover, #menu-item-53.current_page_item{ /* Work with us */
+	background-color: #93268F !important;
+}
+
+#menu-item-51 a{ /* Education and research */
+	border-color: #F36523 !important;
+}
+
+#menu-item-51 a:hover, #menu-item-51.current_page_item{ /* Education and research */
+	background-color: #F36523 !important;
+}
+
+#menu-item-50 a{ /* GPs and Clinicians */
+	border-color: #015496 !important;
+}
+
+#menu-item-50 a:hover, #menu-item-50.current_page_item{ /* GPs and Clinicians */
+	background-color: #015496 !important;
+}
+
+#menu-item-49 a{ /* Contact and Find us */
+	border-color: #F41355 !important;
+}
+
+#menu-item-49 a:hover, #menu-item-49.current_page_item{ /* Contact and Find us */
+	background-color: #F41355 !important;
+}
+
+
+/* End colour bars */
+
+
+/* #primarynav ul li.current_menu_item, #primarynav ul li.current_page_item, #primarynav ul li.current-page-ancestor {
+	background: #fff !important;
+} */
 
 #primarynav ul li.current_menu_item a, #primarynav ul li.current_page_item a, #primarynav ul li.current-page-ancestor a  {
-	color: #333;
+	color: #FFFFFF;
 	border-right: 1px solid navy;
 }
 
@@ -443,7 +514,7 @@ ul.sub-menu {
 }
 
 .menu li, .sub-menu li {
-	margin: 0.5em 0 !important;
+	margin: 0 0 !important;
 }
 
 .downloadbig {
@@ -876,16 +947,7 @@ li.comment .comment-body {
 	#primarynavmenu li.current-menu-item a, #primarynavmenu li.current-menu-parent a {
 		color: #981200;
 	}
-	.touchdown-list  {
-	display: none !important;
-}
 
-
-	.touchdown  {
-	display: block !important;
-	 margin: 1em 0 1em 0.5em;
-	 ;
-}
 	ul.xoxo li {
 		margin: 2em 0;
 	}
@@ -934,13 +996,14 @@ li.comment .comment-body {
 }
 
 
-#header {
+/* #header {
 	background: #0075D8;
 	height: 294px;
 }
-
+*/ 
 #mainlogo {
-	width: 50px;
+	width: 75%;
+	padding: 1em !important;
 }
 
 }
