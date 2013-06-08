@@ -33,7 +33,7 @@ get_header(); ?>
 						array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "title",
+						"orderby" => "menu_order title",
 						"order" => "ASC",
 						"post_parent" => $mainid
 						)
@@ -52,26 +52,32 @@ get_header(); ?>
 					//display contact information
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
 					if ($contactnumber){
-						// display location details 
 						echo "<div class='message'>";
 						echo "<h3>Contact number</h3>";
 						echo wpautop($contactnumber);
+						echo "</div>";
+					}
+
+					$hours = get_post_meta($post->ID, 'opening_hours', true);
+					if ($contactnumber){
+						echo "<div class='message'>";
+						echo "<h3>Opening hours</h3>";
+						echo wpautop($hours);
 						echo "</div>";
 					}
 					
 					//display location information
 					$servicelocations = get_post_meta($post->ID, 'location', true);
 					foreach ($servicelocations as $servicelocation){
-						// display location details 
 						echo "<div class='message'>";
 						echo "<h3>Location</h3>";
 						$location = get_post($servicelocation);
 						echo $location->post_title;
 						$longitude = get_post_meta($servicelocation,'longitude',true);
-						$latitude = get_post_meta($servicelocation,'$latitude',true);
+						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=18&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
+					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=18&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
 
 						echo "</div>";
 					}
@@ -122,10 +128,13 @@ get_header(); ?>
 								}
 								echo "<div class='clearfix'><hr>";
 								echo "<h3><a href='".$clinician->guid."'>".$clinician->post_title."</a></h3>";
+/*
 								echo get_the_post_thumbnail($clinician->ID,'clinicianthumb', array("class"=>"alignleft")); 
 								$protitle= get_post_meta($clinician->ID,'professional_title',true);
 								echo 
-								"<p><a href='".$clinician->guid."'>".$protitle."</a></p></div>";
+								"<p><a href='".$clinician->guid."'>".$protitle."</a></p>";
+*/
+								echo "</div>";
 
 							}
 						}

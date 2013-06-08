@@ -20,10 +20,6 @@ get_header(); ?>
 					<h1><?php the_title(); ?></h1>
 
 					<?php 
-					$protitle = get_post_meta($post->ID, 'professional_title', true);
-					if ($protitle !=''){
-						echo "<h2>".$protitle."</h2>";
-					}	
 					
 					the_content(); 
 					echo "<h3>Contact</h3>";
