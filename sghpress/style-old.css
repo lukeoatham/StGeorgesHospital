@@ -1,0 +1,1295 @@
+/*
+Theme Name: St George's Hospital
+Theme URI: http://
+Description: Custom WordPress theme for BIOT. Based on Starkers + 1140 Grid System by Alex Newman, derived from Elliot Jay Stocks' Starkers Theme (http://starkerstheme.com/) and the 1140 CSS Grid (http://cssgrid.net/).
+Version: 0.1
+Author: Colin Wren & Luke Oatham
+Author URI: http://www.helpfultechnology.com
+Tags: starkers, naked, clean, basic, unicorns
+*/
+
+/* ---------------------------- */
+/*           Imports            */
+/* ---------------------------- */
+@import "css/reset.css";
+@import "css/typography.css";
+@import "css/webfonts.css";
+@import "css/layout.css";
+
+/* ---------------------------- */
+/*           General            */
+/* ---------------------------- */
+
+/* general body class */
+body {
+	font-size: 100%;
+	line-height: 140% !important;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+/* Rows */
+.row {
+	max-width: 100%;
+}
+
+.container .row, #titlestrip .container, #utilitystrip .container, #footer .container {
+	max-width: 1140px !important; max-width: 960px !important;
+	margin: 0 auto;
+}
+
+#utilitystrip {
+	margin: 1em 0;
+}
+
+#utilitystrip .container {
+	background: url('images/logo.png') #fff no-repeat 20px top;
+	height: 60px;
+	padding-left: 90px;
+	max-width: 1080px !important; max-width: 900px !important;
+}
+
+hr {
+	border-top: 3px solid #00857E;
+}
+
+h1 a, h2 a {
+	text-decoration: none;
+	color: black !important;
+}
+
+.hiddentext, .printonlyheadline {
+	position: absolute;
+	left: -9999em;
+}
+
+.alignleft {
+	margin: 0 1em 1em 0;
+}
+
+.alignright {
+	margin: 0 0 1em 1em;
+}
+
+.aligncenter {
+	text-align: center;
+}
+
+
+
+
+.breadcrumbs {
+	padding: 1em 0;
+	font-size: 0.8em;
+	}
+	
+.toptasks {
+	padding: .5em;
+	border-top: 10px solid #76C9DD;
+}	
+ul#menu-top-tasks li {
+	list-style: square;
+	margin-left: 1em !important;
+}
+
+
+/* mobile side menu styles */
+
+#mobileNav, #contentOverlay, .sideNav, #mobileMenuButton{
+	 display: none; 
+}
+
+
+
+/* ---------------------------- */
+/*           Header             */
+/* ---------------------------- */
+#header {
+	background: #FFFFFF;
+	/* height: 11em; 167px; */
+	overflow: hidden;
+	background-image: url('images/headerBorder.png');
+	background-repeat: repeat-x;
+	background-position-y: bottom;
+}
+
+#masthead  {
+	text-align: right;
+	padding: 0;
+}
+#masthead #mainlogo {
+	float: right;
+	padding: 1.5em;
+	padding-right: 0px;
+	background: transparent;
+	margin-left: 1.75em;
+}
+
+.searchbox{
+	background-image: url('images/search.svg');
+	background-repeat: no-repeat;
+	background-position: 96% center;
+	background-size: 1.5em;
+	border-radius: 15px;
+	border: 2px solid #888888;
+	padding: 0.5em;
+	padding-right: 0px;
+	margin-top: -1.5em;
+}
+
+.searchbox:focus{
+ background-image: none;
+ outline: none;
+ box-shadow: 0px 0px 5px #444444;
+}
+ 
+#searchblock form {
+	text-align: right;
+	padding: 2em 1em 0 0;
+}
+
+#searchcontainer #searchform {
+	margin-top: 1em !important;	
+}
+
+#titlestrip {
+	background: #EBEBEB;
+}
+
+#sitetitle {
+	font-size: 2em !important;
+	padding: 1em 0;
+	margin: 0 !important;
+}
+
+#topheader {
+	padding: 1em 0 0 0;
+	color: navy;
+	margin-bottom: 0;
+}
+
+#primarynav  {
+	background: none;
+	padding: 0;
+	/* margin-top: 23px; */
+}
+
+#primarynav ul  {
+	margin-top: 0;
+}
+
+#primarynav ul li  {
+	display: inline;
+	background: #FFFFFF;
+	font-family:'Ubuntu',  verdana,  sans-serif;
+	font-weight: normal;
+	float: left;
+	margin-right: 0.5em;
+	font-size: 0.85em;
+	text-align: left;
+}
+
+
+
+#primarynav ul li a  {
+	display: block;
+	padding: 0.4em 0.75em 0.6em 0.75em;
+	color: #000000;
+	text-decoration: none;
+	border-bottom: 3px solid #0075D8;
+	height: 3em;
+}
+
+#primarynav ul li a:hover  {
+	color: #FFFFFF;
+	border-bottom: 3px solid #028dff;
+}
+
+/* Colour bars for each topline navigation structure */
+
+#menu-item-52 a{ /* Patients and visitors */
+	border-color: #A00155 !important;
+}
+
+#menu-item-52 a:hover, #menu-item-52.current_page_item, #menu-item-52.current-page-ancestor a{ /* Patients and visitors */
+	background-color: #A00155 !important;
+}
+
+#menu-item-11 a{ /* Services */
+	border-color: #3BBF21 !important;
+}
+
+#menu-item-11 a:hover, #menu-item-11.current_page_item, #menu-item-11.current-page-ancestor a{ /* Services */
+	background-color: #3BBF21 !important;
+}
+
+#menu-item-12 a{ /* About */
+	border-color: #93268F !important;
+}
+
+#menu-item-12 a:hover, #menu-item-12.current_page_item, #menu-item-12.current-page-ancestor a{ /* About */
+	background-color: #93268F !important;
+}
+
+#menu-item-53 a{ /* Work with us */
+	border-color: #68D3E3 !important;
+}
+
+#menu-item-53 a:hover, #menu-item-53.current_page_item, #menu-item-53.current-page-ancestor a{ /* Work with us */
+	background-color: #68D3E3 !important;
+}
+
+#menu-item-51 a{ /* Education and research */
+	border-color: #F36523 !important;
+}
+
+#menu-item-51 a:hover, #menu-item-51.current_page_item, #menu-item-51.current-page-ancestor a{ /* Education and research */
+	background-color: #F36523 !important;
+}
+
+#menu-item-50 a{ /* GPs and Clinicians */
+	border-color: #015496 !important;
+}
+
+#menu-item-50 a:hover, #menu-item-50.current_page_item, #menu-item-50.current-page-ancestor a{ /* GPs and Clinicians */
+	background-color: #015496 !important;
+}
+
+#menu-item-49 a{ /* Contact and Find us */
+	border-color: #F41355 !important;
+}
+
+#menu-item-49 a:hover, #menu-item-49.current_page_item, #menu-item-49.current-page-ancestor a{ /* Contact and Find us */
+	background-color: #F41355 !important;
+}
+
+
+/* End colour bars */
+
+
+/* #primarynav ul li.current_menu_item, #primarynav ul li.current_page_item, #primarynav ul li.current-page-ancestor {
+	background: #fff !important;
+} */
+
+#primarynav ul li.current_menu_item a, #primarynav ul li.current_page_item a, #primarynav ul li.current-page-ancestor a  {
+	color: #FFFFFF;
+	border-right: 1px solid navy;
+}
+
+.touchdown-list  {
+	display: block;
+}
+
+.touchdown  {
+	display: none;
+}
+
+.single.single-post #primarynav ul#menu-primary-navigation #menu-item-29 a {
+	color: #333 !important;
+	background: white;
+}
+.single.single-service #primarynav ul#menu-primary-navigation #menu-item-11 a {
+	color: #333 !important;
+	background: white;
+}
+
+.archive.category.category-news #primarynav ul#menu-primary-navigation #menu-item-29 a {
+	color: #333 !important;
+	background: white;
+}
+
+#sectionnav ul  {
+	margin: 0;
+	padding-top: 0em;
+}
+
+#sectionnav ul li  {
+	list-style: none;
+	padding: 0;
+	font-size: 0.9em;
+	font-family: "Ubuntu", arial, sans-serif;
+	font-weight: normal;
+	line-height: 130%;
+}
+
+#sectionnav ul li a {
+	padding: 0.95em 1em 0.95em 1em;
+	border-top: 1px solid gray;
+}
+
+#sectionnav ul li a:link,  #sectionnav ul li a:visited  {
+	color: #333;
+	text-decoration: none;
+	display: block;
+}
+
+#sectionnav ul li a:hover  {
+	list-style: none;
+	font-family: "Ubuntu", arial, sans-serif;
+	font-weight: normal;
+	background: #DEE0E2 !important;
+	color: #333 !important;
+}
+
+#sectionnav ul li.page_item a:hover,  #sectionnav ul li.current_page_parent a:hover  {
+	list-style: none;
+	font-family: "Ubuntu", arial, sans-serif;
+	font-weight: normal;
+	background: #DEE0E2 !important;
+	color: #333 !important;
+}
+
+#sectionnav ul li ul.children  {
+	border-top: 0;
+	background: #fff;
+	margin: 0.25em -0.5em -0.25em -0.5em;
+	margin: 0;
+	border: 1px solid #0B3A66; border: none;
+	background: #fff;
+	color: #000;
+}
+
+#sectionnav ul li ul.children li  {
+	background: #fff !important; 
+	font-size: 0.9em;
+	border: none;
+	padding: 0 0 0 0.5em; padding: 0;
+}
+
+#sectionnav ul li ul.children li a {
+	padding-left: 1em;
+}
+
+#sectionnav ul li ul.children li ul.children li a {
+	padding-left: 1.75em;
+}
+
+#sectionnav ul li ul.children li a:link,  #sectionnav ul li ul.children li a:visited  {
+	color: #000;
+	text-decoration: none;
+	display: block;
+}
+
+#sectionnav ul li.current_page_item,  #sectionnav ul li.current_page_parent  {
+		background: #00285B !important;
+	color: #fff !important;
+}
+
+#sectionnav ul li.current_page_item a,  #sectionnav ul li.current_page_parent a  {
+	color: #00285B; color: white;
+
+}
+
+#sectionnav ul li ul.children ul.children li a {
+	padding-left: 1em;
+}
+
+
+#sectionnav ul.children li.current_page_item  ul.children li  {
+	font-weight: normal;
+}
+
+#sectionnav ul.children li.current_page_item a,  #sectionnav ul.children ul.children li.current_page_item a  {
+	color: #00285B;
+		background: #DEE0E2 !important;
+		border: none !important;
+}
+
+#sectionnav ul li ul.children,  #sectionnav ul li ul.children li ul.children  {
+	display: none;
+}
+
+#sectionnav ul li.current_page_item ul.children, 
+#sectionnav ul li.current_page_ancestor ul.children, 
+#sectionnav ul li.current_page_ancestor ul.children li.current_page_ancestor ul.children, 
+#sectionnav ul li ul.children li.current_page_item ul.children
+ {
+	display: block;
+	margin-left: 1em;
+}
+
+.homeicon {
+	float:left; 
+	padding-top: 25px;
+	padding-right: 10px;
+}
+.message { background:#e1f3fc; padding: .5em; margin-bottom: 1em; } 
+
+#promobar {
+	margin: 1em auto 2em auto;
+}
+
+.promo {
+	float: left;
+	margin-bottom: 1em;
+	background: #fff;
+	font-size: 85%;
+}
+
+.promo.last {
+	margin-right: 0;
+}
+
+.promo p, .promo h2 {
+	margin: 0;
+	line-height: 130%;
+}
+
+.promo h2 {
+	margin: 0.5em 0;
+}
+
+.promo p, .promo a:link, .promo a:visited, .promo h2 {
+	color: #111;
+}
+
+.promo a {
+	
+}
+
+.promo a:hover, .promo a:active {
+	color: #00857E;
+}
+
+.leftpromo {
+	border-top: 3px solid #00857E;
+}
+
+.middlepromo {
+	border-top: 3px solid #00857E;
+}
+
+.rightpromo {
+	border-top: 3px solid #00857E;
+}
+
+#footer {
+	margin-top: 1em;
+	border-top: 10px solid #76C9DD;
+	background: #DEE0E2;
+	padding: 1em 0;
+}
+
+#topheader .alignleft, #topheader .alignright {
+	margin: 0;
+}
+
+#sidebar ul.xoxo li ul.iconlinks {
+	list-style: none !important;
+	margin: 0;
+	padding: 0;
+}
+
+#sidebar ul.xoxo li ul.iconlinks .twitterlink {
+	background: url('images/icon_twitter_18x18.png') no-repeat;
+	padding-left: 25px !important;
+	list-style: none !important;
+}
+
+#sidebar ul.xoxo li ul.iconlinks .emaillink {
+	background: url('images/icon_envelope_18x18.png') no-repeat;
+	padding-left: 25px !important;
+	list-style: none !important;
+}
+
+#sidebar ul.xoxo li ul.iconlinks .commentlink {
+	background: url('images/icon_bubble_18x18.png') no-repeat;
+	padding-left: 25px !important;
+	list-style: none !important;
+}
+
+#sidebar .sharebuttonsanywhere, .promo .sharebuttonsanywhere, #footer .sharebuttonsanywhere {
+	display: none;
+}
+
+#sidebar h3 {
+	margin-bottom: 0
+}
+
+ul.sub-menu {
+	padding-left: 1em;
+}
+
+.menu li, .sub-menu li {
+	margin: 0 0 !important;
+}
+
+.downloadbig {
+	background: url('images/pdf-32.png') no-repeat 0 2px;
+	padding-left: 45px;
+}
+
+.news_story{
+	margin-bottom: 1em;
+}
+#utilities {
+	padding: 0.75em 1em;
+	float: right;
+}
+
+
+ul#menu-utilities
+{
+	list-style: none !important;
+	font-size: 0.75em;
+	display: inline !important;
+}
+#menu-utilities li
+{	
+	display: inline !important;
+	padding: 0.3em;
+	}
+	
+
+ul#menu-utilities a {
+	color: white;
+	list-style: none !important;
+}
+
+
+/* content styles */
+
+h1, h2, h3, h4, h5, h6 {
+	color: #00857E;
+	font-family: "Ubuntu", arial, sans-serif;
+	font-weight: lighter;
+	line-height: 130%;
+	margin: 0 0 1em 0;
+}
+
+h1 {
+	font-size: 1.8em !important;
+	color: #111;
+}
+
+h2 {
+	font-size: 1.6em !important;
+}
+
+h3 {
+	font-size: 1.4em;
+}
+
+h4 {
+	font-size: 1.1em;
+}
+
+a:link {
+	color: #00857E;
+}
+
+a:visited {
+	color: #575757;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+.postmeta {
+	color: #888;
+	font-size: 0.9em;
+}
+
+.postthumb {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+#content p, #content li, #content td, #content dd, #content dt, #sidebar p, #sidebar li, #footer p {
+	margin-bottom: 1em !important;
+	font-family: "Ubuntu", arial, trebuchet, verdana, sans-serif;
+	font-weight: lighter;
+	letter-spacing: 0.06em; letter-spacing: 0;
+	font-size: 100%;
+}
+
+#footer p {
+	padding: 0.5em 0;
+	color: #575757;
+	text-align: left;
+	font-size: 90%;
+}
+
+#content ul, #maincontent ul, .spot ul {
+	margin: 0.5em 0;
+	padding: 0
+}
+
+#content ul li, #maincontent ul li, .spot ul li  {
+	list-style: square;
+	margin-left: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+#content ol li, #maincontent ol li, .col1 ol li  {
+	list-style: decimal;
+	margin-left: 2em;
+}
+
+#content li.gfield {
+	margin-left: 0 !important;
+}
+
+#content .gform_wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+
+#maincontent {
+	padding-bottom: 2em !important;
+	font-size: 100% !important;
+	line-height: 140%;
+}
+
+#maincontent p {
+	margin-bottom: 1em;
+}
+
+.metabox {
+	background: #e2e8e8;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+.metabox h2, .metabox h3 {
+	margin-top: 0;
+}
+
+#sidebar {
+}
+
+body.page-template-page-threecol-php #sidebar {
+	border-left: 0;
+	margin-left: 0;
+}
+
+#sidebar ul.xoxo, #sidebar ul.xoxo li {
+	list-style: none !important;
+	margin-left: 0;
+}
+
+#sidebar ul.xoxo li {
+	margin-bottom: 2em !important;
+	padding: 0 1em;
+}
+
+#sidebar ul.xoxo li ul li {
+	margin-bottom: 0.5em !important;
+}
+
+#sidebar ul, #sidebar ul li, #sidebar ul.xoxo li ul li {
+	list-style: square !important;
+	margin-left: 0.5em;
+}
+
+#sidebar iframe {
+	width: 99%;
+}
+
+#sidebar ul.xoxo li ul {
+	list-style: square;
+	padding-left: 0.75em;
+}
+
+#sidebar ul.xoxo li ul li {
+	margin: 0;
+	padding: 0;
+}
+
+ul.xoxo {
+	margin-bottom: 2em;
+}
+
+#footer ul.xoxo {
+	margin-bottom: 0.5em;
+}
+
+h2 a:link, h3 a:link, h2 a:visited, h3 a:visited {
+	text-decoration: none !important;
+	color: black !important;
+}
+
+h2 a:hover, h3 a:hover {
+	text-decoration: underline;
+}
+
+table {
+	border: 1px solid #e7e7e7 !important;
+	text-align: left;
+	margin: 0 -1px 1em 0;
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+tr th,
+thead th {
+	border: none !important;
+	font-weight: bold;
+	padding: 0.5em 1em;
+}
+tr td {
+	border: none !important;
+	border-top: 1px solid #e7e7e7 !important;
+	padding: 0.5em 1em;
+}
+
+.paginationnav {
+	text-align: center;
+}
+
+.prevlink, .nextlink {
+	padding: 0.5em 1em;
+}
+
+/* comment form */
+#comments {
+	background: white;
+}
+
+#comments-title {
+	margin: 1.5em 0 0 0;
+}
+
+#commentform label {
+	display: inline;
+	padding-right: 5px !important;
+}
+
+.subscribe-to-comments label {
+	padding-left: 5px !important;
+}
+
+p.comment-form-author input , p.comment-form-email input, p.comment-form-url input {
+	display: block;
+}
+
+#commentform input#author, #commentform input#email, #commentform input#url {
+	font-size: 100%;
+}
+
+#sidebar ul.xoxo li #comments ol {
+	margin: 1em 0 !important;
+}
+
+#sidebar ul.xoxo li #comments ol li, #sidebar ul.xoxo li #comments ol li ul li  {
+	list-style: none  !important;
+	margin-left: 0 !important;
+	padding: 0 !important;
+}
+
+#sidebar ul.xoxo li li.comment, #sidebar ul.xoxo li li.comment ul li.comment {
+	list-style: none !important;
+	padding-top: 1em;
+}
+
+div.reply {
+	margin-bottom: 1em;
+}
+
+textarea#comment {
+	display: block;
+	width: 90%;
+}
+
+img.avatar {
+  float: left !important;
+  margin: 0 0.5em 0.5em 0;	
+}
+
+li.comment .comment-body {
+	clear: both;
+	padding-top: 0.5em;
+}
+
+.required {
+
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.wp-caption {
+	border: none;
+	background: #EBEBEB;
+	padding: 0 !important;
+}
+
+.wp-caption img {
+	margin: 0;
+	width: 100%;
+}
+
+.wp-caption-text, .wp-caption-dd {
+	font-size: 70%;
+	margin: 0 !important;
+	padding: 0.5em;
+	text-align: left;
+}
+
+.jumptocomments {
+	background: #e2e8e8 url('images/icon_bubble_18x18.png') no-repeat 15px 12px;
+	padding: 10px 0 10px 45px;
+}
+
+.printfriendly {
+	background: white url('images/printer-grey.png') no-repeat 9px 0;
+	padding-left: 45px;
+	color: #777;
+	padding-bottom: 1em !important;
+}
+
+.pdfdocument {
+	padding-left: 2em;
+	background: url('images/pdf-trans.png') no-repeat;
+}
+
+/* IE styles */
+
+.ie7 #content p, .ie7 #content li, .ie7 #content td, .ie7 #content dd, .ie7 #content dt, .ie7 #sidebar p, .ie7 #sidebar li, .ie7 #footer p,
+.ie8 #content p, .ie8 #content li, .ie8 #content td, .ie8 #content dd, .ie8 #content dt, .ie8 #sidebar p, .ie8 #sidebar li, .ie8 #footer p
+{
+	letter-spacing: 0 !important;
+}
+/* End IE styles */
+
+
+/* media queries for responsive styles */
+
+/* Smaller screens */
+
+@media only screen and (max-width: 1023px) {
+	
+	body {
+		font-size: 85%;
+	}
+	
+	#primarynavmenu li a {
+		font-size: 80%;
+	}	
+	
+	.promo {
+		border-top: none;
+	}
+	
+#masthead #strapline  {
+	font-family: 'Ubuntu', arial, sans-serif;
+	font-size: 1.8em;
+	padding: 1.7em 0 0 1em !important;
+	display: inline-block;
+	width: 65%;
+	color: navy !important;
+	line-height: 110%;
+	font-weight: 200;
+	margin-bottom: 1.2em;
+}
+
+	
+}
+
+
+/* Mobile */
+
+@media handheld, only screen and (max-width: 767px) {
+		
+	.container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#titlestrip .container {
+		padding: 0 1em;
+	}
+	
+	#primarynav{
+		display: none;
+	}
+	
+	#navigation .twelvecol, #searchblock{
+		padding: 0px;
+	}
+	
+	#navigation{
+		background-color: black;
+	}
+	
+	#searchform{
+		float: left;
+		margin-left: 5%;
+		width: 67%;
+		display: inline;
+		background: none;
+	}
+	
+	#searchblock form{
+		padding-top: 2em;
+		padding-bottom: 1em;
+	}
+	
+	.searchbox{
+		padding: 0.5em !important;
+		width: 100% !important;
+		font-size: 1.2em;
+	}
+	
+	#mobileMenuButton{
+		float: right;
+		width: 20%;
+		display: inline;
+		border-left: 2px solid rgba(255,255,255,0.2);
+		padding-top: 1.5em;
+		padding-bottom: 1.5em;
+		background: none;
+	}
+	#mobileMenuButton h6{
+		width: 100%;
+		text-align: center;
+		margin-top: auto;
+		margin-bottom: auto;
+		font-size: 1.2em;
+		color: white;
+	}
+
+	#primarynavmenu, #footer {
+		margin: 1em;
+		width: 99%;
+		background: none !important;
+	}
+	
+	#content ul#primarynavmenu, #content ul#primarynavmenu li {
+		margin-left: 0 !important;
+		left: 0;
+	}
+	
+	#primarynavmenu ul {
+		border: none;
+	}
+					
+	#primarynavmenu li {
+		width: 100%;
+		display: block;
+		border: 0;
+		margin: 0.5em;
+		background: #EBEBEB;
+	}
+		
+	#primarynavmenu li a {
+		float: none;
+		font-size: 1em;
+	}
+	
+	#primarynavmenu li:hover ul, #primarynavmenu li.hover ul {	
+		width: auto;
+		position: relative;
+		top: 0;
+		left: 1em;
+	}
+		
+	#primarynavmenu li.current-menu-item a, #primarynavmenu li.current-menu-parent a {
+		color: #981200;
+	}
+
+	ul.xoxo li {
+		margin: 2em 0;
+	}
+
+	.promo {
+		width: 100%;
+		margin: 0 1em 1em 1em !important;
+		height: auto;
+		font-size: 110%;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		border-top: none;
+	}
+
+	.printonlyheadline {
+		position: relative;
+		left: 0;
+		top: 0;
+		font-family:  arial, sans-serif;
+		font-weight: normal;
+		line-height: 120%;
+		font-size: 200%;
+		padding-bottom: 0.5em;
+	}
+	
+	.printonlyheadline a {
+		text-decoration: none;
+		color: #000;
+	}
+	
+	#sidebar {
+		padding: 1em 0;
+	}
+	
+#masthead #strapline  {
+	font-family: 'Ubuntu', arial, sans-serif;
+	font-size: 1.4em;
+	padding: 2em 0 0 1em !important;
+	display: inline-block;
+	width: 65%;
+	color: white !important;
+	line-height: 110%;
+	font-weight: 200;
+	min-height: 30px;
+	margin-bottom: 1.2em;
+}
+
+
+/* #header {
+	background: #0075D8;
+	height: 294px;
+}
+*/ 
+#mainlogo {
+	width: 75%;
+	padding: 1em !important;
+}
+
+
+/* slidy menu stuff */
+
+
+body {
+	-webkit-animation: bugfix infinite 1s;
+}
+
+@-webkit-keyframes bugfix {
+	from {
+		padding:0;
+	}
+	to {
+		padding:0;
+	}
+}
+
+
+
+#contentOverlay{
+	position: fixed;
+	left: 60%;
+	top: 0;
+	width: 40%;
+	height: 100%;
+	visibility: hidden;
+	opacity: 0;
+	display: inherit;
+}
+
+.sideNav {
+	position: fixed;
+	left: -60%;
+	top: 0;
+	width: 60%;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.subSideNav #secondarynav .current_page_item{
+	background-color: none;
+}
+
+.subSideNav #sectionnav ul li a{
+	padding-right: 0px;
+}
+
+.sideNav .menu-item-52.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* Patients and visitors */
+	background-color: rgba(160,1,85,0.8) !important;
+}
+
+.sideNav .menu-item-52.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* Patients and visitors */
+	background-color: rgba(160,1,85,0.9) !important;
+}
+
+.sideNav .menu-item-11.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* Services */
+	background-color: rgba(59,191,32,0.8) !important;
+}
+
+.sideNav .menu-item-11.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* Services */
+	background-color: rgba(59,191,32,0.9) !important;
+}
+
+.sideNav .menu-item-12.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* About */
+	background-color: rgba(148,38,144,0.8) !important;
+}
+
+.sideNav .menu-item-12.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* About */
+	background-color: rgba(148,38,144,0.9) !important;
+}
+
+.sideNav .menu-item-53.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* Work with us */
+	background-color: rgba(104,210,227,0.8) !important;
+}
+
+.sideNav .menu-item-53.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* Work with us */
+	background-color: rgba(104,210,227,0.9) !important;
+}
+
+.sideNav .menu-item-51.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* Education and research */
+	background-color: rgba(243,100,34,0.8) !important;
+}
+
+.sideNav .menu-item-51.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* Education and research */
+	background-color: rgba(243,100,34,0.9) !important;
+}
+
+.sideNav .menu-item-50.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* GPs and Clinicians */
+	background-color: rgba(0,83,151,0.8) !important;
+}
+
+.sideNav .menu-item-50.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* GPs and Clinicians */
+	background-color: rgba(0,83,151,0.9) !important;
+}
+
+.sideNav .menu-item-49.current_page_item ~ .subSideNav #sectionnav .current_page_item a{ /* Contact and Find us */
+	background-color: rgba(245,20,88,0.8) !important;
+}
+
+.sideNav .menu-item-49.current_page_item ~ .subSideNav #sectionnav .current_page_parent a{ /* Contact and Find us */
+	background-color: rgba(245,20,88,0.9) !important;
+}
+
+#secondarynav{
+	display: none;
+}
+
+#mobileMenuButton{
+	cursor: pointer;
+	user-select: none;
+	display: inherit;
+}
+
+.sideNav ul, .sideNav li {
+	display: block;
+	float: left;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.sideNav a {
+	display: block;
+	float: left;
+	margin: 0;
+	width: 95%;
+	padding: 2.5%; 
+}
+
+.sideNav {
+	overflow: auto;
+	display: inherit; 
+	background-color: #444444;
+	/*box-shadow: inset -2px 0px 8px -2px black;*/
+}
+
+.sideNav ul {
+	list-style: none; 
+}
+
+.sideNav li {
+	z-index: 50;
+	
+}
+
+.sideNav ul li:first-child {
+	border-top: 0; 
+}
+
+.sideNav ul li:last-child {
+	border-bottom: 0;
+}
+.sideNav li:hover, .sideNav li:focus, .sideNav li:active {
+}
+
+.sideNav a {
+	padding: 0.5em;
+	font-size: 1.2em;
+	background-color: #666666;
+	/*box-shadow: inset -5px 0px 1px 0px black;*/
+	color: white;
+	text-decoration: none;
+	/* position: relative; */
+	border-top: 1px solid rgba(0,0,0,0.2);
+	border-bottom: 1px solid rgba(0,0,0,0.2);	
+}
+
+.subSideNav a, .children li a{
+	color: white !important;
+}
+
+/*.current_page_item a:after{  Awesome white triangle 
+	content:"";
+    width:0;
+    height:0;
+    border-top:16px solid transparent;
+    border-bottom:16px solid transparent;
+    border-right:16px solid white;
+    right: 0;
+    top: 0;
+    position: absolute;
+} */
+
+.sideNav .menu-item-52.current_page_item a{ /* Patients and visitors */
+	background-color: #A00155 !important;
+}
+
+.sideNav .menu-item-11.current_page_item a{ /* Services */
+	background-color: #3BBF21 !important;
+}
+
+.sideNav .menu-item-12.current_page_item a{ /* About */
+	background-color: #93268F !important;
+}
+
+.sideNav .menu-item-53.current_page_item a{ /* Work with us */
+	background-color: #68D3E3 !important;
+}
+
+.sideNav .menu-item-51.current_page_item a{ /* Education and research */
+	background-color: #F36523 !important;
+}
+
+.sideNav .menu-item-50.current_page_item a{ /* GPs and Clinicians */
+	background-color: #015496 !important;
+}
+
+.sideNav .menu-item-49.current_page_item a{ /* Contact and Find us */
+	background-color: #f51458 !important;
+}
+
+
+#mobMove, #mobileNav, #contentOverlay, .sideNav {
+	-webkit-transition-duration: 0.7s;
+	-moz-transition-duration: 0.7s;
+	-o-transition-duration: 0.7s;
+	transition-duration: 0.7s; 
+}
+
+
+#mobileNav:checked ~ #mobMove{
+	left: 60% !important;
+	position: absolute;
+	overflow: hidden; 
+}
+
+#mobileNav:checked ~ #mobMove .sideNav {
+	left: 0 !important;
+}
+
+#mobileNav:checked ~ #mobMove #contentOverlay {
+	visibility: visible;
+}
+
+#mobileNav:checked ~ #footer{
+	display: none;
+}
+
+
+}
+

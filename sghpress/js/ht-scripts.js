@@ -47,7 +47,7 @@ function setCookie(name,value,expires,path,domain,secure) {
 
 function gaTrackDownloadableFiles() {
 
-	var links = $('a');
+	var links = jQuery('a');
 
 	for(var i = 0; i < links.length; i++) {
 		if (links[i].href.indexOf('.pdf') != "-1") {

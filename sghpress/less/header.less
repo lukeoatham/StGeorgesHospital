@@ -1,0 +1,192 @@
+// The checkbox that powers the sliding menu
+#mobileNav{
+	display: none;
+}
+
+// The header
+#header {
+	background: #FFFFFF;
+	overflow: hidden;
+	background-image: url('images/headerBorder.png');
+	background-repeat: repeat-x;
+	background-position-y: bottom;
+	margin-bottom: 2em;
+}
+
+// The top part of the header where the logo sits
+#masthead  {
+	text-align: right;
+	padding: 0;
+	#mainlogo {
+		float: right;
+		padding: 1.5em;
+		padding-right: 0px;
+		background: transparent;
+		margin-left: 1.75em;
+	}
+}
+
+// The top navigation menu
+#primarynav  {
+	background: none;
+	padding: 0;
+	ul  {
+		margin-top: 0;
+		li  {
+			display: inline;
+			background: #FFFFFF;
+			font-family:'Ubuntu',  verdana,  sans-serif;
+			font-weight: normal;
+			float: left;
+			font-size: 0.85em;
+			text-align: left;
+			a  {
+				display: block;
+				padding: 0.4em 0.75em 0.6em 0.75em;
+				color: #000000;
+				text-decoration: none;
+				border-bottom: 3px solid #0075D8;
+				height: 3em;
+				&:hover  {
+					color: #FFFFFF;
+					border-bottom: 3px solid #028dff;
+				}
+			}
+			&.current_page_item a, &.current-page-ancestor a{
+				color: white;
+			}
+		}
+	}
+}
+
+// Colour bars for each topline navigation structure 
+// Patients and visitors
+#menu-item-52 {
+	a{
+		border-color: @patientsAndVisitors !important;
+		&:hover{
+			background-color: @patientsAndVisitors !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @patientsAndVisitors !important;
+	}
+}
+
+
+// Services
+#menu-item-11 {
+	a{
+		border-color: @services !important;
+		&:hover{
+			background-color: @services !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @services !important;
+	}
+}
+
+// About
+#menu-item-12 {
+	a{
+		border-color: @about !important;
+		&:hover{
+			background-color: @about !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @about !important;
+	}
+}
+
+// Work with us
+#menu-item-53 {
+	a{
+		border-color: @workWithUs !important;
+		&:hover{
+			background-color: @workWithUs !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @workWithUs !important;
+	}
+}
+
+
+// Education and research
+#menu-item-51 {
+	a{
+		border-color: @educationAndResearch !important;
+		&:hover{
+			background-color: @educationAndResearch !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @educationAndResearch !important;
+	}
+}
+
+// GPs and clinicians
+#menu-item-50 {
+	a{
+		border-color: @gpsAndClinicians !important;
+		&:hover{
+			background-color: @gpsAndClinicians !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @gpsAndClinicians !important;
+	}
+}
+
+// Contact and Find us
+#menu-item-49 {
+	a{
+		border-color: @contactAndFindUs !important;
+		&:hover{
+			background-color: @contactAndFindUs !important;
+		}
+	}
+	
+	&.current_page_item, &.current-page-ancestor a{
+		background-color: @contactAndFindUs !important;
+	}
+}
+
+// The search box
+#searchblock{
+	form {
+		padding: 2.5em 1em 0 0;
+		.searchbox{
+			background-image: url('images/search.svg');
+			background-repeat: no-repeat;
+			background-position: 96% center;
+			background-size: 1.5em;
+			border-radius: @borderRadius;
+			border: 2px solid #888888;
+			padding: 0.5em;
+			padding-right: 0px;
+			margin-top: -1.5em;
+			&:focus{
+				background-image: none;
+				outline: none;
+				box-shadow: @boxShadowX @boxShadowY @boxShadowBlur @shadowColour;
+			}
+		}	
+	}
+	#mobileMenuButton{
+		display: none;
+	}
+}
+
+// Sliding sidebar navigation for mobile
+.sideNav{
+	display: none;
+}

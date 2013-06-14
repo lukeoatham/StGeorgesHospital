@@ -572,7 +572,15 @@ function renderLeftNav($outputcontent="TRUE") {
 	if (strlen($subpages)>0 && !is_search() ) {
 	
 		$output = "
-			<div id='sectionnav'>
+			<div id='sectionnav' class='";
+		
+		foreach($post->ancestors as $ancestor){
+			$output .= "ancestor-".$ancestor." ";
+		}
+		
+		$output .= "current-".$post->ID;
+			
+		$output .= "'>
 			<ul>
 				{$subpages}
 			</ul>

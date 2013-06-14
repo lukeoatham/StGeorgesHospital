@@ -20,7 +20,7 @@ global $biotpress_options;
 
 				<div class="row">
 
-					<div class="threecol" iid='secondarynav'>
+					<div class="threecol" id='secondarynav'>
 
 						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				

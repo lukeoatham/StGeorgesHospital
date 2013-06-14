@@ -11,8 +11,8 @@
  */
 ?>
 
-			</div><!-- container -->
-
+			
+		</div><!-- container -->
 			<div class="row" id='footer'>
 
 				<div class='container'>
@@ -37,6 +37,8 @@
 				
 
 			</div>
+			
+			
 
 <!--  other analytics code -->
 
@@ -49,7 +51,13 @@
 <script type='text/javascript'>
     jQuery(document).ready(function(){
         //jQuery("#primarynav").Touchdown();
- 
+        
+       // add dynamic classes for IE8 first-child support
+ 		//jQuery('#menu-header-links li').first().addClass('first-link');
+ 		//jQuery('#menu-footer-links li').first().addClass('first-link');
+ 		//jQuery('#primarynav li').first().addClass('first-link');
+ 		//jQuery('#sectionnav ul li').first().addClass('first-link');
+ 		
  		// add dynamic classes for IE8 last-child support
  		jQuery('#menu-header-links li').last().addClass('last-link');
  		jQuery('#menu-footer-links li').last().addClass('last-link');

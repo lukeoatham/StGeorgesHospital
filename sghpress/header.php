@@ -28,19 +28,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-
-	<!-- webfont loading: -->
-	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,700' rel='stylesheet' type='text/css'>
-	
-	<!-- 1140px Grid styles for IE -->
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/css/ie.css" type="text/css" media="screen" />
-	<![endif]-->
-	
-	<!-- The 1140px Grid - http://cssgrid.net/ -->
-	<link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/css/1140.css" type="text/css" media="screen" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?><?php echo "?" . time();?>" />
-	<link rel="stylesheet" type="text/css" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/print.css<?php echo "?" . time();?>" />
 
 	<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
 	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/css3-mediaqueries.js"></script>
@@ -70,24 +58,18 @@
 </head>
 
 <body <?php body_class($parentpageclass); ?>>
-
+		
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
-
-			<div class="container">								
+<input type="checkbox" name="mobileNav" id="mobileNav" />
+			<div class="container" id="mobMove">								
 
 				<div id='header' class="row">
 					<div id='masthead' class="twelvecol last">
 						<p id='mainlogo'>
 							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-								<!-- <img src="<?php echo get_stylesheet_directory_uri();?>/images/wordpress.png" alt="<?php echo get_bloginfo('name');?>"  /> -->
 								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="St George's Healthcare NHS Trust">
 							</a>
 						</p>							
-							<!-- <p id='strapline'>
-								<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-									<?php echo get_bloginfo( 'name' ); ?>
-								</a>
-							</p> -->
 					</div>
 						
 						
@@ -105,17 +87,59 @@
 								</div>
 								<div id='searchblock' class="fourcol last">
 									<?php get_search_form(true); ?>
-									<!--<div id="utilities">	
-										<ul>
-											<?php //dynamic_sidebar( 'utilities-widget-area' ); ?>
-										</ul>
-									</div>-->
+									<!-- label to control checbox -->
+									<label id="mobileMenuButton" for="mobileNav" onclick>
+										<h6>Menu</h6>
+									</label>
+									<!-- end label to control checkbox -->
 								</div>
 							</div>						
 						</div>
 					</div>
 				
 				</div>
+				<!-- label to display the content when bringing in side menu -->
+					<label id="contentOverlay" for="mobileNav"></label>
+				<!-- end label for side menu -->
+				
+				<!-- start navigation for sidebar -->
+				<div class="sideNav">
+				<ul>
+				<?php
+				
+				global $post;
+				$menu_name = 'primary';
+				$locations = get_nav_menu_locations();
+				$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+				$menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
+				
+				foreach($menuitems as $item){
+					$itemID = $item->ID;
+					
+					//checks to see if the page is the current page and adds the current class
+					$classString = "";
+					if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
+						$classString = " current_page_item";
+					}
+					echo('<li class="menu-item-'.$itemID.''.$classString.'"><a href="'.$item->url.'" title="'.$item->title.'">'.$item->title.'</a></li>');
+					
+					//Renders the left nav of pages with left navs
+					
+					if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
+						//if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ){
+						if(!is_front_page() && !is_404() && !is_search()){
+							echo('<li class="subSideNav">');
+							renderLeftNav();
+							echo('</li>');
+						}
+					}
+				}
+				
+				?>
+				</ul>
+				</div>
+				
+				<!-- end navigation for sidebar -->
 				
 				<div class="row">
 					<div class="twelvecol last">
