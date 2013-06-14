@@ -19,12 +19,15 @@ get_header(); ?>
 <div id="sectionnav">
 <ul>
 						<?php
+						
+						
+//PREPARE LEFT HAND NAVIGATION TO SHOW CHILDREN OPTIONS OF CURRENT SERVICE
+						
 						echo "<li class='page_item'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>";
 
 						$parentpost = $post->post_parent; 
 						if ($post->post_parent != 0) {
 							$parentservice = get_post($parentpost);
-							//print_r($parentservice);
 						echo "<li class='page_item'><a href='".$parentservice->guid."'>&laquo; ".$parentservice->post_title."</a></li>";	
 						}
 						echo "<li class='page_item current_page_item'><a href='".$post->guid."'><strong>".$post->post_title."</strong></a></li>";	
@@ -100,8 +103,47 @@ get_header(); ?>
 				
 				<?php the_post_thumbnail('medium'); 
 				
-				//display clinicians associated with this service
+				//DISPLAY WARDS ASSOCIATED WITH THIS SERVICE
+
+				$wards = get_posts(
+						array(
+						"post_type" => "ward",
+						"posts_per_page" => -1,
+						"orderby" => "title",
+						"order" => "ASC",
+						)
+					);
+
+					//run through each clinician to check if assigned to this service
+					
+					foreach ($wards as $ward) {
+					setup_postdata($ward); 
+						//get array of services for this clinician	
+						$wardservices=get_post_meta($ward->ID, 'service-relationship',false);
+
+						//check each element in the array to see if it matches this service
+						foreach ($wardservices as $wardservice){ 
+
+							if ( in_array($mainid, $wardservice) ){
+								if (!$donetitle){
+									echo "<h3>Wards</h3>";
+									$donetitle=true;
+								}
+								echo "<div class='clearfix'><hr>";
+								echo "<h3><a href='".$ward->guid."'>".$ward->post_title."</a></h3>";
+								echo "</div>";
+
+							}
+						}
+					}
+
+
+
+
 				
+		
+				//display clinicians associated with this service
+				$donetitle=false;
 				$clinicians = get_posts(
 						array(
 						"post_type" => "clinician",
