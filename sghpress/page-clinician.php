@@ -9,7 +9,19 @@ get_header(); ?>
 
 					<div class="eightcol">
 					<?php
-					$clinicians = new WP_Query('post_type=clinician&posts_per_page=10');
+					$clinicians = new WP_Query(
+					array(
+					"post_type"=>"people",
+					"posts_per_page"=>10,
+					"orderby"=>"meta_value",
+					"order"=>"ASC",
+					"meta_key"=>"last_name",
+					"tax_query"=>array(array(
+					"taxonomy"=>"people-types",
+					"field"=>"slug",
+					"terms"=>"clinician"
+					))
+					));	
 					
 					while ($clinicians->have_posts()) {
 				$clinicians->the_post();

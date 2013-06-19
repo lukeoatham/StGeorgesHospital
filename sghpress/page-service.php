@@ -1,7 +1,13 @@
 <?php
 /* Template name: Services page */
 
-get_header(); ?>
+get_header(); 
+
+$hospsite = $_GET['hospsite'];
+if (!$hospsite){
+	$hospsite="st-georges";
+}
+?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
@@ -9,11 +15,12 @@ get_header(); ?>
 					<div class="ninecol" iid='secondarynav'>
 
 
-				<?php 
-
-					the_content(); ?>
+		
+					<p><br><a href="/services/a-z/?hospsite=st-georges">St George's</a> | <a href="/services/a-z/?hospsite=queen-marys">Queen Mary's</a></p>
+		<?php 
+							the_content(); ?>
 					
-<div id="sectionnav">
+<div id="sectionnavx">
 <ul>
 <?php
 				//list all services
@@ -24,12 +31,18 @@ get_header(); ?>
 							"posts_per_page" => -1,
 							"orderby" => "title",
 							"order" => "ASC",
-							"post_parent" => 0
+							"post_parent" => 0,
+							"tax_query"=> array(array(
+							"taxonomy"=>"sites",
+							"terms"=>$hospsite,
+							"field"=>"slug"
+							)
+							)							
 							)
 						);
 						
 					foreach ($allservices as $service){
-						echo "<li class='page_item'><a href='".$service->guid."'>".$service->post_title."</a></li>";
+						echo "<li class='page_item'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
 					} 
 ?>
 </ul>	

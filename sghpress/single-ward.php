@@ -138,16 +138,38 @@ get_header(); ?>
 				</div>
 				
 				<div class="fourcol last" id='sidebar'>
-<?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
-					echo $cimage;
-						$services=get_post_meta($post->ID, 'service-relationship',true);
-						echo "<h3>Services</h3><ul>";
+<?php	
+//display services associated with this ward
+				
+				$services = get_posts(
+					array(
+					"post_type"=>"service",
+					"posts_per_page"=>-1,
+					"orderby"=>"name",
+					"order"=>"ASC",
+					));	
+
+					//run through each service to check if assigned to this ward
+					
+					foreach ($services as $service) {
+					setup_postdata($service); 
+						//get array of services for this ward	
+						$servicesposts=get_post_meta($service->ID, 'wards',false);
+
 						//check each element in the array to see if it matches this service
-						foreach ($services as $service){ 
-							$thisservice = get_post($service);
-							echo "<li><a href='".$thisservice->guid."'>".$thisservice->post_title."</a></li>";
+						foreach ($servicesposts as $servicespost){ 
+
+							if ( in_array($mainid, $servicespost) ){
+								if (!$donetitle){
+									echo "<h3>Services</h3><ul>";
+									$donetitle=true;
+								}
+								echo "<li><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
+
+							}
 						}
-						echo "</ul>";
+					}
+					echo "</ul";
 	?>				
 	
 				</div>

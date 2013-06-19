@@ -647,3 +647,15 @@ add_action('wp_enqueue_scripts','enqueueThemeScripts');
 // listing page thumbnail sizes, e.g. home page
 
 add_image_size( "clinicianthumb", "72", "72", true );
+
+function sghpress_custom_title( $output ) {
+	if (!is_admin()) {
+//		$newtitle = str_replace("[", "(", $output);
+//		$newtitle = str_replace("]", ")", $newtitle);		
+//		return $newtitle;
+		return trim(preg_replace('/\[.*\]/i','',$output));
+	} else {
+		return $output;
+	}
+}
+add_filter( 'the_title', 'sghpress_custom_title' );

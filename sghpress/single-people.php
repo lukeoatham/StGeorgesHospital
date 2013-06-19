@@ -17,25 +17,32 @@ get_header(); ?>
 		<div class="row">
 
 				<div class="eightcol" id='content'>
-					<h1><?php the_title(); ?></h1>
-
+					<h1><?php the_title(); 
+					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1>
+					
 					<?php 
-					$protitle = get_post_meta($post->ID, 'professional_title', true);
-					if ($protitle !=''){
-						echo "<h2>".$protitle."</h2>";
-					}	
+
 					
 					the_content(); 
 					echo "<h3>Contact</h3>";
-					$email = get_post_meta($post->ID, 'clinician_email', true);
+					$email = get_post_meta($post->ID, 'people_email', true);
 					if ($email !=''){
 						echo "<p><strong>Email: </strong><a href='mailto:".$email."'>".$email."</a></p>";
 					}	
 
-					$telephone = get_post_meta($post->ID, 'clinician_telephone', true);
+					$telephone = get_post_meta($post->ID, 'people_telephone', true);
 					if ($telephone !=''){
 						echo "<p><strong>Telephone: </strong>".$telephone."</p>";
 					}	
+					$incat = false;
+					$cats=get_the_terms($id, 'people-types');
+					foreach ($cats as $cat){
+						if ( $cat->slug == "clinician" ){
+							$incat = true;
+						}
+					}
+					
+					if ( $incat ) { //if this person is categorised as a clinician then display additional fields
 					
 					$secretary = get_post_meta($post->ID, 'secretary_name', true);
 					if ($telephone !=''){
@@ -69,6 +76,7 @@ get_header(); ?>
 						echo wpautop($other);
 					}	
 					
+					}
 					?>
 
 				
@@ -78,13 +86,15 @@ get_header(); ?>
 <?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
 					echo $cimage;
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
-						echo "<h3>Services</h3><ul>";
-						//check each element in the array to see if it matches this service
-						foreach ($clinicianservices as $clinicianservice){ 
-							$thisservice = get_post($clinicianservice);
-							echo "<li><a href='".$thisservice->guid."'>".$thisservice->post_title."</a></li>";
+						if ($clinicianservices){
+							echo "<h3>Services</h3><ul>";
+							//check each element in the array to see if it matches this service
+							foreach ($clinicianservices as $clinicianservice){ 
+								$thisservice = get_post($clinicianservice);
+								echo "<li><a href='".$thisservice->guid."'>".$thisservice->post_title."</a></li>";
+							}
+							echo "</ul>";
 						}
-						echo "</ul>";
 	?>				
 	
 				</div>

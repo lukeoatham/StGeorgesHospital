@@ -25,9 +25,9 @@ get_header(); ?>
 						if ($post->post_parent != 0) {
 							$parentservice = get_post($parentpost);
 							//print_r($parentservice);
-						echo "<li class='page_item'><a href='".$parentservice->guid."'>&laquo; ".$parentservice->post_title."</a></li>";	
+						echo "<li class='page_item'><a href='".$parentservice->guid."'>&laquo; ".sghpress_custom_title($parentservice->post_title)."</a></li>";	
 						}
-						echo "<li class='page_item current_page_item'><a href='".$post->guid."'><strong>".$post->post_title."</strong></a></li>";	
+						echo "<li class='page_item current_page_item'><a href='".$post->guid."'><strong>".sghpress_custom_title($post->post_title)."</strong></a></li>";	
 						
 						$allservices = get_posts(
 						array(
@@ -40,7 +40,7 @@ get_header(); ?>
 					);
 						
 					foreach ($allservices as $service){
-						echo "<li class='page_item'><a href='".$service->guid."'>".$service->post_title."</a></li>";
+						echo "<li class='page_item'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
 					}	 ?>
 </ul>	
 </div>
@@ -70,8 +70,8 @@ get_header(); ?>
 						$longitude = get_post_meta($servicelocation,'longitude',true);
 						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
+					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
 
 						echo "</div>";
 					}
@@ -97,13 +97,18 @@ get_header(); ?>
 				//display clinicians associated with this service
 				
 				$clinicians = get_posts(
-						array(
-						"post_type" => "clinician",
-						"posts_per_page" => -1,
-						"orderby" => "title",
-						"order" => "ASC",
-						)
-					);
+					array(
+					"post_type"=>"people",
+					"posts_per_page"=>-1,
+					"orderby"=>"meta_value",
+					"order"=>"ASC",
+					"meta_key"=>"last_name",
+					"tax_query"=>array(array(
+					"taxonomy"=>"people-types",
+					"field"=>"slug",
+					"terms"=>"clinician"
+					))
+					));	
 
 					//run through each clinician to check if assigned to this service
 					
@@ -120,16 +125,32 @@ get_header(); ?>
 									echo "<h3>Clinicians</h3>";
 									$donetitle=true;
 								}
-								echo "<div class='clearfix'><hr>";
-								echo "<h3><a href='".$clinician->guid."'>".$clinician->post_title."</a></h3>";
+								echo "<div class='clearfix'>";
+								echo "<h4><a href='".$clinician->guid."'>".$clinician->post_title."</a></h4>";
 								echo get_the_post_thumbnail($clinician->ID,'clinicianthumb', array("class"=>"alignleft")); 
 								$protitle= get_post_meta($clinician->ID,'professional_title',true);
 								echo 
-								"<p><a href='".$clinician->guid."'>".$protitle."</a></p></div>";
+								"</div>";
 
 							}
 						}
 					}
+					
+					$wards=get_post_meta($post->ID, 'wards',true);
+					if ($wards){
+						$donetitle=false;
+						foreach ($wards as $ward){
+							if (!$donetitle){
+								echo "<h3>Wards</h3><ul>";
+								$donetitle=true;
+							}
+							$w = get_post($ward);
+							echo "<li><a href='".$w->guid."'>".$w->post_title."</a></li>";
+						}
+						echo "</ul>";
+					}
+						
+					
 					?>
 						<ul class="xoxo">
 
