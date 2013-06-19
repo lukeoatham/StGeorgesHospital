@@ -68,7 +68,7 @@ get_header(); ?>
 						$location = get_post($servicelocation);
 						echo $location->post_title;
 						$longitude = get_post_meta($servicelocation,'longitude',true);
-						$latitude = get_post_meta($servicelocation,'$latitude',true);
+						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
 						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
 					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=14&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";

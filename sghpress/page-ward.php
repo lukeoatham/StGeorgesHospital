@@ -4,6 +4,9 @@
 get_header();
 
 $hospsite = $_GET['hospsite'];
+if (!$hospsite){
+	$hospsite="st-georges";
+}
  ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
@@ -12,71 +15,40 @@ $hospsite = $_GET['hospsite'];
 					<div class="ninecol" iid='secondarynav'>
 
 
+					
+					<p><br><a href="/patients-and-visitors/our-wards/?hospsite=st-georges">St George's</a> | <a href="/patients-and-visitors/our-wards/?hospsite=queen-marys">Queen Mary's</a></p>
+
 				<?php 
 
 					the_content(); ?>
+
 					
 <div id="sectionnav">
 <ul>
 <?php
-				//list all services
-						
-						//find all locations for the chosen site
-						
-						$locations = get_posts(
-							array(
-							"post_type" => "location",
-							"posts_per_page" => -1,
-							"tax_query"=> array(array(
-							"taxonomy"=>"sites",
-							"terms"=>$hospsite,
-							"field"=>"id"
-							))
-							)
-						);
-						$locarray = array();
-						foreach ($locations as $location){
-							$locarray[] = $location->ID;
-						}
-							//print_r($locarray);
-						
-						//find all the services for the found locations
-						
-						
-
-						$wards = get_posts(
+				//list all wards
+						$wards = new WP_query(
 							array(
 							"post_type" => "ward",
 							"posts_per_page" => -1,
 							"orderby" => "title",
 							"order" => "ASC",
+							"tax_query"=> array(array(
+							"taxonomy"=>"sites",
+							"terms"=>$hospsite,
+							"field"=>"slug"
+							)
+							)
 							)
 						);
 
-
-						foreach ($wards as $ward) {
-							setup_postdata($ward); 
-						//get array of services for this clinician	
-						$locations=get_post_meta($ward->ID, 'location',false);
-
 						//check each element in the array to see if it matches this service
-						foreach ($locations as $location){ 
-							print_r($location);
-							foreach ($locarray as $loc) {		
-								if ( $loc == $location) {
-									echo "<div class='clearfix'><hr>";
-									echo "<h3><a href='".$ward->guid."'>".$ward->post_title."</a></h3>";
+						while ($wards->have_posts()) {
+							$wards->the_post();
+									echo "<div class='clearfix'>";
+									echo "<h3><a href='".$post->guid."'>".$post->post_title."</a></h3>";
 									echo "</div>";
 								}
-							}
-						}
-					}
-
-
-						
-					foreach ($allservices as $service){
-						echo "<li class='page_item'><a href='".$service->guid."'>".$service->post_title."</a></li>";
-					} 
 ?>
 </ul>	
 </div>						
