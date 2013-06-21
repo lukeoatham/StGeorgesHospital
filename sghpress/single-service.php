@@ -122,19 +122,17 @@ get_header(); ?>
 
 							if ( in_array($mainid, $clinicianservice) ){
 								if (!$donetitle){
-									echo "<h3>Clinicians</h3>";
+									echo "<h3>Clinicians</h3><ul>";
 									$donetitle=true;
 								}
-								echo "<div class='clearfix'>";
-								echo "<h4><a href='".$clinician->guid."'>".$clinician->post_title."</a></h4>";
-								echo get_the_post_thumbnail($clinician->ID,'clinicianthumb', array("class"=>"alignleft")); 
-								$protitle= get_post_meta($clinician->ID,'professional_title',true);
-								echo 
-								"</div>";
+								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
+//								echo get_the_post_thumbnail($clinician->ID,'clinicianthumb', array("class"=>"alignleft")); 
+//								$protitle= get_post_meta($clinician->ID,'professional_title',true);
 
 							}
 						}
 					}
+					echo "</ul>";
 					
 					$wards=get_post_meta($post->ID, 'wards',true);
 					if ($wards){
