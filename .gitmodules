@@ -1,0 +1,3 @@
+[submodule "sghpress/sghstrap"]
+	path = sghpress/sghstrap
+	url = https://github.com/Gimpneek/SGHstrap.git
