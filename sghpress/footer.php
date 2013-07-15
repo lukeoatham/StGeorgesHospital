@@ -11,33 +11,46 @@
  */
 ?>
 
-			
-		</div><!-- container -->
-			<div class="row" id='footer'>
 
-				<div class='container'>
-				
-					<div class="eightcol">
-	
-						<ul class="xoxo">
-							<?php dynamic_sidebar( 'left-footer-widget-area' ); ?>
-						</ul>
-											
-					</div>
-				
-					<div class="fourcol last">
-	
-						<ul class="xoxo">
-							<?php dynamic_sidebar( 'right-footer-widget-area' ); ?>
-						</ul>
-											
-					</div>
-				
-				</div>
-				
 
+
+		<div id="ourvalues" class="row-fluid">
+		<div class="container-fluid">
+			<div class="span9">
+			<img src="/wp-content/themes/sghpress/images/values.png" alt="Our values">
 			</div>
-			
+			<div class="span3">
+			<p>Our <a href="#">values</a>, <a href="#">vision</a> and <a href="#">strategy</a>
+			</div>
+		</div>
+		</div>
+		
+			<div class="row-fluid" id='footer'>
+				<div class="container-fluid">
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area4' ); ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 			
 
 <!--  other analytics code -->

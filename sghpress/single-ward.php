@@ -14,9 +14,9 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row">
+		<div class="row-fluid">
 
-				<div class="eightcol" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<?php 
@@ -76,22 +76,22 @@ get_header(); ?>
 						
 						$matrons = get_post_meta($post->ID, 'matron', true);
 						foreach ($matrons as $matron){
-						// display location details 
-						echo "<p><strong>Matron: </strong>";
-						$m = get_post($matron);
-						echo "<a href='".$m->guid."'>";
-						echo $m->post_title;
-						echo "</a></p>";
+							// display location details 
+							echo "<p><strong>Matron: </strong>";
+							$m = get_post($matron);
+							echo "<a href='".$m->guid."'>";
+							echo $m->post_title;
+							echo "</a></p>";
 						}
 
 						$sisters = get_post_meta($post->ID, 'sister_in_charge', true);
 						foreach ($sisters as $sister){
-						// display location details 
-						echo "<p><strong>Sister in charge: </strong>";
-						$s = get_post($sister);
-						echo "<a href='".$s->guid."'>";
-						echo $s->post_title;
-						echo "</a></p>";
+							// display location details 
+							echo "<p><strong>Sister in charge: </strong>";
+							$s = get_post($sister);
+							echo "<a href='".$s->guid."'>";
+							echo $s->post_title;
+							echo "</a></p>";
 						}
 						
 						echo "<p><strong>Number of beds: </strong>";
@@ -99,23 +99,23 @@ get_header(); ?>
 						echo "</p>";
 
 						if ( get_post_meta($post->ID, 'payg', true)  == 0 ) {
-						echo "<p><strong>No TV</strong>"; 
+							echo "<p><strong>No TV</strong>"; 
 						} else {
-						echo "<p><strong>Pay as you go TV is available</strong>"; 
+							echo "<p><strong>Pay as you go TV is available</strong>"; 
 						}
 						echo "</p>";
 
 						if ( get_post_meta($post->ID, 'mobiles_and_laptops', true)  == 0 ) {
-						echo "<p><strong>No mobiles or laptops allowed</strong>"; 
+							echo "<p><strong>No mobiles or laptops allowed</strong>"; 
 						} else {
-						echo "<p><strong>Mobile and laptops are allowed</strong>"; 
+							echo "<p><strong>Mobile and laptops are allowed</strong>"; 
 						}
 						echo "</p>";
 
 						if ( get_post_meta($post->ID, 'wifi', true)  == 0 ) {
-						echo "<p><strong>No WiFi</strong>"; 
+							echo "<p><strong>No WiFi</strong>"; 
 						} else {
-						echo "<p><strong>WiFi is available</strong>"; 
+							echo "<p><strong>WiFi is available</strong>"; 
 						}
 						echo "</p>";
 						echo "</div>";
@@ -137,7 +137,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="fourcol last" id='sidebar'>
+				<div class="span4" id='sidebar'>
 <?php	
 //display services associated with this ward
 				
@@ -161,7 +161,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $servicespost) ){
 								if (!$donetitle){
-									echo "<h3>Services</h3><ul>";
+									echo "<div class='well'><h3>Services</h3><ul class='nav nav-list'>";
 									$donetitle=true;
 								}
 								echo "<li><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
@@ -169,7 +169,7 @@ get_header(); ?>
 							}
 						}
 					}
-					echo "</ul";
+					echo "</ul></div>";
 	?>				
 	
 				</div>

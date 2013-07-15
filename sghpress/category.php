@@ -9,8 +9,8 @@
 
 get_header(); ?>
 
-				<div class="row">
-					<div class="eightcol" id="content">
+				<div class="row-fluid">
+					<div class="span8" id="content">
 
 				<h1><?php
 					printf( __( '%s', 'twentyten' ), '' . single_cat_title( '', false ) . '' );
@@ -30,7 +30,7 @@ get_header(); ?>
 
 					</div>
 
-					<div class="fourcol last" id='sidebar'>
+					<div class="span4" id='sidebar'>
 						<ul class="xoxo">
 							<?php if (is_home() || is_front_page()) : ?>
 								<?php dynamic_sidebar( 'home-sidebar-widget-area' ); ?>

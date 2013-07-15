@@ -5,53 +5,58 @@ get_header(); ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row">
+				<div class="row-fluid">
+				
+				<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
 
-					<div class="sevencol">
+							<div class="alert alert-block">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+
+									<?php dynamic_sidebar( 'emergency_message' ); ?>
+							
+							</div>
+
+						<?php endif; ?>
+
 					<?php the_content(); ?>
-					<h2>Carousel</h2>
-					St George’s Healthcare provides diagnosis, surgery and chemotherapy for all types of cancer as well as palliative care (care to improve quality of life) and follow-up clinics. It also plays a key part in cancer prevention, offering screening services and treatment for pre-cancer stages. Radiotherapy (using x-rays or other forms of radiation as treatment) for patients is provided at the Royal Marsden Hospital with which St George’s Healthcare is a Joint Cancer Centre. There is close liaison with primary healthcare teams and local hospices to provide seamless care for cancer patients. A 24-hour on-call oncology and palliative care service is available.
-					</div>
-					
-					<div class="fivecol last">
-						<h2>News</h2>
-						St George’s Healthcare provides diagnosis, surgery and chemotherapy for all types of cancer as well as palliative care (care to improve quality of life) and follow-up clinics. It also plays a key part in cancer prevention, offering screening services and treatment for pre-cancer stages. Radiotherapy (using x-rays or other forms of radiation as treatment) for patients is provided at the Royal Marsden Hospital with which St George’s Healthcare is a Joint Cancer Centre. There is close liaison with primary healthcare teams and local hospices to provide seamless care for cancer patients. A 24-hour on-call oncology and palliative care service is available.
-						
-					<div class="message">
+<ul class="thumbnails">
+<li class="span6"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh1.png" alt=""></a><h3>Primary story headline</h3><p>Teaser text introducing the news story. Can go onto two lines.</p></li>
+<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh2.png" alt=""></a><h4>Secondary story headline</h4></li>
+<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh3.png" alt=""></a><h4>Secondary story headline</h4></li>
+<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh4.png" alt=""></a><h4>Campaign feature story headline</h4></li>
+<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh5.png" alt=""></a><h4>Campaign story headline</h4></li>
+</ul>
+
+				</div>
+				
+					<div class="row-fluid">
+					<div class="span8" id="services">
+					<div class="row-fluid">
+					<div class="span6">
+
 					<h3>Services</h3>
-					<h4>Most popular</h4>
+					<h4>Most active</h4>
 					<?php
 					$defaults = array(
-	'theme_location'  => '',
-	'menu'            => 'top-tasks',
-	'container'       => 'div',
-	'container_class' => '',
-	'container_id'    => '',
-	'menu_class'      => 'menu',
-	'menu_id'         => '',
-	'echo'            => true,
-	'fallback_cb'     => 'wp_page_menu',
-	'before'          => '',
-	'after'           => '',
-	'link_before'     => '',
-	'link_after'      => '',
-	'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-	'depth'           => 0,
-	'walker'          => ''
-);
-
-wp_nav_menu( $defaults );
-
-
-
-
-					?>	
-
-<p> 
-  <label for="select2">Jump to: </label>
-  <select id="select2" >
-<?php  
-	$allservices = get_posts(
+					'menu'            => 'top-tasks',
+					'container'       => 'div',
+					'menu_class'      => 'menu',
+					'echo'            => true,
+					'fallback_cb'     => 'wp_page_menu',
+					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					'depth'           => 0,
+				);
+				
+				wp_nav_menu( $defaults );
+									?>	
+				</div>
+				<div class="span6">
+				<h4>All services: A-Z </h4> 
+				<p>
+				  <label for="select2">Jump to:</label>
+				  <select id="select2" >
+				<?php  
+					$allservices = get_posts(
 							array(
 							"post_type" => "service",
 							"posts_per_page" => -1,
@@ -64,11 +69,12 @@ wp_nav_menu( $defaults );
 					foreach ($allservices as $service){
 						echo  '<option value="'.$service->guid.'">'.$service->post_title.' </option>';
 					}
-?>
-  </select>
-  <input type="button" value="Go" onclick="goToPage('select2')"/>
-</p>					
-					
+					?>
+					  </select>
+					  <input type="button" value="Go" onclick="goToPage('select2')"/>
+					</p>					
+
+		
 <script>
 function goToPage( id ) {
 
@@ -87,13 +93,25 @@ function goToPage( id ) {
   
   
 }
-</script>
-					</div>	
-						
+</script>					</div>			
+						</div>
 					</div>
+						<div class="span4" id="doitonline">
+							<h3>Do it online</h3>
+							<ul>
+							<li><a href='#'>Change an appointment</a></li>
+							<li><a href='#'>Get rest results</a></li>
+							<li><a href='#'>Another patient service</a></li>
+							<li><a href='#'>A popular enquiry</a></li>
+							<li><a href='#'>Frequent page visit</a></li>
+							</ul>
+						</div>
+						<div class="span4">							
+						<h2>Find us</h2>
+						</div>
 
-				</div>
-				
+					</div>
+					
 
 <?php endwhile; ?>
 

@@ -14,22 +14,35 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row">
-					<div class="threecol" iid='secondarynav'>
-<div id="sectionnav">
-<ul>
+		<div class="row-fluid">
+					<div class="span3" id='secondarynav'>
+					
+					
+<div class="menu-primary-navigation-container">
+<ul id="nav" class="menu">
 						<?php
-						echo "<li class='page_item'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>";
+						//build the left hand navigation based on the current page
 
-						$parentpost = $post->post_parent; 
-						if ($post->post_parent != 0) {
-							$parentservice = get_post($parentpost);
-							//print_r($parentservice);
-						echo "<li class='page_item'><a href='".$parentservice->guid."'>&laquo; ".sghpress_custom_title($parentservice->post_title)."</a></li>";	
-						}
-						echo "<li class='page_item current_page_item'><a href='".$post->guid."'><strong>".sghpress_custom_title($post->post_title)."</strong></a></li>";	
+						$navarray = array();
+						$currentpost = get_post($post->ID);
 						
-						$allservices = get_posts(
+						while (true){
+							//iteratively get the post's parent until we reach the top of the hierarchy
+							
+							$post_parent = $currentpost->post_parent; 
+							
+							if ($post_parent!=0){	//if found a parent
+
+								$navarray[] = $post_parent;
+								$currentpost = get_post($post_parent);
+								continue; //loop round again
+							}
+							break; //we're done with the parents
+						};
+						$navarray = array_reverse($navarray);
+						$navarray[] = $mainid;	//set current page in the nav array
+						//get children pages
+						$allservices = get_posts( 
 						array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
@@ -39,48 +52,97 @@ get_header(); ?>
 						)
 					);
 						
-					foreach ($allservices as $service){
-						echo "<li class='page_item'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
-					}	 ?>
+					foreach ($allservices as $service){ //fill the nav array with the child pages
+						$navarray[] = $service->ID;
+//						echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
+					}	 
+					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>"; //top level menu item
+					$subs=false;
+					foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
+						$currentpost = get_post($nav);
+						if ($nav == $mainid){
+						 	$subs = true;
+						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item page-item'>"; //current page
+						} elseif ($subs) {
+							echo "<li class='page-item'>"; //child page
+						} else {
+							echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'>"; //parent page
+						}
+						echo "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
+					}					
+					?>
 </ul>	
 </div>
 					</div>
-				<div class="sixcol" id='content'>
+				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<?php 
 					//display contact information
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
 					if ($contactnumber){
-						// display location details 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Contact number</h3>";
 						echo wpautop($contactnumber);
+						echo "</div>";
+					}
+
+					//display opening hours information
+					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
+					if ($openinghours){
+						echo "<div class='well'>";
+						echo "<h3>Opening hours</h3>";
+						echo wpautop($openinghours);
 						echo "</div>";
 					}
 					
 					//display location information
 					$servicelocations = get_post_meta($post->ID, 'location', true);
 					foreach ($servicelocations as $servicelocation){
-						// display location details 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Location</h3>";
 						$location = get_post($servicelocation);
 						echo $location->post_title;
 						$longitude = get_post_meta($servicelocation,'longitude',true);
 						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
+					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
 
 						echo "</div>";
 					}
 										
 					the_content(); 
+
+					$treatments = get_post_meta($post->ID, 'treatments', true);
+					if ($treatments !=''){
+						echo wpautop($treatments); 					}	
+
+					$team = get_post_meta($post->ID, 'team_profile', true);
+					if ($team !=''){
+						echo wpautop($team);
+					}						
+
+					$video = get_post_meta($post->ID, 'video', true);
+					if ($video !=''){
+						echo wpautop($video);
+					}								
+
+					$leaflets = get_post_meta($post->ID, 'leaflets', true);
+					if ($leaflets !=''){
+						echo "<h3>Leaflets</h3><ul id='leaflets'>";
+						foreach ($leaflets as $leaflet){
+						$attachlink = wp_get_attachment_url($leaflet);
+							echo "<li><a href='".$attachlink."'>";
+							echo get_the_title($leaflet);
+							echo "</a></li>";
+						}
+						echo "</ul>";
+
+					}	
 						
 					$moreinformation = get_post_meta($post->ID, 'more_information', true);
 					if ($moreinformation !=''){
-						// display more information 
 						echo wpautop($moreinformation);
 					}	
 						
@@ -90,7 +152,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="threecol last" id='sidebar'>
+				<div class="span3" id='sidebar'>
 				
 				<?php the_post_thumbnail('medium'); 
 				
@@ -114,10 +176,8 @@ get_header(); ?>
 					
 					foreach ($clinicians as $clinician) {
 					setup_postdata($clinician); 
-						//get array of services for this clinician	
 						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false);
 
-						//check each element in the array to see if it matches this service
 						foreach ($clinicianservices as $clinicianservice){ 
 
 							if ( in_array($mainid, $clinicianservice) ){
@@ -126,9 +186,6 @@ get_header(); ?>
 									$donetitle=true;
 								}
 								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
-//								echo get_the_post_thumbnail($clinician->ID,'clinicianthumb', array("class"=>"alignleft")); 
-//								$protitle= get_post_meta($clinician->ID,'professional_title',true);
-
 							}
 						}
 					}
@@ -149,6 +206,37 @@ get_header(); ?>
 					}
 						
 					
+				$referrals = get_posts(
+					array(
+					"post_type"=>"attachment",
+					"posts_per_page"=>-1,
+					"tax_query"=>array(array(
+					"taxonomy"=>"category",
+					"field"=>"slug",
+					"terms"=>"referral-forms"
+					))
+					));	
+
+					//run through each referrals to check if assigned to this service
+					$donetitle=false;					
+					foreach ($referrals as $referral) {
+						setup_postdata($referral); 
+						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
+						foreach ($referralservices as $referralservice){ 
+
+							if ( in_array($mainid, $referralservice) ){
+								if (!$donetitle){
+									echo "<h3>Referral forms</h3><ul>";
+									$donetitle=true;
+								}
+								//print_r($referralservice)	;
+								$referrallink = get_attachment_link($referral->ID);
+								echo "<li><a href='".$referrallink."'>".$referral->post_title."</a></li>";
+							}
+						}
+					}
+					echo "</ul>";
+
 					?>
 						<ul class="xoxo">
 

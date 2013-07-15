@@ -14,9 +14,9 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row">
+		<div class="row-fluid">
 
-				<div class="eightcol" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); 
 					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1>
 					
@@ -82,7 +82,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="fourcol last" id='sidebar'>
+				<div class="span4" id='sidebar'>
 <?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
 					echo $cimage;
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);

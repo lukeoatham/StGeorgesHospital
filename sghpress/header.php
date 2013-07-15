@@ -9,11 +9,7 @@
  * @since Starkers 3.0
  */
 ?><!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6 no-js" lang="en-US"><![endif]-->
-<!--[if IE 7 ]><html class="ie ie7 no-js" lang="en-US"><![endif]-->
-<!--[if IE 8 ]><html class="ie ie8 no-js" lang="en-US"><![endif]-->
-<!--[if IE 9 ]><html class="ie ie9 no-js" lang="en-US"><![endif]-->
-<!--[if gt IE 9]><!--><html lang="en-US"><!--<![endif]-->
+<html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<title><?php
@@ -28,17 +24,16 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?><?php echo "?" . time();?>" />
 
-	<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
-	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/css3-mediaqueries.js"></script>
-	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/ht-scripts.js"></script>
-
-	<!-- [if lte IE 8]>
-		<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/ie7/IE8.js"></script>
-	<![endif]-->
+	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet">
+	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+	<link rel="stylesheet" type="text/css" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/print.css" />
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="/wp-content/themes/sghpress/js/bootstrap.js"></script>
 
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
 			
 		<?php
 		/* We add some JavaScript to pages with the comment form
@@ -58,23 +53,40 @@
 </head>
 
 <body <?php body_class($parentpageclass); ?>>
-		
-		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
-<input type="checkbox" name="mobileNav" id="mobileNav" />
-			<div class="container" id="mobMove">								
 
+
+		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
+<input type="checkbox" name="mobileNav" id="mobileNav" checked />
+			<div class="container-fluid" id="mobMove">
+			<div class="row-fluid">
+				<ul class="topLinks">
+					<li><a href="#">Telephone: 020 8275 4521</a></li>
+					<li><a href="#">This is a link</a></li>
+					<li><a href="#">This is also a link</a></li>
+				</ul>
+			</div>								
+			<div class="row-fluid">
 				<div id='header' class="row">
-					<div id='masthead' class="twelvecol last">
+					<div id='masthead'>
+						
 						<p id='mainlogo'>
 							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="St George's Healthcare NHS Trust">
 							</a>
-						</p>							
+						</p>
+						
+						<div id='searchblock'>
+									<?php get_search_form(true); ?>
+									<!-- label to control checbox -->
+									<label id="mobileMenuButton" for="mobileNav" onclick>
+										<h6>Menu</h6>
+									</label>
+									<!-- end label to control checkbox -->
+						</div>							
 					</div>
 						
-						
 					<div id='navigation' class="row">
-						<div class="twelvecol last">
+						<div class="span12">
 							<div class='menu-header'>
 								
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
@@ -84,14 +96,6 @@
 									<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 									<?php 
 										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
-								</div>
-								<div id='searchblock' class="fourcol last">
-									<?php get_search_form(true); ?>
-									<!-- label to control checbox -->
-									<label id="mobileMenuButton" for="mobileNav" onclick>
-										<h6>Menu</h6>
-									</label>
-									<!-- end label to control checkbox -->
 								</div>
 							</div>						
 						</div>
@@ -140,14 +144,13 @@
 				</div>
 				
 				<!-- end navigation for sidebar -->
-				
-				<div class="row">
-					<div class="twelvecol last">
-							<div class='breadcrumbs'>
-							<?php if(function_exists('bcn_display') && !is_front_page()) {
-								bcn_display();
-							}?>
+			</div>
+			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
+				<div class="row-fluid">
+					<div class="span12">
+							<div class='breadcrumb'>
+								<?php bcn_display(); ?>
 							</div>
-							
     				</div>
 				</div>
+			<?php endif; ?>

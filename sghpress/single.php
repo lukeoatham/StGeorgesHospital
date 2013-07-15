@@ -13,10 +13,9 @@ get_header(); ?>
 	
 	$mainid=$post->ID;
 ?>
+		<div class="row-fluid">
 
-		<div class="row">
-
-				<div class="eightcol" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
@@ -28,10 +27,25 @@ get_header(); ?>
 							<?php comments_template( '', true ); ?>
 						</div>						
 					<?php endif; ?>
+					
+					<ul class="xoxo">
+
+						<?php if ( (comments_open() || have_comments()) ) : ?>
+						<li>
+	
+							<div id='comments'>
+								<?php comments_template( '', true ); ?>
+							</div>
+						
+						</li>
+						<?php endif; ?>
+
+						</ul>
+
 				
 				</div>
 				
-				<div class="fourcol last" id='sidebar'>
+				<div class="span4" id='sidebar'>
 					<?php
 										if ( has_post_thumbnail( $post->ID ) ) {
 								$img = get_the_post_thumbnail($post->ID,'large') ;
@@ -62,27 +76,9 @@ echo "<div id='newsposts'><br><hr><br>";
 			endwhile; 
 ?>
 
-						<ul class="xoxo">
-
-						<?php if ( (comments_open() || have_comments()) && $commentariatGOVUK_options['radio_commentlayout_input'] == "sidebar") : ?>
-						<li>
-	
-							<div id='comments'>
-								<?php comments_template( '', true ); ?>
-							</div>
-						
-						</li>
-						<?php endif; ?>
-
-							<?php if (is_home() || is_front_page()) : ?>
-								<?php dynamic_sidebar( 'home-sidebar-widget-area' ); ?>
-							<?php else : ?>
-								<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
-							<?php endif; ?>
-						</ul>
-	
+							
 				</div>
-	
+		</div>
 	</div>
 
 

@@ -9,8 +9,8 @@
 
 get_header(); ?>
 
-				<div class="row">
-					<div class="eightcol" id="content">
+				<div class="row-fluid">
+					<div class="span9" id="content">
 				<h1><?php
 					printf( __( 'Tagged: %s', 'twentyten' ), '' . single_tag_title( '', false ) . '' );
 				?></h1>
@@ -25,7 +25,7 @@ get_header(); ?>
 
 					</div>
 
-					<div class="fourcol last" id='sidebar'>
+					<div class="span3" id='sidebar'>
 
 						<ul class="xoxo">
 							<?php if (is_home() || is_front_page()) : ?>

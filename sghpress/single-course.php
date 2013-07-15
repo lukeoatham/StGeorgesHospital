@@ -14,12 +14,10 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row">
+		<div class="row-fluid">
 
-				<div class="eightcol" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
-
-					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
 
 					<?php 
 					
@@ -33,7 +31,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="fourcol last" id='sidebar'>
+				<div class="span4" id='sidebar'>
 					
 						<ul class="xoxo">
 

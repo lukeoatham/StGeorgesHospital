@@ -6,7 +6,7 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 	<?php
 	$cdir=$_GET['cdir'];
-
+	$eventcat = $_GET['cat'];
 
 			//setup future/past button
 			if ($theme==""){
@@ -28,10 +28,10 @@ get_header(); ?>
 			}
 			
 ?>			
-				<div class="row">
+				<div class="row-fluid">
 
 				
-					<div class="ninecol" id='content'>
+					<div class="span9" id='content'>
 							<?php 
 							echo "<h1>";
 							if ($cdir!='b') {
@@ -40,30 +40,31 @@ get_header(); ?>
 							echo "Past events" ;
 							}
 
-							$pub = get_terms( 'event-type', 'orderby=count&hide_empty=0' );
+							$pub = get_terms( 'event-types', 'orderby=count&hide_empty=0' );
 							//print_r($pub);
 							$cat_id = $_GET['cat'] ? $_GET['cat'] : 0;
 							$cat_desc = get_term($cat_id, 'event-type');
 							foreach ($pub as $sc) {
-								if ($cat_id == $sc->term_id) { echo ' - '.$cat_desc->name; } 
+								if ($cat_id == $sc->term_id) { echo ' - '.$sc->name; } 
 							}
 							echo "</h1>";
 							?>
 							
-<div id="tabmenu" >
-<ul>
 
-    <li class="menu_item<?php if ($cat_id == 0) { echo ' current_menu_item'; } ?>"><a href="<?php echo home_url( '/' ); ?>events/">All events</a></li>
+<ul class="nav nav-pills">
+
+    <li<?php if (!$cat_id) { echo ' class="active"'; } ?>><a href="<?php echo home_url( '/' ); ?>about/events/<?php if ($cdir=='b'){echo '?cdir=b';} ?>">All events</a></li>
 <?php
-	foreach ($pub	 as $sc) {
-	$cat_desc = get_term($sc, 'event-type');\
+	foreach ($pub as $sc) {
+	//print_r($sc);
+	$cat_desc = get_term($sc, 'event-type');
 	?>
-    <li class="menu_item<?php if ($cat_id == $sc->term_id ) { echo ' current_menu_item'; } ?>"><a href="<?php echo home_url( '/' ); ?>events/?cat=<?php echo $sc->term_id; if ($cdir=='b'){echo '&cdir=b';}?>"><?php echo $cat_desc->name; ?></a></li>
+    <li<?php if ($cat_id == $sc->term_id ) { echo ' class="active"'; } ?>><a href="<?php echo home_url( '/' ); ?>events/?cat=<?php echo $sc->term_id; if ($cdir=='b'){echo '&cdir=b';} ?>"><?php echo $sc->name; ?></a></li>
+
 <?php
 	}
 ?>
 </ul>
-</div><div class="clearfix"></div>
 					
 							<?php the_content(); ?>
 							
@@ -82,15 +83,15 @@ get_header(); ?>
 				if ($cdir=="b"){
 
 				$cquery = array(
-/*
+
 				    'tax_query' => array(
 				        array(
-				            'taxonomy' => 'event-type',
+				            'taxonomy' => 'event-types',
 				            'field' => 'term_id',
 				            'terms' => $cat_id,
 					       ),
 					    ),
-*/	
+	
 				   'meta_query' => array(
 							       array(
 						           		'key' => 'start_date',
@@ -101,7 +102,7 @@ get_header(); ?>
 								    'orderby' => 'meta_value',
 								    'meta_key' => 'start_date',
 								    'order' => 'DESC',
-								    'post_type' => 'events',
+								    'post_type' => 'event',
 									'posts_per_page' => 10,
 								    'paged' => $paged												
 								)
@@ -109,15 +110,15 @@ get_header(); ?>
 				}
 				else {
 					$cquery = array(
-/*
+
 				    'tax_query' => array(
 				        array(
-				            'taxonomy' => 'event-type',
+				            'taxonomy' => 'event-types',
 				            'field' => 'term_id',
 				            'terms' => $cat_id,
 					       ),
 					    ),	
-*/
+
 				   'meta_query' => array(
 							       array(
 						           		'key' => 'start_date',
@@ -128,7 +129,7 @@ get_header(); ?>
 								    'orderby' => 'meta_value',
 								    'meta_key' => 'start_date',
 								    'order' => 'ASC',
-								    'post_type' => 'events',
+								    'post_type' => 'event',
 									'posts_per_page' => 10,
 								    'paged' => $paged												
 								)
@@ -138,7 +139,7 @@ get_header(); ?>
 				}else {
 			if ($cdir=="b"){
 			$cquery = array(
-					'post_type' => 'events',
+					'post_type' => 'event',
 					'posts_per_page' => 10,
 				   'meta_query' => array(
 			       array(
@@ -155,7 +156,7 @@ get_header(); ?>
 			}
 			else {
 			$cquery = array(
-					'post_type' => 'events',
+					'post_type' => 'event',
 					'posts_per_page' => 10,
 				   'meta_query' => array(
 			       array(
@@ -172,6 +173,7 @@ get_header(); ?>
 			
 			}
 			}
+			//print_r($cquery);
 							$customquery = new WP_Query($cquery);
 							
 							if (!$customquery->have_posts()){
@@ -218,34 +220,12 @@ get_header(); ?>
 	
 				
 					</div>
-<div class="threecol last">
-
-<?php			
- $thisurl = $_SERVER['REQUEST_URI'];
- $x = explode('/',$_SERVER['REQUEST_URI']); 
- $cx = count($x) -1 ;
- $mainarea = home_url($x[1])."/"; 
-	$menu_name = 'primary';
-	if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-		$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
-		$menu_items = wp_get_nav_menu_items($menu->term_id);
-		echo '<div id="homenav">';
-		echo '<ul id="menu-' . $menu_name . '">';
-		foreach ( (array) $menu_items as $key => $menu_item ) {
-		    $title = $menu_item->title;
-		    $url = $menu_item->url;
-		    if (network_site_url($thisurl) != $url ){
-				echo '<li class=\'page_item\'><a href="' . $url . '">' . $title . '</a></li>';
-			} else {
-				echo '<li class=\'page_item current_page_item\'><a href="' . $url . '">' . $title . '</a></li>';
-			}
-		}
-		echo "</ul></div>";
-	}
-?>
-			
-
-</div>
+					<div class="span3">
+					
+					
+								
+					
+					</div>
 					
 				</div>
 

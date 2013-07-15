@@ -6,87 +6,40 @@ get_header();
 $hospsite = $_GET['hospsite'];
 $show = $_GET['show'];
 
-?>
-
-<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-
-				<div class="row">
-					<div class="ninecol" iid='secondarynav'>
-<style>
-/* A to Z listings */
-#atozlist h3 {
-	cursor:pointer; 
-	background: url("images/state.gif") no-repeat 0% 4px; 
-	display:block; 
-	padding-left: 24px;
-}  
-
-#atozlist h3.active {
-	background-position: 0% -85px;
+if ($show=="ALL"){
+	$show='';
 }
 
-.atozlisting {
-	clear: left;
-	padding: 0.5em 0;
-}
+if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-.atozlisting ul {
-	margin-left: 1em;
-}
+				<div class="row-fluid">
+<div class="span3" id='secondarynav'>
 
-.atozlisting ul li {
-	list-style: none !important;
-}
+										
+							<div class="menu-primary-navigation-container"><ul id="nav" class="menu"><li class="service menu-item menu-item-type-post_type menu-item-object-page page_item page-item-7  current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a><ul class="children"><li class="page_item page-item-230 current-menu-item current_page_item"><a href="http://sgh.helpfulclients.com/services/a-z/">Services A-Z</a></li>
+<li class="page_item page-item-232"><a href="http://sgh.helpfulclients.com/services/clinician-directory/">Clinician directory</a></li>
+<li class="page_item page-item-234"><a href="http://sgh.helpfulclients.com/services/private-patients/">Private patients</a></li>
+</ul></div>						
+												
+					</div>				
+					<div class="span9">
+					<h1><?php the_title() ; ?></h1>
+					<div class="row-fluid">
 
-.atoz {
-	float: left;
-	background: white;
-	padding: 0.5em;
-	margin: 0.2em;
-	padding: 0.5em 0.5em;
-	font-size: 1em !important;
-	width: 1.25em;
-	text-align: center;
-}
-
-.atoz a {
-	text-decoration: none;
-	display: block;
-}
-
-.emptyletter {
-	background: #ddd !important;
-	color: #aaa;
-}
-
-.activeletter {
-	background: #333 !important;
-}
-
-.activeletter a {
-	color: #fff !important;
-}
-
-.letterinfo h3 {
-	font-size: 0.9em;
-}
-</style>
 <?php
-					if ($_REQUEST['show'] === null) $_REQUEST['show'] = "A";
 
 					$letters = range('A','Z');
 					
 					foreach($letters as $l) {
 						
-						$letterlink[$l] = "<p class='atoz emptyletter {$l}'>".$l."</p>";
+						$letterlink[$l] = "<li class='atoz disabled {$l}'><a href='#'>".$l."</a></li>";
 					}				
 					
 					?>				
 					
-					<div id='atozlist' class="atozlisting" data-collapse="accordion">
-					
-					<div class='clearfix'>
-					<p class='atoz'><a href='?show=&hospsite=<?php echo $hospsite; ?>'>All</a></p>
+					<div class="pagination span12">
+					<ul>
+					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
 					<?php
 					
 					$gterms = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
@@ -95,26 +48,26 @@ $show = $_GET['show'];
 							
 					if ( $gterms->have_posts() ) while ( $gterms->have_posts() ) : $gterms->the_post(); ?>
 																	
-								<?php 
-									
-									$title = get_the_title();
-									$thisletter = strtoupper(substr($title,0,1));	
-																
-									$hasentries[$thisletter] = $hasentries[$thisletter] + 1;
-									
-									if (!$_REQUEST['show'] || (strtoupper($thisletter) == strtoupper($_REQUEST['show']) ) ) {
-										
-										$html .= "\r\r<div class='letterinfo'>\r<h3>".get_the_title()."</h3><div>" . wpautop(get_the_content()) . "</div></div>";
-										
-										$counter++;
-																																	
-									}
-									
-									$activeletter = ($_REQUEST['show'] == strtoupper($thisletter)) ? "activeletter" : null;
+					<?php 
+						
+						$title = get_the_title();
+						$thisletter = strtoupper(substr($title,0,1));	
+													
+						$hasentries[$thisletter] = $hasentries[$thisletter] + 1;
+						
+						if (!$_REQUEST['show'] || (strtoupper($thisletter) == strtoupper($_REQUEST['show']) ) ) {
+							
+							$html .= "\r\r<div class='letterinfo'>\r<h3>".get_the_title()."</h3><div>" . wpautop(get_the_content()) . "</div></div>";
+							
+							$counter++;
+																														
+						}
+						
+						$activeletter = ($show == strtoupper($thisletter)) ? "active" : null;
 
-									$letterlink[$thisletter] = ($hasentries[$thisletter] > 0) ? "<p class='atoz {$thisletter} {$activeletter}'><a href='?show=".$thisletter."&hospsite=".$hospsite."'>".$thisletter."</a></p>" : "<p class='atoz {$thisletter} {$activeletter}'>".$thisletter."</p>";
-								
-								?>
+						$letterlink[$thisletter] = ($hasentries[$thisletter] > 0) ? "<li class='atoz {$thisletter} {$activeletter}'><a href='?show=".$thisletter."&amp;hospsite=".$hospsite."'>".$thisletter."</a></li>" : "<li class='atoz  emptyletter {$thisletter} {$activeletter}'><a href='#'>".$thisletter."</a></li>";
+					
+					?>
 							
 						
 					<?php endwhile; ?>
@@ -122,17 +75,44 @@ $show = $_GET['show'];
 					<?php 
 						//print_r($letterlink); 
 						echo @implode("",$letterlink); 
+					
+					
+					if ($show==''){
+						$show="ALL";
+					}
+			
 					?>
+					</ul>
+					</div>
 					
 					</div>
-		
-					<p><br><a href="/services/a-z/?show=<?php echo $show; ?>">All services</a> | <a href="/services/a-z/?hospsite=st-georges&show=<?php echo $show; ?>">St George's</a> | <a href="/services/a-z/?hospsite=queen-marys&show=<?php echo $show; ?>">Queen Mary's</a></p>
+					<ul class="nav nav-pills span12">
+<?php //display filter terms
+				 
+				 $sites = get_terms('sites'); 
+				 foreach ($sites as $site){
+					 
+					 echo "<li";
+					 if ($site->slug == $hospsite) echo " class='active'";
+					 echo "><a href='/services/a-z/?hospsite=".$site->slug."&show=".$show."'>".$site->name."</a></li>";
+				 }
+					 echo "<li";
+					 if (!$hospsite) echo " class='active'";
+					 echo "><a href='/services/a-z/?show=".$show."'>All</a></li>";
+				 
+				 ?>
+					</ul>
 		<?php 
 							the_content(); ?>
+
 					
-<div id="sectionnavx">
-<ul>
+
+<ul class="nav nav-list span12">
 <?php
+					if ($show=='ALL'){
+						$show="";
+					}
+
 				//list all services
 						if ($hospsite){
 						$allservices = get_posts(
@@ -170,11 +150,11 @@ $show = $_GET['show'];
 					} 
 ?>
 </ul>	
-</div>						
 					</div>
-					
-					<div class="threecol last">
+					</div>
 
+					<div class="span3">
+&nbsp;
 					<?php 
 
 					the_post_thumbnail('medium');

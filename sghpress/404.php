@@ -10,10 +10,10 @@
 get_header(); ?>
 
 
-				<div class="row">
-					<div class="twelvecol last" id="content">
+				<div class="row-fluid">
+					<div class="span12" id="content">
 
-				<h1><?php _e( 'Not Found', 'twentyten' ); ?></h1>
+				<h1><?php _e( 'Not found', 'twentyten' ); ?></h1>
 
 				<p><?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', 'twentyten' ); ?></p>
 				<p class='aligncenter'><?php get_search_form(); ?></p>

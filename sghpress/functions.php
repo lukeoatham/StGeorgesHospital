@@ -414,24 +414,51 @@ function twentyten_widgets_init() {
 
 
 	register_sidebar( array(
-		'name' => __( 'Left Footer', 'twentyten' ),
-		'id' => 'left-footer-widget-area',
-		'description' => __( 'The left footer widget area', 'twentyten' ),
+		'name' => __( 'Footer1', 'twentyten' ),
+		'id' => 'footer-widget-area1',
+		'description' => __( 'Footer widget area 1', 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer2', 'twentyten' ),
+		'id' => 'footer-widget-area2',
+		'description' => __( 'Footer widget area 2', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer3', 'twentyten' ),
+		'id' => 'footer-widget-area3',
+		'description' => __( 'Footer widget area 3', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Footer4', 'twentyten' ),
+		'id' => 'footer-widget-area4',
+		'description' => __( 'Footer widget area 4', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Emergency', 'twentyten' ),
+		'id' => 'emergency_message',
+		'description' => __( 'Emergency message area', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
 	) );
 
-	register_sidebar( array(
-		'name' => __( 'Right Footer', 'twentyten' ),
-		'id' => 'right-footer-widget-area',
-		'description' => __( 'The right footer widget area', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
 
 
 }
@@ -557,55 +584,15 @@ add_shortcode( 'showsitemap', 'showsitemap_func' );
 
 
 function renderLeftNav($outputcontent="TRUE") {
-
 	global $post;
-	
-	if ($post->post_parent)	{
-		$ancestors = $post->ancestors;		
-		$parent = @array_pop($ancestors);
-	} else {
-		$parent = $post->ID;
-	}
-							
-	$subpages = wp_list_pages("echo=0&title_li=&depth=3&child_of=". $parent);
-	
-	if (strlen($subpages)>0 && !is_search() ) {
-	
-		$output = "
-			<div id='sectionnav' class='";
-		
-		foreach($post->ancestors as $ancestor){
-			$output .= "ancestor-".$ancestor." ";
-		}
-		
-		$output .= "current-".$post->ID;
-			
-		$output .= "'>
-			<ul>
-				{$subpages}
-			</ul>
-			</div>	
-		";
 
-		if ($outputcontent == "TRUE") { 
-			echo $output; 
-		} else {
-			return true;
-		}
-		
-	} else {
-		$output = "
-			<div id='spacernav'>
-			</div>	
-		";
-
-		if ($outputcontent == "TRUE") { 
-			echo $output; 
-		} else {
-			return false;
-		}
-		
-	}
+	//Iterate through the top level items - Primary Nav with a walker
+	$navParams = array(
+		'theme_location' => 'primary',
+		'menu_id' => 'nav',
+		'walker' => new mobileNav_walker($post)
+	);
+	wp_nav_menu($navParams);
 
 }
 
@@ -659,3 +646,113 @@ function sghpress_custom_title( $output ) {
 	}
 }
 add_filter( 'the_title', 'sghpress_custom_title' );
+
+// Custom nav walker to make it awesome on mobile while keeping it awesome on desktop
+class mobileNav_walker extends Walker_Nav_Menu{
+	var $currentPost;
+	
+	function __construct($currentPost){
+		$this->currentPostID = $currentPost->ID;
+		$this->currentPostAncestors = array_reverse($currentPost->ancestors);
+		$this->sectionID = (end($currentPost->ancestors) ? end($currentPost->ancestors) : $this->currentPostID);
+	}
+
+	function start_el(&$output, $item, $depth, $args){
+		global $wp_query;
+		
+		$currentSection = false;
+		if($item->object_id == $this->currentPostID || $item->object_id == $this->sectionID && $this->sectionID != 0){
+			$currentSection = true;
+		}
+		
+		
+		$class_names = $value = '';  
+  
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;  
+        
+        if($currentSection){
+	        array_push($classes, "current_section");
+        }else{
+	        array_push($classes, "visible-phone");
+        }
+  
+        $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );  
+        $class_names = ' class="'. esc_attr( $class_names ) . '"';
+		
+		$output .= '<li'.$class_names.'>';
+		
+		
+		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';  
+        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';  
+        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';  
+        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';  
+        $description  = ! empty( $item->description ) ? '<span>'.esc_attr( $item->description ).'</span>' : '';
+		
+		$item_output = $args->before;  
+        $item_output .= '<a'. $attributes .'>'; 
+        $link_title = $item->title;
+        $link_title = str_replace("<br>", " ", $link_title);
+        $item_output .= $args->link_before .$link_title;  
+        $item_output .= $description.$args->link_after;  
+        $item_output .= '</a>';  
+        $item_output .= $args->after;
+        
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+		
+		if($currentSection){
+			
+			$output .= '<ul class="children">';
+			
+			if(!empty($this->currentPostAncestors)){
+				$ancestors = 0;
+				foreach($this->currentPostAncestors as $ancestor){
+					if($ancestor != $this->sectionID){
+						$output .= '<li class="ancestor level-'.$ancestors.'"><a href="'.get_permalink($ancestor).'">'.get_the_title($ancestor).'</a></li>';
+						$ancestors++;
+					}
+				}
+			}
+			
+			if($this->currentPostID != $this->sectionID){
+				$currentLevel = ((count($this->currentPostAncestors)-1) != 0 ? " level-".(count($this->currentPostAncestors)-1) : "");
+				if(pageHasChildren($this->currentPostID)){
+					$currentLevel = " level-0";
+				}
+				$output .= '<li class="current_page_item'.$currentLevel.'"><a href="'.get_permalink($this->currentPostID).'">'.get_the_title($this->currentPostID).'</a></li>';
+			}
+			
+			$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
+	
+			if (strlen($subpages)>0 && !is_search() ) {
+				$output .= "{$subpages}";
+			}
+			
+			
+			$output .= '</ul>';
+		}
+		
+	}
+}
+
+// support Posts to Posts plugin linking of Pages/Posts to other Pages/Posts
+
+function ht_connection_types() {
+	// Make sure the Posts 2 Posts plugin is active.
+	if ( !function_exists( 'p2p_register_connection_type' ) )
+		return;
+
+	p2p_register_connection_type( array(
+		'name' => 'services_to_pages',
+		'from' => 'service',
+		'to' => 'page',
+		'reciprocal' => true
+	));
+	p2p_register_connection_type( array(
+		'name' => 'services_to_posts',
+		'from' => 'service',
+		'to' => 'post',
+		'reciprocal' => true
+	));
+
+}
+add_action( 'wp_loaded', 'ht_connection_types' );

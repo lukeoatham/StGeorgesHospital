@@ -19,88 +19,97 @@
  */
 ?>
 
-<?php /* Display navigation to next/previous pages when applicable */ ?>
-<?php if ( $wp_query->max_num_pages > 1 ) : ?>
-
-		<?php if (is_search()) : ?>
-		
-			<p class='paginationnav'>
-				<span class='prevlink'><?php next_posts_link( __( '&larr; Back a page of results '.$itemtype, 'twentyten' ) ); ?></span>
-				<span class='nextlink'><?php previous_posts_link( __( 'Forward a page of results '.$itemtype.' &rarr;', 'twentyten' ) ); ?></span>
-			</p>
-
-		<?php else : ?>
-		
-			<p class='paginationnav'>
-				<span class='prevlink'><?php next_posts_link( __( '&larr; Previous '.$itemtype, 'twentyten' ) ); ?></span>
-				<span class='nextlink'><?php previous_posts_link( __( 'Next '.$itemtype.' &rarr;', 'twentyten' ) ); ?></span>
-			</p>
-
-		<?php endif; ?>
-		
-		
-		
-<?php endif; ?>
-
 <?php /* If there are no posts to display, such as an empty archive page */ ?>
-<?php if ( ! have_posts() ) : ?>
-		<h1><?php _e( 'Not Found', 'twentyten' ); ?></h1>
-		<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', 'twentyten' ); ?></p>
-		<?php get_search_form(); ?>
+<?php 
 
-<?php endif; ?>
-
-<?php while ( have_posts() ) : the_post(); ?>
-
-
-	<div class='metabox clearfix'>
-
-	<h2><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-	<p class='postmeta'><?php if (is_category('latest-updates') || in_category('latest-updates')) twentyten_posted_on(); ?></p>
-
-	<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
-			<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_post_thumbnail('thumbnail','class=postthumb'); ?></a>
-			<?php the_excerpt(); ?>
-	<?php else : ?>
-			<?php the_content( __( 'Continue reading &rarr;', 'twentyten' ) ); ?>
-			<?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'twentyten' ), 'after' => '' ) ); ?>
-	<?php endif; ?>
-
-		<?php if ( count( get_the_category() ) ) : ?>
-			<?php //printf( __( 'Posted in %2$s', 'twentyten' ), 'entry-utility-prep entry-utility-prep-cat-links', get_the_category_list( ', ' ) ); ?>
-			
-		<?php endif; ?>
-		<?php
-			//$tags_list = get_the_tag_list( '', ', ' );
-			if ( $tags_list ):
+		if ( ! have_posts() ) { 
+				echo "<h1>";
+				_e( 'Not Found', 'twentyten' );
+				echo "</h1>";
+				echo "<p>";
+				_e( 'Apologies, there are no results. .', 'helpfulstrap' );
+				echo "</p>";
+				get_search_form(); 
+				}		
 		?>
-			<?php printf( __( 'Tagged %2$s', 'twentyten' ), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list ); ?>
-			
-		<?php endif; ?>
+<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+	<?php if (function_exists(wp_pagenavi)) : ?>
+		<?php wp_pagenavi(); ?>
+	<?php else : ?>
+		<?php next_posts_link('&larr; Older items', $wp_query->max_num_pages); ?>
+		<?php previous_posts_link('Newer items &rarr;', $wp_query->max_num_pages); ?>						
+	<?php endif; ?>
+<?php endif; ?>		
+<?php while ( have_posts() ) : the_post(); 
+	$image_url = get_the_post_thumbnail($ID, 'thumbnail', array('class' => 'alignright'));
 
-	</div>
 
+									echo "<div class='wellx'><hr>
+										<div class='media'>";?>
+										    <?php
+									if ( has_post_thumbnail( $post->ID ) ) {
+										    echo "<a class='pull-left' href=".get_permalink().">";
+										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'thumbnail');
+										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
+											echo "</a>";
+	    									}
+	    									?>
+										<?php 
+										echo "<div class='media-body'><h2 class='media-heading'>";
+										//if (get_post_type() == 'people') echo "<i class='icon-user'></i>";
+										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
+	
+										the_excerpt();
+	?>
+<p>
+<?php
+									if (get_post_type() == 'post') :?>
+									
+									<i class="icon-calendar"></i> <?php 
+										echo date('j M Y',strtotime($post->post_date));
+										
+										endif;
+									?>
+									<?php if (get_comments_number($ID)>0) : ?>
+									| <i class="icon-comment"></i> <a href="<?php comments_link(); ?>"> 
+									<?php echo get_comments_number($ID); 
+										if (get_comments_number($ID) == 1) {
+										echo " Comment"; 
+										} else {
+										echo  " Comments"; 
+										}
+										echo "</a>";
+									endif;	
+									?>
+									<?php $posttags = get_the_tags();
+										$foundtags=false;	
+										$tagstr="";
+									if ($posttags) {
+									  	foreach($posttags as $tag) {
+									  			$foundtags=true;
+									  			$tagurl = $tag->slug;
+										    	$tagstr=$tagstr."
+										    	<a href='/tag/{$tagurl}'><span class='label label-info'>" . str_replace(' ', '&nbsp;' , $tag->name) ."</span></a>";
+											}
+								  	}
+									  	if ($foundtags){
+										  	echo "| <i class='icon-tags'></i> Tags: ".$tagstr;
+									  	
+										  	}
+
+?>									 </p></div></div></div>
+
+
+	
 	<?php comments_template( '', true ); ?>
 
 <?php endwhile; // End the loop. Whew. ?>
 
-<?php /* Display navigation to next/previous pages when applicable */ ?>
 <?php if (  $wp_query->max_num_pages > 1 ) : ?>
-
-		<?php if (is_search()) : ?>
-
-			<p class='paginationnav'>
-				<span class='prevlink'><?php next_posts_link( __( '&larr; Back a page of results '.$itemtype, 'twentyten' ) ); ?></span>
-				<span class='nextlink'><?php previous_posts_link( __( 'Forward a page of results '.$itemtype.' &rarr;', 'twentyten' ) ); ?></span>
-			</p>
-
-		<?php else : ?>
-		
-			<p class='paginationnav'>
-				<span class='prevlink'><?php next_posts_link( __( '&larr; Previous '.$itemtype, 'twentyten' ) ); ?></span>
-				<span class='nextlink'><?php previous_posts_link( __( 'Next '.$itemtype.' &rarr;', 'twentyten' ) ); ?></span>
-			</p>
-
-		<?php endif; ?>
-
+	<?php if (function_exists(wp_pagenavi)) : ?>
+		<?php wp_pagenavi(); ?>
+	<?php else : ?>
+		<?php next_posts_link('&larr; Older items', $wp_query->max_num_pages); ?>
+		<?php previous_posts_link('Newer items &rarr;', $wp_query->max_num_pages); ?>						
+	<?php endif; ?>
 <?php endif; ?>
