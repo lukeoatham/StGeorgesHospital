@@ -40,30 +40,49 @@ get_header(); ?>
 							break; //we're done with the parents
 						};
 						$navarray = array_reverse($navarray);
-						$navarray[] = $mainid;	//set current page in the nav array
+						
+						
+						//is the current page at the end of the branch?
+						$currentpost = get_post($mainid);
+						
+						if (postHasChildren($mainid)){
+//						echo "has children";
+							$menuid = $mainid;
+							$navarray[] = $mainid;	//set current page in the nav array
+							$navarray[] = -1;	//set marker for children styling
+						} else {
+//						echo "end of the branch";
+							$menuid = $currentpost->post_parent;
+							$navarray[] = -1;	//set marker in array for subsequent children styling
+						}
+						
 
 						//get children pages
 						$allservices = get_posts( 
 						array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "title",
+						"orderby" => "menu_order",
 						"order" => "ASC",
-						"post_parent" => $mainid
+						"post_parent" => $menuid
 						)
-					);
+						);
 						
 					foreach ($allservices as $service){ //fill the nav array with the child pages
 						$navarray[] = $service->ID;
 					}	 
-					print_r($navarray);
-					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>"; //top level menu item
+					//print_r($navarray);
+					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
 					$subs=false;
+					
 					foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
+						if ($nav == -1) {
+						$subs=true;
+						continue;
+						}
 						$currentpost = get_post($nav);
 						if ($nav == $mainid){
-						 	$subs = true;
-						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item page-item'>"; //current page
+						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item current-page-item'>"; //current page
 						} elseif ($subs) {
 							echo "<li class='page-item'>"; //child page
 						} else {

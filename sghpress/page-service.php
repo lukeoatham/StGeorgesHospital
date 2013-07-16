@@ -42,7 +42,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
 					<?php
 					
-					$gterms = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
+					$gterms = new WP_Query('post_type=service&post_parent=0&posts_per_page=-1&orderby=name&order=ASC');
 					
 					$counter = 0;
 							

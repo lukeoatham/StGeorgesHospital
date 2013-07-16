@@ -612,6 +612,24 @@ function pageHasChildren($id="") {
 		return false;
 	}
 }
+
+function postHasChildren($id="") {
+
+	global $post;
+	
+	if ($id) {
+		$children = get_posts('post_type=service&post_parent='.$id);	
+	} else {
+		$children = get_posts('post_type=service&post_parent='.$post->ID);
+	}
+
+	if (count($children) != 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 // check jQuery is available
 
 function enqueueThemeScripts() {

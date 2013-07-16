@@ -52,7 +52,7 @@ get_header(); ?>
 				</div>
 				<div class="span6">
 				<h4>All services: A-Z </h4> 
-				<p>
+				<div class="input-append">
 				  <label for="select2">Jump to:</label>
 				  <select id="select2" >
 				<?php  
@@ -67,12 +67,14 @@ get_header(); ?>
 						);
 						
 					foreach ($allservices as $service){
-						echo  '<option value="'.$service->guid.'">'.$service->post_title.' </option>';
+						echo  '<option ';
+						if ($service->post_title == "Emergency") echo " selected=selected ";
+						echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
 					}
 					?>
 					  </select>
-					  <input type="button" value="Go" onclick="goToPage('select2')"/>
-					</p>					
+					  <button class="btn" type="button" onclick="goToPage('select2')">Go</button>
+					</div>					
 
 		
 <script>

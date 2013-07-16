@@ -13,7 +13,7 @@
  */
 
 get_header(); 
-global $biotpress_options;
+
 ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
@@ -39,11 +39,6 @@ global $biotpress_options;
 							<?php the_content(); ?>
 	
 
-							<?php if ( (comments_open() || have_comments()) && $biotpress_options['radio_commentlayout_input'] == "traditional") : ?>
-								<div id='comments'>
-									<?php comments_template( '', true ); ?>
-								</div>						
-							<?php endif; ?>
 	
 					</div>
 
@@ -53,20 +48,6 @@ global $biotpress_options;
 					the_post_thumbnail('medium');
 					
 					?>
-						<ul class="xoxo">
-
-							<?php if ( (comments_open() || have_comments()) && $biotpress_options['radio_commentlayout_input'] == "sidebar") : ?>
-							<li>
-		
-								<div id='comments'>
-									<?php comments_template( '', true ); ?>
-								</div>
-							
-							</li>
-							<?php endif; ?>
-							
-						<?php dynamic_sidebar('inside-sidebar-widget-area');  ?>
-						</ul>
 						
 					</div>
 
