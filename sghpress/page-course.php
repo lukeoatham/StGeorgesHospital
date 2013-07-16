@@ -10,8 +10,16 @@ $paged = $_GET['$paged'];
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<div class="row-fluid">
+					<div class="span3" id='secondarynav'>
 
-					<div class="span8">
+						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
+				
+							<?php renderLeftNav(); ?>
+						
+						<?php endif; ?>
+						
+					</div>
+					<div class="span9">
 					
 					<ul class="nav nav-pills">
 					<?php //display filter terms
@@ -63,10 +71,7 @@ $paged = $_GET['$paged'];
 					
 					?>
 					</div>
-					
-					<div class="span4">
-	
-					</div>
+
 
 
 				</div>
