@@ -79,13 +79,10 @@ $paged = $_GET['$paged'];
 										the_excerpt();
 	?>
 <p>
-									<i class="icon-user"></i> by <a href="#"> <?php the_author(); ?></a>
-									| <i class="icon-calendar"></i> <?php 
-										echo date('j M Y',strtotime($post->post_date));
 										
-									?>
+									
 									<?php if (get_comments_number($ID)>0) : ?>
-									| <i class="icon-comment"></i> <a href="<?php comments_link(); ?>"> 
+									<i class="icon-comment"></i> <a href="<?php comments_link(); ?>"> 
 									<?php echo get_comments_number($ID); 
 										if (get_comments_number($ID) == 1) {
 										echo " Comment"; 
@@ -107,7 +104,7 @@ $paged = $_GET['$paged'];
 								  	}
 								  	}
 									  	if ($foundtags){
-										  	echo "| <i class='icon-tags'></i> Tags: ".$tagstr;
+										  	echo " <i class='icon-tags'></i> Tags: ".$tagstr;
 									  	
 									}
 
