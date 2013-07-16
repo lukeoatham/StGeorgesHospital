@@ -238,14 +238,39 @@ get_header(); ?>
 					echo "</ul>";
 
 					?>
-						<ul class="xoxo">
+	<?php
+							
+								// Find connected posts via Posts to Posts plugin
+								$connected = new WP_Query( array(
+								  'connected_type' => 'services_to_posts',
+								  'connected_items' => get_queried_object(),
+								  'nopaging' => true,
+								) );
+											
+								//print_r($connected);
+																
+								// Display connected posts
+								if ( $connected->have_posts() ) {
+									
+									while ( $connected->have_posts() ) {
+										$connected->the_post();
+										$relatedposts .= "<li><a href='".get_permalink()."'>".get_the_title()."</a></li>\n";
+									}								
+								}
+																
+								if ($relatedposts) {
+								
+									echo "<ul class='xoxo'>
+											<li class='widget-container'>
+												<div id='related'><h3 class='widget-title'>Related services</h3><ul class='relatedposts'>" . $relatedposts . "</ul></div>
+											</li>
+										</ul>";
+								}
+								
 
-							<?php if (is_home() || is_front_page()) : ?>
-								<?php dynamic_sidebar( 'home-sidebar-widget-area' ); ?>
-							<?php else : ?>
-								<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
-							<?php endif; ?>
-						</ul>
+						
+							?>	
+
 	
 				</div>
 	
