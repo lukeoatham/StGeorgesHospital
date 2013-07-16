@@ -19,7 +19,7 @@ get_header(); ?>
 					
 					
 <div class="menu-primary-navigation-container">
-<ul id="nav" class="menu">
+	<ul id="nav" class="menu">
 						<?php
 						//build the left hand navigation based on the current page
 
@@ -41,6 +41,7 @@ get_header(); ?>
 						};
 						$navarray = array_reverse($navarray);
 						$navarray[] = $mainid;	//set current page in the nav array
+
 						//get children pages
 						$allservices = get_posts( 
 						array(
@@ -54,7 +55,6 @@ get_header(); ?>
 						
 					foreach ($allservices as $service){ //fill the nav array with the child pages
 						$navarray[] = $service->ID;
-//						echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
 					}	 
 					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>"; //top level menu item
 					$subs=false;
@@ -71,7 +71,7 @@ get_header(); ?>
 						echo "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
 					}					
 					?>
-</ul>	
+	</ul>	
 </div>
 					</div>
 				<div class="span6" id='content'>
