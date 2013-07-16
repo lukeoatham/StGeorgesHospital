@@ -750,7 +750,7 @@ function ht_connection_types() {
 	p2p_register_connection_type( array(
 		'name' => 'services_to_posts',
 		'from' => 'service',
-		'to' => 'post',
+		'to' => 'service',
 		'reciprocal' => true
 	));
 
