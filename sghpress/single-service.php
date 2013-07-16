@@ -56,6 +56,7 @@ get_header(); ?>
 					foreach ($allservices as $service){ //fill the nav array with the child pages
 						$navarray[] = $service->ID;
 					}	 
+					print_r($navarray);
 					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>&laquo; Services A-Z</a></li>"; //top level menu item
 					$subs=false;
 					foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
