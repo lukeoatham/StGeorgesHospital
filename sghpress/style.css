@@ -148,17 +148,21 @@ p, ul, ol, dd, td, dt {
     background: 0;
     padding: 0;
 }
+
 #primarynav ul {
     margin-top: 0;
 }
+
 #primarynav ul li {
     display: inline;
     background: #000;
     font-weight: normal;
     float: left;
-    font-size: 1em;
+    font-size: 0.9em;
+    line-height: 1em;
     text-align: left;
     margin-left: 12px !important;
+    width: 7em;
 }
 #primarynav ul li a {
     display: block;
@@ -171,6 +175,7 @@ p, ul, ol, dd, td, dt {
 #primarynav ul li.current_page_item a, #primarynav ul li.current-page-ancestor a {
     color: white;
 }
+
 /* patients and visitors */
 #menu-item-52 a {
     background-color: rgb(160, 31, 97)!important;
