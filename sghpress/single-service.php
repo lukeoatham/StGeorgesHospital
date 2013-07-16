@@ -58,15 +58,17 @@ get_header(); ?>
 						
 
 						//get children pages
+						if ($menuid!=0){
 						$allservices = get_posts( 
 						array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "menu_order",
+						"orderby" => "menu_order,title",
 						"order" => "ASC",
 						"post_parent" => $menuid
 						)
 						);
+						}
 						
 					foreach ($allservices as $service){ //fill the nav array with the child pages
 						$navarray[] = $service->ID;
