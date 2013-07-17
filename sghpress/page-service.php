@@ -29,6 +29,13 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					<div class="span9">
 					<h1><?php the_title() ; ?></h1>
 					<div class="row-fluid">
+						<form action="/">
+						<div class="input-append">
+						  <input class="span12" name="s" id="appendedInputButton" type="text">
+						  <button class="btn" type="button">Search services</button>
+						  <input type="hidden" value="service" name="post_type">
+						</div>
+						</form>
 
 <?php
 
@@ -41,7 +48,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					
 					?>				
 					
-					<div class="pagination span12">
+					<div class="pagination">
 					<ul>
 					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
 					<?php
@@ -89,8 +96,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					</ul>
 					</div>
 					
-					</div>
-					<ul class="nav nav-pills span12">
+
+					<ul class="nav nav-pills">
 <?php //display filter terms
 				 
 				 $sites = get_terms('sites'); 
@@ -111,7 +118,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 					
 
-<ul class="nav nav-list span12">
+<ul class="nav nav-list">
 <?php
 					if ($show=='ALL'){
 						$show="";
