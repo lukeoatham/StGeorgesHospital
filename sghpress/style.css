@@ -303,9 +303,9 @@ p, ul, ol, dd, td, dt {
     padding-left: 10%;
     width: 85%;
 }
-#secondarynav .children .level-0 a,#secondarynav .children .level-1 a  {
-    padding-left: 5%;
-    width: 90%;
+#secondarynav .children .level-0 a,#secondarynav .children .level-1 a, #secondarynav .children .level-2 a{
+    padding-left: 5% !important;
+    width: 90% !important;
 }
 
 
@@ -382,6 +382,12 @@ p, ul, ol, dd, td, dt {
 
 .service .level-1 a{
 	background-color: rgb(166, 219, 163) !important;
+    color: white !important;
+    border-top-width: 0px !important;
+}
+
+.service .level-2 a{
+	background-color: rgb(201, 234, 200) !important;
     color: white !important;
     border-top-width: 0px !important;
 }

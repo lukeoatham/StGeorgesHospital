@@ -112,33 +112,17 @@
 				<?php
 				
 				global $post;
-				$menu_name = 'primary';
-				$locations = get_nav_menu_locations();
-				$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
-				$menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
 				
-				foreach($menuitems as $item){
-					$itemID = $item->ID;
-					
-					//checks to see if the page is the current page and adds the current class
-					$classString = "";
-					if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
-						$classString = " current_page_item";
-					}
-					echo('<li class="menu-item-'.$itemID.''.$classString.'"><a href="'.$item->url.'" title="'.$item->title.'">'.$item->title.'</a></li>');
-					
+				
 					//Renders the left nav of pages with left navs
-					
-					if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
-						//if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ){
-						if(!is_front_page() && !is_404() && !is_search()){
-							echo('<li class="subSideNav">');
-							renderLeftNav();
-							echo('</li>');
-						}
+				if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
+				//if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ){
+					if(!is_front_page() && !is_404() && !is_search()){
+						echo('<li class="subSideNav">');
+						renderLeftNav();
+						echo('</li>');
 					}
 				}
-				
 				?>
 				</ul>
 				</div>
@@ -154,3 +138,4 @@
     				</div>
 				</div>
 			<?php endif; ?>
+			

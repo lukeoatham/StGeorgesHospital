@@ -586,14 +586,112 @@ add_shortcode( 'showsitemap', 'showsitemap_func' );
 function renderLeftNav($outputcontent="TRUE") {
 	global $post;
 
-	//Iterate through the top level items - Primary Nav with a walker
-	$navParams = array(
-		'theme_location' => 'primary',
-		'menu_id' => 'nav',
-		'walker' => new mobileNav_walker($post)
-	);
-	wp_nav_menu($navParams);
+	if(is_single()){
+		$singleURLs = explode("/", get_single_template());
+		$singleURL = end($singleURLs);
+		if ($singleURL == 'single-service.php' ) {
+			//Iterate through the top level items - Primary Nav with a walker
+			$mainid = $post->ID;
+			$navParams = array(
+			'theme_location' => 'primary',
+			'menu_id' => 'nav',
+			'echo' => false
+			);
+			$navItems = wp_nav_menu($navParams);
+			
+			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
+			$navItems = str_replace("<li class=\"visible-phone service", "<li class=\"service", $navItems);
+			
+			
+			
+			//build the left hand navigation based on the current page
+			$navarray = array();
+			$currentpost = get_post($post->ID);
+						
+			while (true){
+				//iteratively get the post's parent until we reach the top of the hierarchy
+				$post_parent = $currentpost->post_parent; 
+				if ($post_parent!=0){	//if found a parent
+					$navarray[] = $post_parent;
+					$currentpost = get_post($post_parent);
+					continue; //loop round again
+				}
+				break; //we're done with the parents
+			};
+			
+			$navarray = array_reverse($navarray);
+			$ancestorNav = count($navarray) + 1;
+			//is the current page at the end of the branch?
+			$currentpost = get_post($mainid);
+						
+			if (postHasChildren($mainid)){
+			//echo "has children";
+				$menuid = $mainid;
+				$navarray[] = $mainid;	//set current page in the nav array
+				$navarray[] = -1;	//set marker for children styling
+			} else {
+			//echo "end of the branch";
+				$menuid = $currentpost->post_parent;
+				$navarray[] = -1;	//set marker in array for subsequent children styling
+			}
+						
 
+			//get children pages
+			if ($menuid!=0){
+				$allservices = get_posts( 
+					array(
+						"post_type" => "service",
+						"posts_per_page" => -1,
+						"orderby" => "menu_order,title",
+						"order" => "ASC",
+						"post_parent" => $menuid
+					)
+				);
+			}
+			
+			$subnavString = "";
+						
+			foreach ($allservices as $service){ //fill the nav array with the child pages
+				$navarray[] = $service->ID;
+			}	 
+			$subnavString .= "<li class='level-0'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
+			$subs=false;
+					
+			$ancestorCount = 1;
+			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
+				if ($nav == -1) {
+					$subs=true;
+					continue;
+				}
+				$currentpost = get_post($nav);
+				
+				if ($nav == $mainid){
+					if(postHasChildren($mainid)){
+						$subnavString .= "<li class='current_page_item level-".$ancestorNav."'>";
+					}else{
+						$subnavString .= "<li class='current_page_item'>"; //current page
+					}
+				} elseif ($subs) {
+					$subnavString .= "<li class='page-item'>"; //child page
+				} else {
+					$subnavString .= "<li class='page_item menu-item menu-item-type-post_type menu-item-object-page level-".$ancestorCount."'>"; //parent page
+					$ancestorCount++;
+				}
+				$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
+				}
+			}
+			
+			$navItems = str_replace("Services</a>", "Services</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
+			echo($navItems);
+		}else{
+		//Iterate through the top level items - Primary Nav with a walker
+		$navParams = array(
+			'theme_location' => 'primary',
+			'menu_id' => 'nav',
+			'walker' => new mobileNav_walker($post)
+		);
+		wp_nav_menu($navParams);
+	}
 }
 
 function pageHasChildren($id="") {
@@ -680,6 +778,8 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		global $wp_query;
 		
 		$currentSection = false;
+		
+		
 		if($item->object_id == $this->currentPostID || $item->object_id == $this->sectionID && $this->sectionID != 0){
 			$currentSection = true;
 		}
@@ -721,46 +821,39 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		if($currentSection){
 			
 			$output .= '<ul class="children">';
-			$ancestors = 0;
-			//See if the page has ancestors
-			if(!empty($this->currentPostAncestors)){
-				foreach($this->currentPostAncestors as $ancestor){
-					if($ancestor != $this->sectionID && $ancestor != $this->currentPostID){
-						$output .= '<li class="ancestor level-'.$ancestors.'"><a href="'.get_permalink($ancestor).'">'.get_the_title($ancestor).'</a></li>';
-						$ancestors++;
+			
+				$ancestors = 0;
+				//See if the page has ancestors
+				if(!empty($this->currentPostAncestors)){
+					foreach($this->currentPostAncestors as $ancestor){
+						if($ancestor != $this->sectionID && $ancestor != $this->currentPostID){
+							$output .= '<li class="ancestor level-'.$ancestors.'"><a href="'.get_permalink($ancestor).'">'.get_the_title($ancestor).'</a></li>';
+							$ancestors++;
+						}
 					}
 				}
-			}
-			
-			//See if the page is a section page itself
-			if($this->currentPostID == $this->sectionID){
-				$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
-			}else{
-				
-				//Figure out the level of the page	
-				$currentLevel = ((count($this->currentPostAncestors)-1) != 0 ? " level-".(count($this->currentPostAncestors)-1) : "");
-				if(pageHasChildren($this->currentPostID)){
-					$currentLevel = " level-" . $ancestors;
-					$output .= '<li class="current_page_item'.$currentLevel.'"><a href="'.get_permalink($this->currentPostID).'">'.get_the_title($this->currentPostID).'</a></li>';
-				
-				}
-				
-				//If the page has kids then we want to show them else show the page in it's parent's list of kids
-				
-				if(pageHasChildren($this->currentPostID)){
+				//See if the page is a section page itself
+				if($this->currentPostID == $this->sectionID){
 					$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
 				}else{
-					$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostParent);
+					//Figure out the level of the page	
+					$currentLevel = ((count($this->currentPostAncestors)-1) != 0 ? " level-".(count($this->currentPostAncestors)-1) : "");
+					if(pageHasChildren($this->currentPostID)){
+						$currentLevel = " level-" . $ancestors;
+						$output .= '<li class="current_page_item'.$currentLevel.'"><a href="'.get_permalink($this->currentPostID).'">'.get_the_title($this->currentPostID).'</a></li>';
+					}
+					//If the page has kids then we want to show them else show the page in it's parent's list of kids
+					if(pageHasChildren($this->currentPostID)){
+						$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
+					}else{
+						$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostParent);
+					}
 				}
-			}
-			if (strlen($subpages)>0 && !is_search() ) {
-				$output .= "{$subpages}";
-			}
-			
-			
+				if (strlen($subpages)>0 && !is_search() ) {
+					$output .= "{$subpages}";
+				}
 			$output .= '</ul>';
 		}
-		
 	}
 }
 

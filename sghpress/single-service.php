@@ -17,86 +17,12 @@ get_header(); ?>
 		<div class="row-fluid">
 					<div class="span3" id='secondarynav'>
 					
-					
-<div class="menu-primary-navigation-container">
-	<ul id="nav" class="menu">
-						<?php
-						//build the left hand navigation based on the current page
+						<?php global $post; if ( (postHasChildren() || postHasChildren($post->post_parent)) ) : ?>
+				
+							<?php renderLeftNav(); ?>
+						
+						<?php endif; ?>
 
-						$navarray = array();
-						$currentpost = get_post($post->ID);
-						
-						while (true){
-							//iteratively get the post's parent until we reach the top of the hierarchy
-							
-							$post_parent = $currentpost->post_parent; 
-							
-							if ($post_parent!=0){	//if found a parent
-
-								$navarray[] = $post_parent;
-								$currentpost = get_post($post_parent);
-								continue; //loop round again
-							}
-							break; //we're done with the parents
-						};
-						$navarray = array_reverse($navarray);
-						
-						
-						//is the current page at the end of the branch?
-						$currentpost = get_post($mainid);
-						
-						if (postHasChildren($mainid)){
-//						echo "has children";
-							$menuid = $mainid;
-							$navarray[] = $mainid;	//set current page in the nav array
-							$navarray[] = -1;	//set marker for children styling
-						} else {
-//						echo "end of the branch";
-							$menuid = $currentpost->post_parent;
-							$navarray[] = -1;	//set marker in array for subsequent children styling
-						}
-						
-
-						//get children pages
-						if ($menuid!=0){
-							$allservices = get_posts( 
-							array(
-							"post_type" => "service",
-							"posts_per_page" => -1,
-							"orderby" => "menu_order,title",
-							"order" => "ASC",
-							"post_parent" => $menuid
-							)
-							);
-						}
-						
-					foreach ($allservices as $service){ //fill the nav array with the child pages
-						$navarray[] = $service->ID;
-					}	 
-					//print_r($navarray);
-					echo '<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a>';
-					echo "<ul class='children'><li class='service  level-0'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
-					$subs=false;
-					
-					foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
-						if ($nav == -1) {
-						$subs=true;
-						continue;
-						}
-						$currentpost = get_post($nav);
-						if ($nav == $mainid){
-						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item current_page_item level-1'>"; //current page
-						} elseif ($subs) {
-							echo "<li class='page-item'>"; //child page
-						} else {
-							echo "<li class='service page_item menu-item menu-item-type-post_type menu-item-object-page level-1'>"; //parent page
-						}
-						echo "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
-					}
-					echo "</ul>";					
-					?>
-	</ul>	
-</div>
 					</div>
 				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
