@@ -16,7 +16,22 @@ get_header(); ?>
 
 		<div class="row-fluid">
 
-				<div class="span8" id='content'>
+
+<div class="span3" id='secondarynav'>
+
+										
+							<div class="menu-primary-navigation-container">
+							
+							<ul id="nav" class="menu">
+						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="/services/">Services</a>
+						<ul class='children'>
+						<li class="page_item level-0 page-item-232"><a href="/services/clinician-directory/">Clinician directory</a></li>
+						<li class="page_item level-2"><a><?php the_title(); ?></a></li>
+
+</ul></div>						
+												
+					</div>	
+				<div class="span6" id='content'>
 					<h1><?php the_title(); 
 					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1>
 					
@@ -82,7 +97,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span4" id='sidebar'>
+				<div class="span3" id='sidebar'>
 <?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
 					echo $cimage;
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
