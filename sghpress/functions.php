@@ -672,6 +672,7 @@ class mobileNav_walker extends Walker_Nav_Menu{
 	function __construct($currentPost){
 		$this->currentPostID = $currentPost->ID;
 		$this->currentPostAncestors = array_reverse($currentPost->ancestors);
+		$this->currentPostParent = end($this->currentPostAncestors);
 		$this->sectionID = (end($currentPost->ancestors) ? end($currentPost->ancestors) : $this->currentPostID);
 	}
 
@@ -720,27 +721,38 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		if($currentSection){
 			
 			$output .= '<ul class="children">';
-			
+			$ancestors = 0;
+			//See if the page has ancestors
 			if(!empty($this->currentPostAncestors)){
-				$ancestors = 0;
 				foreach($this->currentPostAncestors as $ancestor){
-					if($ancestor != $this->sectionID){
+					if($ancestor != $this->sectionID && $ancestor != $this->currentPostID){
 						$output .= '<li class="ancestor level-'.$ancestors.'"><a href="'.get_permalink($ancestor).'">'.get_the_title($ancestor).'</a></li>';
 						$ancestors++;
 					}
 				}
 			}
 			
-			if($this->currentPostID != $this->sectionID){
+			//See if the page is a section page itself
+			if($this->currentPostID == $this->sectionID){
+				$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
+			}else{
+				
+				//Figure out the level of the page	
 				$currentLevel = ((count($this->currentPostAncestors)-1) != 0 ? " level-".(count($this->currentPostAncestors)-1) : "");
 				if(pageHasChildren($this->currentPostID)){
-					$currentLevel = " level-0";
+					$currentLevel = " level-" . $ancestors;
+					$output .= '<li class="current_page_item'.$currentLevel.'"><a href="'.get_permalink($this->currentPostID).'">'.get_the_title($this->currentPostID).'</a></li>';
+				
 				}
-				$output .= '<li class="current_page_item'.$currentLevel.'"><a href="'.get_permalink($this->currentPostID).'">'.get_the_title($this->currentPostID).'</a></li>';
+				
+				//If the page has kids then we want to show them else show the page in it's parent's list of kids
+				
+				if(pageHasChildren($this->currentPostID)){
+					$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
+				}else{
+					$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostParent);
+				}
 			}
-			
-			$subpages = wp_list_pages("echo=0&title_li=&depth=1&child_of=".$this->currentPostID);
-	
 			if (strlen($subpages)>0 && !is_search() ) {
 				$output .= "{$subpages}";
 			}
@@ -751,6 +763,7 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		
 	}
 }
+
 
 // support Posts to Posts plugin linking of Pages/Posts to other Pages/Posts
 

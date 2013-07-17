@@ -355,12 +355,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.patient .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(160, 31, 97);
+.patient .current_page_item:before{
+	border-color: transparent transparent transparent rgb(160, 31, 97) !important;
 }
 
-.patient .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.patient .level-0.current_page_item:before, .patient .level-1.current_page_item:before, .patient .level-2.current_page_item:before, .patient .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 /* Services */
@@ -386,12 +386,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.service .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(77, 184, 72);
+.service .current_page_item:before{
+	border-color: transparent transparent transparent rgb(77, 184, 72) !important;
 }
 
-.service .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.service .level-0.current_page_item:before, .service .level-1.current_page_item:before, .service .level-2.current_page_item:before, .service .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 /* About */
@@ -417,12 +417,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.about .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(72, 47, 137);
+.about .current_page_item:before{
+	border-color: transparent transparent transparent rgb(72, 47, 137) !important;
 }
 
-.about .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.about .level-0.current_page_item:before, .about .level-1.current_page_item:before, .about .level-2.current_page_item:before, .about .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 
@@ -449,12 +449,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.work .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(14, 180, 222);
+.work .current_page_item:before{
+	border-color: transparent transparent transparent rgb(14, 180, 222) !important;
 }
 
-.work .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.work .level-0.current_page_item:before, .work .level-1.current_page_item:before, .work .level-2.current_page_item:before, .work .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 
@@ -483,12 +483,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.education .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(246, 134, 32);
+.education .current_page_item:before{
+	border-color: transparent transparent transparent rgb(246, 134, 32) !important;
 }
 
-.education .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.education .level-0.current_page_item:before, .education .level-1.current_page_item:before, .education .level-2.current_page_item:before, .education .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 
@@ -517,12 +517,12 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.gp .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(33,65,142);
+.gp .current_page_item:before{
+	border-color: transparent transparent transparent rgb(33,65,142) !important;
 }
 
-.gp .current_page_item:before{
-	border-color: transparent transparent transparent white;
+.gp .level-0.current_page_item:before, .gp .level-1.current_page_item:before, .gp .level-2.current_page_item:before, .gp .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
 }
 
 
@@ -548,14 +548,13 @@ p, ul, ol, dd, td, dt {
     border-top-width: 0px !important;
 }
 
-.contact .children .current_page_item:before{
-	border-color: transparent transparent transparent rgb(238, 45,38);
-}
-
 .contact .current_page_item:before{
-	border-color: transparent transparent transparent white;
+	border-color: transparent transparent transparent rgb(238, 45,38) !important;
 }
 
+.contact .level-0.current_page_item:before, .contact .level-1.current_page_item:before, .contact .level-2.current_page_item:before, .contact .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
+}
 
 
 
