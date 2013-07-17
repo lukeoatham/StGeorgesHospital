@@ -65,7 +65,7 @@ get_header(); ?>
 							function initialize() {
 								var mapOptions = {
 									zoom: 15,
-									center: new google.maps.LatLng(<?php echo $loc ?>),
+									center: new google.maps.LatLng(<?php echo $loc; ?>),
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
 								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -77,10 +77,9 @@ get_header(); ?>
 						<div id="map-canvas" class="google_map"></div>
 						
 						<?php
-						/*echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						
 
-						echo "</div>";*/
+						echo "</div>";
 					}
 										
 					the_content(); 
