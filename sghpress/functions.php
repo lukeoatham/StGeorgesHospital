@@ -642,7 +642,7 @@ function renderLeftNav($outputcontent="TRUE") {
 					array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "menu_order,title",
+						"orderby" => "menu_order title",
 						"order" => "ASC",
 						"post_parent" => $menuid
 					)
