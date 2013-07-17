@@ -206,27 +206,29 @@ get_header(); ?>
 
 							if ( in_array($mainid, $clinicianservice) ){
 								if (!$donetitle){
-									echo "<h3>Clinicians</h3><ul>";
+									echo "<div class='well'><h3>Clinicians</h3><ul>";
 									$donetitle=true;
 								}
 								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
 							}
 						}
 					}
-					echo "</ul>";
-					
+					if ($donetitle){
+						echo "</ul></div>";
+					}
+
 					$wards=get_post_meta($post->ID, 'wards',true);
 					if ($wards){
 						$donetitle=false;
 						foreach ($wards as $ward){
 							if (!$donetitle){
-								echo "<h3>Wards</h3><ul>";
+								echo "<div class='well'><h3>Wards</h3><ul>";
 								$donetitle=true;
 							}
 							$w = get_post($ward);
 							echo "<li><a href='".$w->guid."'>".$w->post_title."</a></li>";
 						}
-						echo "</ul>";
+						echo "</ul></div>";
 					}
 						
 					
@@ -250,7 +252,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $referralservice) ){
 								if (!$donetitle){
-									echo "<h3>Referral forms</h3><ul>";
+									echo "<div class='well'><h3>Referral forms</h3><ul>";
 									$donetitle=true;
 								}
 								//print_r($referralservice)	;
@@ -259,11 +261,16 @@ get_header(); ?>
 							}
 						}
 					}
-					echo "</ul>";
-
-					?>
-	<?php
-							
+					if ($donetitle){
+						echo "</ul></div>";
+					}
+					
+					$linksbox = get_post_meta($post->ID, 'links_box', true);
+					if ($linksbox){
+						echo "<div class='well'>";
+						echo wpautop($linksbox);
+						echo "</div>";
+					}
 								// Find connected posts via Posts to Posts plugin
 								$connected = new WP_Query( array(
 								  'connected_type' => 'services_to_posts',
@@ -284,11 +291,8 @@ get_header(); ?>
 																
 								if ($relatedposts) {
 								
-									echo "<ul class='xoxo'>
-											<li class='widget-container'>
-												<div id='related'><h3 class='widget-title'>Related services</h3><ul class='relatedposts'>" . $relatedposts . "</ul></div>
-											</li>
-										</ul>";
+									echo "<div class='well'>
+												<h3>Related services</h3><ul class='relatedposts'>" . $relatedposts . "</ul></div>";
 								}
 								
 
