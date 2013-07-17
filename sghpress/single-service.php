@@ -56,10 +56,31 @@ get_header(); ?>
 						$longitude = get_post_meta($servicelocation,'longitude',true);
 						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
+						
+						?>
+						
+						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+						<script>
+							var map;
+							function initialize() {
+								var mapOptions = {
+									zoom: 15,
+									center: new google.maps.LatLng(<?php echo $loc ?>),
+									mapTypeId: google.maps.MapTypeId.ROADMAP
+								};
+								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+							}
+
+							google.maps.event.addDomListener(window, 'load', initialize);
+						</script>
+						
+						<div id="map-canvas" class="google_map"></div>
+						
+						<?php
+						/*echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
 					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
 
-						echo "</div>";
+						echo "</div>";*/
 					}
 										
 					the_content(); 
