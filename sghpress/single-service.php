@@ -64,11 +64,18 @@ get_header(); ?>
 							var map;
 							function initialize() {
 								var mapOptions = {
-									zoom: 15,
+									zoom: 18,
 									center: new google.maps.LatLng(<?php echo $loc; ?>),
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
 								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+								
+								var marker = new google.maps.Marker({
+									position: new google.maps.LatLng(<?php echo $loc; ?>),
+									map: map,
+									title: '<?php echo $location->post_title; ?>',
+									animation: google.maps.Animation.DROP
+								});
 							}
 
 							google.maps.event.addDomListener(window, 'load', initialize);
