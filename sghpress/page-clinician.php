@@ -19,7 +19,20 @@ if ($show=="ALL"){
 
 
 				<div class="row-fluid">
-				<div class="span12">
+				<div class="span3" id='secondarynav'>
+				
+				<div class="menu-primary-navigation-container">
+							
+							<ul id="nav" class="menu">
+						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a><ul class='children'>
+						<li class='service '><a href='/services/a-z/'>Services A-Z</a></li>
+
+<li class="page_item current_page_item page-item-232 level-0"><a href="http://sgh.helpfulclients.com/services/clinician-directory/">Clinician directory</a></li>
+<li class="page_item page-item-234"><a href="http://sgh.helpfulclients.com/services/private-patients/">Private patients</a></li>
+</ul></div>	
+				
+				</div>
+				<div class="span9">
 					<h1><?php the_title() ; ?></h1>
 					
 <?php
@@ -85,11 +98,9 @@ if ($show=="ALL"){
 					?>					
 					</ul>
 					</div>
-				</div>
-				</div>
-				<div class="row-fluid">
+
 					
-					<div class="span8">
+
 					<ul class="nav nav-list">
 					<?php
 					$clinicians = new WP_Query(
@@ -127,9 +138,7 @@ if ($show=="ALL"){
 					</ul>
 					</div>
 					
-					<div class="span4">
-						
-					</div>
+
 
 				<hr>
 

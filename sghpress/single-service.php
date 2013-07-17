@@ -74,7 +74,8 @@ get_header(); ?>
 						$navarray[] = $service->ID;
 					}	 
 					//print_r($navarray);
-					echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
+					echo '<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a>';
+					echo "<ul class='children'><li class='service  level-0'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
 					$subs=false;
 					
 					foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
@@ -84,14 +85,15 @@ get_header(); ?>
 						}
 						$currentpost = get_post($nav);
 						if ($nav == $mainid){
-						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item current-page-item'>"; //current page
+						 	echo "<li class='service menu-item-type-post_type menu-item-object-page current-menu-item current_page_item level-1'>"; //current page
 						} elseif ($subs) {
 							echo "<li class='page-item'>"; //child page
 						} else {
-							echo "<li class='service menu-item menu-item-type-post_type menu-item-object-page'>"; //parent page
+							echo "<li class='service page_item menu-item menu-item-type-post_type menu-item-object-page level-1'>"; //parent page
 						}
 						echo "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
-					}					
+					}
+					echo "</ul>";					
 					?>
 	</ul>	
 </div>
