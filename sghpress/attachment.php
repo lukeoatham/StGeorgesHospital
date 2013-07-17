@@ -11,14 +11,9 @@ get_header(); ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row-fluid">
-					<div class="span12" id="content">
-
-				<p><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'twentyten' ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery"><?php
-					/* translators: %s - title of parent post */
-					//printf( __( '<span>&larr;</span> %s', 'twentyten' ), get_the_title( $post->post_parent ) );
-					echo "Document library";
-				?></a></p>
+			<div class="row-fluid">
+				
+					<div class="span9 offset1" id="content">
 
 					<h2><?php the_title(); ?></h2>
 					<ul>

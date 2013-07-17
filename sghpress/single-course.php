@@ -23,9 +23,8 @@ get_header(); ?>
 	<ul class="children">
 	<li class="ancestor level-0"><a href="/education-and-research/education/">Education</a></li>
 	<li class="page_item level-1"><a href="/education-and-research/education/courses/">Courses</a></li>
-	</ul>
-<li class="page_item level-2"><a><?php the_title(); ?></a></li>
-</li>
+<li class="page_item current_page_item"><a><?php the_title(); ?></a></li>
+	</ul></li>
 </ul></div>						
 												
 					</div>
