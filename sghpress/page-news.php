@@ -21,7 +21,7 @@ get_header(); ?>
 							<?php
 							
 							$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-							$customquery = new WP_Query('category_name=news&paged='.$paged);
+							$customquery = new WP_Query('post_type=news&paged='.$paged);
 								
 							if ( $customquery->have_posts() ) {
 				

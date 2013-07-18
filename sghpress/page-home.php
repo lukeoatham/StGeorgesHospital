@@ -18,14 +18,34 @@ get_header(); ?>
 
 						<?php endif; ?>
 
-					<?php the_content(); ?>
-<ul class="thumbnails">
-<li class="span6"><a href="#"><img src="/wp-content/uploads/2013/06/sgh1.png" alt=""></a><h3>Primary story headline</h3><p>Teaser text introducing the news story. Can go onto two lines.</p></li>
-<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh2.png" alt=""></a><h4>Secondary story headline</h4></li>
-<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh3.png" alt=""></a><h4>Secondary story headline</h4></li>
-<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh4.png" alt=""></a><h4>Campaign feature story headline</h4></li>
-<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh5.png" alt=""></a><h4>Campaign story headline</h4></li>
-</ul>
+					<?php the_content(); 
+					
+							$customquery = new WP_Query('post_type=news&posts_per_page=5');
+								
+							if ( $customquery->have_posts() ) {
+								$k=0;
+								echo '<ul class="thumbnails">';
+								while ( $customquery->have_posts() ) {
+									$customquery->the_post();
+									$k++;
+									$title = get_the_title();
+									if ($k==1){
+										$image = get_the_post_thumbnail($customquery->ID,'newsheadline');
+//										print_r($customquery);
+										echo '<li class="span6"><a href="/news/'.$post->post_name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
+										echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
+										echo '</li>';
+									}
+									else {
+										$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
+										echo '<li class="span3"><a href="/news/'.$post->post_name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h4>'.$title.'</h4></a>';
+//										echo '<p>'.substr($post->post_excerpt,0,70).'&hellip;</p>'; 	
+										echo '</li>';
+									}
+									}
+									}
+									echo '</ul>';
+									?>
 
 				</div>
 				

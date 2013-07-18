@@ -840,6 +840,10 @@ add_action('wp_enqueue_scripts','enqueueThemeScripts');
 // listing page thumbnail sizes, e.g. home page
 
 add_image_size( "clinicianthumb", "72", "72", true );
+add_image_size( "newsheadline", "536", "356", true );
+add_image_size( "newssubhead", "254", "169", true );
+
+
 
 function sghpress_custom_title( $output ) {
 	if (!is_admin()) {
@@ -970,3 +974,4 @@ function ht_connection_types() {
 
 }
 add_action( 'wp_loaded', 'ht_connection_types' );
+
