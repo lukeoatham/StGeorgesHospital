@@ -20,11 +20,11 @@ get_header(); ?>
 
 					<?php the_content(); ?>
 <ul class="thumbnails">
-<li class="span6"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh1.png" alt=""></a><h3>Primary story headline</h3><p>Teaser text introducing the news story. Can go onto two lines.</p></li>
-<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh2.png" alt=""></a><h4>Secondary story headline</h4></li>
-<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh3.png" alt=""></a><h4>Secondary story headline</h4></li>
-<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh4.png" alt=""></a><h4>Campaign feature story headline</h4></li>
-<li class="span3"><a href="#" class="thumbnail"><img src="/wp-content/uploads/2013/06/sgh5.png" alt=""></a><h4>Campaign story headline</h4></li>
+<li class="span6"><a href="#"><img src="/wp-content/uploads/2013/06/sgh1.png" alt=""></a><h3>Primary story headline</h3><p>Teaser text introducing the news story. Can go onto two lines.</p></li>
+<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh2.png" alt=""></a><h4>Secondary story headline</h4></li>
+<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh3.png" alt=""></a><h4>Secondary story headline</h4></li>
+<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh4.png" alt=""></a><h4>Campaign feature story headline</h4></li>
+<li class="span3"><a href="#"><img src="/wp-content/uploads/2013/06/sgh5.png" alt=""></a><h4>Campaign story headline</h4></li>
 </ul>
 
 				</div>
@@ -98,6 +98,7 @@ function goToPage( id ) {
 </script>					</div>		
 						</div>
 					</div>
+					<br>
 <!--//find us row -->
 					<div class="row-fluid">
 						<div class="span3">
@@ -134,6 +135,7 @@ function goToPage( id ) {
 							</ul>
 						</div>
 					</div>
+					<br>
 <!--//promo row -->				
 					<div class="row-fluid">
 						<div class="span4">
