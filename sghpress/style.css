@@ -841,18 +841,20 @@ li.comment .comment-body {
     background: #4DB848;
     padding: 1em;
     }
-#doitonline p {
+#doitonline p, #doitonline li a {
     margin-bottom: 1em !important;
     letter-spacing: .06em;
     letter-spacing: 0;
     padding: .5em 0;
-    color: #575757;
+    color: white;
     text-align: left;
     font-size: 90%;
     }
     
 #doitonline h3 {
 	color: white;
+	margin-top: 0;
+	margin-bottom: 0.5em;
 }
 
 #services {
