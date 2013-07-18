@@ -57,7 +57,14 @@
 										<?php 
 										echo "<div class='media-body'><h2 class='media-heading'>";
 										//if (get_post_type() == 'people') echo "<i class='icon-user'></i>";
-										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
+										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a>";
+										
+										if ($post->post_type=='people') echo " <span class='searchsub'><i class='icon-user'></i>People</span>";
+										if ($post->post_type=='course') echo " <span class='searchsub'><i class='icon-refresh'></i>Courses</span>";
+										if ($post->post_type=='page') echo " <span class='searchsub'><i class='icon-book'></i>Page</span>";
+										if ($post->post_type=='news') echo "  <span class='searchsub'><i class='icon-volume-up'></i>News</span>";													if ($post->post_type=='event') echo " <i class='icon-calendar'></i>Events</span>";
+										if ($post->post_type=='service') echo "  <span class='searchsub'><i class='icon-cog'></i>Services</span>";																	
+										echo "</h2>";
 	
 										the_excerpt();
 	?>
@@ -104,7 +111,7 @@
 	<?php comments_template( '', true ); ?>
 
 <?php endwhile; // End the loop. Whew. ?>
-
+<hr>
 <?php if (  $wp_query->max_num_pages > 1 ) : ?>
 	<?php if (function_exists(wp_pagenavi)) : ?>
 		<?php wp_pagenavi(); ?>

@@ -280,6 +280,11 @@ p, ul, ol, dd, td, dt {
 #searchblock #mobileMenuButton {
     display: none;
 }
+.searchsub {
+	font-size: 60%;
+	display: inline;
+}
+
 .sideNav {
     display: none;
 }
