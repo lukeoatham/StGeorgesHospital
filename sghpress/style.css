@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5 {
     font-weight: bold;
     display: block;
     text-shadow: 0 0 0 #f00, 0px 0 1px transparent;
+    padding-bottom:  .5em;
 }
 h1 {
     font-size: 2em;
