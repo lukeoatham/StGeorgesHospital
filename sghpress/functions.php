@@ -418,61 +418,6 @@ function twentyten_widgets_init() {
 		'after_title' => '</h2>',
 	) );
 	register_sidebar( array(
-		'name' => __( 'Campaign box 1', 'twentyten' ),
-		'id' => 'campaign-1-area',
-		'description' => __( 'Homepage campaign area 1', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-	register_sidebar( array(
-		'name' => __( 'Campaign box 2', 'twentyten' ),
-		'id' => 'campaign-2-area',
-		'description' => __( 'Homepage campaign area 2', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name' => __( 'Promo box 1', 'twentyten' ),
-		'id' => 'promo-1-area',
-		'description' => __( 'Homepage promo area', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-	register_sidebar( array(
-		'name' => __( 'Promo box 2', 'twentyten' ),
-		'id' => 'promo-2-area',
-		'description' => __( 'Homepage promo area', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-	register_sidebar( array(
-		'name' => __( 'Promo box 3', 'twentyten' ),
-		'id' => 'promo-3-area',
-		'description' => __( 'Homepage promo area', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-	register_sidebar( array(
-		'name' => __( 'Promo box 4', 'twentyten' ),
-		'id' => 'promo-4-area',
-		'description' => __( 'Homepage promo area', 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h2 class="widget-title">',
-		'after_title' => '</h2>',
-	) );
-	register_sidebar( array(
 		'name' => __( 'Social media area', 'twentyten' ),
 		'id' => 'social-media-area',
 		'description' => __( 'Homepage social media area', 'twentyten' ),
@@ -501,8 +446,6 @@ function twentyten_widgets_init() {
 		'before_title' => '<h2 class="widget-title">',
 		'after_title' => '</h2>',
 	) );
-
-
 	register_sidebar( array(
 		'name' => __( 'Footer1', 'twentyten' ),
 		'id' => 'footer-widget-area1',

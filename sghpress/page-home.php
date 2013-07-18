@@ -20,33 +20,49 @@ get_header(); ?>
 
 					<?php the_content(); 
 					
-							$customquery = new WP_Query('post_type=news&posts_per_page=5');
-								
-							if ( $customquery->have_posts() ) {
-								$k=0;
-								echo '<ul class="thumbnails">';
-								while ( $customquery->have_posts() ) {
-									$customquery->the_post();
-									$k++;
-									$title = get_the_title();
-									if ($k==1){
-										$image = get_the_post_thumbnail($customquery->ID,'newsheadline');
-//										print_r($customquery);
-										echo '<li class="span6"><a href="/news/'.$post->post_name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
-										echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
-										echo '</li>';
-									}
-									else {
-										$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
-										echo '<li class="span3"><a href="/news/'.$post->post_name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h4>'.$title.'</h4></a>';
-//										echo '<p>'.substr($post->post_excerpt,0,70).'&hellip;</p>'; 	
-										echo '</li>';
-									}
-									}
-									}
-									echo '</ul>';
+					
+					
+					
+					$rows = get_field('feature_news_boxes');
+					if($rows)
+//					print_r($rows);
+					{
+						$k=0;
+						echo '<ul class="thumbnails">';
+						foreach($rows as $row)
+						{
+						global $post;
+						$post= $row;
+						setup_postdata( $post ); 
+						//the_title();
+							$k++;
+							$title = get_the_title();
+							if ($k==1){
+								$image = get_the_post_thumbnail($post->ID,'newsheadline');
+								echo '<li class="span6"><a href="/news/'.$post->name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
+								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
+								echo '</li>';
+							}
+							else {
+								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
+								echo '<li class="span3"><a href="/news/'.$post->post_name.'">'.$image.'</a><a href="/news/'.$post->post_name.'"><h4>'.$title.'</h4></a>';
+								echo '</li>';
+							}
+						}
 									?>
-
+						<li class="span3" id="doitonline">
+							<h3>Do it online</h3>
+							<ul>
+							<li><a href='#'>Change an appointment</a></li>
+							<li><a href='#'>Get results</a></li>
+							<li><a href='#'>Another patient service</a></li>
+							<li><a href='#'>A popular enquiry</a></li>
+							<li><a href='#'>Frequent page visit</a></li>
+							</ul>
+						</li>
+<?php					echo '</ul>';
+					}
+?>
 				</div>
 				
 					<div class="row-fluid">
@@ -146,45 +162,35 @@ function goToPage( id ) {
 						<?php endif; ?>
 						</div>
 
-						<div class="span3" id="doitonline">
-							<h3>Do it online</h3>
-							<ul>
-							<li><a href='#'>Change an appointment</a></li>
-							<li><a href='#'>Get results</a></li>
-							<li><a href='#'>Another patient service</a></li>
-							<li><a href='#'>A popular enquiry</a></li>
-							<li><a href='#'>Frequent page visit</a></li>
-							</ul>
-						</div>
+
 					</div>
 					<br>
 <!--//promo row -->				
 					<div class="row-fluid">
-						<div class="span4">
-						<?php if ( is_active_sidebar( 'promo-1-area' ) ) : ?>
+					
+<?php					
+					$rows = get_field('promo_boxes');
+					if($rows)
+					{
+						$k=0;
+						foreach($rows as $row)
+						{
+							$k++;
+							global $post;
+							$post= $row;
+							setup_postdata( $post ); 
+							$title = get_the_title();							
+							$image = get_the_post_thumbnail($post->ID,'large');
+							if ($k==1 || $k==3) echo '<div class="span4">';
+							echo '<a href="/news/'.$post->name.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
+							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
+							if ($k==2 || $k==4) echo '</div>';
+						}
+					}
+?>
 
-						<?php dynamic_sidebar( 'promo-1-area' ); ?>
-							
-						<?php endif; ?>
-						<?php if ( is_active_sidebar( 'promo-3-area' ) ) : ?>
-
-						<?php dynamic_sidebar( 'promo-3-area' ); ?>
-							
-						<?php endif; ?>
-
-						</div>
-						<div class="span4">
-						<?php if ( is_active_sidebar( 'promo-2-area' ) ) : ?>
-
-						<?php dynamic_sidebar( 'promo-2-area' ); ?>
-							
-						<?php endif; ?>
-						<?php if ( is_active_sidebar( 'promo-4-area' ) ) : ?>
-
-						<?php dynamic_sidebar( 'promo-4-area' ); ?>
-							
-						<?php endif; ?>
-						</div>
+					
+					
 						<div class="span4">
 						<?php if ( is_active_sidebar( 'social-media-area' ) ) : ?>
 
