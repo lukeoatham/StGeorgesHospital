@@ -98,7 +98,9 @@ function goToPage( id ) {
 </script>					</div>		
 						</div>
 					</div>
-					<br>
+					<div class="row-fluid">
+					&nbsp; 
+					</div>
 <!--//find us row -->
 					<div class="row-fluid">
 						<div class="span3">
