@@ -417,7 +417,6 @@ function twentyten_widgets_init() {
 		'before_title' => '<h2 class="widget-title">',
 		'after_title' => '</h2>',
 	) );
-<<<<<<< HEAD
 	register_sidebar( array(
 		'name' => __( 'Campaign box 1', 'twentyten' ),
 		'id' => 'campaign-1-area',
@@ -436,8 +435,6 @@ function twentyten_widgets_init() {
 		'before_title' => '<h2 class="widget-title">',
 		'after_title' => '</h2>',
 	) );
-=======
->>>>>>> 86da7a4c3ddc0ad0f90400a40185d8295405985d
 
 	register_sidebar( array(
 		'name' => __( 'Promo box 1', 'twentyten' ),

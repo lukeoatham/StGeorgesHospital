@@ -98,16 +98,29 @@ function goToPage( id ) {
 </script>					</div>		
 						</div>
 					</div>
-//find us row
+<!--//find us row -->
 					<div class="row-fluid">
 						<div class="span3">
-							map
+						<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'find-us-1-area' ); ?>
+							
+						<?php endif; ?>
+
 						</div>
 						<div class="span3">
-							st george's
+						<?php if ( is_active_sidebar( 'find-us-2-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'find-us-2-area' ); ?>
+							
+						<?php endif; ?>
 						</div>
 						<div class="span3">
-							queen mary's
+						<?php if ( is_active_sidebar( 'find-us-3-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'find-us-3-area' ); ?>
+							
+						<?php endif; ?>
 						</div>
 
 						<div class="span3" id="doitonline">
@@ -121,16 +134,40 @@ function goToPage( id ) {
 							</ul>
 						</div>
 					</div>
-//promo row					
+<!--//promo row -->				
 					<div class="row-fluid">
 						<div class="span4">
-						promo
+						<?php if ( is_active_sidebar( 'promo-1-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'promo-1-area' ); ?>
+							
+						<?php endif; ?>
+						<?php if ( is_active_sidebar( 'promo-3-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'promo-3-area' ); ?>
+							
+						<?php endif; ?>
+
 						</div>
 						<div class="span4">
-						promo
+						<?php if ( is_active_sidebar( 'promo-2-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'promo-2-area' ); ?>
+							
+						<?php endif; ?>
+						<?php if ( is_active_sidebar( 'promo-4-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'promo-4-area' ); ?>
+							
+						<?php endif; ?>
 						</div>
 						<div class="span4">
-						twitter
+						<?php if ( is_active_sidebar( 'social-media-area' ) ) : ?>
+
+						<?php dynamic_sidebar( 'social-media-area' ); ?>
+							
+						<?php endif; ?>
+
 						</div>
 						
 
