@@ -45,6 +45,10 @@ ol, ul, li {
 	list-style: none;
 	margin-left: 0;
 }
+.nav-pills  li {
+	list-style: none !important;
+	margin-left: 0;
+}
 
 .container {
     padding-left: 20px;

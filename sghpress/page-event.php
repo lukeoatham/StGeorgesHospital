@@ -29,9 +29,18 @@ get_header(); ?>
 			
 ?>			
 				<div class="row-fluid">
+					<div class="span3" id='secondarynav'>
+
+						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
+				
+							<?php renderLeftNav(); ?>
+						
+						<?php endif; ?>
+						
+					</div>
 
 				
-					<div class="span9" id='content'>
+					<div class="span6" id='content'>
 							<?php 
 							echo "<h1>";
 							if ($cdir!='b') {
