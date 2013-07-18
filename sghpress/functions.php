@@ -933,3 +933,9 @@ function wpse28145_add_custom_types( $query ) {
     }
 }
 add_filter( 'pre_get_posts', 'wpse28145_add_custom_types' );
+
+function get_post_thumbnail_caption() {
+	if ( $thumb = get_post_thumbnail_id() )
+		return get_post( $thumb )->post_excerpt;
+}
+

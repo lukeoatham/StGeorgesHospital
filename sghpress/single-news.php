@@ -30,13 +30,12 @@ get_header(); ?>
 				
 				<div class="span4" id='sidebar'>
 					<?php
-										if ( has_post_thumbnail( $post->ID ) ) {
-								$img = get_the_post_thumbnail($post->ID,'large') ;
-								echo $img;
-								
-						} 
 
-echo "<div id='newsposts'><br><hr><br>";
+						echo get_the_post_thumbnail($post->ID,'newsubhead');
+								
+						echo "<span class='caption'>".get_post_thumbnail_caption()."</span>";
+
+			echo "<div id='newsposts'><hr>";
 			$category = get_the_category(); 
 			$recentitems = new WP_Query('post_type=news&posts_per_page=5');			
 			echo "<h2>Recently published</h2>";
