@@ -580,6 +580,10 @@ p, ul, ol, dd, td, dt {
     padding: .5em;
     margin-bottom: 1em;
 }
+.alert {
+	background-color: #ec8911;
+	color: white;
+}
 #promobar {
     margin: 1em auto 2em auto;
 }
