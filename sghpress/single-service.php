@@ -22,7 +22,35 @@ get_header(); ?>
 							<?php renderLeftNav(); ?>
 						
 						<?php endif; ?>
-
+						
+						<?php
+						//save current post 
+						$temppost = $post;
+						
+						 // Find connected posts via Posts to Posts plugin
+								$connected = new WP_Query( array(
+								  'connected_type' => 'services_to_posts',
+								  'connected_items' => get_queried_object(),
+								  'nopaging' => true,
+								) );
+																											
+								// Display connected posts
+								if ( $connected->have_posts() ) {
+									
+									while ( $connected->have_posts() ) {
+										$connected->the_post();
+										$relatedposts .= "<li class='page-item'><a href='".get_permalink()."'>".get_the_title()." <i class='icon-share'></i></a></li>\n";
+									}								
+								}
+																
+								if ($relatedposts) {
+								
+									echo "<div class='menu'><ul class='service menu'>
+												<ul class='children'>" . $relatedposts . "</ul></ul></div>";
+								}
+								//reinstate current post
+								$post=$temppost;
+								?>
 					</div>
 				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
@@ -224,29 +252,7 @@ get_header(); ?>
 						echo wpautop($linksbox);
 						echo "</div>";
 					}
-								// Find connected posts via Posts to Posts plugin
-								$connected = new WP_Query( array(
-								  'connected_type' => 'services_to_posts',
-								  'connected_items' => get_queried_object(),
-								  'nopaging' => true,
-								) );
-											
-								//print_r($connected);
-																
-								// Display connected posts
-								if ( $connected->have_posts() ) {
-									
-									while ( $connected->have_posts() ) {
-										$connected->the_post();
-										$relatedposts .= "<li><a href='".get_permalink()."'>".get_the_title()."</a></li>\n";
-									}								
-								}
-																
-								if ($relatedposts) {
 								
-									echo "<div class='well'>
-												<h3>Related services</h3><ul class='relatedposts'>" . $relatedposts . "</ul></div>";
-								}
 								
 
 						

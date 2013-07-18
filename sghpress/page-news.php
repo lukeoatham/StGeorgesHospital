@@ -8,8 +8,18 @@ get_header(); ?>
 
 				<div class="row-fluid">
 
+					<div class="span3" id='secondarynav'>
+
+						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				
-					<div class="span9" id='content'>
+							<?php renderLeftNav(); ?>
+						
+						<?php endif; ?>
+						
+					</div>
+
+				
+					<div class="span6" id='content'>
 						<?php if ( is_front_page() ) { ?>
 							<h2><?php the_title(); ?></h2>
 						<?php } else { ?>	
