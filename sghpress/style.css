@@ -820,18 +820,19 @@ li.comment .comment-body {
 #footer {
     background: #2b2b2b;
 }
-#footer p {
+#footer p, #footer li a {
     margin-bottom: 1em !important;
     letter-spacing: .06em;
     letter-spacing: 0;
     padding: .5em 0;
-    color: #575757;
+    color: white;
     text-align: left;
     font-size: 90%;
     }
     
 #footer h3 {
 	color: white;
+	font-size: 110%
 }    
 #footer ul.xoxo {
     margin-bottom: 3em;
