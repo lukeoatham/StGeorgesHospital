@@ -390,11 +390,92 @@ function twentyten_widgets_init() {
 		'after_title' => '</h2>',
 	) );
 
+	register_sidebar( array(
+		'name' => __( 'Find us box 1', 'twentyten' ),
+		'id' => 'find-us-1-area',
+		'description' => __( 'Homepage map area', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Find us box 2', 'twentyten' ),
+		'id' => 'find-us-2-area',
+		'description' => __( 'Box for St George\' address', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Find us box 3', 'twentyten' ),
+		'id' => 'find-us-3-area',
+		'description' => __( 'Box for Queen Mary\'s address', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Campaign box 1', 'twentyten' ),
+		'id' => 'campaign-1-area',
+		'description' => __( 'Homepage campaign area 1', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Campaign box 2', 'twentyten' ),
+		'id' => 'campaign-2-area',
+		'description' => __( 'Homepage campaign area 2', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
 
 	register_sidebar( array(
-		'name' => __( 'Tout box', 'twentyten' ),
-		'id' => 'tout-box-widget-area',
-		'description' => __( 'The tout box widget area on the homepage', 'twentyten' ),
+		'name' => __( 'Promo box 1', 'twentyten' ),
+		'id' => 'promo-1-area',
+		'description' => __( 'Homepage promo area', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Promo box 2', 'twentyten' ),
+		'id' => 'promo-2-area',
+		'description' => __( 'Homepage promo area', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Promo box 3', 'twentyten' ),
+		'id' => 'promo-3-area',
+		'description' => __( 'Homepage promo area', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Promo box 4', 'twentyten' ),
+		'id' => 'promo-4-area',
+		'description' => __( 'Homepage promo area', 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Social media area', 'twentyten' ),
+		'id' => 'social-media-area',
+		'description' => __( 'Homepage social media area', 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h2 class="widget-title">',
@@ -642,7 +723,7 @@ function renderLeftNav($outputcontent="TRUE") {
 					array(
 						"post_type" => "service",
 						"posts_per_page" => -1,
-						"orderby" => "menu_order title",
+						"orderby" => "menu_order  title",
 						"order" => "ASC",
 						"post_parent" => $menuid
 					)
