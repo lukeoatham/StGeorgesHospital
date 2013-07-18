@@ -30,7 +30,7 @@ get_header(); ?>
 				</div>
 				
 					<div class="row-fluid">
-					<div class="span8" id="services">
+					<div class="span12" id="services">
 					<div class="row-fluid">
 					<div class="span6">
 
@@ -95,25 +95,47 @@ function goToPage( id ) {
   
   
 }
-</script>					</div>			
+</script>					</div>		
 						</div>
 					</div>
-						<div class="span4" id="doitonline">
+//find us row
+					<div class="row-fluid">
+						<div class="span3">
+							map
+						</div>
+						<div class="span3">
+							st george's
+						</div>
+						<div class="span3">
+							queen mary's
+						</div>
+
+						<div class="span3" id="doitonline">
 							<h3>Do it online</h3>
 							<ul>
 							<li><a href='#'>Change an appointment</a></li>
-							<li><a href='#'>Get rest results</a></li>
+							<li><a href='#'>Get results</a></li>
 							<li><a href='#'>Another patient service</a></li>
 							<li><a href='#'>A popular enquiry</a></li>
 							<li><a href='#'>Frequent page visit</a></li>
 							</ul>
 						</div>
-						<div class="span4">							
-						<h2>Find us</h2>
+					</div>
+//promo row					
+					<div class="row-fluid">
+						<div class="span4">
+						promo
 						</div>
+						<div class="span4">
+						promo
+						</div>
+						<div class="span4">
+						twitter
+						</div>
+						
 
 					</div>
-					
+</div>
 
 <?php endwhile; ?>
 
