@@ -25,22 +25,7 @@ get_header(); ?>
 						<div id='comments'>
 							<?php comments_template( '', true ); ?>
 						</div>						
-					
-					<ul class="xoxo">
-
-						<?php if ( (comments_open() || have_comments()) ) : ?>
-						<li>
-	
-							<div id='comments'>
-								<?php comments_template( '', true ); ?>
-							</div>
-						
-						</li>
-						<?php endif; ?>
-
-						</ul>
-
-				
+									
 				</div>
 				
 				<div class="span4" id='sidebar'>
