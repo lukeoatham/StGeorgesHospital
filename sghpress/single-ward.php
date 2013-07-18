@@ -15,8 +15,16 @@ get_header(); ?>
 ?>
 
 		<div class="row-fluid">
+		
+						<div class="span3" id='secondarynav'>
 
-				<div class="span8" id='content'>
+										
+							<div class="menu-primary-navigation-container"><ul id="nav" class="menu"><li class="patient menu-item menu-item-type-post_type menu-item-object-page page_item page-item-7  current_section"><a href="/patients-and-visitors//">Patients and visitors</a><ul class="children"><li class="page_item page-item-230 current-menu-item current_page_item"><a href="/patients-and-visitors/our-wards/">Our wards</a></li>
+</ul></div>						
+												
+					</div>	
+
+				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<?php 
@@ -28,7 +36,7 @@ get_header(); ?>
 					$contactnumber = get_post_meta($post->ID, 'telephone', true);
 					if ($contactnumber){
 						// display location details 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Contact number</h3>";
 						echo wpautop($contactnumber);
 						echo "</div>";
@@ -38,20 +46,20 @@ get_header(); ?>
 					$servicelocations = get_post_meta($post->ID, 'location', true);
 					foreach ($servicelocations as $servicelocation){
 						// display location details 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Location</h3>";
 						$location = get_post($servicelocation);
 						echo $location->post_title;
 						$longitude = get_post_meta($servicelocation,'longitude',true);
 						$latitude = get_post_meta($servicelocation,'latitude',true);
 						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=640x640&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=320x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
+					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=320x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
 
 						echo "</div>";
 					}
 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Key information</h3>";
 
 						echo "<p><strong>Visiting times: </strong>";
@@ -124,7 +132,7 @@ get_header(); ?>
 					$facilities = get_post_meta($post->ID, 'facilities', true);
 					if ($facilities){
 						// display location details 
-						echo "<div class='message'>";
+						echo "<div class='well'>";
 						echo "<h3>Other facilities</h3>";
 						echo wpautop($facilities);
 						echo "</div>";
@@ -137,7 +145,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span4" id='sidebar'>
+				<div class="span3" id='sidebar'>
 <?php	
 //display services associated with this ward
 				

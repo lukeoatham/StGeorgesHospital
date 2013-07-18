@@ -44,8 +44,7 @@ get_header(); ?>
 										the_excerpt();
 	?>
 <p>
-									<i class="icon-user"></i> by <a href="#"> <?php the_author(); ?></a>
-									| <i class="icon-calendar"></i> <?php 
+										<i class="icon-calendar"></i> <?php 
 										echo date('j M Y',strtotime($post->post_date));
 										
 									?>

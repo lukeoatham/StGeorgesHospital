@@ -24,11 +24,11 @@ if ($show=="ALL"){
 				<div class="menu-primary-navigation-container">
 							
 							<ul id="nav" class="menu">
-						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a><ul class='children'>
+						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="/services/">Services</a><ul class='children'>
 						<li class='service '><a href='/services/a-z/'>Services A-Z</a></li>
 
-<li class="page_item current_page_item page-item-232 level-0"><a href="http://sgh.helpfulclients.com/services/clinician-directory/">Clinician directory</a></li>
-<li class="page_item page-item-234"><a href="http://sgh.helpfulclients.com/services/private-patients/">Private patients</a></li>
+<li class="page_item current_page_item page-item-232 level-0"><a href="/services/clinician-directory/">Clinician directory</a></li>
+<li class="page_item page-item-234"><a href="/services/private-patients/">Private patients</a></li>
 </ul></div>	
 				
 				</div>
@@ -127,9 +127,9 @@ if ($show=="ALL"){
 				$clinicians->the_post();
 				
 
-				$x = get_the_title();
+				$displayname = get_post_meta($post->ID,'last_name',TRUE).", ".get_post_meta($post->ID,'professional_title',TRUE)." ".get_post_meta($post->ID,'first_name',TRUE);
 					if (($show && strtoupper(substr(get_post_meta($post->ID,'last_name',TRUE), 0,1)) == strtoupper($show)) || !$show ){
-						echo "<li><a href='".$post->guid."'>".$x."</a></li>";
+						echo "<li><a href='".$post->guid."'>".$displayname."</a></li>";
 					}
 				}
 
