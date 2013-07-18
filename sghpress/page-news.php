@@ -76,7 +76,7 @@ get_header(); ?>
 									  	
 									}
 
-?>									 </p></div></div>
+?>									 </p></div></div></div>
 <?php
 
 								}
@@ -96,10 +96,10 @@ get_header(); ?>
 							<?php endif; ?>
 						<?php endif; ?>
 	
-					</div></div></div>
+					</div>
 					
-					<div class="span3" id='secondarynav'>
-				 rhc
+					<div class="span3">
+
 					<?php if ( is_active_sidebar( 'news-landing-widget-area' ) ) : ?>
 		
 					<?php dynamic_sidebar( 'news-landing-widget-area' ); ?>

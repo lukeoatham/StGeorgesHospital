@@ -482,6 +482,15 @@ function twentyten_widgets_init() {
 		'after_title' => '</h2>',
 	) );
 
+	register_sidebar( array(
+		'name' => __( 'News landing', 'twentyten' ),
+		'id' => 'news-landing-widget-area',
+		'description' => __( 'The sidebar widget area on news landing page', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
 
 	register_sidebar( array(
 		'name' => __( 'Inside sidebar', 'twentyten' ),
