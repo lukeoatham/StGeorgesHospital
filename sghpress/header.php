@@ -56,7 +56,7 @@
 
 
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
-<input type="checkbox" name="mobileNav" id="mobileNav" checked />
+<input type="checkbox" name="mobileNav" id="mobileNav" />
 			<div class="container-fluid" id="mobMove">
 			<div class="row-fluid">
 				<ul class="topLinks">
