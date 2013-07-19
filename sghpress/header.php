@@ -58,14 +58,14 @@
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
 <input type="checkbox" name="mobileNav" id="mobileNav" />
 			<div class="container-fluid" id="mobMove">
-			<div class="row-fluid">
+			<div class="row-fluid quick-links">
 				<ul class="topLinks">
 					<li><a href="#">Telephone: 020 8275 4521</a></li>
 					<li><a href="#">This is a link</a></li>
 					<li><a href="#">This is also a link</a></li>
 				</ul>
 			</div>								
-			<div class="row-fluid">
+			<div class="row-fluid header">
 				<div id='header' class="row">
 					<div id='masthead'>
 						
@@ -148,7 +148,7 @@
 		
 		
 			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
-				<div class="row-fluid">
+				<div class="row-fluid breadcrumbs">
 					<div class="span12">
 							<div class='breadcrumb'>
 								<?php bcn_display(); ?>
