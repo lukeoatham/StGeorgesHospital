@@ -106,13 +106,13 @@
 					<label id="contentOverlay" for="mobileNav"></label>
 				<!-- end label for side menu -->
 				
-				<!-- start navigation for sidebar -->
+				<!-- start navigation for sidebar
 				<div class="sideNav">
 				<ul>
 				<?php
 				
 				global $post;
-				
+				/*
 				
 					//Renders the left nav of pages with left navs
 				if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
@@ -121,13 +121,18 @@
 						echo('<li class="subSideNav">');
 						renderLeftNav();
 						echo('</li>');
+					}else{
+						echo('<li class="subSideNav visible-phone">'); 
+						wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); 
+						echo('</li>');
+
 					}
-				}
+				}*/
 				?>
 				</ul>
 				</div>
 				
-				<!-- end navigation for sidebar -->
+				end navigation for sidebar -->
 			</div>
 			
 			<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
