@@ -37,7 +37,7 @@ get_header(); ?>
 
 			echo "<div id='newsposts'><hr>";
 			$category = get_the_category(); 
-			$recentitems = new WP_Query('post_type=news&posts_per_page=5');			
+			$recentitems = new WP_Query('post_type=newsitem&posts_per_page=5');			
 			echo "<h2>Recently published</h2>";
 
 			if ($recentitems->post_count==0 || ($recentitems->post_count==1 && $mainid==$post->ID)){

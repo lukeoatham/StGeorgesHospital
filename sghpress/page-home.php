@@ -39,7 +39,7 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<li class="span6"><a href="/newsitem/'.$post->name.'">'.$image.'</a><a href="/newsitem/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
+								echo '<li class="span6"><a href="/newsitem/'.$post->post_name.'">'.$image.'</a><a href="/newsitem/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
 								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 								echo '</li>';
 							}
@@ -52,13 +52,19 @@ get_header(); ?>
 									?>
 						<li class="span3" id="doitonline">
 							<h3>Do it online</h3>
-							<ul>
-							<li><a href='#'>Change an appointment</a></li>
-							<li><a href='#'>Get results</a></li>
-							<li><a href='#'>Another patient service</a></li>
-							<li><a href='#'>A popular enquiry</a></li>
-							<li><a href='#'>Frequent page visit</a></li>
-							</ul>
+							<?php
+					$defaults = array(
+					'menu'            => 'do-it-online',
+					'container'       => 'div',
+					'menu_class'      => 'menu',
+					'echo'            => true,
+					'fallback_cb'     => 'wp_page_menu',
+					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					'depth'           => 0,
+				);
+				
+				wp_nav_menu( $defaults );
+									?>	
 						</li>
 <?php					echo '</ul>';
 					}
@@ -135,7 +141,7 @@ function goToPage( id ) {
 						</div>
 					</div>
 					<div class="row-fluid">
-					&nbsp; 
+					<h3>Find us</h3>
 					</div>
 <!--//find us row -->
 					<div class="row-fluid">
@@ -161,10 +167,33 @@ function goToPage( id ) {
 							
 						<?php endif; ?>
 						</div>
-
-
-					</div>
-					<br>
+						<div class="span3">
+						<h4>Find a local health centre </h4> 
+						<div class="input-append">
+						  <select id="select3" >
+						<?php  
+							$allservices = get_posts(
+									array(
+									"post_type" => "location",
+									"posts_per_page" => -1,
+									"orderby" => "title",
+									"order" => "ASC",
+									"post_parent" => 0
+									)
+								);
+								
+							foreach ($allservices as $service){
+								echo  '<option ';
+								if ($service->post_title == "Emergency") echo " selected=selected ";
+								echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
+							}
+							?>
+							  </select>
+							  <button class="btn" type="button" onclick="goToPage('select3')">Go</button>
+							</div>			
+		
+							</div></div>
+							<br>
 <!--//promo row -->				
 					<div class="row-fluid">
 					
