@@ -1044,6 +1044,12 @@ ul.xoxo li {
     width: 75%;
     padding: 1em!important;
 }
+
+#content, #sidebar{
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
 body {
     -webkit-animation: bugfix infinite 1s;
 }
