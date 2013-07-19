@@ -7,16 +7,7 @@ get_header(); ?>
 
 				<div class="row-fluid">
 				
-				<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
 
-							<div class="alert alert-block">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-
-									<?php dynamic_sidebar( 'emergency_message' ); ?>
-							
-							</div>
-
-						<?php endif; ?>
 
 					<?php the_content(); 
 					
@@ -210,7 +201,7 @@ function goToPage( id ) {
 							$post= $row;
 							setup_postdata( $post ); 
 							$title = get_the_title();							
-							$image = get_the_post_thumbnail($post->ID,'large');
+							$image = get_the_post_thumbnail($post->ID,'promo');
 							if ($k==1 || $k==3) echo '<div class="span4">';
 							echo '<a href="/news/'.$post->name.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
 							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
@@ -222,6 +213,13 @@ function goToPage( id ) {
 					
 					
 						<div class="span4">
+						
+						<?php if ( is_active_sidebar( 'sponsor-advert' ) ) : ?>
+
+								<?php dynamic_sidebar( 'sponsor-advert' ); ?>
+									
+						<?php endif; ?>
+						
 						<?php if ( is_active_sidebar( 'social-media-area' ) ) : ?>
 
 						<?php dynamic_sidebar( 'social-media-area' ); ?>

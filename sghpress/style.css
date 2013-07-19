@@ -877,7 +877,9 @@ li.comment .comment-body {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 }
-
+#services label {
+	color: white;
+}
 #services {
     background: #1972B5;
     padding: 1em;

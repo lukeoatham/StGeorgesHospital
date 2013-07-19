@@ -129,6 +129,19 @@
 				
 				<!-- end navigation for sidebar -->
 			</div>
+			
+			<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
+
+			<div class="alert alert-block">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+
+					<?php dynamic_sidebar( 'emergency_message' ); ?>
+			
+			</div>
+			
+			<?php endif; ?>
+		
+		
 			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
 				<div class="row-fluid">
 					<div class="span12">

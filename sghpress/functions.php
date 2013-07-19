@@ -491,7 +491,15 @@ function twentyten_widgets_init() {
 		'before_title' => '',
 		'after_title' => '',
 	) );
-
+	register_sidebar( array(
+		'name' => __( 'Sponsor advert', 'twentyten' ),
+		'id' => 'sponsor-advert',
+		'description' => __( 'Sponsor advert area', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
 
 
 }
@@ -785,6 +793,7 @@ add_action('wp_enqueue_scripts','enqueueThemeScripts');
 add_image_size( "clinicianthumb", "72", "72", true );
 add_image_size( "newsheadline", "536", "356", true );
 add_image_size( "newssubhead", "254", "169", true );
+add_image_size( "promo", "348", "240", true );
 
 
 
