@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying all single treatment posts.
+ * The Template for displaying all single event posts.
  *
  * @package WordPress
  * @subpackage Starkers
@@ -15,8 +15,14 @@ get_header(); ?>
 ?>
 
 		<div class="row-fluid">
-
-				<div class="span8" id='content'>
+					<div class="span3" id='secondarynav'>
+					
+				
+							<?php renderLeftNav(); ?>
+						
+						
+					</div>
+				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
@@ -33,7 +39,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span4" id='sidebar'>
+				<div class="span3" id='sidebar'>
 					
 						<ul class="xoxo">
 

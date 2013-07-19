@@ -15,18 +15,15 @@ get_header(); ?>
 ?>
 
 		<div class="row-fluid">
-<div class="span3" id='secondarynav'>
+
 
 										
-							<div class="menu-primary-navigation-container"><ul id="nav" class="menu">
-<li class="education menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="/education-and-research/">Education & research</a>
-	<ul class="children">
-	<li class="ancestor level-0"><a href="/education-and-research/education/">Education</a></li>
-	<li class="page_item level-1"><a href="/education-and-research/education/courses/">Courses</a></li>
-<li class="page_item current_page_item"><a><?php the_title(); ?></a></li>
-	</ul></li>
-</ul></div>						
-												
+					<div class="span3" id='secondarynav'>
+					
+				
+							<?php renderLeftNav(); ?>
+						
+						
 					</div>
 				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
