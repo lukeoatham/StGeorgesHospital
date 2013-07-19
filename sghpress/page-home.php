@@ -167,7 +167,7 @@ function goToPage( id ) {
 							
 						<?php endif; ?>
 						</div>
-						<div class="span3">
+						<div class="span3" id="findlocal">
 						<h4>Find a local health centre </h4> 
 						<div class="input-append">
 						  <select id="select3" >
@@ -178,7 +178,8 @@ function goToPage( id ) {
 									"posts_per_page" => -1,
 									"orderby" => "title",
 									"order" => "ASC",
-									"post_parent" => 0
+									'meta_key' => 'health_centre',
+									'meta_value' => 1
 									)
 								);
 								
