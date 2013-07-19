@@ -26,6 +26,10 @@
 		</div>
 		
 			<div class="row-fluid" id='footer'>
+				<div class="span12 pull-right">
+				
+				<a href="http://www.mitie.com"><img class="pull-right" src="/wp-content/themes/sghpress/images/mitie.gif" alt="Sponsored by MITIE"></a>
+				</div>
 				<div class="container-fluid">
 					<div class="span3">
 						<ul class="xoxo">

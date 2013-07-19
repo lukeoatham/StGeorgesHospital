@@ -838,7 +838,7 @@ li.comment .comment-body {
 	text-decoration: underline;
 }
 #footer {
-    background: #2b2b2b;
+    background:#2b2b2b;
 }
 #footer p, #footer li a {
     margin-bottom: 1em !important;
@@ -856,7 +856,7 @@ li.comment .comment-body {
 }    
 #footer ul.xoxo {
     margin-bottom: 3em;
-    margin-top: 3em;}
+}
 
 #doitonline {
     background: #4DB848;
