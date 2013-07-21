@@ -187,7 +187,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $clinicianservice) ){
 								if (!$donetitle){
-									echo "<div class='well'><h3>Clinicians</h3><ul>";
+									echo "<div class='sidebox'><h3>Clinicians</h3><ul>";
 									$donetitle=true;
 								}
 								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
@@ -203,7 +203,7 @@ get_header(); ?>
 						$donetitle=false;
 						foreach ($wards as $ward){
 							if (!$donetitle){
-								echo "<div class='well'><h3>Wards</h3><ul>";
+								echo "<div class='sidebox'><h3>Wards</h3><ul>";
 								$donetitle=true;
 							}
 							$w = get_post($ward);
@@ -233,7 +233,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $referralservice) ){
 								if (!$donetitle){
-									echo "<div class='well'><h3>Referral forms</h3><ul>";
+									echo "<div class='sidebox'><h3>Referral forms</h3><ul>";
 									$donetitle=true;
 								}
 								//print_r($referralservice)	;
@@ -248,7 +248,7 @@ get_header(); ?>
 					
 					$linksbox = get_post_meta($post->ID, 'links_box', true);
 					if ($linksbox){
-						echo "<div class='well'>";
+						echo "<div class='sidebox'>";
 						echo wpautop($linksbox);
 						echo "</div>";
 					}

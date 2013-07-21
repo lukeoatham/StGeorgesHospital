@@ -48,11 +48,12 @@ get_header(); ?>
 				if ($mainid!=$post->ID) {
 					$thistitle = get_the_title($ID);
 					$thisURL=get_permalink($ID);
-					echo "<div class='well'>";
-					echo "<p><h3><a href='{$thisURL}'>".$thistitle."</a></h3><p>";
+					echo "<div class='sidebox'>";
+					echo "<h3><a href='{$thisURL}'>".$thistitle."</a></h3>";
 					$thisdate= $post->post_date;
 					$thisdate=date("j M Y",strtotime($thisdate));
 					echo "<i class='icon-calendar'></i>".$thisdate;
+					the_excerpt();
 					echo "</div>";
 				}
 			endwhile; 

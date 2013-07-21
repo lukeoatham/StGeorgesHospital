@@ -169,7 +169,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $servicespost) ){
 								if (!$donetitle){
-									echo "<div class='well'><h3>Services</h3><ul class='nav nav-list'>";
+									echo "<div class='sidebox'><h3>Services</h3><ul class='nav nav-list'>";
 									$donetitle=true;
 								}
 								echo "<li><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";

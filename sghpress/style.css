@@ -877,6 +877,26 @@ li.comment .comment-body {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 }
+.sidebox {
+	background: #f1f8ff;
+}
+.sidebox h3 {
+	background: #1972B5;
+	padding: 0.5em;
+	color: white;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+.sidebox ul, .sidebox p {
+	margin-left: 0.5em;
+	padding: 0.5em;
+}
+.sidebox h3 a {
+	color: white !important;
+}
+.sidebox i {
+	margin-left:  1em;
+}
 #services label {
 	color: white;
 }
