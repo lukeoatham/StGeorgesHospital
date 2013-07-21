@@ -136,16 +136,18 @@
 			</div>
 			
 			<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
-
-			<div class="alert alert-block">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-
-					<?php dynamic_sidebar( 'emergency_message' ); ?>
-			
-			</div>
-			
+					<?php 
+					if ( $_GET['msgclose'] == true) : 
+						setCookie("emergencymsg", 'closed', time()+3600);  /* expire in 1 hour */
+					endif; 
+					if ($_COOKIE['emergencymsg']) : 
+					?>
+						<div class="alert alert-block">
+							<button class="pull-right"><a href="?msgclose=true">[&times;]</a></button>
+							<?php dynamic_sidebar( 'emergency_message' ); ?>
+						</div>
+				<?php endif; ?>
 			<?php endif; ?>
-		
 		
 			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
 				<div class="row-fluid breadcrumbs">

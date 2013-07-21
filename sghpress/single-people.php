@@ -39,7 +39,7 @@ get_header(); ?>
 
 					
 					the_content(); 
-					echo "<h3>Contact</h3>";
+					echo "<div class='sidebox'><h3>Contact</h3>";
 					$email = get_post_meta($post->ID, 'people_email', true);
 					if ($email !=''){
 						echo "<p><strong>Email: </strong><a href='mailto:".$email."'>".$email."</a></p>";
@@ -49,6 +49,7 @@ get_header(); ?>
 					if ($telephone !=''){
 						echo "<p><strong>Telephone: </strong>".$telephone."</p>";
 					}	
+
 					$incat = false;
 					$cats=get_the_terms($id, 'people-types');
 					foreach ($cats as $cat){
@@ -73,17 +74,21 @@ get_header(); ?>
 					if ($secretarytelephone !=''){
 						echo "<p><strong>Secretary telephone: </strong>".$secretarytelephone."</p>";
 					}	
+					
+					echo "</div>";
+					}
+					if ( $incat ) { //if this person is categorised as a clinician then display additional fields
 
 					$clinicalinterests = get_post_meta($post->ID, 'clinical_interests', true);
 					if ($clinicalinterests !=''){
-						echo "<h3>Clinical interests</h3>";
-						echo wpautop($clinicalinterests);
+						echo "<div class='sidebox'><h3>Clinical interests</h3>";
+						echo wpautop($clinicalinterests)."</div>";
 					}	
 					
 					$proprofile = get_post_meta($post->ID, 'professional_profile', true);
 					if ($proprofile !=''){
-						echo "<h3>Professional profile</h3>";
-						echo wpautop($proprofile);
+						echo "<div class='sidebox'><h3>Professional profile</h3>";
+						echo wpautop($proprofile)."</div>";
 					}	
 
 					$other = get_post_meta($post->ID, 'other', true);

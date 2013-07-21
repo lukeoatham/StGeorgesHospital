@@ -30,7 +30,7 @@ function setCookie(name,value,expires,path,domain,secure) {
 	today.setTime( today.getTime() );
 	
 	if ( expires ) {
-		expires = expires * 1000 * 60; // time in minutes
+		expires = expires * 1 * 60; // time in minutes
 	}
 	
 	var expires_date = new Date( today.getTime() + (expires) );
@@ -43,7 +43,11 @@ function setCookie(name,value,expires,path,domain,secure) {
 
     return null;
 }
-
+function noCookieBar() { // set a 6 month cookie if user closes cookie bar
+	setCookie('emergencymsg','closed','60','/',0,0); echo "setting cookie";
+	location.reload(true);
+	return true;
+}
 
 function gaTrackDownloadableFiles() {
 

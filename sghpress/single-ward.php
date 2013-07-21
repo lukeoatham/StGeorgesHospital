@@ -36,7 +36,7 @@ get_header(); ?>
 					$contactnumber = get_post_meta($post->ID, 'telephone', true);
 					if ($contactnumber){
 						// display location details 
-						echo "<div class='well'>";
+						echo "<div class='sidebox'>";
 						echo "<h3>Contact number</h3>";
 						echo wpautop($contactnumber);
 						echo "</div>";
@@ -46,7 +46,7 @@ get_header(); ?>
 					$servicelocations = get_post_meta($post->ID, 'location', true);
 					foreach ($servicelocations as $servicelocation){
 						// display location details 
-						echo "<div class='well'>";
+						echo "<div class='sidebox'>";
 						echo "<h3>Location</h3>";
 						$location = get_post($servicelocation);
 						echo $location->post_title;
@@ -59,7 +59,7 @@ get_header(); ?>
 						echo "</div>";
 					}
 
-						echo "<div class='well'>";
+						echo "<div class='sidebox'>";
 						echo "<h3>Key information</h3>";
 
 						echo "<p><strong>Visiting times: </strong>";
@@ -132,7 +132,7 @@ get_header(); ?>
 					$facilities = get_post_meta($post->ID, 'facilities', true);
 					if ($facilities){
 						// display location details 
-						echo "<div class='well'>";
+						echo "<div class='sidebox'>";
 						echo "<h3>Other facilities</h3>";
 						echo wpautop($facilities);
 						echo "</div>";
