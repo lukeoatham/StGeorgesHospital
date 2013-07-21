@@ -36,7 +36,7 @@ get_header(); ?>
 																											
 								// Display connected posts
 								if ( $connected->have_posts() ) {
-									
+									$relatedposts='';
 									while ( $connected->have_posts() ) {
 										$connected->the_post();
 										$relatedposts .= "<li class='page-item'><a href='".get_permalink()."'>".get_the_title()." <i class='icon-share'></i></a></li>\n";
@@ -49,7 +49,10 @@ get_header(); ?>
 												<ul class='children'>" . $relatedposts . "</ul></ul></div>";
 								}
 								//reinstate current post
+								global $post;
 								$post=$temppost;
+								setup_postdata($post);
+								
 								?>
 					</div>
 				<div class="span6" id='content'>
