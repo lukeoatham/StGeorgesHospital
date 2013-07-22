@@ -657,24 +657,52 @@ function renderLeftNav($outputcontent="TRUE") {
 	if(is_single()){
 		$singleURLs = explode("/", get_single_template());
 		$singleURL = end($singleURLs);
-		if ($singleURL == 'single-service.php' ) {
+		$postSection = "";
+		$postSectionID = 0;
+		$postID = $post->ID;
+		$postType = $post->post_type;
+		$before = array();
+		
+		if($postType == "ward"){
+			$postSection = "patient";
+			$postSectionID = 9;
+			array_push($before, 186);
+		}
+		
+		
+		if ($postType == "service") {
 			//Iterate through the top level items - Primary Nav with a walker
-			$mainid = $post->ID;
-			$navParams = array(
+			$postSection = "service";
+			$postSectionID = 7;
+			array_push($before, 230);
+		}
+		
+		if($postType == "course"){
+			$postSection = "education";
+			$postSectionID = 35;
+			array_push($before, 237);
+			array_push($before, 241);
+		}
+		
+		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
+		
+		$mainid = $postID;
+		$navParams = array(
 			'theme_location' => 'primary',
 			'menu_id' => 'nav',
 			'echo' => false
-			);
-			$navItems = wp_nav_menu($navParams);
+		);
+		$navItems = wp_nav_menu($navParams);
 			
-			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
-			$navItems = str_replace("<li class=\"visible-phone service", "<li class=\"service", $navItems);
+		$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
+		$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection."\"", $navItems); 
 			
 			
+		
 			
 			//build the left hand navigation based on the current page
 			$navarray = array();
-			$currentpost = get_post($post->ID);
+			$currentpost = get_post($postID);
 						
 			while (true){
 				//iteratively get the post's parent until we reach the top of the hierarchy
@@ -703,35 +731,47 @@ function renderLeftNav($outputcontent="TRUE") {
 				$navarray[] = -1;	//set marker in array for subsequent children styling
 			}
 						
-
-			//get children pages
-			if ($menuid!=0){
-				$allservices = get_posts( 
-					array(
-						"post_type" => "service",
-						"posts_per_page" => -1,
-						"orderby" => "menu_order  title",
-						"order" => "ASC",
-						"post_parent" => $menuid
-					)
-				);
+			$allNavParams = array(
+				"post_type" => $postType,
+				"posts_per_page" => -1,
+				"orderby" => "menu_order title",
+				"order" => "ASC"
+			);
+			
+			if($menuid != 0){
+				$allNavParams["post_parent"] = $menuid;
 			}
+			
+			
+			//get children pages
+			//if ($menuid!=0){
+				$allnavItems = get_posts($allNavParams);
+			//}
 			
 			$subnavString = "";
 						
-			foreach ($allservices as $service){ //fill the nav array with the child pages
-				$navarray[] = $service->ID;
+			foreach ($allnavItems as $navItem){ //fill the nav array with the child pages
+				$navarray[] = $navItem->ID;
 			}	 
-			$subnavString .= "<li class='level-0'><a href='/services/a-z/'>Services A-Z</a></li>"; //top level menu item
+			
+			$ancestorCount = 0;
+			foreach($before as $beforeItem){
+				$subnavString .= "<li class='level-".$ancestorCount."'><a href='".get_permalink($beforeItem)."'>".get_the_title($beforeItem)."</a></li>"; //top level menu item
+				$ancestorCount++;
+			}
+			
 			$subs=false;
+			
+			//var_dump($navarray);
 					
-			$ancestorCount = 1;
+			
 			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
 				if ($nav == -1) {
 					$subs=true;
 					continue;
 				}
 				$currentpost = get_post($nav);
+				
 				
 				if ($nav == $mainid){
 					if(postHasChildren($mainid)){
@@ -747,9 +787,11 @@ function renderLeftNav($outputcontent="TRUE") {
 				}
 				$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
 				}
-			}
 			
-			$navItems = str_replace("Services</a>", "Services</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
+			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
+			$postSectionTitle = str_replace("and", "&#038;", get_the_title($postSectionID));
+					
+			$navItems = str_replace($postSectionTitle."</a>", $postSectionTitle."</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
 			echo($navItems);
 		}else{
 		//Iterate through the top level items - Primary Nav with a walker
