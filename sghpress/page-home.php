@@ -92,7 +92,7 @@ get_header(); ?>
 									?>	
 				</div>
 				<div class="span6">
-				<h4>All services: A-Z </h4> 
+				<h4>All services A-Z </h4> 
 				<div class="input-append">
 				  <label for="select2">Jump to:</label>
 				  <select id="select2" >

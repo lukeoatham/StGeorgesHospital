@@ -11,9 +11,6 @@
  */
 ?>
 
-
-
-
 		<div id="ourvalues" class="row-fluid">
 		<div class="container-fluid">
 			<div class="span8">
@@ -27,8 +24,7 @@
 		
 			<div class="row-fluid" id='footer'>
 				<div class="span12 pull-right">
-				
-				<a href="http://www.mitie.com"><img class="pull-right" src="/wp-content/themes/sghpress/images/mitie.gif" alt="Sponsored by MITIE"></a>
+							<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
 				</div>
 				<div class="container-fluid">
 					<div class="span3">

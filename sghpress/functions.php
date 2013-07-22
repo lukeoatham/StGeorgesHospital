@@ -465,6 +465,15 @@ function twentyten_widgets_init() {
 		'after_title' => '',
 	) );
 	register_sidebar( array(
+		'name' => __( 'Sponsor', 'twentyten' ),
+		'id' => 'footer-sponsor-area',
+		'description' => __( 'Footer sponsor area', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
+	register_sidebar( array(
 		'name' => __( 'Footer1', 'twentyten' ),
 		'id' => 'footer-widget-area1',
 		'description' => __( 'Footer widget area 1', 'twentyten' ),

@@ -52,7 +52,7 @@
 										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'thumbnail');
 										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
 											echo "</a>";
-	    									}
+	    							}
 	    									?>
 										<?php 
 										echo "<div class='media-body'><h2 class='media-heading'>";
@@ -62,15 +62,15 @@
 										if ($post->post_type=='people') echo " <span class='searchsub'><i class='icon-user'></i>People</span>";
 										if ($post->post_type=='course') echo " <span class='searchsub'><i class='icon-refresh'></i>Courses</span>";
 										if ($post->post_type=='page') echo " <span class='searchsub'><i class='icon-book'></i>Page</span>";
-										if ($post->post_type=='news') echo "  <span class='searchsub'><i class='icon-volume-up'></i>News</span>";													if ($post->post_type=='event') echo " <i class='icon-calendar'></i>Events</span>";
-										if ($post->post_type=='service') echo "  <span class='searchsub'><i class='icon-cog'></i>Services</span>";																	
+										if ($post->post_type=='newsitem') echo " <span class='searchsub'><i class='icon-volume-up'></i>News</span>";												if ($post->post_type=='event') echo " <span class='searchsub'><i class='icon-calendar'></i>Events</span>";
+										if ($post->post_type=='service') echo " <span class='searchsub'><i class='icon-cog'></i>Services</span>";																	
 										echo "</h2>";
 	
 										the_excerpt();
 	?>
 <p>
 <?php
-									if (get_post_type() == 'post') :?>
+									if (get_post_type() == 'newsitem') :?>
 									
 									<i class="icon-calendar"></i> <?php 
 										echo date('j M Y',strtotime($post->post_date));
