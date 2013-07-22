@@ -72,11 +72,8 @@ get_header(); ?>
 				
 					<div class="row-fluid">
 					<div class="span12" id="services">
-					<div class="row-fluid">
-					<div class="span6">
-
-					<h3>Services</h3>
-					<h4>Most active</h4>
+					<div class="span5">
+					<h4>Most active services</h4>
 					<?php
 					$defaults = array(
 					'menu'            => 'top-tasks',
@@ -91,7 +88,7 @@ get_header(); ?>
 				wp_nav_menu( $defaults );
 									?>	
 				</div>
-				<div class="span6">
+				<div class="span4">
 				<h4>All services A-Z </h4> 
 				<div class="input-append">
 				  <label for="select2">Jump to:</label>
@@ -136,8 +133,12 @@ function goToPage( id ) {
   
   
 }
-</script>					</div>		
-						</div>
+</script>					
+					</div>	
+					<div class="span3">
+					<h4>Telephone <br><?php echo get_field("telephone"); ?></h4>
+					</div>	
+					</div>
 					</div>
 					<div class="row-fluid">
 					<h3>Find us</h3>
