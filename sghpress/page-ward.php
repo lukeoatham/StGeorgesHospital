@@ -14,8 +14,7 @@ $paged = $_GET['paged'];
 				<div class="span3" id='secondarynav'>
 
 										
-							<div class="menu-primary-navigation-container"><ul id="nav" class="menu"><li class="patient menu-item menu-item-type-post_type menu-item-object-page page_item page-item-7  current_section"><a href="http://sgh.helpfulclients.com/patients-and-visitors//">Patients and visitors</a><ul class="children"><li class="page_item page-item-230 current-menu-item current_page_item"><a href="http://sgh.helpfulclients.com/patients-and-visitors/our-wards/">Our wards</a></li>
-</ul></div>						
+							<?php renderLeftNav() ?>
 												
 					</div>	
 				
