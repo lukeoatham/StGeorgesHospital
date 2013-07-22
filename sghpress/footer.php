@@ -16,11 +16,11 @@
 
 		<div id="ourvalues" class="row-fluid">
 		<div class="container-fluid">
-			<div class="span9">
-			<img src="/wp-content/themes/sghpress/images/values.png" alt="Our values">
+			<div class="span8">
+			<?php dynamic_sidebar( 'values-widget-area1' ); ?>
 			</div>
-			<div class="span3">
-			<p>Our <a href="#">values</a>, <a href="#">vision</a> and <a href="#">strategy</a>
+			<div class="span4">
+			<?php dynamic_sidebar( 'values-widget-area2' ); ?>
 			</div>
 		</div>
 		</div>

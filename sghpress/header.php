@@ -60,11 +60,7 @@ session_start();
 <input type="checkbox" name="mobileNav" id="mobileNav" />
 			<div class="container-fluid" id="mobMove">
 			<div class="row-fluid quick-links">
-				<ul class="topLinks">
-					<li><a href="#">Telephone: 020 8275 4521</a></li>
-					<li><a href="#">This is a link</a></li>
-					<li><a href="#">This is also a link</a></li>
-				</ul>
+			<?php dynamic_sidebar( 'utilities-widget-area' ); ?>
 			</div>								
 			<div class="row-fluid header">
 				<div id='header' class="row">
