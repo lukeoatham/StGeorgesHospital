@@ -447,6 +447,24 @@ function twentyten_widgets_init() {
 		'after_title' => '</h2>',
 	) );
 	register_sidebar( array(
+		'name' => __( 'Values area 1', 'twentyten' ),
+		'id' => 'values-widget-area1',
+		'description' => __( 'Values widget area 1', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
+	register_sidebar( array(
+		'name' => __( 'Values area 2', 'twentyten' ),
+		'id' => 'values-widget-area2',
+		'description' => __( 'Values widget area 2', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
+	register_sidebar( array(
 		'name' => __( 'Footer1', 'twentyten' ),
 		'id' => 'footer-widget-area1',
 		'description' => __( 'Footer widget area 1', 'twentyten' ),
