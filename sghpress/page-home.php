@@ -38,13 +38,13 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<li class="span6"><a href="/newsitem/'.$post->post_name.'">'.$image.'</a><a href="/newsitem/'.$post->post_name.'"><h3>'.$title.'</h3></a>';
+								echo '<li class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
 								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 								echo '</li>';
 							}
 							else {
 								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
-								echo '<li class="span3"><a href="/newsitem/'.$post->post_name.'">'.$image.'</a><a href="/newsitem/'.$post->post_name.'"><h4>'.$title.'</h4></a>';
+								echo '<li class="span3"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
 								echo '</li>';
 							}
 						}
@@ -211,7 +211,7 @@ function goToPage( id ) {
 							$title = get_the_title();							
 							$image = get_the_post_thumbnail($post->ID,'promo');
 							if ($k==1 || $k==3) echo '<div class="span4">';
-							echo '<a href="/news/'.$post->name.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
+							echo '<a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
 							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 							if ($k==2 || $k==4) echo '</div>';
 						}

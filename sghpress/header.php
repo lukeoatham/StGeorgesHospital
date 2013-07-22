@@ -8,6 +8,7 @@
  * @subpackage Starkers
  * @since Starkers 3.0
  */
+session_start();
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -137,13 +138,15 @@
 			
 			<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>
 					<?php 
+					//set session variable to hide emergency bar if manually closed
 					if ( $_GET['msgclose'] == true) : 
-						setCookie("emergencymsg", 'closed', time()+3600);  /* expire in 1 hour */
+						$_SESSION['emergencymsg']='closed';
 					endif; 
-					if ($_COOKIE['emergencymsg']) : 
+
+					if (!$_SESSION['emergencymsg']) : 
 					?>
 						<div class="alert alert-block">
-							<button class="pull-right"><a href="?msgclose=true">[&times;]</a></button>
+							<button class="pull-right"><a href="?msgclose=true">&times;</a></button>
 							<?php dynamic_sidebar( 'emergency_message' ); ?>
 						</div>
 				<?php endif; ?>
