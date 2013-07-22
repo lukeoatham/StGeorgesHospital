@@ -23,9 +23,12 @@
 		</div>
 		
 			<div class="row-fluid" id='footer'>
+				<div class="container-fluid">
 				<div class="span12 pull-right">
 							<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
 				</div>
+				</div>
+
 				<div class="container-fluid">
 					<div class="span3">
 						<ul class="xoxo">

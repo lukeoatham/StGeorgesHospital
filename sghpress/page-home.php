@@ -13,14 +13,14 @@ get_header(); ?>
 						
 						?>
 					</div>
-				<div class="row-fluid">
+				<div class="row-fluid" id="homethumbs">
 				
 
 
 					<?php the_content(); 
 					
 					
-					
+					$telephone = get_post_meta($post->ID,"main_telephone",true);
 					
 					$rows = get_field('feature_news_boxes');
 					if($rows)
@@ -69,11 +69,11 @@ get_header(); ?>
 					}
 ?>
 				</div>
-				
+
 					<div class="row-fluid">
 					<div class="span12" id="services">
 					<div class="span5">
-					<h4>Most active services</h4>
+					<h3 id="homeservices">Services</h3>					<h4>Most active services</h4>
 					<?php
 					$defaults = array(
 					'menu'            => 'top-tasks',
@@ -136,7 +136,7 @@ function goToPage( id ) {
 </script>					
 					</div>	
 					<div class="span3">
-					<h4>Telephone <br><?php echo get_field("telephone"); ?></h4>
+					<h4>Telephone <br><?php echo $telephone; ?></h4>
 					</div>	
 					</div>
 					</div>

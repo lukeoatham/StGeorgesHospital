@@ -108,6 +108,15 @@ h5 {
 p, ul, ol, dd, td, dt {
     margin-bottom: 1em;
 }
+#homethumbs ul {
+	margin-bottom: 0;
+}
+#homeservices {
+	margin-top: 0;
+}
+ul#menu-top-tasks li {
+	padding-right: 0.5em;
+}
 .hiddentext {
     display: none;
 }
