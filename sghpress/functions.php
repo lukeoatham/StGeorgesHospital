@@ -696,7 +696,7 @@ function renderLeftNav($outputcontent="TRUE") {
 			array_push($before, 232);
 		}
 		
-		if($postType == "news"){
+		if($postType == "newsitem"){
 			$postSection = "news";
 			$postSectionID = 93;
 		}
