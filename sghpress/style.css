@@ -273,6 +273,22 @@ ul#menu-top-tasks li {
     background-color: rgb(238, 45,38)!important;
 }
 
+/* news */
+
+#menu-item-1792 a{
+	background-color: rgb(0,0,0) !important;
+}
+
+#menu-item-1792 a:hover{
+	background-color: rgb(25,25,25) !important;
+}
+
+#menu-item-1792.current_page_item, #menu-item-1792.current-page-ancestor a{
+	background-color: rgb(0,0,0) !important;
+}
+
+
+
 #searchblock{
 	float: left;
 }
@@ -592,7 +608,35 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
+/* news */
+.news .children li a{
+	color: rgb(0, 0,0);
+	background-color: white;
+}
 
+.news a{
+	background-color: rgb(0, 0,0);
+	color: white;
+}
+
+.news .level-0 a{
+    background-color: rgb(25, 25, 25) !important;
+    color: white !important;
+    border-top-width: 0px !important;
+}
+.news .level-1 a{
+    background-color: rgb(50, 50, 50) !important;
+    color: white !important;
+    border-top-width: 0px !important;
+}
+
+.news .current_page_item:before{
+	border-color: transparent transparent transparent rgb(0, 0,0) !important;
+}
+
+.news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
+	border-color: transparent transparent transparent white !important;
+}
 
 .homeicon {
     float: left;
