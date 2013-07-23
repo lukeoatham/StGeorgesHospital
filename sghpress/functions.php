@@ -669,6 +669,12 @@ function renderLeftNav($outputcontent="TRUE") {
 			array_push($before, 186);
 		}
 		
+		if($postType == "event"){
+			$postSection = "about";
+			$postSectionID = 6;
+			array_push($before, 286);
+		}
+		
 		
 		if ($postType == "service") {
 			//Iterate through the top level items - Primary Nav with a walker
@@ -798,7 +804,7 @@ function renderLeftNav($outputcontent="TRUE") {
 			}
 			
 			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
-			$postSectionTitle = str_replace("and", "&#038;", get_the_title($postSectionID));
+			$postSectionTitle = str_replace("and", "&#038;", $postSectionTitle);
 					
 			$navItems = str_replace($postSectionTitle."</a>", $postSectionTitle."</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
 			echo($navItems);
