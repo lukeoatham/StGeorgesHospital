@@ -15,15 +15,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 				<div class="row-fluid">
 <div class="span3" id='secondarynav'>
 
-										
-							<div class="menu-primary-navigation-container">
-							
-							<ul id="nav" class="menu">
-						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="http://sgh.helpfulclients.com/services/">Services</a><ul class='children'><li class='service  current_page_item level-0'><a href='/services/a-z/'>Services A-Z</a></li>
-
-<li class="page_item page-item-232"><a href="http://sgh.helpfulclients.com/services/clinician-directory/">Clinician directory</a></li>
-<li class="page_item page-item-234"><a href="http://sgh.helpfulclients.com/services/private-patients/">Private patients</a></li>
-</ul></div>						
+										<?php renderLeftNav(); ?>				
 												
 					</div>				
 					<div class="span9">

@@ -19,16 +19,9 @@ get_header(); ?>
 
 <div class="span3" id='secondarynav'>
 
+							<?php renderLeftNav(); ?>
 										
-							<div class="menu-primary-navigation-container">
-							
-							<ul id="nav" class="menu">
-						<li class="service menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current_section"><a href="/services/">Services</a>
-						<ul class='children'>
-						<li class="page_item level-0 page-item-232"><a href="/services/clinician-directory/">Clinician directory</a></li>
-						<li class="page_item level-2"><a><?php the_title(); ?></a></li>
-
-</ul></div>						
+												
 												
 					</div>	
 				<div class="span6" id='content'>

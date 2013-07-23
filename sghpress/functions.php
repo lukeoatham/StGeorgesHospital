@@ -684,6 +684,12 @@ function renderLeftNav($outputcontent="TRUE") {
 			array_push($before, 241);
 		}
 		
+		if($postType == "people"){
+			$postSection = "service";
+			$postSectionID = 7;
+			array_push($before, 232);
+		}
+		
 		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
 		
 		$mainid = $postID;
@@ -763,7 +769,9 @@ function renderLeftNav($outputcontent="TRUE") {
 			$subs=false;
 			
 			//var_dump($navarray);
-					
+			if($postType == "people"){
+				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
+			}else{
 			
 			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
 				if ($nav == -1) {
@@ -787,6 +795,7 @@ function renderLeftNav($outputcontent="TRUE") {
 				}
 				$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
 				}
+			}
 			
 			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
 			$postSectionTitle = str_replace("and", "&#038;", get_the_title($postSectionID));
