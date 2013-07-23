@@ -696,6 +696,11 @@ function renderLeftNav($outputcontent="TRUE") {
 			array_push($before, 232);
 		}
 		
+		if($postType == "news"){
+			$postSection = "news";
+			$postSectionID = 93;
+		}
+		
 		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
 		
 		$mainid = $postID;
