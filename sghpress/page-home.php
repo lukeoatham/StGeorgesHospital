@@ -21,14 +21,15 @@ get_header(); ?>
 					
 					
 					$telephone = get_post_meta($post->ID,"main_telephone",true);
-					
-					$rows = get_field('feature_news_boxes');
-					if($rows)
+					$promorows = get_field('promo_boxes');
+
+					$featurerows = get_field('feature_news_boxes');
+					if($featurerows)
 //					print_r($rows);
 					{
 						$k=0;
 						echo '<ul class="thumbnails">';
-						foreach($rows as $row)
+						foreach($featurerows as $row)
 						{
 						global $post;
 						$post= $row;
@@ -199,11 +200,10 @@ function goToPage( id ) {
 					<div class="row-fluid">
 					
 <?php					
-					$rows = get_field('promo_boxes');
-					if($rows)
+					if($promorows)
 					{
 						$k=0;
-						foreach($rows as $row)
+						foreach($promorows as $row)
 						{
 							$k++;
 							global $post;
