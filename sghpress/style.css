@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
-/*!
+/*
 Theme Name: St George's Hospital
 Theme URI: https://www.stgeorges.nhs.uk
 Description: Custom WordPress theme for BIOT. Based on Starkers + 1140 Grid System by Alex Newman, derived from Elliot Jay Stocks' Starkers Theme (http://starkerstheme.com/) and the 1140 CSS Grid (http://cssgrid.net/). Converted into LESS by Colin Wren
@@ -9,6 +8,7 @@ Author URI: http://www.helpfultechnology.com
 Tags: starkers, naked, clean, basic, unicorns
 */
 
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
 
 body {
 	font-family: 'Ubuntu', arial, helvetica, verdana, sans-serif;
@@ -310,6 +310,11 @@ ul#menu-top-tasks li {
 #secondarynav {
     border-bottom: 1px solid #262626;
 }
+
+body.home #secondarynav {
+	border-bottom: none;
+}
+
 #secondarynav ul {
     margin-bottom: 0;
 }
@@ -602,6 +607,7 @@ ul#menu-top-tasks li {
 .alert {
 	background-color: #ec8911;
 	color: white;
+	text-shadow: none;
 }
 #promobar {
     margin: 1em auto 2em auto;
