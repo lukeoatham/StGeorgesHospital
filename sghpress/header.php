@@ -68,9 +68,9 @@ session_start();
 						
 						<p id='mainlogo'>
 							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-								<!--[if !IE]>
+								<!--[if !IE]> -->
 								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="St George's Healthcare NHS Trust">
-								<![endif]-->
+								<!-- <![endif]-->
 								<!--[if IE]>
 								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif" alt="St George's Healthcare NHS Trust">
 								<![endif]-->
