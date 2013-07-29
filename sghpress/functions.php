@@ -748,15 +748,16 @@ function renderLeftNav($outputcontent="TRUE") {
 				$navarray[] = -1;	//set marker in array for subsequent children styling
 			}
 						
-			$allNavParams = array(
-				"post_type" => $postType,
-				"posts_per_page" => -1,
-				"orderby" => "menu_order title",
-				"order" => "ASC"
-			);
+			
 			
 			if($menuid != 0){
-				$allNavParams["post_parent"] = $menuid;
+				$allNavParams = array(
+					"post_type" => $postType,
+					"posts_per_page" => -1,
+					"orderby" => "menu_order title",
+					"order" => "ASC",
+					"post_parent" => $menuid
+				);
 			}
 			
 			
@@ -778,9 +779,8 @@ function renderLeftNav($outputcontent="TRUE") {
 			}
 			
 			$subs=false;
-			
 			//var_dump($navarray);
-			if($postType == "people"){
+			if($postType == "people" || count($navarray) == 1){
 				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
 			}else{
 			
