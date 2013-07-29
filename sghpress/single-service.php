@@ -28,28 +28,98 @@ get_header(); ?>
 					</div>
 
 					<?php 
-					//display contact information
+					//check the various sidebar boxes
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
+					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
+					$servicelocations = get_post_meta($post->ID, 'location', true);
+					$treatments = get_post_meta($post->ID, 'treatments', true);
+					$team = get_post_meta($post->ID, 'team_profile', true);
+					$video = get_post_meta($post->ID, 'video', true);
+					$leaflets = get_post_meta($post->ID, 'leaflets', true);
+					$moreinformation = get_post_meta($post->ID, 'more_information', true);
+					$clinicians = get_posts(
+						array(
+							"post_type"=>"people",
+							"posts_per_page"=>-1,
+							"orderby"=>"meta_value",
+							"order"=>"ASC",
+							"meta_key"=>"last_name",
+							"tax_query"=>array(array(
+							"taxonomy"=>"people-types",
+							"field"=>"slug",
+							"terms"=>"clinician"
+						))
+					));
+					$wards=get_post_meta($post->ID, 'wards',true);
+					$referrals = get_posts(
+						array(
+							"post_type"=>"attachment",
+							"posts_per_page"=>-1,
+							"tax_query"=>array(array(
+							"taxonomy"=>"category",
+							"field"=>"slug",
+							"terms"=>"referral-forms"
+						))
+					));
+					$linksbox = get_post_meta($post->ID, 'links_box', true);
+					
+					?>
+					<h4 class="visible-phone">On this page:</h4>
+					<ul class="visible-phone">
+						<li><a href="#mcontent">Main content</a></li>
+						<?php
+							if($contactnumber){
+								echo '<li><a href="#contactnumber">Contact numbers</a></li>';
+							}
+							if($openinghours){
+								echo '<li><a href="#openinghours">Opening hours</a></li>';
+							}
+							if($servicelocations){
+								echo '<li><a href="#servicelocations">Locations</a></li>';
+							}
+							/*if($treatments != ''){
+								echo '<li><a href="#treatments">Treatments</a></li>';
+							}*/
+							if($team != ''){
+								echo '<li><a href="#team">Staff members</a></li>';
+							}
+							if($leaflets != ''){
+								echo '<li><a href="#leaflets">Patient information leaflets</a></li>';
+							}
+							//echo count($clinicians);
+							/*if(count($clinicians) > 0){
+								echo '<li><a href="#clinicians">Clinicians</a></li>'
+							}*/
+							if($wards){
+								echo '<li><a href="#wards">Wards</a></li>';
+							}
+							/*if(count($referrals) != 0){
+								echo '<li><a href="#referrals">Referral forms</a></li>'
+							}*/
+						?>
+					</ul>
+					<?php
+					
+					
+					//display contact information
 					if ($contactnumber){
-						echo "<div class='sidebox'>";
+						echo "<div class='sidebox' id='contactnumber'>";
 						echo "<h3>Contact number</h3>";
 						echo wpautop($contactnumber);
 						echo "</div>";
 					}
 
 					//display opening hours information
-					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
 					if ($openinghours){
-						echo "<div class='sidebox'>";
+						echo "<div class='sidebox' id='openinghours'>";
 						echo "<h3>Opening hours</h3>";
 						echo wpautop($openinghours);
 						echo "</div>";
 					}
 					
 					//display location information
-					$servicelocations = get_post_meta($post->ID, 'location', true);
 					foreach ($servicelocations as $servicelocation){
-						echo "<div class='sidebox'>";
+						echo "<div class='sidebox' id='servicelocations'>";
 						echo "<h3>Location</h3>";
 						$location = get_post($servicelocation);
 						echo $location->post_title;
@@ -89,25 +159,26 @@ get_header(); ?>
 						echo "</div>";
 					}
 										
+					echo "<div id='mcontent'>";
 					the_content(); 
-
-					$treatments = get_post_meta($post->ID, 'treatments', true);
+					echo "</div>";
+					
 					if ($treatments !=''){
 						echo wpautop($treatments); 					}	
 
-					$team = get_post_meta($post->ID, 'team_profile', true);
+					
 					if ($team !=''){
 						echo wpautop($team);
 					}						
 
-					$video = get_post_meta($post->ID, 'video', true);
+					
 					if ($video !=''){
 						echo wpautop($video);
 					}								
 
-					$leaflets = get_post_meta($post->ID, 'leaflets', true);
+					
 					if ($leaflets !=''){
-						echo "<h3>Leaflets</h3><ul id='leaflets'>";
+						echo "<h3 id='leaflets'>Leaflets</h3><ul>";
 						foreach ($leaflets as $leaflet){
 						$attachlink = wp_get_attachment_url($leaflet);
 							echo "<li><a href='".$attachlink."'>";
@@ -118,7 +189,7 @@ get_header(); ?>
 
 					}	
 						
-					$moreinformation = get_post_meta($post->ID, 'more_information', true);
+					
 					if ($moreinformation !=''){
 						echo wpautop($moreinformation);
 					}	
@@ -154,19 +225,7 @@ get_header(); ?>
 				}
 				//display clinicians associated with this service
 				
-				$clinicians = get_posts(
-					array(
-					"post_type"=>"people",
-					"posts_per_page"=>-1,
-					"orderby"=>"meta_value",
-					"order"=>"ASC",
-					"meta_key"=>"last_name",
-					"tax_query"=>array(array(
-					"taxonomy"=>"people-types",
-					"field"=>"slug",
-					"terms"=>"clinician"
-					))
-					));	
+				
 
 					//run through each clinician to check if assigned to this service
 					
@@ -178,7 +237,7 @@ get_header(); ?>
 
 							if ( in_array($mainid, $clinicianservice) ){
 								if (!$donetitle){
-									echo "<div class='sidebox'><h3>Clinicians</h3><ul>";
+									echo "<div class='sidebox' id='clinicians'><h3>Clinicians</h3><ul>";
 									$donetitle=true;
 								}
 								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
@@ -189,12 +248,12 @@ get_header(); ?>
 						echo "</ul></div>";
 					}
 
-					$wards=get_post_meta($post->ID, 'wards',true);
+					
 					if ($wards){
 						$donetitle=false;
 						foreach ($wards as $ward){
 							if (!$donetitle){
-								echo "<div class='sidebox'><h3>Wards</h3><ul>";
+								echo "<div class='sidebox' id='wards'><h3>Wards</h3><ul>";
 								$donetitle=true;
 							}
 							$w = get_post($ward);
@@ -204,16 +263,7 @@ get_header(); ?>
 					}
 						
 					
-				$referrals = get_posts(
-					array(
-					"post_type"=>"attachment",
-					"posts_per_page"=>-1,
-					"tax_query"=>array(array(
-					"taxonomy"=>"category",
-					"field"=>"slug",
-					"terms"=>"referral-forms"
-					))
-					));	
+				
 
 					//run through each referrals to check if assigned to this service
 					$donetitle=false;					
@@ -237,7 +287,7 @@ get_header(); ?>
 						echo "</ul></div>";
 					}
 					
-					$linksbox = get_post_meta($post->ID, 'links_box', true);
+					
 					if ($linksbox){
 						echo "<div class='sidebox'>";
 						echo wpautop($linksbox);
