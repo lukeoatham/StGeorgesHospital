@@ -8,11 +8,16 @@
  */
 
 get_header(); ?>
-
+<div class="row-fluid visible-phone">
+			<div class="span3" id="secondarynav">
+				<?php renderLeftNav(); ?>
+			</div>
+		</div>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); 
 	
 	$mainid=$post->ID;
 ?>
+		
 		<div class="row-fluid">
 
 				<div class="span8" id='content'>

@@ -8,7 +8,11 @@
  */
 
 get_header(); ?>
-
+<div class="row-fluid visible-phone">
+			<div class="span3" id="secondarynav">
+				<?php renderLeftNav(); ?>
+			</div>
+		</div>
 				<div class="row-fluid">
 					<div class="span9" id="content">
 				<h1><?php
