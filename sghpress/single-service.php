@@ -17,11 +17,11 @@ get_header(); ?>
 		<div class="row-fluid">
 					<div class="span3" id='secondarynav'>
 					
-						<?php global $post; if ( (postHasChildren() || postHasChildren($post->post_parent)) ) : ?>
+						<?php global $post; //if ( (postHasChildren() || postHasChildren($post->post_parent)) ) : ?>
 				
 							<?php renderLeftNav(); ?>
 						
-						<?php endif; ?>
+						<?php //endif; ?>
 						
 						<?php
 						//save current post 
