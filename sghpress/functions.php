@@ -653,6 +653,27 @@ add_shortcode( 'showsitemap', 'showsitemap_func' );
 
 function renderLeftNav($outputcontent="TRUE") {
 	global $post;
+	$temppost = $post;
+	
+	$connected = new WP_Query( array(
+		'connected_type' => 'services_to_posts',
+		'connected_items' => get_queried_object(),
+		'nopaging' => true,
+	) );
+		
+	$relatedposts='';
+	// Display connected posts
+	if ( $connected->have_posts() ) {
+		while ( $connected->have_posts() ) {
+			$connected->the_post();
+			$relatedposts .= "<li class='page-item'><a href='".get_permalink()."'>".get_the_title()." <i class='icon-share'></i></a></li>\n";
+		}								
+	}
+	
+	//reinstate current post
+	global $post;
+	$post=$temppost;
+	setup_postdata($post);
 
 	if(is_single()){
 		$singleURLs = explode("/", get_single_template());
@@ -782,6 +803,9 @@ function renderLeftNav($outputcontent="TRUE") {
 			//var_dump($navarray);
 			if($postType == "people" || count($navarray) == 1){
 				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
+				if ($relatedposts) {
+					$subnavString .= $relatedposts;
+				}
 			}else{
 			
 			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
@@ -808,6 +832,10 @@ function renderLeftNav($outputcontent="TRUE") {
 				}
 			}
 			
+			if ($relatedposts) {
+				$subnavString .= $relatedposts;
+			}
+			
 			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
 			$postSectionTitle = str_replace("and", "&#038;", $postSectionTitle);
 					
@@ -822,6 +850,8 @@ function renderLeftNav($outputcontent="TRUE") {
 		);
 		wp_nav_menu($navParams);
 	}
+	
+	
 }
 
 function pageHasChildren($id="") {

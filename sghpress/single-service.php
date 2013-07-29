@@ -17,42 +17,9 @@ get_header(); ?>
 		<div class="row-fluid">
 					<div class="span3" id='secondarynav'>
 					
-						<?php global $post; //if ( (postHasChildren() || postHasChildren($post->post_parent)) ) : ?>
-				
-							<?php renderLeftNav(); ?>
+						<?php global $post;
 						
-						<?php //endif; ?>
-						
-						<?php
-						//save current post 
-						$temppost = $post;
-						
-						 // Find connected posts via Posts to Posts plugin
-								$connected = new WP_Query( array(
-								  'connected_type' => 'services_to_posts',
-								  'connected_items' => get_queried_object(),
-								  'nopaging' => true,
-								) );
-																											
-								// Display connected posts
-								if ( $connected->have_posts() ) {
-									$relatedposts='';
-									while ( $connected->have_posts() ) {
-										$connected->the_post();
-										$relatedposts .= "<li class='page-item'><a href='".get_permalink()."'>".get_the_title()." <i class='icon-share'></i></a></li>\n";
-									}								
-								}
-																
-								if ($relatedposts) {
-								
-									echo "<div class='menu'><ul class='service menu'>
-												<ul class='children'>" . $relatedposts . "</ul></ul></div>";
-								}
-								//reinstate current post
-								global $post;
-								$post=$temppost;
-								setup_postdata($post);
-								
+						 renderLeftNav(); 
 								?>
 					</div>
 				<div class="span6" id='content'>
