@@ -19,7 +19,9 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 												
 					</div>				
 					<div class="span9">
-					<h1><?php the_title() ; ?></h1>
+					<div id="mobhead">
+						<h1><?php the_title() ; ?></h1>
+					</div>
 					<div class="row-fluid">
 						<form action="/">
 						<div class="input-append">
@@ -157,11 +159,25 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					<div class="span3">
 &nbsp;
 					<?php 
-
-					the_post_thumbnail('medium');
-					
+					$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium');;
+					if($thumbnail[0]){
 					?>
 					
+					<script type="text/javascript" defer="defer">
+						$(document).ready(function(){
+							if($(".visible-phone").css("display") != "none"){
+								$("#mobhead").css("background-image","url('<?php echo $thumbnail[0]; ?>')");
+								$("#mobhead").css("min-height", "200px");
+							}else{
+								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
+							}
+						});
+					</script>
+					<noscript>
+						<img src="<?php echo $thumbnail; ?>">
+					</noscript>
+					
+					<?php } ?>
 					</div>
 					
 

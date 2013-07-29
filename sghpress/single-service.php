@@ -23,7 +23,9 @@ get_header(); ?>
 								?>
 					</div>
 				<div class="span6" id='content'>
-					<h1><?php the_title(); ?></h1>
+					<div id="mobhead">
+						<h1><?php the_title() ; ?></h1>
+					</div>
 
 					<?php 
 					//display contact information
@@ -129,8 +131,27 @@ get_header(); ?>
 				
 				<div class="span3" id='sidebar'>
 				
-				<?php the_post_thumbnail('medium'); 
+				<?php 
+					$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium');
+					if($thumbnail[0]){
+					?>
+					
+					<script type="text/javascript" defer="defer">
+						$(document).ready(function(){
+							if($(".visible-phone").css("display") != "none"){
+								$("#mobhead").addClass("active");
+								$("#mobhead").css("background-image","url('<?php echo $thumbnail[0]; ?>')");
+							}else{
+								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
+							}
+						});
+					</script>
+					<noscript>
+						<img src="<?php echo $thumbnail[0]; ?>">
+					</noscript>
 				
+				<?php
+				}
 				//display clinicians associated with this service
 				
 				$clinicians = get_posts(
