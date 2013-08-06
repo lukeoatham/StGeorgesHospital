@@ -25,12 +25,11 @@ get_header(); ?>
 				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
 
-					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
-
 					<?php 
 					
-					$cimage = get_the_post_thumbnail($post->ID, 'thumbnail', array('class' => 'alignleft'));
-					echo $cimage;
+					$rows = get_post_meta($post->ID,'event_start_date',true);
+					echo "<h3>".date('j M Y H:i',strtotime($rows))." - ".get_post_meta($post->ID,'event_end_time',true)."</h3>";
+					
 					the_content(); ?>
 
 						<div id='comments'>
@@ -40,6 +39,9 @@ get_header(); ?>
 				</div>
 				
 				<div class="span3" id='sidebar'>
+<?php					$cimage = get_the_post_thumbnail($post->ID, 'thumbnail', array('class' => 'alignleft'));
+					echo $cimage;
+				?>
 					
 						<ul class="xoxo">
 

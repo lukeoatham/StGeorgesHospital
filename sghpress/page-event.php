@@ -84,12 +84,12 @@ get_header(); ?>
 							$tday = date( 'd' , strtotime($tdate) );
 							$tmonth = date( 'm' , strtotime($tdate) );
 							$tyear= date( 'Y' , strtotime($tdate) );
-							$sdate=$tyear."-".$tmonth."-".$tday;
+							$sdate=$tyear."-".$tmonth."-".$tday." 00:00";
 
 
 							$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			if ($cat_id!=0){ // show individual theme conferences
-				if ($cdir=="b"){
+				if ($cdir=="b"){  //past events
 
 				$cquery = array(
 
@@ -103,13 +103,13 @@ get_header(); ?>
 	
 				   'meta_query' => array(
 							       array(
-						           		'key' => 'start_date',
+						           		'key' => 'event_start_date',
 						        	   'value' => $sdate,
 						    	       'compare' => '<=',
 						    	       'type' => 'DATE' )  
 					    	        ),   
 								    'orderby' => 'meta_value',
-								    'meta_key' => 'start_date',
+								    'meta_key' => 'event_start_date',
 								    'order' => 'DESC',
 								    'post_type' => 'event',
 									'posts_per_page' => 10,
@@ -117,7 +117,7 @@ get_header(); ?>
 								)
 								;
 				}
-				else {
+				else { //future events, single theme
 					$cquery = array(
 
 				    'tax_query' => array(
@@ -130,13 +130,13 @@ get_header(); ?>
 
 				   'meta_query' => array(
 							       array(
-						           		'key' => 'start_date',
+						           		'key' => 'event_start_date',
 						        	   'value' => $sdate,
 						    	       'compare' => '>=',
 						    	       'type' => 'DATE' ) 
 					    	        ),   
 								    'orderby' => 'meta_value',
-								    'meta_key' => 'start_date',
+								    'meta_key' => 'event_start_date',
 								    'order' => 'ASC',
 								    'post_type' => 'event',
 									'posts_per_page' => 10,
@@ -145,37 +145,37 @@ get_header(); ?>
 								;
 
 				}	
-				}else {
-			if ($cdir=="b"){
+				}else { //all themes
+			if ($cdir=="b"){ //past events
 			$cquery = array(
 					'post_type' => 'event',
 					'posts_per_page' => 10,
 				   'meta_query' => array(
 			       array(
-		           		'key' => 'start_date',
+		           		'key' => 'event_start_date',
 		        	   'value' => $sdate,
 		    	       'compare' => '<=',
 		    	       'type' => 'DATE' )
 		    	        ),   
 				    'orderby' => 'meta_value',
-				    'meta_key' => 'start_date',
+				    'meta_key' => 'event_start_date',
 				    'order' => 'DESC',
 				    'paged' => $paged
 					);
 			}
-			else {
+			else { // future events, all themes
 			$cquery = array(
 					'post_type' => 'event',
 					'posts_per_page' => 10,
 				   'meta_query' => array(
 			       array(
-		           		'key' => 'start_date',
+		           		'key' => 'event_start_date',
 		        	   'value' => $sdate,
 		    	       'compare' => '>=',
 		    	       'type' => 'DATE' )
 		    	        ),   
 				    'orderby' => 'meta_value',
-				    'meta_key' => 'start_date',
+				    'meta_key' => 'event_start_date',
 				    'order' => 'ASC',
 				    'paged' => $paged
 					);
@@ -201,12 +201,12 @@ get_header(); ?>
 									
 									echo "<h2><a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
 									//$thisdate = date('d F',get_post_meta($post->ID,'start_date'));
-									$thisdate =  get_post_meta($post->ID,'start_date');
+									$thisdate =  get_post_meta($post->ID,'event_start_date',true); //print_r($thisdate);
 									$thisyear = substr($thisdate[0], 0, 4); 
 									$thismonth = substr($thisdate[0], 4, 2); 
 									$thisday = substr($thisdate[0], 6, 2); 
-									$thisdate = $thisyear."-".$thismonth."-".$thisday;
-									echo "<strong>".date('d F Y', strtotime($thisdate,TRUE))."</strong>";
+//									$thisdate = $thisyear."-".$thismonth."-".$thisday;
+									echo "<strong>".date('j M Y',strtotime($thisdate))."</strong>";
 									the_excerpt();
 									echo "</div><div class='clearfix'></div>";
 								}
