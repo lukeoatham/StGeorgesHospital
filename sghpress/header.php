@@ -57,7 +57,13 @@ session_start();
 
 
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
-<input type="checkbox" name="mobileNav" id="mobileNav" />
+<input type="checkbox" name="mobileNav" id="mobileNav" <?php
+
+if($_COOKIE["sgh_mobile_nav"] != "null"){
+	echo "checked=\"checked\"";
+}
+
+?> />
 			<div class="container-fluid" id="mobMove">
 			<div class="row-fluid quick-links">
 			<?php dynamic_sidebar( 'utilities-widget-area' ); ?>

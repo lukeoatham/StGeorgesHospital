@@ -63,7 +63,7 @@
 	echo $SGH_options['analyticscode'];
 ?>
 <!--  end other analytics code -->
-
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.cookie.js"></script>
 <script type='text/javascript'>
     jQuery(document).ready(function(){
         //jQuery("#primarynav").Touchdown();
@@ -78,6 +78,20 @@
  		jQuery('#menu-header-links li').last().addClass('last-link');
  		jQuery('#menu-footer-links li').last().addClass('last-link');
  		jQuery('#primarynav li').last().addClass('last-link');
+ 		
+ 		//Bit to set persistant mobile side nav
+ 		jQuery("label[for='mobileNav']").click(function(){
+ 		var cookieSet = jQuery.cookie("sgh_mobile_nav");
+	 		if(cookieSet){
+	 			if(cookieSet != "null"){
+		 			jQuery.cookie("sgh_mobile_nav", null, {path:"/"});
+	 			}else{
+		 			jQuery.cookie("sgh_mobile_nav", "true",{path:"/"});	
+		 		}
+	 		}else{
+		 		jQuery.cookie("sgh_mobile_nav", "true",{path:"/"});	
+	 		}
+ 		});
     });
     
     markDocumentLinks();
