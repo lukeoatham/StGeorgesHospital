@@ -175,18 +175,19 @@ function goToPage( id ) {
 						<?php  
 							$allservices = get_posts(
 									array(
-									"post_type" => "location",
+									"post_type" => "service",
 									"posts_per_page" => -1,
 									"orderby" => "title",
 									"order" => "ASC",
-									'meta_key' => 'health_centre',
-									'meta_value' => 1
+									"meta_query"=>array(array(
+									'key' => 'health_centre',
+									'value' => 1)),
+									
 									)
 								);
 								
 							foreach ($allservices as $service){
 								echo  '<option ';
-								if ($service->post_title == "Emergency") echo " selected=selected ";
 								echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
 							}
 							?>

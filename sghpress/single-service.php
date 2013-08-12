@@ -31,7 +31,7 @@ get_header(); ?>
 					//check the various sidebar boxes
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
 					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
-					$servicelocations = get_post_meta($post->ID, 'location', true);
+					$servicelocations = get_field('service_locations'); //print_r($servicelocations);
 					$treatments = get_post_meta($post->ID, 'treatments', true);
 					$team = get_post_meta($post->ID, 'team_profile', true);
 					$video = get_post_meta($post->ID, 'video', true);
@@ -118,15 +118,15 @@ get_header(); ?>
 					}
 					
 					//display location information
+					$k=0;
 					foreach ($servicelocations as $servicelocation){
 						echo "<div class='sidebox' id='servicelocations'>";
 						echo "<h3>Location</h3>";
-						$location = get_post($servicelocation);
-						echo $location->post_title;
-						$longitude = get_post_meta($servicelocation,'longitude',true);
-						$latitude = get_post_meta($servicelocation,'latitude',true);
-						$loc = $latitude.",".$longitude;
-						
+						echo "<p>Site: ".$servicelocation['service_site']->name."<br>";
+						echo "Wing: ".$servicelocation['service_wing']->name."<br>";
+						echo "Floor: ".$servicelocation['service_floor']."</p>";
+						$loc='';
+						$loc = $servicelocation['service_long_lat'];
 						?>
 						
 						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -143,7 +143,7 @@ get_header(); ?>
 								var marker = new google.maps.Marker({
 									position: new google.maps.LatLng(<?php echo $loc; ?>),
 									map: map,
-									title: '<?php echo $location->post_title; ?>',
+									title: '<?php echo "title"; ?>',
 									animation: google.maps.Animation.DROP
 								});
 							}
