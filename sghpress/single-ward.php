@@ -42,21 +42,69 @@ get_header(); ?>
 					}
 
 					
-					$servicelocations = get_post_meta($post->ID, 'location', true);
-					foreach ($servicelocations as $servicelocation){
-						// display location details 
+						$loc = get_field('ward_long_and_lat'); 
 						echo "<div class='sidebox'>";
-						echo "<h3>Location</h3>";
-						$location = get_post($servicelocation);
-						echo $location->post_title;
-						$longitude = get_post_meta($servicelocation,'longitude',true);
-						$latitude = get_post_meta($servicelocation,'latitude',true);
-						$loc = $latitude.",".$longitude;
-						echo "<div class='google_map' style='background-image: url(\"https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=320x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|".$loc."\")'>";
-					echo "<img src='https://maps.googleapis.com/maps/api/staticmap?center=".$loc."&amp;zoom=19&amp;size=320x320&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:blue|label:|' alt='Venue map' /></div>";
+						echo "<h3>Location</h3><p>";
+						$floor = get_field('ward_floor');
+switch ($floor) {
+    case 5:
+        echo "5th floor";
+        break;
+    case 4:
+        echo "4th floor";
+        break;
+    case 3:
+        echo "3rd floor";
+        break;
+    case 2:
+        echo "2nd floor";
+        break;
+    case 1:
+        echo "1st floor";
+        break;
+    case 'G':
+        echo "Ground floor";
+        break;
+    case 'B':
+        echo "Basement floor";
+        break;
+}						
+						echo ", ";
+						$wing = get_the_terms( $post->ID, 'wing' );
+						foreach ($wing as $w){
+						echo $w->name.", ";;
+						}
+						$site = get_the_terms( $post->ID, 'sites' );
+						foreach ($site as $s){
+						echo $s->name."</p>";
+						}
+						
+						?>
+						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+						<script>
+							var map;
+							function initialize() {
+								var mapOptions = {
+									zoom: 18,
+									center: new google.maps.LatLng(<?php echo $loc; ?>),
+									mapTypeId: google.maps.MapTypeId.ROADMAP
+								};
+								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+								
+								var marker = new google.maps.Marker({
+									position: new google.maps.LatLng(<?php echo $loc; ?>),
+									map: map,
+									title: '<?php echo "title"; ?>',
+									animation: google.maps.Animation.DROP
+								});
+							}
 
+							google.maps.event.addDomListener(window, 'load', initialize);
+						</script>
+						<div id="map-canvas" class="google_map"></div>
+						<?php
 						echo "</div>";
-					}
+					
 
 						echo "<div class='sidebox'>";
 						echo "<h3>Key information</h3>";

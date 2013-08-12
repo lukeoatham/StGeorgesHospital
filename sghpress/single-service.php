@@ -121,10 +121,35 @@ get_header(); ?>
 					$k=0;
 					foreach ($servicelocations as $servicelocation){
 						echo "<div class='sidebox' id='servicelocations'>";
-						echo "<h3>Location</h3>";
-						echo "<p>Site: ".$servicelocation['service_site']->name."<br>";
-						echo "Wing: ".$servicelocation['service_wing']->name."<br>";
-						echo "Floor: ".$servicelocation['service_floor']."</p>";
+						echo "<h3>Location</h3><p>";
+						
+						
+						$floor = $servicelocation['service_floor'];
+						switch ($floor) {
+						    case 5:
+						        echo "5th floor";
+						        break;
+						    case 4:
+						        echo "4th floor";
+						        break;
+						    case 3:
+						        echo "3rd floor";
+						        break;
+						    case 2:
+						        echo "2nd floor";
+						        break;
+						    case 1:
+						        echo "1st floor";
+						        break;
+						    case 'G':
+						        echo "Ground floor";
+						        break;
+						    case 'B':
+						        echo "Basement floor";
+						        break;
+						}	
+						echo ", ".$servicelocation['service_wing']->name.", ";
+						echo $servicelocation['service_site']->name."</p>";
 						$loc='';
 						$loc = $servicelocation['service_long_lat'];
 						?>
