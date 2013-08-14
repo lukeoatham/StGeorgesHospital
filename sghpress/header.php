@@ -59,7 +59,7 @@ session_start();
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
 <input type="checkbox" name="mobileNav" id="mobileNav" <?php
 
-if($_COOKIE["sgh_mobile_nav"] != "null"){
+if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 	echo "checked=\"checked\"";
 }
 
