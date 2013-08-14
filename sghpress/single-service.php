@@ -241,9 +241,17 @@ get_header(); ?>
 								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
 							}
 							
-							$("body").animate({
-                            	scrollTop: ($("#mobhead").offset().top)
-                                }, "slow");
+							var hash = window.location.hash;
+							
+							console.log(hash);
+							
+							if(hash == ""){
+								hash = "#mobhead";
+							}
+							
+							if(!jQuery('#mobileNav').is(':checked')){
+								$("body").animate({scrollTop: ($(hash).offset().top)}, "slow");
+							}
 							
 						});
 					</script>
