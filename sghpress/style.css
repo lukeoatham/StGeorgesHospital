@@ -1127,7 +1127,14 @@ ul.xoxo li {
 #content, #sidebar{
 	padding-left: 5%;
 	padding-right: 5%;
+	width: 95%;
+	
 }
+
+#content *, #sidebar *{
+	width: 100%;
+}
+
 
 body {
     -webkit-animation: bugfix infinite 1s;
@@ -1209,17 +1216,18 @@ to {
 	background-size: cover;
 	position: relative;
 	height: 200px;
-	width: 112%;
-	margin-left: -6%;
+	width: 119%;
+	margin-left: -7%;
 	margin-top: -2em;
 }
 
 #mobhead.active h1{
 	background-color: rgba(0,0,0,0.5);
 	color: white;
-	width: 98%;
+	width: 95%;
 	padding: 0px;
-	padding-left: 2%;
+	padding-left: 5%;
+	padding-bottom: 0.2em;
 	position: absolute;
 	bottom: 0px;
 	left:0px;
@@ -1229,6 +1237,64 @@ to {
 	display: none;
 }
 
+.content-list li{
+	list-style: none inside none !important;
+	padding-left: 0px;
+	margin-left: 0px !important;
+}
+
+.content-list li a{
+	width: 100%;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	display: inline-block;
+}
+
+#content table, #content table tr, #content table td{
+	border: 0px solid white;
+}
+
+#content table th{
+	display: none;
+}
+
+#content table td:first-child, #content table tbody td:first-child{
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+#content table td, #content table tbody td{
+	width: 100%;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+}
+
+#content table td:last-child, #content table tbody td:last-child{
+	margin-bottom: 1em;
+}
+
+.sidebox p{
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+#backToTop{
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	font-size: 24px;
+	width: 36px;
+	height: 26px;
+	background-color:black;
+	text-align: center;
+}
+
+#backToTop a{
+	color: white;
+	width: 100%;
+	text-decoration: none;
+}
 
 
 }

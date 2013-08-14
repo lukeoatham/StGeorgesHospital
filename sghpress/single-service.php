@@ -65,7 +65,7 @@ get_header(); ?>
 					
 					?>
 					<h4 class="visible-phone">On this page:</h4>
-					<ul class="visible-phone">
+					<ul class="visible-phone content-list">
 						<li><a href="#mcontent">Main content</a></li>
 						<?php
 							if($contactnumber){
@@ -243,7 +243,7 @@ get_header(); ?>
 							
 							$("body").animate({
                             	scrollTop: ($("#mobhead").offset().top)
-                                }, "fast");
+                                }, "slow");
 							
 						});
 					</script>
