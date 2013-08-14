@@ -240,6 +240,11 @@ get_header(); ?>
 							}else{
 								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
 							}
+							
+							$("body").animate({
+                            	scrollTop: ($("#mobhead").offset().top)
+                                }, "fast");
+							
 						});
 					</script>
 					<noscript>
