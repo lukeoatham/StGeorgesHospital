@@ -79,6 +79,22 @@ get_header(); ?>
 						}
 					}
 					
+					//run through each referrals to check if assigned to this service
+					$referralObjects = array();				
+					foreach ($referrals as $referral) {
+						setup_postdata($referral); 
+						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
+						foreach ($referralservices as $referralservice){ 
+
+							if ( in_array($mainid, $referralservice) ){
+								$referralObject = array();
+								$referralObject["referrallink"] = get_attachment_link($referral->ID);
+								$referralObject["referral_title"] = $referral->post_title;
+								array_push($referralObjects, $referralObject);
+							}
+						}
+					}
+					
 					
 					
 					?>
@@ -110,9 +126,9 @@ get_header(); ?>
 							if($wards){
 								echo '<li><a href="#wards">Wards</a></li>';
 							}
-							/*if(count($referrals) != 0){
-								echo '<li><a href="#referrals">Referral forms</a></li>'
-							}*/
+							if(count($referralObjects) > 0){
+								echo '<li><a href="#referrals">Referral forms</a></li>';
+							}
 						?>
 					</ul>
 					<?php
@@ -318,21 +334,12 @@ get_header(); ?>
 
 					//run through each referrals to check if assigned to this service
 					$donetitle=false;					
-					foreach ($referrals as $referral) {
-						setup_postdata($referral); 
-						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
-						foreach ($referralservices as $referralservice){ 
-
-							if ( in_array($mainid, $referralservice) ){
-								if (!$donetitle){
-									echo "<div class='sidebox'><h3>Referral forms</h3><ul>";
-									$donetitle=true;
-								}
-								//print_r($referralservice)	;
-								$referrallink = get_attachment_link($referral->ID);
-								echo "<li><a href='".$referrallink."'>".$referral->post_title."</a></li>";
-							}
+					foreach ($referralObjects as $referral) {
+						if (!$donetitle){
+							echo "<div class='sidebox' id='referrals'><h3>Referral forms</h3><ul>";
+							$donetitle=true;
 						}
+						echo "<li><a href='".$referral["referrallink"]."'>".$referral["referral_title"]."</a></li>";
 					}
 					if ($donetitle){
 						echo "</ul></div>";
