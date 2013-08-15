@@ -9,8 +9,8 @@ $paged = $_GET['$paged'];
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row-fluid">
-					<div class="span3" id='secondarynav'>
+				<div class="row">
+					<div class="col-lg-3" id='secondarynav'>
 
 						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				
@@ -19,7 +19,7 @@ $paged = $_GET['$paged'];
 						<?php endif; ?>
 						
 					</div>
-					<div class="span9">
+					<div class="col-lg-9">
 					
 					<ul class="nav nav-pills">
 					<?php //display filter terms

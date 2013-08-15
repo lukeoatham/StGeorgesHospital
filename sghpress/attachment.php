@@ -11,9 +11,9 @@ get_header(); ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-			<div class="row-fluid">
+			<div class="row">
 				
-					<div class="span9 offset1" id="content">
+					<div class="col-lg-9 offset1" id="content">
 
 					<h2><?php the_title(); ?></h2>
 					<ul>

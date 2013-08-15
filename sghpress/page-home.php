@@ -13,7 +13,7 @@ get_header(); ?>
 						
 						?>
 					</div>
-				<div class="row-fluid" id="homethumbs">
+				<div class="row" id="homethumbs">
 				
 
 
@@ -39,18 +39,18 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<li class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
+								echo '<li class="col-lg-6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
 								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 								echo '</li>';
 							}
 							else {
 								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
-								echo '<li class="span3"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
+								echo '<li class="col-lg-3"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
 								echo '</li>';
 							}
 						}
 									?>
-						<li class="span3" id="doitonline">
+						<li class="col-lg-3" id="doitonline">
 							<h3>Do it online</h3>
 							<?php
 					$defaults = array(
@@ -71,9 +71,9 @@ get_header(); ?>
 ?>
 				</div>
 
-					<div class="row-fluid">
-					<div class="span12" id="services">
-					<div class="span5">
+					<div class="row">
+					<div class="col-lg-12" id="services">
+					<div class="col-lg-5">
 					<h3 id="homeservices">Services</h3>					<h4>Most active services</h4>
 					<?php
 					$defaults = array(
@@ -89,7 +89,7 @@ get_header(); ?>
 				wp_nav_menu( $defaults );
 									?>	
 				</div>
-				<div class="span4">
+				<div class="col-lg-4">
 				<h4>All services A-Z </h4> 
 				<div class="input-append">
 				  <label for="select2">Jump to:</label>
@@ -136,17 +136,17 @@ function goToPage( id ) {
 }
 </script>					
 					</div>	
-					<div class="span3">
+					<div class="col-lg-3">
 					<h4>Telephone <br><?php echo $telephone; ?></h4>
 					</div>	
 					</div>
 					</div>
-					<div class="row-fluid">
+					<div class="row">
 					<h3>Find us</h3>
 					</div>
 <!--//find us row -->
-					<div class="row-fluid">
-						<div class="span3">
+					<div class="row">
+						<div class="col-lg-3">
 						<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
 
 						<?php dynamic_sidebar( 'find-us-1-area' ); ?>
@@ -154,21 +154,21 @@ function goToPage( id ) {
 						<?php endif; ?>
 
 						</div>
-						<div class="span3">
+						<div class="col-lg-3">
 						<?php if ( is_active_sidebar( 'find-us-2-area' ) ) : ?>
 
 						<?php dynamic_sidebar( 'find-us-2-area' ); ?>
 							
 						<?php endif; ?>
 						</div>
-						<div class="span3">
+						<div class="col-lg-3">
 						<?php if ( is_active_sidebar( 'find-us-3-area' ) ) : ?>
 
 						<?php dynamic_sidebar( 'find-us-3-area' ); ?>
 							
 						<?php endif; ?>
 						</div>
-						<div class="span3" id="findlocal">
+						<div class="col-lg-3" id="findlocal">
 						<h4>Find a local health centre </h4> 
 						<div class="input-append">
 						  <select id="select3" >
@@ -198,7 +198,7 @@ function goToPage( id ) {
 							</div></div>
 							<br>
 <!--//promo row -->				
-					<div class="row-fluid">
+					<div class="row">
 					
 <?php					
 					if($promorows)
@@ -212,7 +212,7 @@ function goToPage( id ) {
 							setup_postdata( $post ); 
 							$title = get_the_title();							
 							$image = get_the_post_thumbnail($post->ID,'promo');
-							if ($k==1 || $k==3) echo '<div class="span4">';
+							if ($k==1 || $k==3) echo '<div class="col-lg-4">';
 							echo '<a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
 							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 							if ($k==2 || $k==4) echo '</div>';
@@ -222,7 +222,7 @@ function goToPage( id ) {
 
 					
 					
-						<div class="span4">
+						<div class="col-lg-4">
 						
 						<?php if ( is_active_sidebar( 'sponsor-advert' ) ) : ?>
 

@@ -10,12 +10,12 @@
 get_header(); ?>
 
 				<div class="visible-phone">
-					<div class="span3" id="secondarynav">
+					<div class="col-lg-3" id="secondarynav">
 						<?php renderLeftNav(); ?>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12" id="content">
+				<div class="row">
+					<div class="col-lg-12" id="content">
 
 				<h1><?php _e( 'Not found', 'twentyten' ); ?></h1>
 

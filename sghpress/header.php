@@ -65,10 +65,10 @@ if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 
 ?> />
 			<div class="container-fluid" id="mobMove">
-			<div class="row-fluid quick-links">
+			<div class="row quick-links">
 			<?php dynamic_sidebar( 'utilities-widget-area' ); ?>
 			</div>								
-			<div class="row-fluid header">
+			<div class="row header">
 				<div id='header' class="row">
 					<div id='masthead'>
 						
@@ -94,7 +94,7 @@ if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 					</div>
 						
 					<div id='navigation' class="row">
-						<div class="span12">
+						<div class="col-lg-12">
 							<div class='menu-header'>
 								
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
@@ -160,8 +160,8 @@ if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 			<?php endif; ?>
 		
 			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
-				<div class="row-fluid breadcrumbs">
-					<div class="span12">
+				<div class="row breadcrumbs">
+					<div class="col-lg-12">
 							<div class='breadcrumb'>
 								<?php bcn_display(); ?>
 							</div>

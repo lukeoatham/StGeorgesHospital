@@ -12,20 +12,20 @@ if ($show=="ALL"){
 
 if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row-fluid">
-<div class="span3" id='secondarynav'>
+				<div class="row">
+<div class="col-lg-3" id='secondarynav'>
 
 										<?php renderLeftNav(); ?>				
 												
 					</div>				
-					<div class="span9">
+					<div class="col-lg-9">
 					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
 					</div>
-					<div class="row-fluid">
+					<div class="row">
 						<form action="/">
 						<div class="input-append">
-						  <input class="span12" name="s" id="appendedInputButton" type="text">
+						  <input class="col-lg-12" name="s" id="appendedInputButton" type="text">
 						  <button class="btn" type="button">Search services</button>
 						  <input type="hidden" value="service" name="post_type">
 						</div>
@@ -156,7 +156,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					</div>
 					</div>
 
-					<div class="span3">
+					<div class="col-lg-3">
 &nbsp;
 					<?php 
 					$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium');;

@@ -14,15 +14,15 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row-fluid">
-					<div class="span3" id='secondarynav'>
+		<div class="row">
+					<div class="col-lg-3" id='secondarynav'>
 					
 						<?php global $post;
 						
 						 renderLeftNav(); 
 								?>
 					</div>
-				<div class="span6" id='content'>
+				<div class="col-lg-6" id='content'>
 					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
 					</div>
@@ -225,7 +225,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span3" id='sidebar'>
+				<div class="col-lg-3" id='sidebar'>
 				
 				<?php 
 					$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium');

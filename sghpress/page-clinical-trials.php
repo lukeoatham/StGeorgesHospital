@@ -12,12 +12,12 @@ if (!$hospsite){
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row-fluid">
-					<div class="span3" id="secondarynav">
+				<div class="row">
+					<div class="col-lg-3" id="secondarynav">
 						<?php renderLeftNav(); ?>
 					</div>
 				
-					<div class="span9">
+					<div class="col-lg-9">
 
 					<h1><?php the_title() ; ?></h1>
 				<?php the_content(); ?>
@@ -49,7 +49,7 @@ if (!$hospsite){
 					
 					</div>
 					
-					<div class="span3">
+					<div class="col-lg-3">
 
 					<?php 
 

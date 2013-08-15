@@ -6,9 +6,9 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 
-				<div class="row-fluid">
+				<div class="row">
 
-					<div class="span3" id='secondarynav'>
+					<div class="col-lg-3" id='secondarynav'>
 
 						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				
@@ -19,7 +19,7 @@ get_header(); ?>
 					</div>
 
 				
-					<div class="span6" id='content'>
+					<div class="col-lg-6" id='content'>
 						<?php if ( is_front_page() ) { ?>
 							<h2><?php the_title(); ?></h2>
 						<?php } else { ?>	
@@ -107,7 +107,7 @@ get_header(); ?>
 	
 					</div>
 					
-					<div class="span3">
+					<div class="col-lg-3">
 
 					<?php if ( is_active_sidebar( 'news-landing-widget-area' ) ) : ?>
 		

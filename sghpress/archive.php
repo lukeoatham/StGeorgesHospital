@@ -27,8 +27,8 @@ get_header(); ?>
 		the_post();
 ?>
 
-				<div class="row-fluid">
-					<div class="span8" id="content">
+				<div class="row">
+					<div class="col-lg-8" id="content">
 
 			<h1>
 <?php if ( is_day() ) : ?>
@@ -58,7 +58,7 @@ get_header(); ?>
 
 					</div>
 
-					<div class="span4" id="sidebar">
+					<div class="col-lg-4" id="sidebar">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
 						</ul>
