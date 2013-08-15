@@ -63,6 +63,40 @@ get_header(); ?>
 					));
 					$linksbox = get_post_meta($post->ID, 'links_box', true);
 					
+					
+					// turn the clinician results into an array we can parse later (and check against)
+					$clinicianObjects = array();
+					foreach ($clinicians as $clinician) {
+					setup_postdata($clinician); 
+						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false);
+						foreach ($clinicianservices as $clinicianservice){ 
+							if ( in_array($mainid, $clinicianservice) ){
+								$clinicianObject = array();
+								$clinicianObject["guid"] = $clinician->guid;
+								$clinicianObject["post_title"] = $clinician->post_title;
+								array_push($clinicianObjects, $clinicianObject);
+							}
+						}
+					}
+					
+					//run through each referrals to check if assigned to this service
+					$referralObjects = array();				
+					foreach ($referrals as $referral) {
+						setup_postdata($referral); 
+						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
+						foreach ($referralservices as $referralservice){ 
+
+							if ( in_array($mainid, $referralservice) ){
+								$referralObject = array();
+								$referralObject["referrallink"] = get_attachment_link($referral->ID);
+								$referralObject["referral_title"] = $referral->post_title;
+								array_push($referralObjects, $referralObject);
+							}
+						}
+					}
+					
+					
+					
 					?>
 					<h4 class="visible-phone">On this page:</h4>
 					<ul class="visible-phone content-list">
@@ -86,16 +120,15 @@ get_header(); ?>
 							if($leaflets != ''){
 								echo '<li><a href="#leaflets">Patient information leaflets</a></li>';
 							}
-							//echo count($clinicians);
-							/*if(count($clinicians) > 0){
-								echo '<li><a href="#clinicians">Clinicians</a></li>'
-							}*/
+							if(count($clinicianObjects) > 0){
+								echo '<li><a href="#clinicians">Clinicians</a></li>';
+							}
 							if($wards){
 								echo '<li><a href="#wards">Wards</a></li>';
 							}
-							/*if(count($referrals) != 0){
-								echo '<li><a href="#referrals">Referral forms</a></li>'
-							}*/
+							if(count($referralObjects) > 0){
+								echo '<li><a href="#referrals">Referral forms</a></li>';
+							}
 						?>
 					</ul>
 					<?php
@@ -258,21 +291,25 @@ get_header(); ?>
 				
 
 					//run through each clinician to check if assigned to this service
+					//$querystr = "
+								//SELECT wpostmeta.post_id, wpostmeta.meta_key
+								//FROM $wpdb->posts wposts INNER JOIN $wpdb->postmeta wpostmeta ON wposts.ID = wpostmeta.post_id WHERE wposts.ID = ".$mainid;
+								
+					/*$querystr = "SELECT * FROM $wpdb->postmeta wpostmeta WHERE meta_key = 'service-relationship' AND meta_value LIKE '%$mainid%'"; <- gets all things from post meta that have the service id: SPITS OUT REVISIONS OF CONTENT!
 					
-					foreach ($clinicians as $clinician) {
-					setup_postdata($clinician); 
-						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false);
-
-						foreach ($clinicianservices as $clinicianservice){ 
-
-							if ( in_array($mainid, $clinicianservice) ){
-								if (!$donetitle){
-									echo "<div class='sidebox' id='clinicians'><h3>Clinicians</h3><ul>";
-									$donetitle=true;
-								}
-								echo "<li><a href='".$clinician->guid."'>".$clinician->post_title."</a></li>";
-							}
+					$pageposts = $wpdb->get_results($querystr, OBJECT);
+					
+					foreach($pageposts as $clin){
+						echo "<a href=\"".get_permalink($clin->post_id)."\">".get_the_title($clin->post_id)."</a>";
+					}
+					
+					var_dump($pageposts);*/
+					foreach ($clinicianObjects as $clinObj){ 
+						if (!$donetitle){
+							echo "<div class='sidebox' id='clinicians'><h3>Clinicians</h3><ul>";
+							$donetitle=true;
 						}
+						echo "<li><a href='".$clinObj["guid"]."'>".$clinObj["post_title"]."</a></li>";
 					}
 					if ($donetitle){
 						echo "</ul></div>";
@@ -297,21 +334,12 @@ get_header(); ?>
 
 					//run through each referrals to check if assigned to this service
 					$donetitle=false;					
-					foreach ($referrals as $referral) {
-						setup_postdata($referral); 
-						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
-						foreach ($referralservices as $referralservice){ 
-
-							if ( in_array($mainid, $referralservice) ){
-								if (!$donetitle){
-									echo "<div class='sidebox'><h3>Referral forms</h3><ul>";
-									$donetitle=true;
-								}
-								//print_r($referralservice)	;
-								$referrallink = get_attachment_link($referral->ID);
-								echo "<li><a href='".$referrallink."'>".$referral->post_title."</a></li>";
-							}
+					foreach ($referralObjects as $referral) {
+						if (!$donetitle){
+							echo "<div class='sidebox' id='referrals'><h3>Referral forms</h3><ul>";
+							$donetitle=true;
 						}
+						echo "<li><a href='".$referral["referrallink"]."'>".$referral["referral_title"]."</a></li>";
 					}
 					if ($donetitle){
 						echo "</ul></div>";
