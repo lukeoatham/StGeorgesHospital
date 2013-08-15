@@ -173,23 +173,27 @@ function goToPage( id ) {
 						<div class="input-append">
 						  <select id="select3" >
 						<?php  
-							$allservices = get_posts(
+							$allservices = get_terms("sites",
 									array(
-									"post_type" => "service",
-									"posts_per_page" => -1,
-									"orderby" => "title",
+									"orderby" => "name",
 									"order" => "ASC",
-									"meta_query"=>array(array(
-									'key' => 'health_centre',
-									'value' => 1)),
-									
+									"hide_empty"=>false
 									)
 								);
 								
-							foreach ($allservices as $service){
-								echo  '<option ';
-								echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
+							foreach ($allservices as $service){ print_r($service);
+					  		    $themeid = $service->term_id;
+					  		    $q = "select option_value from wp_options where option_name = 'sites_".$themeid."_site_type'";
+					  		    global $wpdb;
+					  		    $theme_term = $wpdb->get_results( $q );					
+								if ($theme_term[0]->option_value == "Health Centre"){
+									echo  '<option ';
+									echo ' value="/sites/'.$service->slug.'">'.$service->name.' </option>';
+								}
 							}
+							
+							
+							
 							?>
 							  </select>
 							  <button class="btn" type="button" onclick="goToPage('select3')">Go</button>
