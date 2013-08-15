@@ -8,8 +8,8 @@
  */
 
 get_header(); ?>
-<div class="row visible-phone">
-			<div class="col-lg-3" id="secondarynav">
+<div class="row-fluid visible-phone">
+			<div class="span3" id="secondarynav">
 				<?php renderLeftNav(); ?>
 			</div>
 		</div>
@@ -18,9 +18,9 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 		
-		<div class="row">
+		<div class="row-fluid">
 
-				<div class="col-lg-8" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
@@ -50,7 +50,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="col-lg-4" id='sidebar'>
+				<div class="span4" id='sidebar'>
 					<?php
 										if ( has_post_thumbnail( $post->ID ) ) {
 								$img = get_the_post_thumbnail($post->ID,'large') ;

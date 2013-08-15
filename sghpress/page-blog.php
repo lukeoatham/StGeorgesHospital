@@ -5,10 +5,10 @@ get_header(); ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-				<div class="row">
+				<div class="row-fluid">
 
 				
-					<div class="col-lg-9" id='content'>
+					<div class="span9" id='content'>
 						<?php if ( is_front_page() ) { ?>
 							<h2><?php the_title(); ?></h2>
 						<?php } else { ?>	
@@ -55,7 +55,7 @@ get_header(); ?>
 				
 					</div>
 					
-					<div class="col-lg-3" id='secondarynav'>
+					<div class="span3" id='secondarynav'>
 				
 					<?php if ( is_active_sidebar( 'news-landing-widget-area' ) ) : ?>
 		

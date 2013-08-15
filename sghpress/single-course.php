@@ -14,18 +14,18 @@ get_header(); ?>
 	$mainid=$post->ID;
 ?>
 
-		<div class="row">
+		<div class="row-fluid">
 
 
 										
-					<div class="col-lg-3" id='secondarynav'>
+					<div class="span3" id='secondarynav'>
 					
 				
 							<?php renderLeftNav(); ?>
 						
 						
 					</div>
-				<div class="col-lg-6" id='content'>
+				<div class="span6" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<?php 
@@ -89,7 +89,7 @@ if($rows)
 				
 				</div>
 				
-				<div class="col-lg-3" id='sidebar'>
+				<div class="span3" id='sidebar'>
 					
 <?php					the_post_thumbnail($post->ID, 'medium');
 //					echo $cimage;

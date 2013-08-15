@@ -28,8 +28,8 @@ get_header(); ?>
 			}
 			
 ?>			
-				<div class="row">
-					<div class="col-lg-3" id='secondarynav'>
+				<div class="row-fluid">
+					<div class="span3" id='secondarynav'>
 
 						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				
@@ -40,7 +40,7 @@ get_header(); ?>
 					</div>
 
 				
-					<div class="col-lg-6" id='content'>
+					<div class="span6" id='content'>
 							<?php 
 							echo "<h1>";
 							if ($cdir!='b') {
@@ -229,7 +229,7 @@ get_header(); ?>
 	
 				
 					</div>
-					<div class="col-lg-3">
+					<div class="span3">
 					
 					
 								

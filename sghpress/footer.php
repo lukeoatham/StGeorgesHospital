@@ -11,41 +11,41 @@
  */
 ?>
 
-		<div id="ourvalues" class="row">
+		<div id="ourvalues" class="row-fluid">
 		<div class="container-fluid">
-			<div class="col-lg-8">
+			<div class="span8">
 			<?php dynamic_sidebar( 'values-widget-area1' ); ?>
 			</div>
-			<div class="col-lg-4">
+			<div class="span4">
 			<?php dynamic_sidebar( 'values-widget-area2' ); ?>
 			</div>
 		</div>
 		</div>
 		
-			<div class="row" id='footer'>
+			<div class="row-fluid" id='footer'>
 				<div class="container-fluid">
-				<div class="col-lg-12 pull-right">
+				<div class="span12 pull-right">
 							<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
 				</div>
 				</div>
 
 				<div class="container-fluid">
-					<div class="col-lg-3">
+					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
 						</ul>
 					</div>
-					<div class="col-lg-3">
+					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
 						</ul>
 					</div>
-					<div class="col-lg-3">
+					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
 						</ul>
 					</div>
-					<div class="col-lg-3">
+					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area4' ); ?>
 						</ul>

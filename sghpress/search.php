@@ -9,14 +9,14 @@
 
 get_header(); ?>
 					<div class="visible-phone">
-						<div class="col-lg-3" id='secondarynav'>
+						<div class="span3" id='secondarynav'>
 						
 							<?php renderLeftNav(); ?>
 						
 						</div>
 					</div>
-				<div class="row">
-					<div class="col-lg-8" id='content'>
+				<div class="row-fluid">
+					<div class="span8" id='content'>
 
 <?php if ( have_posts() ) : ?>
 				<h1><?php printf( __( 'Search results for: %s', 'twentyten' ), '' . get_search_query() . '' ); ?></h1>
@@ -62,7 +62,7 @@ $q = $_GET['s'];
 
 					</div>
 
-					<div class="col-lg-4" id='sidebar'>
+					<div class="span4" id='sidebar'>
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
 						</ul>

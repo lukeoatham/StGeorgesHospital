@@ -13,8 +13,8 @@ get_header(); ?>
 	
 	$mainid=$post->ID;
 ?>
-		<div class="row visible-phone" id="sideNav">
-			<div class="col-lg-3" id='secondarynav'>
+		<div class="row-fluid visible-phone" id="sideNav">
+			<div class="span3" id='secondarynav'>
 					
 				
 							<?php renderLeftNav(); ?>
@@ -22,9 +22,9 @@ get_header(); ?>
 						
 					</div>
 		</div>
-		<div class="row">
+		<div class="row-fluid">
 
-				<div class="col-lg-8" id='content'>
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
 
 					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
@@ -37,7 +37,7 @@ get_header(); ?>
 									
 				</div>
 				
-				<div class="col-lg-4" id='sidebar'>
+				<div class="span4" id='sidebar'>
 					<?php
 
 						echo get_the_post_thumbnail($post->ID,'newsubhead');
