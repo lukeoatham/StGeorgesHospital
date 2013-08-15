@@ -41,6 +41,8 @@ $site = $_GET['site'];
 	
 	//Retrieve meta fields from options table for each field
 	
+	echo "<p>".$showsite->description."</p>";
+	
 	$siteid = $showsite->term_id;
 	
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_address'";
