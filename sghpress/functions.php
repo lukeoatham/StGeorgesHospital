@@ -733,7 +733,7 @@ function renderLeftNav($outputcontent="TRUE") {
 		$navItems = wp_nav_menu($navParams);
 			
 		$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
-		$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection."\"", $navItems); 
+		$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection, $navItems); 
 			
 			
 		
