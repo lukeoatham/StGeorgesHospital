@@ -13,6 +13,7 @@ Tags: starkers, naked, clean, basic, unicorns
 body {
 	font-family: 'Ubuntu', arial, helvetica, verdana, sans-serif;
 	background: #ffffff;
+	font-size: 16px !important;
 }
 
 .container-fluid {
