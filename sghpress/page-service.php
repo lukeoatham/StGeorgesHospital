@@ -34,15 +34,48 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 <?php
 
 					//get all services
+					/*"tax_query"=> array(array(
+							"taxonomy"=>"sites",
+							"terms"=>$hospsite,
+							"field"=>"slug"
+							)*/
+							
+							
+					//$querystr = "
+								//SELECT wpostmeta.post_id, wpostmeta.meta_key
+								//FROM $wpdb->posts wposts INNER JOIN $wpdb->postmeta wpostmeta ON wposts.ID = wpostmeta.post_id WHERE wposts.ID = ".$mainid;
+								
+					/*$querystr = "SELECT * FROM $wpdb->postmeta wpostmeta WHERE meta_key = 'service-relationship' AND meta_value LIKE '%$mainid%'"; <- gets all things from post meta that have the service id: SPITS OUT REVISIONS OF CONTENT!
+					
+					$pageposts = $wpdb->get_results($querystr, OBJECT);
+					
+					foreach($pageposts as $clin){
+						echo "<a href=\"".get_permalink($clin->post_id)."\">".get_the_title($clin->post_id)."</a>";
+					}
+					
+					var_dump($pageposts);*/
 					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
 					
 					$servs = array();
+					$sites = array();
 					// do a for loop, check dict for key which is first letter of service name
+					
 					foreach($gtermsa->posts as $serv){
 						$servObj = array();
 						$key = strtolower(substr($serv->post_title, 0, 1));
 						$servObj["title"] = $serv->post_title;
 						$servObj["link"] = $serv->guid;
+						$sSites = get_the_terms($serv->ID, 'sites');
+						//var_dump($sSites);
+						if($sSites){
+							$servObj["sites"] = array();
+							foreach($sSites as $k => $val){
+								if(!$sites[$val->slug]){
+									$sites[$val->slug] = $val->name;
+								}
+								array_push($servObj["sites"], $val->slug);
+							}
+						}
 						//if has letter append to array, else create new key
 						if($servs[$key]){
 							array_push($servs[$key], $servObj);
@@ -78,9 +111,14 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 								echo "<li><a href=\"#".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
 							}
 							
+							foreach($sites as $siteKey => $siteVal){
+								echo "<li><a href=\"#".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
+							}
 							
 							?>
 						</ul>
+						
+						
 						<div class="tab-content">
 							<?php
 							
@@ -89,7 +127,16 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 								
 								echo "<ul>";
 								foreach($value as $serv){
-									echo "<li><a href=\"".$serv["link"]."\">".$serv["title"]."</a></li>";
+									if($serv["sites"]){
+										$sites = "";
+										foreach($serv["sites"] as $servSite){
+											if($sites != ""){
+												$sites .= " ";
+											}
+											$sites .= $servSite;
+										}
+									}
+									echo "<li class='".$sites."'><a href=\"".$serv["link"]."\">".$serv["title"]."</a></li>";
 								}
 								echo "</ul>";
 								echo "</div>";
@@ -110,13 +157,34 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						});
 					
 						$('#allServs').click(function (e) {
-							e.preventDefault();
+							//e.preventDefault();
 							$("#allServs").addClass('active');
+							$(".tab-content li").show();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
 							});
 						});
+						
+						$(".site").click(function(e){
+							e.preventDefault();
+							var selectedSite = $(this).attr("href");
+							selectedSite = selectedSite.replace("#", "");
+							$(this).addClass("active");
+							$(".tab-content li").hide();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+							$("." + selectedSite).show();
+						});
+						
+						$('.serviceTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content li").show();
+							$(this).tab('show');
+						});
+
 					</script>			
 					
 					<!-- <div class="pagination">
