@@ -3,12 +3,9 @@
 
 get_header(); 
 
-$hospsite = $_GET['hospsite'];
-$show = $_GET['show'];
+$hospsite = $_GET['site'];
 
-if ($show=="ALL"){
-	$show='';
-}
+
 
 if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
@@ -32,28 +29,6 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						</form>
 
 <?php
-
-					//get all services
-					/*"tax_query"=> array(array(
-							"taxonomy"=>"sites",
-							"terms"=>$hospsite,
-							"field"=>"slug"
-							)*/
-							
-							
-					//$querystr = "
-								//SELECT wpostmeta.post_id, wpostmeta.meta_key
-								//FROM $wpdb->posts wposts INNER JOIN $wpdb->postmeta wpostmeta ON wposts.ID = wpostmeta.post_id WHERE wposts.ID = ".$mainid;
-								
-					/*$querystr = "SELECT * FROM $wpdb->postmeta wpostmeta WHERE meta_key = 'service-relationship' AND meta_value LIKE '%$mainid%'"; <- gets all things from post meta that have the service id: SPITS OUT REVISIONS OF CONTENT!
-					
-					$pageposts = $wpdb->get_results($querystr, OBJECT);
-					
-					foreach($pageposts as $clin){
-						echo "<a href=\"".get_permalink($clin->post_id)."\">".get_the_title($clin->post_id)."</a>";
-					}
-					
-					var_dump($pageposts);*/
 					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
 					
 					$servs = array();
@@ -66,7 +41,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$servObj["title"] = $serv->post_title;
 						$servObj["link"] = $serv->guid;
 						$sSites = get_the_terms($serv->ID, 'sites');
-						//var_dump($sSites);
+						
 						if($sSites){
 							$servObj["sites"] = array();
 							foreach($sSites as $k => $val){
@@ -76,35 +51,34 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 								array_push($servObj["sites"], $val->slug);
 							}
 						}
-						//if has letter append to array, else create new key
-						if($servs[$key]){
-							array_push($servs[$key], $servObj);
+						
+						// if we're filtering by site then only add to array if available at that site
+						if($hospsite){
+							if(in_array($hospsite, $servObj["sites"])){
+								//if has letter append to array, else create new key
+								if($servs[$key]){
+									array_push($servs[$key], $servObj);
+								}else{
+									$servs[$key] = array();
+									array_push($servs[$key], $servObj);
+								}
+							}
 						}else{
-							
-							$servs[$key] = array();
-							array_push($servs[$key], $servObj);
+							//if has letter append to array, else create new key
+							if($servs[$key]){
+								array_push($servs[$key], $servObj);
+							}else{
+								$servs[$key] = array();
+								array_push($servs[$key], $servObj);
+							}
 						}
-						
-					}
-					
-					
-					
-					
-					
-
-
-					/*$letters = range('A','Z');
-					
-					foreach($letters as $l) {
-						
-						$letterlink[$l] = "<li class='atoz disabled {$l}'><a href='#'>".$l."</a></li>";
-					}	*/			
+					}		
 					
 					?>	
 					
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
-							<li><a href="#" data-toggle="tab" id="allServs">All services</a></li>
+							<li><a href="#" data-toggle="tab" id="allServs" class="active">All services</a></li>
 							<?php
 							
 							foreach($servs as $key => $servLetter){
@@ -112,7 +86,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							}
 							
 							foreach($sites as $siteKey => $siteVal){
-								echo "<li><a href=\"#".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
+								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
 							}
 							
 							?>
@@ -123,7 +97,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							<?php
 							
 							foreach($servs as $key => $value){
-								echo "<div class=\"tab-pane\" id=\"".$key."\">";
+								echo "<div class=\"tab-pane active\" id=\"".$key."\">";
 								
 								echo "<ul>";
 								foreach($value as $serv){
@@ -148,14 +122,6 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					</div>
 					
 					<script type="text/javascript">
-						$(document).ready(function(){
-							$("#allServs").addClass('active');
-							$(".tab-pane").each(function(i, t){
-								$(".serviceTab").removeClass("active");
-								$(this).addClass('active');
-							});
-						});
-					
 						$('#allServs').click(function (e) {
 							//e.preventDefault();
 							$("#allServs").addClass('active');
@@ -169,7 +135,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$(".site").click(function(e){
 							e.preventDefault();
 							var selectedSite = $(this).attr("href");
-							selectedSite = selectedSite.replace("#", "");
+							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
 							$(this).addClass("active");
 							$(".tab-content li").hide();
 							$(".tab-pane").each(function(i, t){
@@ -182,6 +148,10 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
 							$(".tab-content li").show();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).removeClass('active');
+							});
 							$(this).tab('show');
 						});
 
