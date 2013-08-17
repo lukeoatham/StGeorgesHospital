@@ -82,7 +82,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							<?php
 							
 							foreach($servs as $key => $servLetter){
-								echo "<li><a href=\"#".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
+								echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
 							}
 							
 							foreach($sites as $siteKey => $siteVal){
@@ -97,7 +97,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							<?php
 							
 							foreach($servs as $key => $value){
-								echo "<div class=\"tab-pane active\" id=\"".$key."\">";
+								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
 								
 								echo "<ul>";
 								foreach($value as $serv){
