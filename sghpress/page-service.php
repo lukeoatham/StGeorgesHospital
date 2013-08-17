@@ -33,16 +33,93 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 <?php
 
-					$letters = range('A','Z');
+					//get all services
+					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
+					
+					$servs = array();
+					// do a for loop, check dict for key which is first letter of service name
+					foreach($gtermsa->posts as $serv){
+						$servObj = array();
+						$key = strtolower(substr($serv->post_title, 0, 1));
+						$servObj["title"] = $serv->post_title;
+						$servObj["link"] = $serv->guid;
+						//if has letter append to array, else create new key
+						if($servs[$key]){
+							array_push($servs[$key], $servObj);
+						}else{
+							
+							$servs[$key] = array();
+							array_push($servs[$key], $servObj);
+						}
+						
+					}
+					
+					
+					
+					
+					
+
+
+					/*$letters = range('A','Z');
 					
 					foreach($letters as $l) {
 						
 						$letterlink[$l] = "<li class='atoz disabled {$l}'><a href='#'>".$l."</a></li>";
-					}				
+					}	*/			
 					
-					?>				
+					?>	
 					
-					<div class="pagination">
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li><a href="#" data-toggle="tab" id="allServs">All services</a></li>
+							<?php
+							
+							foreach($servs as $key => $servLetter){
+								echo "<li><a href=\"#".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
+							}
+							
+							
+							?>
+						</ul>
+						<div class="tab-content">
+							<?php
+							
+							foreach($servs as $key => $value){
+								echo "<div class=\"tab-pane\" id=\"".$key."\">";
+								
+								echo "<ul>";
+								foreach($value as $serv){
+									echo "<li><a href=\"".$serv["link"]."\">".$serv["title"]."</a></li>";
+								}
+								echo "</ul>";
+								echo "</div>";
+								
+							}
+							
+							?>
+						</div>
+					</div>
+					
+					<script type="text/javascript">
+						$(document).ready(function(){
+							$("#allServs").addClass('active');
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+					
+						$('#allServs').click(function (e) {
+							e.preventDefault();
+							$("#allServs").addClass('active');
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+					</script>			
+					
+					<!-- <div class="pagination">
 					<ul>
 					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
 					<?php
@@ -152,8 +229,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						}
 					} 
 ?>
-</ul>	
-					</div>
+</ul>	-->
+					</div> 
 					</div>
 
 					<div class="span3">

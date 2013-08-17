@@ -31,7 +31,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 	<link rel="stylesheet" type="text/css" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/print.css" />
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="/wp-content/themes/sghpress/js/bootstrap.js"></script>
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.js"></script>
 
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
