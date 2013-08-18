@@ -13,22 +13,32 @@ get_header(); ?>
 	
 	$mainid=$post->ID;
 ?>
-		
-
-		<div class="row-fluid">
-	<div class="span3" id='secondarynav'>
+		<div class="row-fluid visible-phone" id="sideNav">
+			<div class="span3" id='secondarynav'>
 					
 				
 							<?php renderLeftNav(); ?>
 						
 						
 					</div>
-				<div class="span5" id='content'>
+		</div>
+		<div class="row-fluid">
+
+				<div class="span8" id='content'>
 					<h1><?php the_title(); ?></h1>
 
-					<p class='postmeta'><?php twentyten_posted_on(); ?></p>
+					<p class='postmeta'><?php 
+						echo "Published: ".date('j M Y',strtotime($post->post_date));
+					 ?></p>
 
-					<?php the_content(); ?>
+					<?php the_content(); 
+						
+						$notes = get_field('notes_to_editors');
+						if ($notes){
+						echo "<h3>Notes to editors</h3>";
+						echo wpautop($notes);
+						}
+					?>
 
 						<div id='comments'>
 							<?php comments_template( '', true ); ?>
@@ -42,6 +52,23 @@ get_header(); ?>
 						echo get_the_post_thumbnail($post->ID,'newsubhead');
 								
 						echo "<span class='caption'>".get_post_thumbnail_caption()."</span>";
+						
+						
+						$posttags = get_the_tags();
+										$foundtags=false;	
+										$tagstr="";
+									if ($posttags) {
+									  	foreach($posttags as $tag) {
+									  			$foundtags=true;
+									  			$tagurl = $tag->slug;
+										    	$tagstr=$tagstr."
+										    	<a href='/tag/{$tagurl}'><span class='label label-info'>" . str_replace(' ', '&nbsp;' , $tag->name) ."</span></a>";
+											}
+								  	}
+									  	if ($foundtags){
+										  	echo "<hr><p><i class='icon-tags'></i> Tags: ".$tagstr."</p>";
+									  	
+										  	}
 
 			echo "<div id='newsposts'><hr>";
 			$category = get_the_category(); 
