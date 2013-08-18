@@ -270,13 +270,16 @@ get_header(); ?>
 							if($(".visible-phone").css("display") != "none"){
 								$("#mobhead").addClass("active");
 								$("#mobhead").css("background-image","url('<?php echo $thumbnail[0]; ?>')");
+								
+								$("body").animate({
+                            	scrollTop: ($("#mobhead").offset().top)
+                                }, "slow");
+								
 							}else{
 								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
 							}
 							
-							$("body").animate({
-                            	scrollTop: ($("#mobhead").offset().top)
-                                }, "slow");
+							
 							
 						});
 					</script>

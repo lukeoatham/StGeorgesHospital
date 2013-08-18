@@ -3,12 +3,9 @@
 
 get_header(); 
 
-$hospsite = $_GET['hospsite'];
-$show = $_GET['show'];
+$hospsite = $_GET['site'];
 
-if ($show=="ALL"){
-	$show='';
-}
+
 
 if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
@@ -32,17 +29,135 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						</form>
 
 <?php
-
-					$letters = range('A','Z');
+					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
 					
-					foreach($letters as $l) {
+					$servs = array();
+					$sites = array();
+					// do a for loop, check dict for key which is first letter of service name
+					
+					foreach($gtermsa->posts as $serv){
+						$servObj = array();
+						$key = strtolower(substr($serv->post_title, 0, 1));
+						$servObj["title"] = $serv->post_title;
+						$servObj["link"] = $serv->guid;
+						$sSites = get_the_terms($serv->ID, 'sites');
 						
-						$letterlink[$l] = "<li class='atoz disabled {$l}'><a href='#'>".$l."</a></li>";
-					}				
+						if($sSites){
+							$servObj["sites"] = array();
+							foreach($sSites as $k => $val){
+								if(!$sites[$val->slug]){
+									$sites[$val->slug] = $val->name;
+								}
+								array_push($servObj["sites"], $val->slug);
+							}
+						}
+						
+						// if we're filtering by site then only add to array if available at that site
+						if($hospsite){
+							if(in_array($hospsite, $servObj["sites"])){
+								//if has letter append to array, else create new key
+								if($servs[$key]){
+									array_push($servs[$key], $servObj);
+								}else{
+									$servs[$key] = array();
+									array_push($servs[$key], $servObj);
+								}
+							}
+						}else{
+							//if has letter append to array, else create new key
+							if($servs[$key]){
+								array_push($servs[$key], $servObj);
+							}else{
+								$servs[$key] = array();
+								array_push($servs[$key], $servObj);
+							}
+						}
+					}		
 					
-					?>				
+					?>	
 					
-					<div class="pagination">
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li><a href="#" data-toggle="tab" id="allServs" class="active">All services</a></li>
+							<?php
+							
+							foreach($servs as $key => $servLetter){
+								echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
+							}
+							
+							foreach($sites as $siteKey => $siteVal){
+								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
+							}
+							
+							?>
+						</ul>
+						
+						
+						<div class="tab-content">
+							<?php
+							
+							foreach($servs as $key => $value){
+								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
+								
+								echo "<ul>";
+								foreach($value as $serv){
+									if($serv["sites"]){
+										$sites = "";
+										foreach($serv["sites"] as $servSite){
+											if($sites != ""){
+												$sites .= " ";
+											}
+											$sites .= $servSite;
+										}
+									}
+									echo "<li class='".$sites."'><a href=\"".$serv["link"]."\">".$serv["title"]."</a></li>";
+								}
+								echo "</ul>";
+								echo "</div>";
+								
+							}
+							
+							?>
+						</div>
+					</div>
+					
+					<script type="text/javascript">
+						$('#allServs').click(function (e) {
+							//e.preventDefault();
+							$("#allServs").addClass('active');
+							$(".tab-content li").show();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+						
+						$(".site").click(function(e){
+							e.preventDefault();
+							var selectedSite = $(this).attr("href");
+							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
+							$(this).addClass("active");
+							$(".tab-content li").hide();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+							$("." + selectedSite).show();
+						});
+						
+						$('.serviceTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content li").show();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).removeClass('active');
+							});
+							$(this).tab('show');
+						});
+
+					</script>			
+					
+					<!-- <div class="pagination">
 					<ul>
 					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
 					<?php
@@ -152,8 +267,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						}
 					} 
 ?>
-</ul>	
-					</div>
+</ul>	-->
+					</div> 
 					</div>
 
 					<div class="span3">
