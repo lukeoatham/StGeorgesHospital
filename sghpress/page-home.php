@@ -188,7 +188,7 @@ function goToPage( id ) {
 					  		    $theme_term = $wpdb->get_results( $q );					
 								if ($theme_term[0]->option_value == "Health Centre"){
 									echo  '<option ';
-									echo ' value="/contact-and-find-us/find-us/sites/'.$service->slug.'">'.$service->name.' </option>';
+									echo ' value="/contact-and-find-us/find-us/sites/?site='.$service->slug.'">'.$service->name.' </option>';
 								}
 							}
 							
