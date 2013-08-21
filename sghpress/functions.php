@@ -1067,3 +1067,40 @@ function get_post_thumbnail_caption() {
 		return get_post( $thumb )->post_excerpt;
 }
 
+
+//Short code to insert NHS Jobs from API into page [nhsJobs]
+function nhsJobs($atts){
+	$url = "http://www.jobs.nhs.uk/extsearch?client_id=121185&infonly=1";
+	$xml = simplexml_load_file($url);
+	
+	$htmlToReturn = "";
+	
+	foreach($xml->vacancy_details as $vacancy){
+		$vID = $vacancy->id;
+		$vRef = $vacancy->job_reference;
+		$vTitle = $vacancy->job_title;
+		$vDesc = $vacancy->job_description;
+		$vType = $vacancy->job_type;
+		$vSpecialty = $vacancy->job_specialty;
+		$vSalary = $vacancy->job_salary;
+		$vLocation = $vacancy->job_location;
+		$vclose = $vacancy->job_closedate;
+		$vPost = $vacancy->job_postdate;
+		$vURL = $vacancy->job_url;
+		
+		$htmlToReturn .= "<div class=\"row\">";
+		$htmlToReturn .= "<h3><a href=\"".$vURL."\">".$vTitle."</a></h3>";
+		$htmlToReturn .= "<p>".$vDesc."</p>";
+		$htmlToReturn .= "<dl class=\"dl-horizontal\">";
+		$htmlToReturn .= "<dt>Job Type</dt><dd>".$vType."</dd>";
+		$htmlToReturn .= "<dt>Salary</dt><dd>".$vSalary."</dd>";
+		$htmlToReturn .= "<dt>Close date</dt><dd>".$vclose."</dd>";
+		$htmlToReturn .= "</dl>";
+		$htmlToReturn .= "<p><a href=\"".$vURL."\" class=\"btn btn-info pull-right\">Apply now</a></p>";
+		$htmlToReturn .= "</div>";
+		
+	}
+	
+	return $htmlToReturn;
+}
+add_shortcode("nhsJobs", "nhsJobs");
