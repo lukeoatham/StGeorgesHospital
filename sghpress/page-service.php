@@ -29,7 +29,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						</form>
 
 <?php
-					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
+					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=title&order=ASC');
 					
 					$servs = array();
 					$sites = array();
