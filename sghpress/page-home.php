@@ -181,7 +181,7 @@ function goToPage( id ) {
 									)
 								);
 								
-							foreach ($allservices as $service){ print_r($service);
+							foreach ($allservices as $service){// print_r($service);
 					  		    $themeid = $service->term_id;
 					  		    $q = "select option_value from wp_options where option_name = 'sites_".$themeid."_site_type'";
 					  		    global $wpdb;
