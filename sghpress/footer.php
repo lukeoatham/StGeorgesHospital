@@ -10,23 +10,23 @@
  * @since Starkers 3.0
  */
 ?>
-
-		<div id="ourvalues" class="row-fluid">
-		<div class="container-fluid">
-			<div class="span8">
-			<?php dynamic_sidebar( 'values-widget-area1' ); ?>
+</div>
+			<div id="ourvalues" class="row-fluid">
+				<div class="container-fluid">
+					<div class="span8">
+						<?php dynamic_sidebar( 'values-widget-area1' ); ?>
+					</div>
+					<div class="span4">
+						<?php dynamic_sidebar( 'values-widget-area2' ); ?>
+					</div>
+				</div>
 			</div>
-			<div class="span4">
-			<?php dynamic_sidebar( 'values-widget-area2' ); ?>
-			</div>
-		</div>
-		</div>
 		
 			<div class="row-fluid" id='footer'>
 				<div class="container-fluid">
-				<div class="navbar navbar-inverse navbar-fixed-bottom pull-right">
-							<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
-				</div>
+					<div class="navbar navbar-inverse navbar-fixed-bottom">
+								<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
+					</div>
 				</div>
 
 				<div class="container-fluid">
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+
 		
 		<div id="backToTop" class="visible-phone">
 			<a href="#mobhead">^</a>
