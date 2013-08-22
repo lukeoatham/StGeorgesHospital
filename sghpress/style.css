@@ -101,6 +101,9 @@ h4 {
 #findlocal h4 {
 	margin-top: 0; 	
 }
+#findlocal {
+margin-left: 0.5em;
+}
 h5 {
     font-size: 1.2em;
     margin-top: .8em;
