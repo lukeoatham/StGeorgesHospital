@@ -199,99 +199,6 @@ ul#menu-top-tasks li {
     color: white;
 }
 
-/* patients and visitors */
-#menu-item-52 a {
-    background-color: rgb(160, 31, 97)!important;
-}
-#menu-item-52 a:hover {
-    background-color: rgb(188, 98, 144)!important;
-}
-#menu-item-52.current_page_item, #menu-item-52.current-page-ancestor a {
-    background-color: rgb(160, 31, 97)!important;
-}
-
-/* Services */
-#menu-item-11 a {
-    background-color: rgb(77, 184, 72) !important;
-}
-#menu-item-11 a:hover {
-    background-color: rgb(130, 205, 127) !important;
-}
-#menu-item-11.current_page_item, #menu-item-11.current-page-ancestor a {
-    background-color: rgb(77, 184, 72) !important;
-}
-
-/* About */
-#menu-item-12 a {
-    background-color: rgb(72, 47, 137)!important;
-}
-#menu-item-12 a:hover {
-    background-color: rgb(127, 109, 172) !important;
-}
-#menu-item-12.current_page_item, #menu-item-12.current-page-ancestor a {
-    background-color: rgb(72, 47, 137)!important;
-}
-
-/* Work with us */
-#menu-item-53 a {
-    background-color: rgb(14, 180, 222)!important;
-}
-#menu-item-53 a:hover {
-    background-color:rgb(86, 202, 232) !important;
-}
-#menu-item-53.current_page_item, #menu-item-53.current-page-ancestor a {
-    background-color: rgb(14, 180, 222)!important;
-}
-
-/* education and research */
-#menu-item-51 a {
-    background-color: rgb(246, 134, 32)!important;
-}
-#menu-item-51 a:hover {
-    background-color: rgb(249, 170, 98) !important;
-}
-#menu-item-51.current_page_item, #menu-item-51.current-page-ancestor a {
-    background-color: rgb(246, 134, 32)!important;
-}
-
-/* gp and clinicians */
-#menu-item-50 a {
-    background-color: rgb(33,65,142)!important;
-}
-#menu-item-50 a:hover {
-    background-color: rgb(99, 122, 176)!important;
-}
-#menu-item-50.current_page_item, #menu-item-50.current-page-ancestor a {
-    background-color: rgb(33,65,142)!important;
-}
-
-/* contact and find us */
-#menu-item-49 a {
-    background-color: rgb(238, 45,38)!important;
-}
-#menu-item-49 a:hover {
-    background-color: rgb(243, 108, 103) !important;
-}
-#menu-item-49.current_page_item, #menu-item-49.current-page-ancestor a {
-    background-color: rgb(238, 45,38)!important;
-}
-
-/* news */
-
-#menu-item-1792 a{
-	background-color: rgb(0,0,0) !important;
-}
-
-#menu-item-1792 a:hover{
-	background-color: rgb(25,25,25) !important;
-}
-
-#menu-item-1792.current_page_item, #menu-item-1792.current-page-ancestor a{
-	background-color: rgb(0,0,0) !important;
-}
-
-
-
 #searchblock{
 	float: left;
 }
@@ -392,7 +299,7 @@ body.home #secondarynav {
 	color: white;
 }
 
-.patient .level-0 a{
+.patient .level-0 a, #menu-primary-navigation .patient a:hover{
 	background-color: rgb(188, 98, 144) !important;
     color: white !important;
     border-top-width: 0px !important;
@@ -423,7 +330,7 @@ body.home #secondarynav {
 	color: white;
 }
 
-.service .level-0 a{
+.service .level-0 a, #menu-primary-navigation .service a:hover{
 	background-color: rgb(130, 205, 127) !important;
     color: white !important;
     border-top-width: 0px !important;
@@ -449,66 +356,66 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-/* About */
-.about .children li a{
+/* Work */
+.work .children li a{
 	background-color: white;
 	color: rgb(72, 47, 137);
 }
 
-.about a{
+.work a{
 	background-color: rgb(72, 47, 137);
 	color: white;
 }
 
-.about .level-0 a{
+.work .level-0 a, #menu-primary-navigation .work a:hover{
 	background-color: rgb(127, 109, 172) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.about .level-1 a{
+.work .level-1 a{
 	background-color: rgb(167, 151, 196) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.about .current_page_item:before{
+.work .current_page_item:before{
 	border-color: transparent transparent transparent rgb(72, 47, 137) !important;
 }
 
-.about .level-0.current_page_item:before, .about .level-1.current_page_item:before, .about .level-2.current_page_item:before, .about .level-3.current_page_item:before{
+.work .level-0.current_page_item:before, .work .level-1.current_page_item:before, .work .level-2.current_page_item:before, .work .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
 }
 
 
-/* Work with us */
-.work .children li a{
+/* About */
+.about .children li a{
 	color: rgb(14, 180, 222);
 	background-color: white;
 }
 
-.work a{
+.about a{
 	background-color: rgb(14, 180, 222);
 	color: white;
 }
 
-.work .level-0 a{
+.about .level-0 a, #menu-primary-navigation .about a:hover{
 	background-color: rgb(86, 202, 232) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.work .level-1 a{
+.about .level-1 a{
 	background-color: rgb(134, 217, 238) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.work .current_page_item:before{
+.about .current_page_item:before{
 	border-color: transparent transparent transparent rgb(14, 180, 222) !important;
 }
 
-.work .level-0.current_page_item:before, .work .level-1.current_page_item:before, .work .level-2.current_page_item:before, .work .level-3.current_page_item:before{
+.about .level-0.current_page_item:before, .about .level-1.current_page_item:before, .about .level-2.current_page_item:before, .about .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
 }
 
@@ -526,7 +433,7 @@ body.home #secondarynav {
 	color: white;
 }
 
-.education .level-0 a{
+.education .level-0 a, #menu-primary-navigation .education a:hover{
 	background-color: rgb(249, 170, 98) !important;
     color: white !important;
     border-top-width: 0px !important;
@@ -549,34 +456,34 @@ body.home #secondarynav {
 
 
 
-/* Gps and clinicians */
-.gp .children li a{
+/* news */
+.news .children li a{
 	color: rgb(33,65,142);
 	background-color: white;
 }
 
-.gp a{
+.news a{
 	background-color: rgb(33,65,142);
 	color: white;
 }
 
-.gp .level-0 a{
+.news .level-0 a, #menu-primary-navigation .news a:hover{
 	background-color: rgb(99, 122, 176) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.gp .level-1 a{
+.news .level-1 a{
 	background-color: rgb(144, 160, 198) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.gp .current_page_item:before{
+.news .current_page_item:before{
 	border-color: transparent transparent transparent rgb(33,65,142) !important;
 }
 
-.gp .level-0.current_page_item:before, .gp .level-1.current_page_item:before, .gp .level-2.current_page_item:before, .gp .level-3.current_page_item:before{
+.news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
 }
 
@@ -592,7 +499,7 @@ body.home #secondarynav {
 	color: white;
 }
 
-.contact .level-0 a{
+.contact .level-0 a, #menu-primary-navigation .contact a:hover{
     background-color: rgb(243, 108, 103) !important;
     color: white !important;
     border-top-width: 0px !important;
@@ -611,33 +518,33 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-/* news */
-.news .children li a{
+/* gps */
+.gp .children li a{
 	color: rgb(0, 0,0);
 	background-color: white;
 }
 
-.news a{
+.gp a{
 	background-color: rgb(0, 0,0);
 	color: white;
 }
 
-.news .level-0 a{
+.gp .level-0 a, #menu-primary-navigation .gp a:hover{
     background-color: rgb(25, 25, 25) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
-.news .level-1 a{
+.gp .level-1 a{
     background-color: rgb(50, 50, 50) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 
-.news .current_page_item:before{
+.gp .current_page_item:before{
 	border-color: transparent transparent transparent rgb(0, 0,0) !important;
 }
 
-.news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
+.gp .level-0.current_page_item:before, .gp .level-1.current_page_item:before, .gp .level-2.current_page_item:before, .gp .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
 }
 
