@@ -148,6 +148,10 @@ ul#menu-top-tasks li {
 	float: left;
 	padding-right: 1em;
 }
+.alignright {
+	float: right;
+	padding-left: 1em;
+}
 #navigation{
 	background-color: #1972B5;
 }
