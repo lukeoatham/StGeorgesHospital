@@ -1,8 +1,7 @@
 <?php
-/* Template name: News page */
+/* Template name: Press releases */
 
 get_header();
-$newstype = $_GET['type'];
  ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
@@ -29,38 +28,23 @@ $newstype = $_GET['type'];
 						<?php } ?>				
 					
 							<?php the_content(); ?>
-<!--
-												<ul class="nav nav-pills">
-					<?php //display filter terms
 				 
-				 $newstypes = get_terms('news-type'); 
-				 foreach ($newstypes as $ct){
-					 
-					 echo "<li";
-					 if ($ct->slug == $newstype) echo " class='active'";
-					 echo "><a href='/news/?type=".$ct->slug."'>".$ct->name."</a></li>";
-				 }
-					 echo "<li";
-					 if (!$newstype) echo " class='active'";
-					 echo "><a href='/news/'>All</a></li>";
-				 
-				 ?>
-					
-					
-					</ul>
--->
-
 							<?php
 							
 							$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-							$customquery = new WP_Query(
-														array(
+						$customquery = new WP_query(
+							array(
 							"post_type" => "newsitem",
 							"posts_per_page" => 20,
 							"paged"=>$paged,
+							"tax_query"=> array(array(
+							"taxonomy"=>"news-type",
+							"terms"=>'press-releases',
+							"field"=>"slug"
 							)
-
-							);
+							)
+							)
+						);
 								
 							if ( $customquery->have_posts() ) {
 				
@@ -111,20 +95,15 @@ $newstype = $_GET['type'];
 								  	}
 									  	if ($foundtags){
 										  	echo "| <i class='icon-tags'></i> Tags: ".$tagstr;
-									  	
 									}
-
 ?>									 </p></div></div></div>
 <?php
-
 								}
+							} else {
+								echo "Nothing newsworthy here.";
 							}
-							
 							wp_reset_query();
-							
 							?>
-					
-						
 						<?php if (  $customquery->max_num_pages > 1 ) : ?>
 							<?php if (function_exists(wp_pagenavi)) : ?>
 								<?php wp_pagenavi(array('query' => $customquery)); ?>
@@ -133,9 +112,7 @@ $newstype = $_GET['type'];
 								<?php previous_posts_link('Newer items &rarr;', $customquery->max_num_pages); ?>						
 							<?php endif; ?>
 						<?php endif; ?>
-	
 					</div>
-					
 					<div class="span3">
 
 					<?php if ( is_active_sidebar( 'news-landing-widget-area' ) ) : ?>
