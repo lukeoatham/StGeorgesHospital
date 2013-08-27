@@ -534,6 +534,13 @@ body.home #secondarynav {
 .ajaxpaging-separator {
 	display: none;
 }
+
+.newsarchive {
+	padding-top: 10%;
+}
+.newsarchive ul a {
+	padding-left: 10% !important;
+}
 /* gps */
 .gp .children li a{
 	color: rgb(0, 0,0);
