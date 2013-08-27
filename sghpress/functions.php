@@ -431,7 +431,7 @@ function twentyten_widgets_init() {
 		'name' => __( 'News landing', 'twentyten' ),
 		'id' => 'news-landing-widget-area',
 		'description' => __( 'The sidebar widget area on news landing page', 'twentyten' ),
-		'before_widget' => '',
+		'before_widget' => '<p>&nbsp;</p>',
 		'after_widget' => '',
 		'before_title' => '',
 		'after_title' => '',
