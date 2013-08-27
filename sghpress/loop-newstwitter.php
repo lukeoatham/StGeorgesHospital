@@ -4,9 +4,8 @@ global $post;
 										<div class='media'>";?>
 										    <?php
 									if ( has_post_thumbnail( $post->ID ) ) {
-										    echo "<a class='pull-left' href=".get_permalink().">";
-										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'thumbnail');
-										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
+										    echo "<a class='pull-left' href='".get_permalink()."'>";
+										    the_post_thumbnail('thumbnail');
 											echo "</a>";
 	    									}
 	    									?>
