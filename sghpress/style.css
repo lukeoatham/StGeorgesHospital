@@ -10,6 +10,7 @@ Tags: bootstrap
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
 
+
 body {
 	font-family: 'Ubuntu', arial, helvetica, verdana, sans-serif;
 	background: #ffffff;
@@ -191,7 +192,7 @@ ul#menu-top-tasks li {
 #primarynav ul li {
     display: inline;
     background: #000;
-    font-weight: normal;
+    font-weight: bold;
     float: left;
     font-size: 0.9em;
     line-height: 1em;
@@ -911,10 +912,6 @@ li.comment .comment-body {
 	height: 300px;
 }
 
-.service-thumbnail{
-	width: 75px;
-	height: 75px;
-}
 
 
 /* ------------------
