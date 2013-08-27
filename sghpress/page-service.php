@@ -146,7 +146,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$('#allServs').click(function (e) {
 							//e.preventDefault();
 							$("#allServs").addClass('active');
-							$(".tab-content li").show();
+							$(".tab-content .media").show();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
@@ -157,18 +157,25 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							e.preventDefault();
 							var selectedSite = $(this).attr("href");
 							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
-							$(this).addClass("active");
-							$(".tab-content li").hide();
+							$(".site").parent("li").removeClass("active");
+							$(this).parent("li").addClass("active");
+							$(".tab-content .media").hide();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
+								
+								console.log($(this).children("." + selectedSite).length);
+								
+								if($(this).children("." + selectedSite).length == 0){
+									$(this).removeClass('active');
+								}
 							});
 							$("." + selectedSite).show();
 						});
 						
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
-							$(".tab-content li").show();
+							$(".tab-content .media").show();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).removeClass('active');
