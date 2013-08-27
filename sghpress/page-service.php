@@ -40,6 +40,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$key = strtolower(substr($serv->post_title, 0, 1));
 						$servObj["title"] = $serv->post_title;
 						$servObj["link"] = $serv->guid;
+						$servObj["id"] = $serv->ID;
 						$sSites = get_the_terms($serv->ID, 'sites');
 						
 						if($sSites){
@@ -99,7 +100,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							foreach($servs as $key => $value){
 								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
 								
-								echo "<ul>";
+								echo "<h3>".strtoupper($key)."</h3>";
+								
 								foreach($value as $serv){
 									if($serv["sites"]){
 										$sites = "";
@@ -110,9 +112,28 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 											$sites .= $servSite;
 										}
 									}
-									echo "<li class='".$sites."'><a href=\"".$serv["link"]."\">".$serv["title"]."</a></li>";
+									echo "<div class=\"media ".$sites."\">";
+									
+									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
+									
+									if(!$postThumb){
+										$postThumb = "http://placehold.it/75x75";
+									}else{
+										$postThumb = $postThumb[0];
+									}
+									
+									echo "<a href=\"".$serv["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object service-thumbnail\"></a>";
+									
+									echo "<div class=\"media-body\">";
+									
+									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+									
+									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
+									
+									echo "</div>";
+									
+									echo "</div>";
 								}
-								echo "</ul>";
 								echo "</div>";
 								
 							}
@@ -125,7 +146,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$('#allServs').click(function (e) {
 							//e.preventDefault();
 							$("#allServs").addClass('active');
-							$(".tab-content li").show();
+							$(".tab-content .media").show();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
@@ -136,18 +157,25 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							e.preventDefault();
 							var selectedSite = $(this).attr("href");
 							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
-							$(this).addClass("active");
-							$(".tab-content li").hide();
+							$(".site").parent("li").removeClass("active");
+							$(this).parent("li").addClass("active");
+							$(".tab-content .media").hide();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
+								
+								console.log($(this).children("." + selectedSite).length);
+								
+								if($(this).children("." + selectedSite).length == 0){
+									$(this).removeClass('active');
+								}
 							});
 							$("." + selectedSite).show();
 						});
 						
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
-							$(".tab-content li").show();
+							$(".tab-content .media").show();
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).removeClass('active');
