@@ -54,7 +54,7 @@ get_header(); ?>
 							}
 						}
 									?>
-						<li class="span6" id="doitonline">
+						<div class="span6" id="doitonline">
 							<h3>Do it online</h3>
 							<?php
 					$defaults = array(
@@ -108,10 +108,10 @@ get_header(); ?>
 							"post_parent" => 0
 							)
 						);
-						
+						echo "<option value=''>Choose a service</option>"; 
 					foreach ($allservices as $service){
 						echo  '<option ';
-						if ($service->post_title == "Neurosciences") echo " selected=selected ";
+						
 						echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
 					}
 					?>
@@ -246,6 +246,7 @@ function goToPage( id ) {
 
 						</div>
 						
+					</div>
 
 					</div>
 </div>
