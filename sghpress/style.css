@@ -531,6 +531,9 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
+.ajaxpaging-separator {
+	display: none;
+}
 /* gps */
 .gp .children li a{
 	color: rgb(0, 0,0);
@@ -821,6 +824,7 @@ li.comment .comment-body {
 }
 #footer {
     background:#2b2b2b;
+    padding-bottom: 1em;
 }
 #footer p, #footer li a {
     margin-bottom: 1em !important;

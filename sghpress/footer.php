@@ -41,7 +41,7 @@
 							);
 								
 							if ( $customquery->have_posts() ) {
-								$k=0;
+								$k=0; //counter to check first 2
 								while ( $customquery->have_posts() ) {
 									$customquery->the_post();
 									$k++;
@@ -49,15 +49,17 @@
 										    <?php
 									if ( has_post_thumbnail( $post->ID ) && $k<3 ) {
 										    echo "<a class='pull-left' href=".get_permalink().">";
-										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'clinicianthumb');
-										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
+										    //$mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'clinicianthumb');
+										    //echo "<img class='media-object' src='".$mediaimage[0]."'>";
+										    the_post_thumbnail('clinicianthumb');
 											echo "</a>";
 	    									}
 	    									?>
 										<?php 
 										echo "<div class='media-body'><strong><a href='" .get_permalink() . "'>" . get_the_title() . "</a></strong>";
-	
+										if ($k<3){
 										the_excerpt();
+										}
 ?></div></div>
 <?php
 
@@ -111,7 +113,6 @@
 					    
 					  } // endif
 					  
-					  
 					}
 					</script>	
 					
@@ -138,12 +139,14 @@
 								}
 							}
 							
-							
-							
 							?>
 							  </select>
 							  <button class="btn" type="button" onclick="goToPage('selectf4')">Go</button>
 							</div>	
+
+							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
+							
+							
 					</div>
 					<div class="span3">
 						<h3>Do it online</h3>
