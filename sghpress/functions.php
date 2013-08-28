@@ -1066,3 +1066,10 @@ function get_post_thumbnail_caption() {
 	if ( $thumb = get_post_thumbnail_id() )
 		return get_post( $thumb )->post_excerpt;
 }
+
+//ensures authors are visible for custom post types
+function add_pagination_to_author_page_query_string($query_string){
+    if (isset($query_string['author_name'])) $query_string['post_type'] = array('newsitem');
+    return $query_string;
+}
+add_filter('request', 'add_pagination_to_author_page_query_string');

@@ -1,5 +1,5 @@
 <?php
-/* Template name: News archive page */
+/* Template name: News page */
 
 get_header();
 $newstype = $_GET['type'];
@@ -141,7 +141,7 @@ $newstype = $_GET['type'];
 		"post_type" => "attachment",
 		"posts_per_page" => 3,
 		"orderby"=>"title",
-		"order"=>"ASC",
+		"order"=>"DESC",
 		"tax_query" => array(array(
 			"taxonomy" => "category",
 			"terms" => 'gazette',

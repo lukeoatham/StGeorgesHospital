@@ -50,6 +50,26 @@ get_header(); ?>
 						echo get_the_post_thumbnail($post->ID,'newsubhead');
 								
 						echo "<span class='caption'>".get_post_thumbnail_caption()."</span>";
+						$session_speaker = get_the_author_meta('ID'); 
+						$newscats = get_the_terms($post->ID,'news-type');
+						$foundblog = false;
+						foreach ($newscats as $c){
+							if ($c->slug=='blog-posts'){
+								echo '<div class="row">';
+								echo '<div class="avatar96">';
+								echo "<a class='pull-left' href='/author/".get_the_author_meta("user_login", $session_speaker)."' title='".get_the_author_meta("display_name", $session_speaker)."'>";
+								echo get_avatar($session_speaker,96) . '</a></div>';
+								echo '<div class="">';
+								echo "<a class='pull-left' href='/author/".get_the_author_meta("user_login", $session_speaker)."' title='".get_the_author_meta("display_name", $session_speaker)."'>";
+								echo get_the_author_meta("display_name", $session_speaker);
+								echo "</a><br> ";
+								echo get_the_author_meta("description", $session_speaker);
+								echo '</div>';
+								echo '</div>';
+							}
+						}
+
+						//}
 						
 						
 						$posttags = get_the_tags();
