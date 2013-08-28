@@ -48,7 +48,7 @@ $site = $_GET['site'];
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_address'";
     global $wpdb;
     $site_meta = $wpdb->get_results( $q );		
-    echo wpautop($site_meta[0]->option_value);
+    
 
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_contact'";
     global $wpdb;
@@ -63,7 +63,13 @@ $site = $_GET['site'];
 
 
 ?>
-						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+			<div class="row-fluid">
+				<div class="span4">
+					<?php echo wpautop($site_meta[0]->option_value); ?>
+				</div>
+				<div class="span8">
+					<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 						<script>
 							var map;
 							function initialize() {
@@ -87,6 +93,9 @@ $site = $_GET['site'];
 						
 						<div id="map-canvas" class="google_map"></div>
 
+				</div>
+			</div>
+						
 <?php } ?>
 					
 					</div>
