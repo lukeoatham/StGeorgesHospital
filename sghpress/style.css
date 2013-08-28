@@ -10,6 +10,7 @@ Tags: bootstrap
 
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
 
+
 body {
 	font-family: 'Ubuntu', arial, helvetica, verdana, sans-serif;
 	background: #ffffff;
@@ -36,6 +37,11 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 }
 ol, ul, li {
     list-style: none;
+}
+#content ol { display: block;}
+#content ol li {
+	list-style:decimal;
+	margin-left: 1em;
 }
 #content ul li {
 	list-style: disc;
@@ -186,7 +192,7 @@ ul#menu-top-tasks li {
 #primarynav ul li {
     display: inline;
     background: #000;
-    font-weight: normal;
+    font-weight: bold;
     float: left;
     font-size: 0.9em;
     line-height: 1em;
@@ -525,6 +531,16 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
+.ajaxpaging-separator {
+	display: none;
+}
+
+.newsarchive {
+	padding-top: 10%;
+}
+.newsarchive ul a {
+	padding-left: 10% !important;
+}
 /* gps */
 .gp .children li a{
 	color: rgb(0, 0,0);
@@ -815,6 +831,7 @@ li.comment .comment-body {
 }
 #footer {
     background:#2b2b2b;
+    padding-bottom: 1em;
 }
 #footer p, #footer li a {
     margin-bottom: 1em !important;
@@ -906,10 +923,6 @@ li.comment .comment-body {
 	height: 300px;
 }
 
-.service-thumbnail{
-	width: 75px;
-	height: 75px;
-}
 
 #service-tabs h4{
 	margin-top: 0px;

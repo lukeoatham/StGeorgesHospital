@@ -28,7 +28,7 @@ get_header(); ?>
 //					print_r($rows);
 					{
 						$k=0;
-						echo '<ul class="thumbnails">';
+						echo '<div class="thumbnails">';
 						foreach($featurerows as $row)
 						{
 						global $post;
@@ -39,18 +39,22 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<li class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
+								echo '<div class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
 								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
-								echo '</li>';
+								echo '</div>';
 							}
 							else {
+							if ($k==2){echo "<div class='span6'><div class='row-fluid'>";}
+							if ($k==4){echo "</div><div class='row-fluid'>";}
+							
 								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
-								echo '<li class="span3"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
-								echo '</li>';
+								echo '<div class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
+								echo '</div>';
+							if ($k==5){echo "</div>";}
 							}
 						}
 									?>
-						<li class="span3" id="doitonline">
+						<div class="span6" id="doitonline">
 							<h3>Do it online</h3>
 							<?php
 					$defaults = array(
@@ -65,8 +69,8 @@ get_header(); ?>
 				
 				wp_nav_menu( $defaults );
 									?>	
-						</li>
-<?php					echo '</ul>';
+						</div>
+<?php					echo '</div>';
 					}
 ?>
 				</div>
@@ -104,10 +108,10 @@ get_header(); ?>
 							"post_parent" => 0
 							)
 						);
-						
+						echo "<option value=''>Choose a service</option>"; 
 					foreach ($allservices as $service){
 						echo  '<option ';
-						if ($service->post_title == "Neurosciences") echo " selected=selected ";
+						
 						echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
 					}
 					?>
@@ -242,6 +246,7 @@ function goToPage( id ) {
 
 						</div>
 						
+					</div>
 
 					</div>
 </div>

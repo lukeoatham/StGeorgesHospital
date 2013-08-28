@@ -54,12 +54,12 @@ get_header(); ?>
 					if ( $incat ) { //if this person is categorised as a clinician then display additional fields
 					
 					$secretary = get_post_meta($post->ID, 'secretary_name', true);
-					if ($telephone !=''){
+					if ($secretary !=''){
 						echo "<p><strong>Secretary: </strong>".$secretary."</p>";
 					}	
 
 					$secretaryemail = get_post_meta($post->ID, 'secretary_email', true);
-					if ($email !=''){
+					if ($secretaryemail !=''){
 						echo "<p><strong>Secretary email: </strong><a href='mailto:".$secretaryemail."'>".$secretaryemail."</a></p>";
 					}	
 
