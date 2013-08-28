@@ -1,5 +1,5 @@
 <?php
-/* Template name: News page */
+/* Template name: News landing page */
 
 get_header();
 $newstype = $_GET['type'];
@@ -92,6 +92,7 @@ $newstype = $_GET['type'];
 																       
 							?>
 					</div>
+					
 				</div>
 
 <?php endwhile; ?>
