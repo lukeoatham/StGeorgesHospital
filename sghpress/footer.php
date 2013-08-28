@@ -24,7 +24,7 @@
 		
 			<div class="row-fluid" id='footer'>
 				<div class="container-fluid">
-					<div class="navbar navbar-inverse navbar-fixed-bottom">
+					<div class="navbar navbar-inverse">
 								<?php dynamic_sidebar( 'footer-sponsor-area' ); ?>				
 					</div>
 				</div>
