@@ -94,7 +94,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						</ul>
 						
 						
-						<div class="tab-content">
+						<div class="tab-content" id="service-tabs">
 							<?php
 							
 							foreach($servs as $key => $value){
@@ -127,6 +127,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 									echo "<div class=\"media-body\">";
 									
 									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+									
+									echo pippin_excerpt_by_id($serv["id"], 20);
 									
 									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
 									
