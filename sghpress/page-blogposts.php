@@ -40,7 +40,7 @@ get_header();
 							"paged"=>$paged,
 							"tax_query"=> array(array(
 							"taxonomy"=>"news-type",
-							"terms"=>'blogposts',
+							"terms"=>'blog-posts',
 							"field"=>"slug"
 							)
 							)
