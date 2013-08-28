@@ -97,7 +97,10 @@ get_header(); ?>
 				
 				<div class="span3" id='sidebar'>
 <?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
-					echo $cimage;
+						if($cimage){
+							echo "<p>".$cimage."<br>";
+							echo the_title()."</p>";
+						}
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
 						if ($clinicianservices){
 							echo "<div class='sidebox'><h3>Services</h3><ul>";
