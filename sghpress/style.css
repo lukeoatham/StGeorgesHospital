@@ -499,8 +499,12 @@ body.home #secondarynav {
 .news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
 }
-
-
+ul.showbullets {
+	list-style: disc;
+}
+.showbullets li {
+	list-style: disc;
+}
 /* contact and find us */
 .contact .children li a{
 	color: rgb(238, 45,38);
@@ -918,21 +922,11 @@ li.comment .comment-body {
 
 
 
-
 .google_map{
 	width: 100%;
 	height: 300px;
 }
 
-
-.service-thumbnail{
-	width: 75px;
-	height: 75px;
-}
-
-#service-tabs h4{
-	margin-top: 0px;
-}
 
 
 /* ------------------
