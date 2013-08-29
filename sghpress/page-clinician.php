@@ -49,19 +49,19 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$itemObj["id"] = $item->ID;
 						$key = strtolower(substr($itemObj["surname"], 0, 1));
 						
-						/*$sService = get_the_terms($clin->ID, 'service');
+						//var_dump(get_post_meta($item->ID, "service-relationship"));
 						
+						$itemService = get_post_meta($item->ID, "service-relationship");
 						
+						$itemObj["services"] = array();
 						
-						if($sService){
-							$clinObj["services"] = array();
-							foreach($sService as $k => $val){
-								if(!$services[$val->slug]){
-									$services[$val->slug] = $val->name;
-								}
-								//array_push($clinObj["services"], $val->slug);
+						foreach($itemService as $serviceArray){
+							foreach($serviceArray as $service){
+								array_push($itemObj["services"], $service);
 							}
-						}*/
+						}
+						
+						
 						
 						//if has letter append to array, else create new key
 						if($items[$key]){
@@ -127,6 +127,14 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 									echo "<div class=\"media-body\">";
 									
 									echo "<h4><a href=\"".$item["link"]."\">".$displayname."</a></h4>";
+									
+									if($item["services"]){
+										echo "<ul>";
+										foreach($item["services"] as $service){
+											echo "<li>".get_the_title($service)."</li>";
+										}
+										echo "</ul>";
+									}
 									
 									//echo pippin_excerpt_by_id($item["id"], 20);
 									
