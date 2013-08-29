@@ -17,7 +17,7 @@ $site = $_GET['site'];
 												
 					</div>	
 				
-					<div class="span6">
+					<div class="span9">
 
 <?php if (!$site){ // LIST ALL SITES 
 ?>
@@ -39,36 +39,36 @@ $site = $_GET['site'];
 	//print_r($showsite);
 	echo "<h1>".$showsite->name."</h1>"; 
 	
-	//Retrieve meta fields from options table for each field
-	
-	echo "<p>".$showsite->description."</p>";
-	
 	$siteid = $showsite->term_id;
 	
+	
+	global $wpdb;
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_address'";
-    global $wpdb;
-    $site_meta = $wpdb->get_results( $q );		
     
+    $site_meta = $wpdb->get_results( $q );		
+    $siteData = explode("|",wpautop($site_meta[0]->option_value));
 
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_contact'";
-    global $wpdb;
-    $site_meta = $wpdb->get_results( $q );		
-    echo wpautop($site_meta[0]->option_value);
+    $site_meta = $wpdb->get_results( $q );
+    $siteTel = wpautop($site_meta[0]->option_value);
 
     $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_long_lat'";
-    global $wpdb;
     $site_meta = $wpdb->get_results( $q );	
     $loc = $site_meta[0]->option_value;
     $loc = substr($loc,strpos($loc,"|")+1,strlen($loc));
-
-
 ?>
 
 			<div class="row-fluid">
 				<div class="span4">
-					<?php echo wpautop($site_meta[0]->option_value); ?>
+					<h4>Address</h4>
+					<address>
+					<?php echo $siteData[0];  ?>
+					</address>
+					<h4>Contact details</h4>
+					<?php  echo $siteTel; ?>
 				</div>
-				<div class="span8">
+				<div class="span1"></div>
+				<div class="span7">
 					<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 						<script>
 							var map;
@@ -91,9 +91,14 @@ $site = $_GET['site'];
 							google.maps.event.addDomListener(window, 'load', initialize);
 						</script>
 						
-						<div id="map-canvas" class="google_map"></div>
+						<div id="map-canvas" class="google_map span11"></div>
 
 				</div>
+			</div>
+			
+			<div class="row-fluid">
+	
+				<?php echo $showsite->description;?>
 			</div>
 						
 <?php } ?>
