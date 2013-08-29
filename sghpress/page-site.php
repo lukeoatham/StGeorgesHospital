@@ -24,11 +24,31 @@ $site = $_GET['site'];
 					<h1><?php the_title(); ?></h1>
 				<?php the_content(); ?>
 					
-					<ul class="nav">
 					<?php //display filter terms
 						$sites = get_terms('sites',array("hide_empty"=>false)); 
 						foreach ($sites as $s){
-							echo "<li><a href='/contact-and-find-us/find-us/sites/?site=".$s->slug."'>".$s->name."</a></li>";
+							echo "<div class=\"media\">";
+							
+							
+							global $wpdb;
+							$q = "select option_value from wp_options where option_name = 'sites_".$s->term_id."_site_featured_image'";
+							$site_meta = $wpdb->get_results( $q );
+							$siteFIid = $site_meta[0]->option_value;
+							
+							
+							$postThumb = wp_get_attachment_image_src($siteFIid, array(75,75));
+							
+							if(!$postThumb){
+								$postThumb = "http://placehold.it/75x75";
+							}else{
+								$postThumb = $postThumb[0];
+							}
+							
+							echo "<div class=\"media-object pull-left\"><a href='/contact-and-find-us/find-us/sites/?site=".$s->slug."'><img src=\"".$postThumb."\" class=\"service-thumbnail\"></a></div>";
+							
+							echo "<div class=\"media-body\"><h4><a href=\"/contact-and-find-us/find-us/sites/?site=".$s->slug."\">".$s->name."</a></h4></div>";
+							
+							echo "</div>";
 						}
 				 ?>
 					</ul>
@@ -56,6 +76,8 @@ $site = $_GET['site'];
     $site_meta = $wpdb->get_results( $q );	
     $loc = $site_meta[0]->option_value;
     $loc = substr($loc,strpos($loc,"|")+1,strlen($loc));
+    
+    
 ?>
 
 			<div class="row-fluid">
