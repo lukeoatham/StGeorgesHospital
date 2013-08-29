@@ -1081,3 +1081,30 @@ function add_pagination_to_author_page_query_string($query_string){
     return $query_string;
 }
 add_filter('request', 'add_pagination_to_author_page_query_string');
+
+
+
+function pippin_excerpt_by_id($post, $length = 10, $tags = '<a><em><strong>', $extra = ' . . .') {
+ 
+	if(is_int($post)) {
+		// get the post object of the passed ID
+		$post = get_post($post);
+	} elseif(!is_object($post)) {
+		return false;
+	}
+ 
+	if(has_excerpt($post->ID)) {
+		$the_excerpt = $post->post_excerpt;
+		return apply_filters('the_content', $the_excerpt);
+	} else {
+		$the_excerpt = $post->post_content;
+	}
+ 
+	$the_excerpt = strip_shortcodes(strip_tags($the_excerpt), $tags);
+	$the_excerpt = preg_split('/\b/', $the_excerpt, $length * 2+1);
+	$excerpt_waste = array_pop($the_excerpt);
+	$the_excerpt = implode($the_excerpt);
+	$the_excerpt .= $extra;
+ 
+	return apply_filters('the_content', $the_excerpt);
+}
