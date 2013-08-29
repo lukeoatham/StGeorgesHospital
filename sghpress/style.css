@@ -927,7 +927,7 @@ li.comment .comment-body {
 	display: inline;
 }
   
-#services h3,#services h4 {
+#services h3,#services h4, #service-tabs h4 {
 	color: white;
 	margin-top: 0;
 }
