@@ -1,5 +1,5 @@
 <?php
-/* Template name: Press releases */
+/* Template name: Blog posts */
 
 get_header();
  ?>
@@ -16,13 +16,12 @@ get_header();
 							<?php renderLeftNav(); ?>
 						
 						<?php endif; ?>
-
-
 						
+
 					</div>
 
 				
-					<div class="span9" id='content'>
+					<div class="span6" id='content'>
 						<?php if ( is_front_page() ) { ?>
 							<h2><?php the_title(); ?></h2>
 						<?php } else { ?>	
@@ -41,7 +40,7 @@ get_header();
 							"paged"=>$paged,
 							"tax_query"=> array(array(
 							"taxonomy"=>"news-type",
-							"terms"=>'press-releases',
+							"terms"=>'blog-posts',
 							"field"=>"slug"
 							)
 							)
@@ -58,8 +57,7 @@ get_header();
 										    <?php
 									if ( has_post_thumbnail( $post->ID ) ) {
 										    echo "<a class='pull-left' href=".get_permalink().">";
-										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'thumbnail');
-										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
+											the_post_thumbnail('thumbnail');
 											echo "</a>";
 	    									}
 	    									?>
@@ -115,6 +113,8 @@ get_header();
 							<?php endif; ?>
 						<?php endif; ?>
 					</div>
+
+
 					
 				</div>
 
