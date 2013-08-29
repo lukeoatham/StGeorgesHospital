@@ -66,7 +66,33 @@ get_header(); ?>
 									  	if ($foundtags){
 										  	echo "<hr><p><i class='icon-tags'></i> Tags: ".$tagstr."</p>";
 									  	
-										  	}
+										  	}?>
+										  	<hr>
+										  		<?php dynamic_sidebar( 'newsitem-contact' ); ?>										  
+										  	<hr>
+										  	
+										  	<h2>Share this story</h2>
+										  	<p><a href="https://twitter.com/share?via=StGeorgesTrust&url=<?php echo urlencode("http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]); ?>&related=stgeorgesceo" class="twitter-share-button" data-lang="en">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></p>
+
+										  	<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo urlencode("http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]); ?>&amp;width=200&amp;height=46&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;send=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:46px;" allowTransparency="true"></iframe><br>
+										  	
+										  	<!-- Place this tag where you want the +1 button to render. -->
+										  	<div class="g-plusone" data-size="medium"></div>
+
+										  	<!-- Place this tag after the last +1 button tag. -->
+										  	<script type="text/javascript">
+											  	window.___gcfg = {lang: 'en-GB'};
+
+											  	(function() {
+												  	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+												  	po.src = 'https://apis.google.com/js/plusone.js';
+												  	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+												})();
+											</script>
+										  	<p><a href="mailto:?subject=<?php the_title(); ?>&body=<?php echo urlencode("http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]); ?>">Email this story</a></p>
+										  	<p>&nbsp;</p>
+										  	<?php
 
 			echo "<div id='newsposts'><hr>";
 			$category = get_the_category(); 

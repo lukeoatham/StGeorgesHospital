@@ -527,7 +527,15 @@ function twentyten_widgets_init() {
 		'before_title' => '',
 		'after_title' => '',
 	) );
-
+	register_sidebar( array(
+		'name' => __( 'newsitem-contact', 'twentyten' ),
+		'id' => 'newsitem-contact-area',
+		'description' => __( 'News item Contact us area', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '',
+		'after_title' => '',
+	) );
 
 }
 /** Register sidebars by running twentyten_widgets_init() on the widgets_init hook. */
