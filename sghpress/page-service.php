@@ -79,7 +79,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
-							<li><a href="#" data-toggle="tab" id="allServs" class="active">All services</a></li>
+							<li class="active"><a href="#" data-toggle="tab" id="allServs">All services</a></li>
 							<?php
 							
 							foreach($servs as $key => $servLetter){

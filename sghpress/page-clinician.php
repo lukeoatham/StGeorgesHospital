@@ -77,7 +77,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					
 					<div class="tabbable">
 						<ul class="nav nav-tabs">
-							<li><a href="#" data-toggle="tab" id="allItems" class="active">All clinicians</a></li>
+							<li class="active"><a href="#" data-toggle="tab" id="allItems">All clinicians</a></li>
 							<?php
 							
 							foreach($items as $key => $itemLetter){
