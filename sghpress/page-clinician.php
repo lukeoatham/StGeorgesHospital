@@ -3,19 +3,7 @@
 
 get_header(); 
 
-$show = $_GET['show'];
-if (!$show){
-	$show="A";
-}
-if ($show=="ALL"){
-	$show='';
-}
-
-?>
-
-
-
-<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
+if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 
 				<div class="row-fluid">
@@ -27,75 +15,9 @@ if ($show=="ALL"){
 				<div class="span9">
 					<h1><?php the_title() ; ?></h1>
 					
-<?php
-					$letters = range('A','Z');
-					
-					foreach($letters as $l) {
-						
-						$letterlink[$l] = "<li class='atoz disabled {$l}'><a href='#'>".$l."</a></li>";
-					}				
-					
-					?>				
-					
-					<div class="pagination">
-					<ul>
-					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All clinicians</a></li>					
 					<?php
 					
-					$gterms = new WP_Query(array(
-					"post_type"=>"people",
-					"posts_per_page"=>-1,
-					"meta_key"=>"show",
-					"meta_value"=>"1",
-					"tax_query"=>array(array(
-					"taxonomy"=>"people-types",
-					"field"=>"slug",
-					"terms"=>"clinician"
-					)),					
-					));	
-					
-					$counter = 0;
-							
-					if ( $gterms->have_posts() ) while ( $gterms->have_posts() ) : $gterms->the_post(); ?>
-																	
-								<?php 
-//			    add_post_meta($post->ID, 'show', 1, TRUE);
-//				sleep (0.5);
-									$title = get_the_title();
-									$lastname = get_post_meta($post->ID,'last_name',TRUE);
-									$thisletter = strtoupper(substr($lastname	,0,1));	
-																
-									$hasentries[$thisletter] = $hasentries[$thisletter] + 1;
-									
-									if (!$_REQUEST['show'] || (strtoupper($thisletter) == strtoupper($_REQUEST['show']) ) ) {
-										
-										$html .= "\r\r<div class='letterinfo'>\r<h3>".get_the_title()."</h3><div>" . wpautop(get_the_content()) . "</div></div>";
-										
-										$counter++;
-																																	
-									}
-									
-									$activeletter = ($show == strtoupper($thisletter)) ? "active" : null;
-
-						$letterlink[$thisletter] = ($hasentries[$thisletter] > 0) ? "<li class='atoz {$thisletter} {$activeletter}'><a href='?show=".$thisletter."&amp;hospsite=".$hospsite."'>".$thisletter."</a></li>" : "<li class='atoz  emptyletter {$thisletter} {$activeletter}'><a href='#'>".$thisletter."</a></li>";
-								
-								?>
-							
-						
-					<?php endwhile; ?>
-					
-					<?php 
-						//print_r($letterlink); 
-						echo @implode("",$letterlink); 
-					?>					
-					</ul>
-					</div>
-
-					
-
-					<ul class="nav nav-list">
-					<?php
-					$clinicians = new WP_Query(
+					$gterms = new WP_Query(
 					array(
 					"post_type"=>"people",
 					"posts_per_page"=>-1,
@@ -115,25 +37,155 @@ if ($show=="ALL"){
 					))
 					));	
 					
-					while ($clinicians->have_posts()) {
-				$clinicians->the_post();
-				
-
-				$displayname = get_post_meta($post->ID,'last_name',TRUE).", ".get_post_meta($post->ID,'professional_title',TRUE)." ".get_post_meta($post->ID,'first_name',TRUE);
-					if (($show && strtoupper(substr(get_post_meta($post->ID,'last_name',TRUE), 0,1)) == strtoupper($show)) || !$show ){
-						echo "<li><a href='".$post->guid."'>".$displayname."</a></li>";
+					$services = array();
+					$items = array();
+					foreach($gterms->posts as $item){
+						$itemObj = array();
+						$itemObj["surname"] = get_post_meta($item->ID, "last_name", true);
+						$itemObj["forename"] = get_post_meta($item->ID,"first_name", true);
+						$itemObj["prof_title"] = get_post_meta($item->ID, "professional_title", true);
+						$itemObj["title"] = $item->post_title;
+						$itemObj["link"] = $item->guid;
+						$itemObj["id"] = $item->ID;
+						$key = strtolower(substr($itemObj["surname"], 0, 1));
+						
+						/*$sService = get_the_terms($clin->ID, 'service');
+						
+						
+						
+						if($sService){
+							$clinObj["services"] = array();
+							foreach($sService as $k => $val){
+								if(!$services[$val->slug]){
+									$services[$val->slug] = $val->name;
+								}
+								//array_push($clinObj["services"], $val->slug);
+							}
+						}*/
+						
+						//if has letter append to array, else create new key
+						if($items[$key]){
+							array_push($items[$key], $itemObj);
+						}else{
+							$items[$key] = array();
+							array_push($items[$key], $itemObj);
+						}
 					}
-				}
-
 					
+			
 					?>
-					</ul>
+					
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li><a href="#" data-toggle="tab" id="allItems" class="active">All clinicians</a></li>
+							<?php
+							
+							foreach($items as $key => $itemLetter){
+								echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"azTab\">".strtoupper($key)."</a></li>";
+							}
+							
+							/*foreach($sites as $siteKey => $siteVal){
+								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
+							}*/
+							
+							
+							?>
+						</ul>
+					
+						<div class="tab-content" id="service-tabs">
+							<?php
+							
+							foreach($items as $key => $value){
+								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
+								
+								echo "<h3>".strtoupper($key)."</h3>";
+								
+								foreach($value as $item){
+									/*if($item["sites"]){
+										$sites = "";
+										foreach($serv["sites"] as $servSite){
+											if($sites != ""){
+												$sites .= " ";
+											}
+											$sites .= $servSite;
+										}
+									}*/
+									echo "<div class=\"media\">";
+									
+									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($item["id"]), array(75,75), false);
+									
+									if(!$postThumb){
+										$postThumb = "http://placehold.it/75x75";
+									}else{
+										$postThumb = $postThumb[0];
+									}
+									
+									$displayname = $item["prof_title"]." ".$item["forename"]." ".$item["surname"];
+									
+									echo "<a href=\"".$item["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object service-thumbnail\"></a>";
+									
+									echo "<div class=\"media-body\">";
+									
+									echo "<h4><a href=\"".$item["link"]."\">".$displayname."</a></h4>";
+									
+									//echo pippin_excerpt_by_id($item["id"], 20);
+									
+									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
+									
+									echo "</div>";
+									
+									echo "</div>";
+								}
+								echo "</div>";
+								
+							}
+							
+							?>
+						</div>
 					</div>
 					
+					<script type="text/javascript">
+						$('#allItems').click(function (e) {
+							//e.preventDefault();
+							$("#allItems").addClass('active');
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".azTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+						
+						/*$(".site").click(function(e){
+							e.preventDefault();
+							var selectedSite = $(this).attr("href");
+							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
+							$(".site").parent("li").removeClass("active");
+							$(this).parent("li").addClass("active");
+							$(".tab-content .media").hide();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+								
+								console.log($(this).children("." + selectedSite).length);
+								
+								if($(this).children("." + selectedSite).length == 0){
+									$(this).removeClass('active');
+								}
+							});
+							$("." + selectedSite).show();
+						});*/
+						
+						$('.azTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".azTab").removeClass("active");
+								$(this).removeClass('active');
+							});
+							$(this).tab('show');
+						});
 
-
-				<hr>
-
+					</script>	
 
 				</div>
 					
