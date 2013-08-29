@@ -21,29 +21,12 @@ $paged = $_GET['$paged'];
 					</div>
 					<div class="span9">
 					
-					<ul class="nav nav-pills">
-					<?php //display filter terms
-				 
-				 $coursetypes = get_terms('course-types'); 
-				 foreach ($coursetypes as $ct){
-					 
-					 echo "<li";
-					 if ($ct->slug == $coursetype) echo " class='active'";
-					 echo "><a href='/education-and-research/education/courses/?coursetype=".$ct->slug."'>".$ct->name."</a></li>";
-				 }
-					 echo "<li";
-					 if (!$coursetype) echo " class='active'";
-					 echo "><a href='/education-and-research/education/courses/'>All</a></li>";
-				 
-				 ?>
 					
-					
-					</ul>
-
 					
 					<?php
+					
 					if ($coursetype){
-						$courses = new WP_query(
+						$gterms = new WP_query(
 							array(
 							"post_type" => "course",
 							"posts_per_page" => 10,
@@ -59,73 +42,153 @@ $paged = $_GET['$paged'];
 							)
 						);
 					} else {
-					$courses = new WP_Query('post_type=course&posts_per_page=10&paged='.$paged);
+						$gterms = new WP_Query('post_type=course&posts_per_page=10&paged='.$paged);
 					}
+					
+					$items = array();
+					
+					$coursetypes = get_terms('course-types'); 
+					foreach ($coursetypes as $ct){
+						$items[$ct->name] = array();
+					}
+					
+					
+					
+					foreach($gterms->posts as $item){
+						$itemObj = array();
+						$itemObj["title"] = $item->post_title;
+						$itemObj["link"] = $item->guid;
+						$itemObj["id"] = $item->ID;
+						$itemObj["thumbnail"] = wp_get_attachment_image_src(get_post_thumbnail_id($item->ID),'thumbnail')[0];
+						$posttags = get_the_tags($item->ID);	
+						$tagstr="";
+						if ($posttags) {
+							foreach($posttags as $tag) {
+								$tagurl = $tag->slug;
+								$tagstr=$tagstr."<a href='/tag/{$tagurl}'><span class='label label-info'>" . str_replace(' ', '&nbsp;' , $tag->name) ."</span></a>";
+							}
+							$itemObj["tags"] = $tagstr;
+						}
+					
+						$courseType = wp_get_post_terms($item->ID, 'course-types');
+						
+						$key = $courseType[0]->name;
+						
+						
+						//if has letter append to array, else create new key
+						if($items[$key]){
+							array_push($items[$key], $itemObj);
+						}else{
+							$items[$key] = array();
+							array_push($items[$key], $itemObj);
+						}
+					}
+					
+					?>
+					
+					
+					<div class="tabbable">
+					
+					
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#" data-toggle="tab" id="allItems">All courses</a></li>
+							<?php
+							
+							foreach($items as $key => $itemLetter){
+								$activator = "";
+								if(count($itemLetter) < 1 ){
+									echo "<li class=\"disabled\"><a>".ucfirst($key)."</a></li>";
 
-					while ($courses->have_posts()) {
-				$courses->the_post();
-				echo "<div class='media'>";?>
-										    <?php
-									if ( has_post_thumbnail( $post->ID ) ) {
-										    echo "<a class='pull-left' href=".get_permalink().">";
-										    $mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'thumbnail');
-										    echo "<img class='media-object' src='".$mediaimage[0]."'>";
-											echo "</a>";
-	    									}
-	    									?>
-										<?php 
-										echo "<div class='media-body'><h2 class='media-heading'><a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
-	
-										the_excerpt();
-	?>
-<p>
-										
-									
-									<?php if (get_comments_number($ID)>0) : ?>
-									<i class="icon-comment"></i> <a href="<?php comments_link(); ?>"> 
-									<?php echo get_comments_number($ID); 
-										if (get_comments_number($ID) == 1) {
-										echo " Comment"; 
-										} else {
-										echo  " Comments"; 
-										}
-										echo "</a>";
-									endif;	
-									?>
-									<?php $posttags = get_the_tags();
-										$foundtags=false;	
-										$tagstr="";
-									if ($posttags) {
-									  	foreach($posttags as $tag) {
-									  			$foundtags=true;
-									  			$tagurl = $tag->slug;
-										    	$tagstr=$tagstr."
-										    	<a href='/tag/{$tagurl}'><span class='label label-info'>" . str_replace(' ', '&nbsp;' , $tag->name) ."</span></a>";
-								  	}
-								  	}
-									  	if ($foundtags){
-										  	echo " <i class='icon-tags'></i> Tags: ".$tagstr;
-									  	
-									}
-
-?>									 </p></div></div>
-<?php
-
+								}else{
+									echo "<li><a href=\"#tab".strtolower(str_replace(" ","",$key))."\" data-toggle=\"tab\" class=\"azTab\">".ucfirst($key)."</a></li>";
 								}
-							
-							
-							wp_reset_query();
+							}
 							
 							?>
-
-					</div>
-
-
-
-				</div>
+						</ul>
 					
-				
+					<div class="tab-content" id="service-tabs">
+							<?php
+							
+							foreach($items as $key => $value){
+								$activator = "";
+								if(count($value) > 0 ){
+									$activator = " active";
+								}
+							
+								echo "<div class=\"tab-pane".$activator."\" id=\"tab".strtolower(str_replace(" ","",$key))."\">";
+								
+								echo "<h3>".ucfirst($key)."</h3>";
+								
+								foreach($value as $item){
+									echo "<div class=\"media\">";
+									
+									
+									if(!$item["thumbnail"]){
+										$postThumb = "http://placehold.it/150x150";
+									}else{
+										$postThumb = $item["thumbnail"];
+									}
+									
+									echo "<a href=\"".$item["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object course-thumbnail\"></a>";
+									
+									echo "<div class=\"media-body\">";
+									
+									echo "<h4><a href=\"".$item["link"]."\">".$item["title"]."</a></h4>";
+									
+									
+									
+									echo pippin_excerpt_by_id($item["id"], 20);
+									
+									if($item["tags"]){
+										echo " <i class='icon-tags'></i> Tags: ".$item["tags"];
+									}
+									
+									echo "</div>";
+									
+									echo "</div>";
+								}
+								echo "</div>";
+								
+							}
+							
+							?>
+						</div>
+					</div>
+					
+					
+					<script type="text/javascript">
+						$('#allItems').click(function (e) {
+							$("#allItems").addClass('active');
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".azTab").removeClass("active");
+								$(this).addClass('active');
+								
+								if($(this).children(".media").length == 0){
+									$(this).removeClass('active');
+								}
+							});
+						});
+						
+						
+						$('.azTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".azTab").removeClass("active");
+								$(this).removeClass('active');
+							});
+							$(this).tab('show');
+						});
 
+					</script>
+					
+					
+				</div>
+
+					
+					
 <?php endwhile; ?>
 
 <?php get_footer(); ?>
