@@ -26,8 +26,10 @@ get_header(); ?>
 						
 					</div>
 				<div class="span6" id='content'>
+				<p class="pull-right"><a href="course-enquiry/?course_title=<?php echo urlencode(the_title()); ?>&course_level=<?php echo urlencode(get_post_meta($post->ID,'target_audience')[0]); ?>" class="btn-large btn-info">Book a place</a></p>
 					<h1><?php the_title(); ?></h1>
-
+					
+					
 					<?php 
 										 $posttags = get_the_tags();
 						$foundtags=false;	
@@ -82,19 +84,15 @@ if($rows)
 					echo wpautop($tempfield[0]);
 					$tempfield = get_post_meta($post->ID,'more_information') ;  //print_r($course_leader[0][0]);
 					echo wpautop($tempfield[0]);
- ?>
-						<div id='comments'>
-							<?php comments_template( '', true ); ?>
-						</div>						
-				
+ ?>					
 				</div>
 				
 				<div class="span3" id='sidebar'>
-					
+					<p>
 <?php					the_post_thumbnail($post->ID, 'medium');
 //					echo $cimage;
-?>
-	
+?></p>
+				
 				</div>
 	
 	</div>
