@@ -38,7 +38,7 @@ $courselevel = $_GET['course_level'];
 							$params["course_level"] = urldecode($courselevel);
 						}
 						
-						gravity_form(3, $display_title=true, $display_description=true, $display_inactive=false, $field_values=$params, $ajax=false, 12); ?>
+						gravity_form('Course booking', $display_title=true, $display_description=true, $display_inactive=false, $field_values=$params, $ajax=false, 12); ?>
 					
 					</div>				
 				</div>
