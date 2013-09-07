@@ -184,7 +184,7 @@ get_header(); ?>
 						if ($servicelocation['service_wing']->name){	
 							echo ", ".$servicelocation['service_wing']->name.", ";
 						}
-						echo $servicelocation['service_site']->name."</p>";
+						echo "<a href='/contact-and-find-us/find-us/sites/?site=".$servicelocation['service_site']->slug."'>".$servicelocation['service_site']->name."</a></p>";
 						$loc='';
 						$loc = $servicelocation['service_long_lat'];
 						if ($loc):

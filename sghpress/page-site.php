@@ -76,6 +76,14 @@ $site = $_GET['site'];
     $site_meta = $wpdb->get_results( $q );	
     $loc = $site_meta[0]->option_value;
     $loc = substr($loc,strpos($loc,"|")+1,strlen($loc));
+
+    $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_service_information'";
+    $site_meta = $wpdb->get_results( $q );
+    $siteService = wpautop($site_meta[0]->option_value);
+
+    $q = "select option_value from wp_options where option_name = 'sites_".$siteid."_site_travel_information'";
+    $site_meta = $wpdb->get_results( $q );
+    $siteTravel = wpautop($site_meta[0]->option_value);
     
     
 ?>
@@ -87,7 +95,18 @@ $site = $_GET['site'];
 					<?php echo $siteData[0];  ?>
 					</address>
 					<h4>Contact details</h4>
-					<?php  echo $siteTel; ?>
+					<?php  echo $siteTel; 
+					if ($siteService):	
+					?>
+					<h4>Service information</h4>
+					<?php  echo $siteService; 
+					endif;
+					if ($siteTravel):
+					?>
+					<h4>Travel information</h4>
+					<?php  echo $siteTravel; 
+					endif;
+					?>
 				</div>
 				<div class="span1"></div>
 				<div class="span7">
