@@ -180,11 +180,14 @@ get_header(); ?>
 						    case 'B':
 						        echo "Basement floor";
 						        break;
-						}	
-						echo ", ".$servicelocation['service_wing']->name.", ";
+						}
+						if ($servicelocation['service_wing']->name){	
+							echo ", ".$servicelocation['service_wing']->name.", ";
+						}
 						echo $servicelocation['service_site']->name."</p>";
 						$loc='';
 						$loc = $servicelocation['service_long_lat'];
+						if ($loc):
 						?>
 						
 						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -212,7 +215,7 @@ get_header(); ?>
 						<div id="map-canvas" class="google_map"></div>
 						
 						<?php
-						
+						endif;
 
 						echo "</div>";
 					}

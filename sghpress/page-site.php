@@ -91,6 +91,7 @@ $site = $_GET['site'];
 				</div>
 				<div class="span1"></div>
 				<div class="span7">
+				<?php if ($loc): ?>
 					<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 						<script>
 							var map;
@@ -114,13 +115,13 @@ $site = $_GET['site'];
 						</script>
 						
 						<div id="map-canvas" class="google_map span11"></div>
-
+						<?php endif; ?>
 				</div>
 			</div>
 			
 			<div class="row-fluid">
 	
-				<?php echo $showsite->description;?>
+				<?php echo wpautop($showsite->description);?>
 			</div>
 						
 <?php } ?>
