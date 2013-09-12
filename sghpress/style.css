@@ -972,8 +972,8 @@ li.comment .comment-body {
 
 select{
 	*margin-top: 0px;
-	*font-size: 20px;
-	*line-height: 2;
+	*font-size: 20px !important;
+	*line-height: 2 !important;
 	
 }
 
