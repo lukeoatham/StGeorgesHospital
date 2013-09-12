@@ -969,7 +969,7 @@ li.comment .comment-body {
 .sidebox {
 	background: #f1f8ff;
 }
-.sidebox h3 {
+h3.sideboxhead  {
 	background: #1972B5;
 	padding: 0.5em;
 	color: white;

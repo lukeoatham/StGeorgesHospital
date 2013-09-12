@@ -146,7 +146,7 @@ get_header(); ?>
 					//display contact information
 					if ($contactnumber){
 						echo "<div class='sidebox' id='contactnumber'>";
-						echo "<h3>Contact details</h3>";
+						echo "<h3 class='sideboxhead'>Contact details</h3>";
 						echo wpautop($contactnumber);
 						echo "</div>";
 					}
@@ -154,7 +154,7 @@ get_header(); ?>
 					//display opening hours information
 					if ($openinghours){
 						echo "<div class='sidebox' id='openinghours'>";
-						echo "<h3>Opening hours</h3>";
+						echo "<h3 class='sideboxhead'>Opening hours</h3>";
 						echo wpautop($openinghours);
 						echo "</div>";
 					}
@@ -163,7 +163,7 @@ get_header(); ?>
 					$k=0;
 					foreach ($servicelocations as $servicelocation){
 						echo "<div class='sidebox' id='servicelocations'>";
-						echo "<h3>Location</h3><p>";
+						echo "<h3 class='sideboxhead'>Location</h3><p>";
 						
 						
 						$floor = $servicelocation['service_floor'];
@@ -234,13 +234,13 @@ get_header(); ?>
 					echo "</div>";
 					
 					if ($treatments !=''){
-						echo "<div class='sidebox' id='treatments'><h3>Treatments</h3>";
+						echo "<div class='sidebox' id='treatments'><h3 class='sideboxhead'>Treatments</h3>";
 						echo wpautop($treatments); 					
 						echo "</div>";
 					}	
 					
 					if ($team !=''){
-						echo "<div class='sidebox' id='team'><h3>Key staff</h3>";
+						echo "<div class='sidebox' id='team'><h3 class='sideboxhead'>Key staff</h3>";
 						echo wpautop($team);
 						echo "</div>";
 					}						
@@ -264,7 +264,7 @@ get_header(); ?>
 					}	
 
 					if ($referralDetails){
-						echo "<div class='sidebox' id='referralforms'><h3>Referrals</h3>";
+						echo "<div class='sidebox' id='referralforms'><h3 class='sideboxhead'>Referrals</h3>";
 						echo wpautop($referralDetails);
 						echo "</div>";
 					}
@@ -331,7 +331,7 @@ get_header(); ?>
 					var_dump($pageposts);*/
 					foreach ($clinicianObjects as $clinObj){ 
 						if (!$donetitle){
-							echo "<div class='sidebox' id='clinicians'><h3>Clinicians</h3><ul>";
+							echo "<div class='sidebox' id='clinicians'><h3 class='sideboxhead'>Clinicians</h3><ul>";
 							$donetitle=true;
 						}
 						echo "<li><a href='".$clinObj["guid"]."'>".$clinObj["post_title"]."</a></li>";
@@ -345,7 +345,7 @@ get_header(); ?>
 						$donetitle=false;
 						foreach ($wards as $ward){
 							if (!$donetitle){
-								echo "<div class='sidebox' id='wards'><h3>Wards</h3><ul>";
+								echo "<div class='sidebox' id='wards'><h3 class='sideboxhead'>Wards</h3><ul>";
 								$donetitle=true;
 							}
 							$w = get_post($ward);
@@ -361,7 +361,7 @@ get_header(); ?>
 					$donetitle=false;					
 					foreach ($referralObjects as $referral) {
 						if (!$donetitle){
-							echo "<div class='sidebox' id='referralforms'><h3>Referral forms</h3><ul>";
+							echo "<div class='sidebox' id='referralforms'><h3 class='sideboxhead'>Referral forms</h3><ul>";
 							$donetitle=true;
 						}
 						echo "<li><a href='".$referral["referrallink"]."'>".$referral["referral_title"]."</a></li>";
