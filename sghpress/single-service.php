@@ -13,6 +13,12 @@ get_header(); ?>
 	global $mainid;
 	$mainid=$post->ID;
 ?>
+	<?php 
+		$wpLink = get_permalink($post->ID);
+		$siteURL = "http://".$_SERVER["HTTP_HOST"]."".$_SERVER["REQUEST_URI"];
+		if($wpLink == $siteURL ){
+	
+	 ?>
 
 		<div class="row-fluid">
 					<div class="span3" id='secondarynav'>
@@ -359,7 +365,7 @@ get_header(); ?>
 					}
 								
 								
-
+				}
 						
 							?>	
 
