@@ -195,6 +195,7 @@ ul#menu-top-tasks li {
 #primarynav {
     background: 0;
     padding: 0;
+    margin-top: 1em;
 }
 
 #primarynav ul {
@@ -927,7 +928,7 @@ li.comment .comment-body {
 	display: inline;
 }
   
-#services h3,#services h4, #service-tabs h4 {
+#services h3,#services h4, #service-tabs h4, #item-tabs h4 {
 	color: white;
 	margin-top: 0;
 }
@@ -944,6 +945,10 @@ li.comment .comment-body {
 	height: 75px;
 }
 
+.item-thumbnail{
+	width: 150px;
+	height: 150px;
+}
 
 /* ------------------
 Mobile
