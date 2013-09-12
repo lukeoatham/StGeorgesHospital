@@ -925,7 +925,14 @@ li.comment .comment-body {
 }
 #services {
     background: #1972B5;
-    padding: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+#services .span5 h3, #services .span5 h4, #services .span5 div{
+	margin-left: 16px;
+}
+#services .span3 h3, #services .span3 h4, #services .span3 div{
+	margin-right: 16px;
 }
 #services p, #services a {
     margin-bottom: 1em !important;
