@@ -34,6 +34,7 @@ get_header(); ?>
 					</div>
 
 					<?php 
+					the_content();
 					//check the various sidebar boxes
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
 					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
@@ -67,6 +68,7 @@ get_header(); ?>
 							"terms"=>"referral-forms"
 						))
 					));
+					$referralDetails = get_post_meta($post->ID,'service_referrals', true);
 					$linksbox = get_post_meta($post->ID, 'links_box', true);
 					
 					
@@ -101,6 +103,7 @@ get_header(); ?>
 						}
 					}
 					
+
 					
 					
 					?>
@@ -109,7 +112,7 @@ get_header(); ?>
 						<li><a href="#mcontent">Main content</a></li>
 						<?php
 							if($contactnumber){
-								echo '<li><a href="#contactnumber">Contact numbers</a></li>';
+								echo '<li><a href="#contactnumber">Contact detailss</a></li>';
 							}
 							if($openinghours){
 								echo '<li><a href="#openinghours">Opening hours</a></li>';
@@ -143,7 +146,7 @@ get_header(); ?>
 					//display contact information
 					if ($contactnumber){
 						echo "<div class='sidebox' id='contactnumber'>";
-						echo "<h3>Contact number</h3>";
+						echo "<h3>Contact details</h3>";
 						echo wpautop($contactnumber);
 						echo "</div>";
 					}
@@ -166,25 +169,25 @@ get_header(); ?>
 						$floor = $servicelocation['service_floor'];
 						switch ($floor) {
 						    case 5:
-						        echo "5th floor";
+						        echo "5th floor ";
 						        break;
 						    case 4:
-						        echo "4th floor";
+						        echo "4th floor ";
 						        break;
 						    case 3:
-						        echo "3rd floor";
+						        echo "3rd floor ";
 						        break;
 						    case 2:
-						        echo "2nd floor";
+						        echo "2nd floor ";
 						        break;
 						    case 1:
-						        echo "1st floor";
+						        echo "1st floor ";
 						        break;
 						    case 'G':
-						        echo "Ground floor";
+						        echo "Ground floor ";
 						        break;
 						    case 'B':
-						        echo "Basement floor";
+						        echo "Basement floor ";
 						        break;
 						}
 						if ($servicelocation['service_wing']->name){	
@@ -231,11 +234,15 @@ get_header(); ?>
 					echo "</div>";
 					
 					if ($treatments !=''){
-						echo wpautop($treatments); 					}	
-
+						echo "<div class='sidebox' id='treatments'><h3>Treatments</h3>";
+						echo wpautop($treatments); 					
+						echo "</div>";
+					}	
 					
 					if ($team !=''){
+						echo "<div class='sidebox' id='team'><h3>Key staff</h3>";
 						echo wpautop($team);
+						echo "</div>";
 					}						
 
 					
@@ -255,6 +262,12 @@ get_header(); ?>
 						echo "</ul>";
 
 					}	
+
+					if ($referralDetails){
+						echo "<div class='sidebox' id='referralforms'><h3>Referrals</h3>";
+						echo wpautop($referralDetails);
+						echo "</div>";
+					}
 						
 					
 					if ($moreinformation !=''){
@@ -348,7 +361,7 @@ get_header(); ?>
 					$donetitle=false;					
 					foreach ($referralObjects as $referral) {
 						if (!$donetitle){
-							echo "<div class='sidebox' id='referrals'><h3>Referral forms</h3><ul>";
+							echo "<div class='sidebox' id='referralforms'><h3>Referral forms</h3><ul>";
 							$donetitle=true;
 						}
 						echo "<li><a href='".$referral["referrallink"]."'>".$referral["referral_title"]."</a></li>";
