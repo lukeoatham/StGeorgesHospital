@@ -295,6 +295,9 @@ body.home #secondarynav {
 
 #secondarynav .current_page_item{
 	position: relative;
+	*background-image: url('images/nav-icon-white.gif');
+	*background-repeat: no-repeat;
+	*background-position: right middle;
 }
 
 #secondarynav .current_page_item:before{
@@ -340,10 +343,12 @@ body.home #secondarynav {
 
 .patient .current_page_item:before{
 	border-color: transparent transparent transparent rgb(160, 31, 97) !important;
+	*background-image: url('images/nav-icon-d-red.gif') !important;
 }
 
 .patient .level-0.current_page_item:before, .patient .level-1.current_page_item:before, .patient .level-2.current_page_item:before, .patient .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 /* Services */
@@ -377,10 +382,12 @@ body.home #secondarynav {
 
 .service .current_page_item:before{
 	border-color: transparent transparent transparent rgb(77, 184, 72) !important;
+	*background-image: url('images/nav-icon-green.gif') !important;
 }
 
 .service .level-0.current_page_item:before, .service .level-1.current_page_item:before, .service .level-2.current_page_item:before, .service .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 /* Work */
@@ -408,10 +415,12 @@ body.home #secondarynav {
 
 .work .current_page_item:before{
 	border-color: transparent transparent transparent rgb(72, 47, 137) !important;
+	*background-image: url('images/nav-icon-d-purple.gif') !important;
 }
 
 .work .level-0.current_page_item:before, .work .level-1.current_page_item:before, .work .level-2.current_page_item:before, .work .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 
@@ -440,10 +449,12 @@ body.home #secondarynav {
 
 .about .current_page_item:before{
 	border-color: transparent transparent transparent rgb(14, 180, 222) !important;
+	*background-image: url('images/nav-icon-l-blue.gif') !important;
 }
 
 .about .level-0.current_page_item:before, .about .level-1.current_page_item:before, .about .level-2.current_page_item:before, .about .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 
@@ -474,10 +485,12 @@ body.home #secondarynav {
 
 .education .current_page_item:before{
 	border-color: transparent transparent transparent rgb(246, 134, 32) !important;
+	*background-image: url('images/nav-icon-orange.gif') !important;
 }
 
 .education .level-0.current_page_item:before, .education .level-1.current_page_item:before, .education .level-2.current_page_item:before, .education .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 
@@ -508,10 +521,12 @@ body.home #secondarynav {
 
 .news .current_page_item:before{
 	border-color: transparent transparent transparent rgb(33,65,142) !important;
+	*background-image: url('images/nav-icon-d-blue.gif') !important;
 }
 
 .news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 ul.showbullets {
 	list-style: disc;
@@ -543,10 +558,12 @@ ul.showbullets {
 
 .contact .current_page_item:before{
 	border-color: transparent transparent transparent rgb(238, 45,38) !important;
+	*background-image: url('images/nav-icon-l-red.gif') !important;
 }
 
 .contact .level-0.current_page_item:before, .contact .level-1.current_page_item:before, .contact .level-2.current_page_item:before, .contact .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 .ajaxpaging-separator {
@@ -583,10 +600,12 @@ ul.showbullets {
 
 .gp .current_page_item:before{
 	border-color: transparent transparent transparent rgb(0, 0,0) !important;
+	*background-image: url('images/nav-icon-black.gif') !important;
 }
 
 .gp .level-0.current_page_item:before, .gp .level-1.current_page_item:before, .gp .level-2.current_page_item:before, .gp .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
+	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
 .homeicon {
