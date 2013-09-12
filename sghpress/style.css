@@ -195,7 +195,7 @@ ul#menu-top-tasks li {
 #primarynav {
     background: 0;
     padding: 0;
-    margin-top: 1em;
+    *margin-top: 1em;
 }
 
 #primarynav ul {
@@ -870,8 +870,12 @@ li.comment .comment-body {
 
 #doitonline {
     background: #4DB848;
-    padding: 1em;
-    }
+    padding: 0px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
 #doitonline p, #doitonline li a {
     margin-bottom: 1em !important;
     letter-spacing: .06em;
@@ -886,7 +890,15 @@ li.comment .comment-body {
 	color: white;
 	margin-top: 0;
 	margin-bottom: 0.5em;
+	margin-left: 16px;
+	margin-right: 16px;
 }
+
+#doitonline .menu-do-it-online-container{
+	margin-left: 16px;
+	margin-right: 16px;
+}
+
 .sidebox {
 	background: #f1f8ff;
 }
