@@ -59,7 +59,7 @@ $paged = $_GET['$paged'];
 						$itemObj["title"] = $item->post_title;
 						$itemObj["link"] = $item->guid;
 						$itemObj["id"] = $item->ID;
-						$itemObj["thumbnail"] = wp_get_attachment_image_src(get_post_thumbnail_id($item->ID),'thumbnail')[0];
+						$itemObj["thumbnail"] = wp_get_attachment_image_src(get_post_thumbnail_id($item->ID),'thumbnail',false)[0];
 						$posttags = get_the_tags($item->ID);	
 						$tagstr="";
 						if ($posttags) {
