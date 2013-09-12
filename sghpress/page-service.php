@@ -166,9 +166,6 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							$(".tab-pane").each(function(i, t){
 								$(".serviceTab").removeClass("active");
 								$(this).addClass('active');
-								
-								console.log($(this).children("." + selectedSite).length);
-								
 								if($(this).children("." + selectedSite).length == 0){
 									$(this).removeClass('active');
 								}
