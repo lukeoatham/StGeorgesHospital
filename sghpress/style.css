@@ -962,6 +962,13 @@ li.comment .comment-body {
 	height: 150px;
 }
 
+select{
+	*margin-top: 0px;
+	*font-size: 20px;
+	*line-height: 2;
+	
+}
+
 /* ------------------
 Mobile
 ----------- */
