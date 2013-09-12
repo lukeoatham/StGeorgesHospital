@@ -233,6 +233,7 @@ ul#menu-top-tasks li {
 }
 #searchblock form .searchbox {
     background-image: url('images/search.svg');
+    *background-image: url('images/search.gif');
     background-repeat: no-repeat;
     background-position: 96% center;
     background-size: 1.5em;
