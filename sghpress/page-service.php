@@ -160,7 +160,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							e.preventDefault();
 							var selectedSite = $(this).attr("href");
 							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
-							$(".site").parent("li").removeClass("active");
+							$(".nav-tabs li").removeClass("active");
 							$(this).parent("li").addClass("active");
 							$(".tab-content .media").hide();
 							$(".tab-pane").each(function(i, t){
@@ -176,11 +176,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
 							$(".tab-content .media").show();
-							$(".tab-pane").each(function(i, t){
-								$(".serviceTab").removeClass("active");
-								$(this).removeClass('active');
-							});
-							$(this).tab('show');
+							
 						});
 
 					</script>			
