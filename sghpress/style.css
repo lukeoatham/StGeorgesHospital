@@ -295,6 +295,9 @@ body.home #secondarynav {
 
 #secondarynav .current_page_item{
 	position: relative;
+}
+
+#secondarynav .current_page_item a{
 	*background-image: url('images/nav-icon-white.gif');
 	*background-repeat: no-repeat;
 	*background-position: left center;
@@ -345,7 +348,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(160, 31, 97) !important;
 }
 
-.patient .current_page_item{
+.patient .current_page_item a{
 	*background-image: url('images/nav-icon-d-red.gif') !important;
 }
 
@@ -353,7 +356,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-.patient .level-0.current_page_item, .patient .level-1.current_page_item, .patient .level-2.current_page_item, .patient .level-3.current_page_item{
+.patient .level-0.current_page_item a, .patient .level-1.current_page_item a, .patient .level-2.current_page_item a, .patient .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -390,16 +393,15 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(77, 184, 72) !important;
 }
 
-.service .current_page_item{
+.service .current_page_item a{
 	*background-image: url('images/nav-icon-green.gif') !important;
 }
 
 .service .level-0.current_page_item:before, .service .level-1.current_page_item:before, .service .level-2.current_page_item:before, .service .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
-	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
-.service .level-0.current_page_item, .service .level-1.current_page_item, .service .level-2.current_page_item, .service .level-3.current_page_item{
+.service .level-0.current_page_item a, .service .level-1.current_page_item a, .service .level-2.current_page_item a, .service .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -430,7 +432,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(72, 47, 137) !important;
 }
 
-.work .current_page_item{
+.work .current_page_item a{
 	*background-image: url('images/nav-icon-d-purple.gif') !important;
 }
 
@@ -438,7 +440,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-.work .level-0.current_page_item, .work .level-1.current_page_item, .work .level-2.current_page_item, .work .level-3.current_page_item{
+.work .level-0.current_page_item a, .work .level-1.current_page_item a, .work .level-2.current_page_item a, .work .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -469,7 +471,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(14, 180, 222) !important;
 }
 
-.about .current_page_item{
+.about .current_page_item a{
 	*background-image: url('images/nav-icon-l-blue.gif') !important;
 }
 
@@ -477,7 +479,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-.about .level-0.current_page_item, .about .level-1.current_page_item, .about .level-2.current_page_item, .about .level-3.current_page_item{
+.about .level-0.current_page_item a, .about .level-1.current_page_item a, .about .level-2.current_page_item a, .about .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -510,7 +512,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(246, 134, 32) !important;
 }
 
-.education .current_page_item{
+.education .current_page_item a{
 	*background-image: url('images/nav-icon-orange.gif') !important;
 }
 
@@ -518,7 +520,7 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent white !important;
 }
 
-.education .level-0.current_page_item, .education .level-1.current_page_item, .education .level-2.current_page_item, .education .level-3.current_page_item{
+.education .level-0.current_page_item a, .education .level-1.current_page_item a, .education .level-2.current_page_item a, .education .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -550,16 +552,15 @@ body.home #secondarynav {
 	border-color: transparent transparent transparent rgb(33,65,142) !important;
 }
 
-.news .current_page_item{
+.news .current_page_item a{
 	*background-image: url('images/nav-icon-d-blue.gif') !important;
 }
 
 .news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
 	border-color: transparent transparent transparent white !important;
-	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
-.news .level-0.current_page_item, .news .level-1.current_page_item, .news .level-2.current_page_item, .news .level-3.current_page_item{
+.news .level-0.current_page_item a, .news .level-1.current_page_item a, .news .level-2.current_page_item a, .news .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -595,7 +596,7 @@ ul.showbullets {
 	border-color: transparent transparent transparent rgb(238, 45,38) !important;
 }
 
-.contact .current_page_item{
+.contact .current_page_item a{
 	*background-image: url('images/nav-icon-l-red.gif') !important;
 }
 
@@ -603,7 +604,7 @@ ul.showbullets {
 	border-color: transparent transparent transparent white !important;
 }
 
-.contact .level-0.current_page_item, .contact .level-1.current_page_item, .contact .level-2.current_page_item, .contact .level-3.current_page_item{
+.contact .level-0.current_page_item a, .contact .level-1.current_page_item a, .contact .level-2.current_page_item a, .contact .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
@@ -643,7 +644,7 @@ ul.showbullets {
 	border-color: transparent transparent transparent rgb(0, 0,0) !important;
 }
 
-.gp .current_page_item{	
+.gp .current_page_item a{	
 	*background-image: url('images/nav-icon-black.gif') !important;
 }
 
@@ -651,7 +652,7 @@ ul.showbullets {
 	border-color: transparent transparent transparent white !important;
 }
 
-.gp .level-0.current_page_item, .gp .level-1.current_page_item, .gp .level-2.current_page_item, .gp .level-3.current_page_item{
+.gp .level-0.current_page_item a, .gp .level-1.current_page_item a, .gp .level-2.current_page_item a, .gp .level-3.current_page_item a{
 	*background-image: url('images/nav-icon-white.gif') !important;
 }
 
