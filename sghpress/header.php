@@ -27,7 +27,6 @@ session_start();
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 
 	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet">
-	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/bootstrap-responsive.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 	<link rel="stylesheet" type="text/css" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/print.css" />
     <script src="http://code.jquery.com/jquery.js"></script>

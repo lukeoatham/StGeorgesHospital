@@ -80,7 +80,13 @@
 										}
 										if ($post->post_type=='newsitem') {$context = "News &amp; events";}
 										if ($post->post_type=='event') {$context = "Events";}
-										if ($post->post_type=='service') { $context = "Services";}
+										$terms = get_the_terms( $post->ID, 'sites' );
+										$serviceterms='';
+										foreach ($terms as $tm){
+											$serviceterms.=$tm->name.", ";
+										}
+										$serviceterms=substr($serviceterms, 0, strlen($serviceterms)-2);
+										if ($post->post_type=='service') { $context = "Services at ".$serviceterms;}
 										if ($post->post_type=='ward') {$context = "Wards";}
 										
 										echo "<strong>".$context."</strong>";
@@ -90,7 +96,7 @@
 											echo date('j M Y',strtotime($post->post_date));
 										endif;
 
-										if ( (get_post_type() == 'page') || (get_post_type() == 'service') ) :?>
+										if ( (get_post_type() == 'page') || (get_post_type() == 'service') || (get_post_type() == 'ward') ) :?>
 											| <i class="icon-calendar"></i> <?php 
 											echo "Updated ".date('j M Y',strtotime($post->post_modified));
 										endif;
