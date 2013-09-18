@@ -815,8 +815,8 @@ ul.xoxo {
     margin-bottom: 2em;
 }
 h2 a:link, h3 a:link, h2 a:visited, h3 a:visited {
-    text-decoration: none!important;
-    color: black!important;
+/*    text-decoration: none!important;
+    color: black!important; */
 }
 h2 a:hover, h3 a:hover {
     text-decoration: underline;
