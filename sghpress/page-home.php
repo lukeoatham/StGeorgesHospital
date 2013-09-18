@@ -105,14 +105,22 @@ get_header(); ?>
 							"posts_per_page" => -1,
 							"orderby" => "title",
 							"order" => "ASC",
-							"post_parent" => 0
+
 							)
 						);
 						echo "<option value=''>Choose a service</option>"; 
 					foreach ($allservices as $service){
+						$terms = get_the_terms( $service->ID, 'sites' );
+						$serviceterms='';
+						foreach ($terms as $tm){
+							$serviceterms.=$tm->name.", ";
+						}
+						if ($serviceterms) $serviceterms = " (".substr($serviceterms, 0, strlen($serviceterms)-2).")";
+						
+						$stitle= $service->post_title;
 						echo  '<option ';
 						
-						echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
+						echo ' value="'.$service->guid.'">'.$stitle.$serviceterms.'</option>';
 					}
 					?>
 					  </select>
