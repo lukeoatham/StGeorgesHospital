@@ -47,36 +47,56 @@
 									echo "<div class='wellx'><hr>
 										<div class='media'>";?>
 										    <?php
-									if ( has_post_thumbnail( $post->ID ) ) {
-										    echo "<a class='pull-left' href='".get_permalink()."'>";
-										    the_post_thumbnail('thumbnail');
-											echo "</a>";
-	    							}
-	    									?>
-										<?php 
+											if ( has_post_thumbnail( $post->ID ) ) {
+												    echo "<a class='pull-left' href='".get_permalink()."'>";
+												    the_post_thumbnail('thumbnail');
+													echo "</a>";
+			    							}
+
 										echo "<div class='media-body'><h2 class='media-heading'>";
 										//if (get_post_type() == 'people') echo "<i class='icon-user'></i>";
-										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a>";
-										
-										if ($post->post_type=='people') echo " <span class='searchsub'><i class='icon-user'></i>People</span>";
-										if ($post->post_type=='course') echo " <span class='searchsub'><i class='icon-refresh'></i>Courses</span>";
-										if ($post->post_type=='page') echo " <span class='searchsub'><i class='icon-book'></i>Page</span>";
-										if ($post->post_type=='newsitem') echo " <span class='searchsub'><i class='icon-volume-up'></i>News</span>";												if ($post->post_type=='event') echo " <span class='searchsub'><i class='icon-calendar'></i>Events</span>";
-										if ($post->post_type=='service') echo " <span class='searchsub'><i class='icon-cog'></i>Services</span>";																	
-										echo "</h2>";
-	
-										the_excerpt();
-	?>
-<p>
-<?php
-									if (get_post_type() == 'newsitem') :?>
+										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
+										echo "<p>";
 									
-									<i class="icon-calendar"></i> <?php 
-										echo date('j M Y',strtotime($post->post_date));
+										$context='';
+
+										if ($post->post_type=='people') { $context = "People"; }
+										if ($post->post_type=='course') {$context = "Courses";}
+										if ($post->post_type=='page') {
+											$currentpost = get_post($post->ID);
+											while (true){
+												//iteratively get the post's parent until we reach the top of the hierarchy
+												$post_parent = $currentpost->post_parent; 
+//													echo " parent ".$post_parent;
+												if ($post_parent!=0){	//if found a parent
+													$currentpost = get_post($post_parent);
+													continue; //loop round again
+												}
+												break; //we're done with the parents
+											};
+											$ptitle = get_the_title($currentpost->ID);
+											echo "<strong>".$ptitle."</strong>";
+											
+										}
+										if ($post->post_type=='newsitem') {$context = "News &amp; events";}
+										if ($post->post_type=='event') {$context = "Events";}
+										if ($post->post_type=='service') { $context = "Services";}
+										if ($post->post_type=='ward') {$context = "Wards";}
 										
+										echo "<strong>".$context."</strong>";
+										
+										if (get_post_type() == 'newsitem') :?>
+											| <i class="icon-calendar"></i> <?php 
+											echo date('j M Y',strtotime($post->post_date));
 										endif;
-									?>
-									<?php if (get_comments_number($ID)>0) : ?>
+
+										if ( (get_post_type() == 'page') || (get_post_type() == 'service') ) :?>
+											| <i class="icon-calendar"></i> <?php 
+											echo "Updated ".date('j M Y',strtotime($post->post_modified));
+										endif;
+
+										
+									if (get_comments_number($ID)>0) : ?>
 									| <i class="icon-comment"></i> <a href="<?php comments_link(); ?>"> 
 									<?php echo get_comments_number($ID); 
 										if (get_comments_number($ID) == 1) {
@@ -101,9 +121,16 @@
 									  	if ($foundtags){
 										  	echo "| <i class='icon-tags'></i> Tags: ".$tagstr;
 									  	
-										  	}
+										  	}														
+	
+										the_excerpt();
+	?>
 
-?>									 </p></div></div></div>
+
+
+
+								 </p>
+									</div></div></div>
 
 
 	
