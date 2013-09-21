@@ -231,23 +231,44 @@ ul#menu-top-tasks li {
 #searchblock form {
     padding: 2.5em 1em 0 0;
 }
+#searchblock .input-prepend label{
+	text-align: left;
+	background: none;
+	border: none;
+	text-shadow: none;
+	font-size: 16px;
+	padding-top: 8px;
+	padding-right: 12px;
+	
+}
 #searchblock form .searchbox {
-    background-image: url('images/search.svg');
-    *background-image: url('images/search.gif');
-    background-repeat: no-repeat;
-    background-position: 96% center;
-    background-size: 1.5em;
-    border-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     border: 2px solid #888;
+    border-right: none;
     padding: .5em;
     padding-right: 0;
-    margin-top: -1em;
-    width: 250px;
+    width: 220px;
+}
+
+#searchblock .input-append button{
+	background: none;
+	border: 2px solid #888;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-left: none;
+	padding-top: .35em;
+	padding-bottom: .35em;
+}
+
+#searchblock .input-append button img{
+	width: 24px;
+	height: 24px;
 }
 #searchblock form .searchbox:focus {
     background-image: none;
     outline: 0;
-    box-shadow: 0 0 3px #262626;
+    box-shadow: none;
 }
 #searchblock #mobileMenuButton {
     display: none;
@@ -1077,9 +1098,19 @@ Mobile
 }
 .searchbox {
     padding: .5em!important;
-    width: 100%!important;
+    width: 70%!important;
     font-size: 1.2em;
+    margin-top: -1em;
+    margin-left: -10px;
 }
+#searchblock .input-append button{
+	padding-top: .4em;
+	padding-bottom: .4em;
+	background-color: white;
+	margin-top: -1em;
+	margin-left:-10px;
+}
+
 #mobileMenuButton {
     float: right;
     width: 20%;
