@@ -1062,8 +1062,13 @@ select{
 	*margin-top: 0px;
 	*font-size: 20px !important;
 	*line-height: 2 !important;
-	
 }
+
+/*.wellx{
+	border-bottom: 1px solid #aaa;
+	padding-bottom: 1.2em;
+}*/
+
 
 /* ------------------
 Mobile
@@ -1268,12 +1273,15 @@ to {
     display: block;
     height: 100%;
     background-color: #a0a0a0;
+    font-size: 1.2em;
 }
 
 #mobileNav:checked ~ #mobMove #secondarynav a {
 	border-top-width: 0px;
 	width: 90.7%;
 	border-right: 1px solid rgb(0,0,0,0.5);
+	padding-top: 0.6em;
+	padding-bottom: 0.6em;
 }
 
 #mobileNav:checked ~ #mobMove #secondarynav .level-0 a, #mobileNav:checked ~ #mobMove #secondarynav .level-1 a{
