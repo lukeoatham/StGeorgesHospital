@@ -27,7 +27,9 @@ get_header(); ?>
 					</div>
 				<div class="span6" id='content'>
 				<p class="pull-right"><a href="course-enquiry/?course_title=<?php echo urlencode(the_title()); ?>&course_level=<?php echo urlencode(get_post_meta($post->ID,'target_audience')); /*removed [0] here */?>" class="btn-large btn-info">Book a place</a></p>
-					<h1><?php the_title(); ?></h1>
+					<div id="mobhead">
+						<h1><?php the_title() ; ?></h1>
+					</div>
 					
 					
 					<?php 

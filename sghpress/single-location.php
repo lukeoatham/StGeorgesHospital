@@ -21,7 +21,9 @@ get_header(); ?>
 											
 				</div>
 				<div class="span6" id='content'>
-					<h1><?php the_title(); ?></h1>
+					<div id="mobhead">
+						<h1><?php the_title() ; ?></h1>
+					</div>
 
 					<?php 
 					

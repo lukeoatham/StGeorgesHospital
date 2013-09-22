@@ -25,8 +25,9 @@ get_header(); ?>
 												
 					</div>	
 				<div class="span6" id='content'>
+					<div id="mobhead">
 					<h1><?php the_title(); 
-					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1>
+					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1></div>
 					
 					<?php 
 

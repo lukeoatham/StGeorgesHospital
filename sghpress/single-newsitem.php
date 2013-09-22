@@ -23,7 +23,9 @@ get_header(); ?>
 						
 			</div>
 				<div class="span5" id='content'>
-					<h1><?php the_title(); ?></h1>
+					<div id="mobhead">
+						<h1><?php the_title() ; ?></h1>
+					</div>
 
 					<p class='postmeta'><?php 
 						echo "Published: ".date('j M Y',strtotime($post->post_date));
