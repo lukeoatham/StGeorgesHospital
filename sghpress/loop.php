@@ -98,6 +98,20 @@
 											| <i class="icon-calendar"></i> <?php 
 											echo "Updated ".date('j M Y',strtotime($post->post_modified));
 										endif;
+										
+										if(get_post_type() == 'people'){
+											$itemService = get_post_meta($post->ID, "service-relationship");
+											$clinicianservice = "";
+											foreach($itemService as $serviceArray){
+												foreach($serviceArray as $service){
+													if($clinicianservice != ""){ $clinicianservice .= ", "; }
+													$clinicianservice .= get_the_title($service);
+												}
+											}
+											if($clinicianservice != ""){
+												echo " | <strong>".$clinicianservice."</strong>";
+											}
+										}
 
 										
 									if (get_comments_number($ID)>0) : ?>
