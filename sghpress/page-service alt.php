@@ -122,12 +122,9 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					
 					<script type="text/javascript" defer="defer">
 						$(document).ready(function(){
-							if($(".visible-phone").css("display") != "none"){
-								$("#mobhead").css("background-image","url('<?php echo $thumbnail[0]; ?>')");
-								$("#mobhead").addClass("active");
-							}else{
+							
 								$("#sidebar").prepend('<img src="<?php echo $thumbnail[0]; ?>">');
-							}
+							
 						});
 					</script>
 					<noscript>
