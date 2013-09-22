@@ -52,7 +52,14 @@ session_start();
 
 </head>
 
-<body <?php body_class($parentpageclass); ?>>
+<body <?php body_class($parentpageclass); 
+
+if(!is_single()){
+ echo 'id="mobhead"';
+}
+
+
+?> >
 
 
 		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
