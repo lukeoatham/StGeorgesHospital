@@ -1108,3 +1108,30 @@ function pippin_excerpt_by_id($post, $length = 10, $tags = '<a><em><strong>', $e
  
 	return apply_filters('the_content', $the_excerpt);
 }
+
+add_filter('query_vars', 'advanced_search_qvs');
+function advanced_search_qvs($qv){
+	$qv[] = 'type';
+	//$qv[] = 'cat';
+	return $qv;
+}
+
+add_action('pre_get_posts', 'type_to_array');
+
+function type_to_array($query){
+	if(!is_admin() && $query->is_main_query()){
+		if($query->is_search){
+			if(isset($_GET['type'])){
+				$newType = array();
+				foreach($_GET['type'] as $type){
+					$newType[]= $type;
+				}
+				$query->set('post_type', $newType);
+			}
+			
+			/*if(isset($_GET['cat'])){
+				$query->set('category_name', $_GET['cat']);
+			}*/
+		}
+	}
+}

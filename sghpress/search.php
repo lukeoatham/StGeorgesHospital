@@ -63,6 +63,32 @@ $q = $_GET['s'];
 					</div>
 
 					<div class="span4" id='sidebar'>
+						<div class="well">
+							<h3>Advanced search</h3>
+							<form role="search" method="get" action="<?php echo home_url('/'); ?>">
+								<input type="hidden" name="s" value=<?php echo $_GET['s']; ?>>
+								<h4>Filter by content type</h4>
+								<?php
+								$ptargs = array('_builtin' => false, 'public' => true);
+								$postTypes = get_post_types($ptargs, 'objects');
+								$checkbox = "";
+								foreach($postTypes as $pt){
+									if($pt->rewrite["slug"] != "spot"){
+										$checkbox .= '<input type="checkbox" name="type[]" value="'. $pt->rewrite["slug"] .'"';
+										
+										if(in_array($pt->rewrite["slug"], $wp_query->query_vars["type"])){ 
+											$checkbox .= "checked=\"checked\"";
+										}
+										
+										$checkbox .= '> '. $pt->labels->search_items .'<br>';
+									}
+								}
+								echo $checkbox;
+								?>
+								<br>
+								<button type="btn">Refine search</button>
+							</form>
+						</div>
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'inside-sidebar-widget-area' ); ?>
 						</ul>
