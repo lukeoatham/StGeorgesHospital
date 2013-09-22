@@ -113,8 +113,14 @@ get_header();
 							<?php endif; ?>
 						<?php endif; ?>
 					</div>
+					<div class="span3">
+										<?php 
 
+					the_post_thumbnail('medium');
+					
+					?>
 
+					</div>
 					
 				</div>
 

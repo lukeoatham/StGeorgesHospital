@@ -59,10 +59,10 @@ get_header(); ?>
 							if ($c->slug=='blog-posts'){
 								echo '<div class="row"><hr>';
 								echo '<div class="avatar96">';
-								echo "<a class='pull-left' href='/author/".get_the_author_meta("user_login", $session_speaker)."' title='".get_the_author_meta("display_name", $session_speaker)."'>";
+								echo "<a class='pull-left' href='/news/blog/'>";
 								echo get_avatar($session_speaker,96) . '</a></div>';
 								echo '<div class="">';
-								echo "<a class='pull-left' href='/author/".get_the_author_meta("user_login", $session_speaker)."' title='".get_the_author_meta("display_name", $session_speaker)."'>";
+								echo "<a class='pull-left' href='/news/blog/'>";
 								echo get_the_author_meta("display_name", $session_speaker);
 								echo "</a><br> ";
 								echo get_the_author_meta("description", $session_speaker);
@@ -117,13 +117,22 @@ get_header(); ?>
 										  	<?php
 
 			echo "<div id='newsposts'><hr>";
-			$category = get_the_category(); 
-			$recentitems = new WP_Query('post_type=newsitem&posts_per_page=5');			
+			$category = wp_get_post_terms( $post->ID, 'news-type'); $thiscat = $category[0]->slug;
+			$recentitems = new WP_Query(array(
+			'post_type' => 'newsitem',
+			'posts_per_page' => 5,
+			'tax_query' => array(array(
+				'taxonomy' => 'news-type',
+				'field' => 'slug',
+				'terms' => $thiscat
+				))
+			));			
 			echo "<h2>Recently published</h2>";
 
 			if ($recentitems->post_count==0 || ($recentitems->post_count==1 && $mainid==$post->ID)){
 				echo "<p>Nothing to show yet.</p>";
 			}
+
 
 			if ( $recentitems->have_posts() ) while ( $recentitems->have_posts() ) : $recentitems->the_post(); 
 				if ($mainid!=$post->ID) {

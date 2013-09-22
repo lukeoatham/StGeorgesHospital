@@ -27,26 +27,12 @@ get_header(); ?>
 
 					<?php the_content(); ?>
 
-					<?php if ( (comments_open() || have_comments()) && $commentariatGOVUK_options['radio_commentlayout_input'] == "traditional") : ?>
+					<?php if ( (comments_open() || have_comments()) ) : ?>
 						<div id='comments'>
 							<?php comments_template( '', true ); ?>
 						</div>						
 					<?php endif; ?>
-					
-					<ul class="xoxo">
-
-						<?php if ( (comments_open() || have_comments()) ) : ?>
-						<li>
-	
-							<div id='comments'>
-								<?php comments_template( '', true ); ?>
-							</div>
-						
-						</li>
-						<?php endif; ?>
-
-						</ul>
-
+				
 				
 				</div>
 				
