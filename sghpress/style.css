@@ -1389,5 +1389,20 @@ to {
 	text-decoration: none;
 }
 
+.span9{
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.nav-tabs li a{
+	font-size: 1.2em;
+}
+
+.nav-tabs .active a{
+	background-color:#0088cc;
+	color: white;
+	border-radius: 10px;
+}
+
 
 }

@@ -16,11 +16,9 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 												
 					</div>				
 					<div class="span9">
-					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
-					</div>
 					<div class="row-fluid">
-						<form action="/">
+						<form action="/" class="hidden-phone">
 						<div class="input-append">
 						  <input class="span12" name="s" id="appendedInputButton" type="text">
 						  <button class="btn" type="button">Search services</button>
