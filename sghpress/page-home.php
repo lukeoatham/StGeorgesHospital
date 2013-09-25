@@ -40,8 +40,8 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<div class="span6 homepage-section-news-main"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
-								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
+								echo '<div class="span6 homepage-section-news-main news-item"><div class="news-item-image"><a href="'.$post->guid.'">'.$image.'</a></div><div class="news-item-copy"><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
+								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p></div>'; 	
 								echo '</div>';
 							}
 							else {
@@ -50,7 +50,7 @@ get_header(); ?>
 							
 								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
 								$j++;
-								echo '<div class="span6 homepage-section-news-other-bottom-news-'.$j.'"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
+								echo '<div class="span6 homepage-section-news-other-bottom-news-'.$j.'"><div class="news-item-image"><a href="'.$post->guid.'">'.$image.'</a></div><div class="news-item-copy"><a href="'.$post->guid.'"><h4>'.$title.'</h4></a></div>';
 								echo '</div>';
 							if ($k==5){
 							echo "</div>";}
@@ -162,7 +162,7 @@ function goToPage( id ) {
 							<h3>Find us</h3>
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="span3 googlemap">
 								<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
 
 								<?php dynamic_sidebar( 'find-us-1-area' ); ?>
@@ -220,7 +220,7 @@ function goToPage( id ) {
 							<br>
 <!--//promo row -->				
 					<div class="row-fluid homepage-section-promoboxes">
-					
+					<div class="span8">
 <?php					
 					if($promorows)
 					{
@@ -233,17 +233,17 @@ function goToPage( id ) {
 							setup_postdata( $post ); 
 							$title = get_the_title();							
 							$image = get_the_post_thumbnail($post->ID,'promo');
-							if ($k==1 || $k==3) echo '<div class="span4">';
-							echo '<a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
-							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
+							if ($k==1 || $k==3) echo '<div class="row-fluid">';
+							echo '<div class="span6 homepage-section-promoboxes-campaign"><div class="homepage-section-promoboxes-campaign-image"><a href="'.$post->guid.'">'.$image.'</a></div><div class="homepage-section-promoboxes-campaign-copy"><a href="'.$post->guid.'">'.'<h3>'.$title.'</h3></a>';
+							echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p></div></div>'; 	
 							if ($k==2 || $k==4) echo '</div>';
 						}
 					}
 ?>
 
+					</div>
 					
-					
-						<div class="span4">
+						<div class="span4 homepage-section-promoboxes-twitter">
 						
 						<?php if ( is_active_sidebar( 'sponsor-advert' ) ) : ?>
 

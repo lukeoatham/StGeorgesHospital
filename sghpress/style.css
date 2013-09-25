@@ -1331,7 +1331,7 @@ to {
     visibility: visible;
     z-index: 999999999999;
 }
-#mobileNav:checked ~ #footer, #mobileNav:checked ~ #ourvalues{
+#footer, #mobileNav:checked ~ #ourvalues{
     display: none;
 }
 
@@ -1555,18 +1555,24 @@ to {
 	-webkit-box-ordinal-group: 2;
     -moz-box-ordinal-group: 2;
     box-ordinal-group: 2;
+     width: 90%;
+    padding: 5%;
 }
 
 .homepage-section-news-other-bottom-news-1{
 	-webkit-box-ordinal-group: 1;
     -moz-box-ordinal-group: 1;
     box-ordinal-group: 1;
+     width: 90%;
+    padding: 5%;
 }
 
 .homepage-section-news-other-bottom-news-2{
 	-webkit-box-ordinal-group: 2;
     -moz-box-ordinal-group: 2;
     box-ordinal-group: 2;
+    width: 90%;
+    padding: 5%;
 }
 
 
@@ -1588,6 +1594,60 @@ to {
     box-ordinal-group: 4;
 }
 
+.homepage-section-promoboxes-twitter{
+	display: none !important;
+}
 
+.homepage-section-promoboxes-campaign, .homepage-section-news .news-item{
+	float: none;
+	clear: both;
+	display: block;
+	padding: 5%;
+	width: 90%;
+}
 
+.homepage-section-promoboxes-campaign-image, .homepage-section-news .news-item-image{
+	width: 25%;
+	float: left;
+}
+
+.homepage-section-promoboxes-campaign-copy, .homepage-section-news .news-item-copy{
+	width: 70%;
+	padding-left: 30%;
+}
+
+.homepage-section-news .news-item-copy p{
+	display: none;
+}
+
+.homepage-section-promoboxes-campaign-copy a h3, .homepage-section-news .news-item-copy a h3, .homepage-section-news .news-item-copy a h4{
+	margin-top: 0px;
+}
+
+#services .span5, #services .span4, #services .span3{
+	width: 90%;
+	padding: 5%;
+}
+
+#services .span5 h3, #services .span5 h4, #services .span5 div{
+	margin-left: 0px !important;
+}
+
+#find-us .row-fluid{
+	width: 90%;
+	padding: 5%;
+}
+
+#find-us .googlemap .textwidget iframe{
+	width: 100% !important;
+}
+
+#find-us #findlocal{
+	margin-left: 0px !important;
+}
+
+#ourvalues{
+	width: 90%;
+	padding: 5%;
+}
 }
