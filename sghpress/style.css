@@ -348,7 +348,7 @@ body.home #secondarynav {
     color: rgb(160, 31, 97);
     background-color: white;
 }
-.patient h1, .patient h2, .patient h3, .patient h4, .patient h5, .patient h6{
+.patientContent h1, .patientContent h2, .patientContent h3, .patientContent h4, .patientContent h5, .patientContent h6{
 	color: rgb(160, 31, 97);
 }  
 
@@ -390,6 +390,10 @@ body.home #secondarynav {
 	color: rgb(77, 184, 72);
 	background-color: white;
 }
+
+.serviceContent h1, .serviceContent h2, .serviceContent h3, .serviceContent h4, .serviceContent h5, .serviceContent h6{
+	color: rgb(77, 184, 72);
+}  
 
 .service a{
 	background-color: rgb(77, 184, 72);
@@ -436,6 +440,10 @@ body.home #secondarynav {
 	color: rgb(72, 47, 137);
 }
 
+.workContent h1, .workContent h2, .workContent h3, .workContent h4, .workContent h5, .workContent h6{
+	color: rgb(72, 47, 137);
+}  
+
 .work a{
 	background-color: rgb(72, 47, 137);
 	color: white;
@@ -474,6 +482,10 @@ body.home #secondarynav {
 	color: rgb(14, 180, 222);
 	background-color: white;
 }
+
+.aboutContent h1, .aboutContent h2, .aboutContent h3, .aboutContent h4, .aboutContent h5, .aboutContent h6{
+	color: rgb(14, 180, 222);
+} 
 
 .about a{
 	background-color: rgb(14, 180, 222);
@@ -516,6 +528,10 @@ body.home #secondarynav {
 	background-color: white;
 }
 
+.educationContent h1, .educationContent h2, .educationContent h3, .educationContent h4, .educationContent h5, .educationContent h6{
+	color: rgb(246, 134, 32);
+} 
+
 .education a{
 	background-color: rgb(246, 134, 32);
 	color: white;
@@ -555,6 +571,10 @@ body.home #secondarynav {
 	color: rgb(33,65,142);
 	background-color: white;
 }
+
+.newsContent h1, .newsContent h2, .newsContent h3, .newsContent h4, .newsContent h5, .newsContent h6{
+	color: rgb(33,65,142);
+} 
 
 .news a{
 	background-color: rgb(33,65,142);
@@ -600,6 +620,10 @@ ul.showbullets {
 	color: rgb(238, 45,38);
 	background-color: white;
 }
+
+.contactContent h1, .contactContent h2, .contactContent h3, .contactContent h4, .contactContent h5, .contactContent h6{
+	color: rgb(238, 45,38);
+} 
 
 .contact a{
 	background-color: rgb(238, 45,38);
@@ -648,6 +672,10 @@ ul.showbullets {
 	color: rgb(0, 0,0);
 	background-color: white;
 }
+
+.gpContent h1, .gpContent h2, .gpContent h3, .gpContent h4, .gpContent h5, .gpContent h6{
+	color: rgb(0, 0,0);
+} 
 
 .gp a{
 	background-color: rgb(0, 0,0);

@@ -15,7 +15,19 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 										<?php renderLeftNav(); ?>				
 												
 					</div>				
-					<div class="span9">
+					<div class="span9 <?php
+					
+					$parent = array_reverse(get_post_ancestors($post->ID));
+					$first_parent = get_page($parent[0]);
+					$parentSplit = split("-", $first_parent->post_name);
+					$parentName = strtolower($parentSplit[0]);
+					$lastLetter = substr($parentName, -1);
+					if($lastLetter == "s" && $parentName != "news"){
+						$parentName = substr($parentName, 0, (strlen($parentName) -1));
+					}
+ 					echo $parentName."Content";
+					
+					?>" id="content">
 					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
 					</div>

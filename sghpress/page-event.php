@@ -40,7 +40,19 @@ get_header(); ?>
 					</div>
 
 				
-					<div class="span6" id='content'>
+					<div class="span6 <?php
+					
+					$parent = array_reverse(get_post_ancestors($post->ID));
+					$first_parent = get_page($parent[0]);
+					$parentSplit = split("-", $first_parent->post_name);
+					$parentName = strtolower($parentSplit[0]);
+					$lastLetter = substr($parentName, -1);
+					if($lastLetter == "s" && $parentName != "news"){
+						$parentName = substr($parentName, 0, (strlen($parentName) -1));
+					}
+ 					echo $parentName."Content";
+					
+					?>" id='content'>
 							<?php 
 							echo "<h1>";
 							if ($cdir!='b') {

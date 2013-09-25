@@ -7,7 +7,7 @@ get_header(); ?>
 
 				<div class="row">
 
-					<div class="fourcol col1'>
+					<div class="fourcol col1">
 
 						<ul class="xoxo">
 						<?php dynamic_sidebar('col1-widget-area');  ?>
@@ -15,7 +15,19 @@ get_header(); ?>
 
 					</div>
 
-					<div class="fourcol col2" id='content'>
+					<div class="fourcol col2 <?php
+					
+					$parent = array_reverse(get_post_ancestors($post->ID));
+					$first_parent = get_page($parent[0]);
+					$parentSplit = split("-", $first_parent->post_name);
+					$parentName = strtolower($parentSplit[0]);
+					$lastLetter = substr($parentName, -1);
+					if($lastLetter == "s" && $parentName != "news"){
+						$parentName = substr($parentName, 0, (strlen($parentName) -1));
+					}
+ 					echo $parentName."Content";
+					
+					?>" id='content'>
 
 						<?php if ( ! is_front_page() ) { ?>
 							<h1><?php the_title(); ?></h1>
