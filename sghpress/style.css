@@ -1470,4 +1470,120 @@ to {
 	left: 0px;
 }
 
+#homethumbs{
+	display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news-main{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
+.homepage-section-news-other{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news-other-top{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news-other-bottom-news-1{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+}
+
+.homepage-section-news-other-bottom-news-2{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
+.homepage-section-news-other-bottom{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news-other-bottom-doitonline{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+}
+
+.homepage-section-news-other-bottom-news-3{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
+.homepage-section-services{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+}
+
+.homepage-section-find-us{
+	-webkit-box-ordinal-group: 3;
+    -moz-box-ordinal-group: 3;
+    box-ordinal-group: 3;
+}
+
+.homepage-section-promoboxes{
+	-webkit-box-ordinal-group: 4;
+    -moz-box-ordinal-group: 4;
+    box-ordinal-group: 4;
+}
+
+
+
 }

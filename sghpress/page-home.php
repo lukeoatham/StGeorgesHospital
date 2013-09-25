@@ -27,8 +27,9 @@ get_header(); ?>
 					if($featurerows)
 //					print_r($rows);
 					{
+						$j=0;
 						$k=0;
-						echo '<div class="thumbnails">';
+						echo '<div class="thumbnails homepage-section-news">';
 						foreach($featurerows as $row)
 						{
 						global $post;
@@ -39,22 +40,24 @@ get_header(); ?>
 							$title = get_the_title();
 							if ($k==1){
 								$image = get_the_post_thumbnail($post->ID,'newsheadline');
-								echo '<div class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
+								echo '<div class="span6 homepage-section-news-main"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h3>'.$title.'</h3></a>';
 								echo '<p>'.substr($post->post_excerpt,0,140).'&hellip;</p>'; 	
 								echo '</div>';
 							}
 							else {
-							if ($k==2){echo "<div class='span6'><div class='row-fluid'>";}
-							if ($k==4){echo "</div><div class='row-fluid'>";}
+							if ($k==2){echo "<div class='span6 homepage-section-news-other'><div class='row-fluid homepage-section-news-other-top'>";}
+							if ($k==4){echo "</div><div class='row-fluid homepage-section-news-other-bottom'>";}
 							
 								$image = get_the_post_thumbnail($customquery->ID,'newssubhead');
-								echo '<div class="span6"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
+								$j++;
+								echo '<div class="span6 homepage-section-news-other-bottom-news-'.$j.'"><a href="'.$post->guid.'">'.$image.'</a><a href="'.$post->guid.'"><h4>'.$title.'</h4></a>';
 								echo '</div>';
-							if ($k==5){echo "</div>";}
+							if ($k==5){
+							echo "</div>";}
 							}
 						}
 									?>
-						<div class="span6" id="doitonline">
+						<div class="span6 homepage-section-news-other-bottom-doitonline" id="doitonline">
 							<h3>Do it online</h3>
 							<?php
 					$defaults = array(
@@ -74,8 +77,8 @@ get_header(); ?>
 					}
 ?>
 				</div>
-
-					<div class="row-fluid">
+				</div>
+					<div class="row-fluid homepage-section-services">
 					<div class="span12" id="services">
 					<div class="span5">
 					<h3 id="homeservices">Services</h3>					<h4>Most active services</h4>
@@ -153,68 +156,70 @@ function goToPage( id ) {
 					</div>	
 					</div>
 					</div>
-					<div class="row-fluid">
-					<h3>Find us</h3>
-					</div>
 <!--//find us row -->
-					<div class="row-fluid">
-						<div class="span3">
-						<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
-
-						<?php dynamic_sidebar( 'find-us-1-area' ); ?>
-							
-						<?php endif; ?>
-
+					<div class="row-fluid homepage-section-find-us" id="find-us">
+						<div class="row-fluid">
+							<h3>Find us</h3>
 						</div>
-						<div class="span3">
-						<?php if ( is_active_sidebar( 'find-us-2-area' ) ) : ?>
+						<div class="row-fluid">
+							<div class="span3">
+								<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
 
-						<?php dynamic_sidebar( 'find-us-2-area' ); ?>
+								<?php dynamic_sidebar( 'find-us-1-area' ); ?>
 							
-						<?php endif; ?>
-						</div>
-						<div class="span3">
-						<?php if ( is_active_sidebar( 'find-us-3-area' ) ) : ?>
+								<?php endif; ?>
 
-						<?php dynamic_sidebar( 'find-us-3-area' ); ?>
+							</div>
+							<div class="span3">
+									<?php if ( is_active_sidebar( 'find-us-2-area' ) ) : ?>
+
+									<?php dynamic_sidebar( 'find-us-2-area' ); ?>
 							
-						<?php endif; ?>
-						</div>
-						<div class="span3" id="findlocal">
-						<h4>Find a local health centre </h4> 
-						<div class="input-append">
-						  <select id="select3" >
-						<?php  
-							$allservices = get_terms("sites",
-									array(
-									"orderby" => "name",
-									"order" => "ASC",
-									"hide_empty"=>false
-									)
-								);
+									<?php endif; ?>
+							</div>
+							<div class="span3">
+									<?php if ( is_active_sidebar( 'find-us-3-area' ) ) : ?>
+
+								<?php dynamic_sidebar( 'find-us-3-area' ); ?>
+							
+								<?php endif; ?>
+							</div>
+							<div class="span3" id="findlocal">
+								<h4>Find a local health centre </h4> 
+								<div class="input-append">
+									<select id="select3" >
+										<?php  
+											$allservices = get_terms("sites",
+											array(
+											"orderby" => "name",
+											"order" => "ASC",
+											"hide_empty"=>false
+											)
+											);
 								
-							foreach ($allservices as $service){// print_r($service);
-					  		    $themeid = $service->term_id;
-					  		    $q = "select option_value from wp_options where option_name = 'sites_".$themeid."_site_type'";
-					  		    global $wpdb;
-					  		    $theme_term = $wpdb->get_results( $q );					
-								if ($theme_term[0]->option_value == "Health Centre"){
-									echo  '<option ';
-									echo ' value="/contact-and-find-us/find-us/sites/?site='.$service->slug.'">'.$service->name.' </option>';
-								}
-							}
+											foreach ($allservices as $service){// print_r($service);
+												$themeid = $service->term_id;
+												$q = "select option_value from wp_options where option_name = 'sites_".$themeid."_site_type'";
+												global $wpdb;
+												$theme_term = $wpdb->get_results( $q );					
+												if ($theme_term[0]->option_value == "Health Centre"){
+													echo  '<option ';
+													echo ' value="/contact-and-find-us/find-us/sites/?site='.$service->slug.'">'.$service->name.' </option>';
+												}
+											}
 							
 							
 							
-							?>
-							  </select>
-							  <button class="btn" type="button" onclick="goToPage('select3')">Go</button>
-							</div>			
-		
-							</div></div>
+											?>
+										</select>
+										<button class="btn" type="button" onclick="goToPage('select3')">Go</button>
+									</div>
+								</div>
+							</div>
+						</div>
 							<br>
 <!--//promo row -->				
-					<div class="row-fluid">
+					<div class="row-fluid homepage-section-promoboxes">
 					
 <?php					
 					if($promorows)
