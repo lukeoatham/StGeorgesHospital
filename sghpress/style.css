@@ -1505,6 +1505,20 @@ to {
     -moz-box-ordinal-group: 1;
     box-ordinal-group: 1;
     
+    display: -webkit-box !important;
+    display: -moz-box;
+    display: box;
+    
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.homepage-section-news-other-bottom{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+    
     display: -webkit-box;
     display: -moz-box;
     display: box;
@@ -1528,31 +1542,8 @@ to {
     box-orient: vertical;
 }
 
-.homepage-section-news-other-bottom-news-1{
-	-webkit-box-ordinal-group: 1;
-    -moz-box-ordinal-group: 1;
-    box-ordinal-group: 1;
-}
 
-.homepage-section-news-other-bottom-news-2{
-	-webkit-box-ordinal-group: 2;
-    -moz-box-ordinal-group: 2;
-    box-ordinal-group: 2;
-}
 
-.homepage-section-news-other-bottom{
-	-webkit-box-ordinal-group: 1;
-    -moz-box-ordinal-group: 1;
-    box-ordinal-group: 1;
-    
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-    
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    box-orient: vertical;
-}
 
 .homepage-section-news-other-bottom-doitonline{
 	-webkit-box-ordinal-group: 1;
@@ -1565,6 +1556,19 @@ to {
     -moz-box-ordinal-group: 2;
     box-ordinal-group: 2;
 }
+
+.homepage-section-news-other-bottom-news-1{
+	-webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    box-ordinal-group: 1;
+}
+
+.homepage-section-news-other-bottom-news-2{
+	-webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
 
 .homepage-section-services{
 	-webkit-box-ordinal-group: 1;
