@@ -28,7 +28,7 @@ get_header(); ?>
 						 renderLeftNav(); 
 								?>
 					</div>
-				<div class="span6" id='content'>
+				<div class="span6 serviceContent" id='content'>
 					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
 					</div>

@@ -19,12 +19,32 @@ get_header(); ?>
 
 <div class="span3" id='secondarynav'>
 
-							<?php renderLeftNav(); ?>
+							<?php renderLeftNav(); 
+								
+								
+								
+								
+								$incat = false;
+								$cats=get_the_terms($id, 'people-types');
+								foreach ($cats as $cat){
+									if ( $cat->slug == "clinician" ){
+										$incat = true;
+									}
+								}
+							?>
 										
 												
 												
 					</div>	
-				<div class="span6" id='content'>
+				<div class="span6 <?php
+				
+				if($incat){
+					echo "serviceContent";
+				}else{
+					echo "aboutContent";
+				}
+				
+				?>" id='content'>
 					<div id="mobhead">
 					<h1><?php the_title(); 
 					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1></div>
@@ -44,13 +64,7 @@ get_header(); ?>
 						echo "<p><strong>Telephone: </strong>".$telephone."</p>";
 					}	
 
-					$incat = false;
-					$cats=get_the_terms($id, 'people-types');
-					foreach ($cats as $cat){
-						if ( $cat->slug == "clinician" ){
-							$incat = true;
-						}
-					}
+					
 					
 					if ( $incat ) { //if this person is categorised as a clinician then display additional fields
 					

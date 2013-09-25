@@ -22,7 +22,7 @@ get_header(); ?>
 						
 						
 					</div>
-				<div class="span6" id='content'>
+				<div class="span6 newsContent" id='content'>
 					<div id="mobhead">
 						<h1><?php the_title() ; ?></h1>
 					</div>
