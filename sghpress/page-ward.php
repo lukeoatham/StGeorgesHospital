@@ -53,11 +53,88 @@ $hospsite = $_GET['hospsite'];
 							$wardObj["title"] = $ward->post_title;
 							$wardObj["link"] = $ward->guid;
 							$wardObj["id"] = $ward->ID;
+							$custom = (get_post_custom($ward->ID));
+							$wardObj["opening"] = "";
+							foreach($custom["visiting_times"] as $visiting_time){
+								if($wardObj["opening"] != ""){
+									$wardObj["opening"] = $wardObj["opening"].", ";
+								}
+								$wardObj["opening"] = $wardObj["opening"].$visiting_time;
+							}
+							
+							$wardObj["tel"] = "";
+							foreach($custom["telephone"] as $visiting_time){
+								if($wardObj["tel"] != ""){
+									$wardObj["tel"] = $wardObj["tel"].", ";
+								}
+								$wardObj["tel"] = $wardObj["tel"].$visiting_time;
+							}
+							
+							
+							
+							$wWing = get_the_terms($ward->ID, 'wing');
 							$wSites = get_the_terms($ward->ID, 'sites');
-						
+							
+							
+							
+							$floor = "";
+							if($custom["ward_floor"][0] == "B"){
+								$floor = "Basement";
+							}
+							
+							if($custom["ward_floor"][0] == "G"){
+								$floor = "Ground Floor";
+							}
+							if($custom["ward_floor"][0] == "1"){
+								$floor = "1<sup>st</sup> Floor";
+							}
+							if($custom["ward_floor"][0] == "2"){
+								$floor = "2<sup>nd</sup> Floor";
+							}
+							if($custom["ward_floor"][0] == "3"){
+								$floor = "3<sup>rd</sup> Floor";
+							}
+							if($custom["ward_floor"][0] == "4"){
+								$floor = "4<sup>th</sup> Floor";
+							}
+							if($custom["ward_floor"][0] == "5"){
+								$floor = "5<sup>th</sup> Floor";
+							}
+							
+							$wingLoc = "";
+							
+							if($wWing){
+								foreach($wWing as $k => $val){
+									$wingLoc = $val->name;
+								}
+							}
+							
+							$wardObj["location"] = "";
+							
 							if($wSites){
 								foreach($wSites as $k => $val){
 									$key = $val->slug;
+									
+									if($floor != ""){
+										$wardObj["location"] = $floor;
+									}
+									if($wardObj["location"] != ""){
+										$wardObj["location"] = $wardObj["location"].", ";
+									}
+									
+									if($wingLoc != ""){
+										$wardObj["location"] = $wardObj["location"]."".$wingLoc;	
+									}
+									
+									if($wardObj["location"] != ""){
+										$wardObj["location"] = $wardObj["location"].", ";
+									}
+									
+									if($val->name != ""){
+										$wardObj["location"] = $wardObj["location"]."".$val->name;
+									}
+																		
+									
 									if($sites[$key]){
 										array_push($sites[$key], $wardObj);
 									}else{
@@ -65,10 +142,12 @@ $hospsite = $_GET['hospsite'];
 										$sites[$key]["fullname"] = $val->name;
 										array_push($sites[$key], $wardObj);
 									}
+									
 								}
 							}
+							
+							
 						}
-						
 						
 					?>
 					
@@ -115,6 +194,15 @@ $hospsite = $_GET['hospsite'];
 									echo "<div class=\"media-body\">";
 									
 									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+									
+									if($serv["opening"] != ""){
+										echo "<p><strong>Visiting hours:</strong> ".$serv["opening"]."</p>";
+									}
+									if($serv["tel"] != ""){
+										echo "<p><strong>Telephone:</strong> ".$serv["tel"]."</p>";
+									}
+									
+									echo "<p><strong>Location:</strong> ".$serv["location"]."</p>";
 									
 									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
 									
