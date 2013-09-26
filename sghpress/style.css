@@ -1669,6 +1669,12 @@ to {
 	padding: 5%;
 }
 
+#content img{
+	width: auto;
+}
 
+.tab-content{
+	overflow: visible;
+}
 
 }
