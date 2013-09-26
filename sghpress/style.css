@@ -1106,6 +1106,13 @@ select{
 	list-style-type: none !important;
 }
 
+
+.personContent .sidebox{
+	background: none !important;
+}
+
+
+
 /* ------------------
 Mobile
 ----------- */
@@ -1698,8 +1705,6 @@ h1,h2,h3,h4,h5,h6{
 	text-shadow:none;
 }
 
-.personContent .sidebox{
-	background: none !important;
-}
+
 
 }
