@@ -1256,6 +1256,14 @@ ul.xoxo li {
 	width: 100%;
 }
 
+.nav-tabs li{
+	list-style-type: none !important;
+}
+
+.nav-tabs li, .nav-tabs li a{
+	width: auto !important;
+}
+
 
 body {
     -webkit-animation: bugfix infinite 1s;
@@ -1650,4 +1658,7 @@ to {
 	width: 90%;
 	padding: 5%;
 }
+
+
+
 }
