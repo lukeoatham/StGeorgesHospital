@@ -44,7 +44,7 @@ get_header(); ?>
 					echo "aboutContent";
 				}
 				
-				?>" id='content'>
+				?> personContent" id='content'>
 					<div id="mobhead">
 					<h1><?php the_title(); 
 					echo " <span class='small'>".get_post_meta($post->ID, 'job_title', true)."</span>"; ?></h1></div>
@@ -110,12 +110,42 @@ get_header(); ?>
 				
 				</div>
 				
+								
+				
 				<div class="span3" id='sidebar'>
-<?php					$cimage = get_the_post_thumbnail($post->ID, 'large');
-						if($cimage){
+<?php					$cimage = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');
+						/*if($cimage[0]){
 							echo "<p>".$cimage."<br>";
 							echo the_title()."</p>";
-						}
+						}*/
+						?>
+						
+						<script type="text/javascript" defer="defer">
+						$(document).ready(function(){
+							if($(".visible-phone").css("display") != "none"){
+								$("#mobhead").addClass("active");
+								$("#mobhead").css("background-image","url('<?php echo $cimage[0]; ?>')");
+								
+								$("body").animate({
+                            	scrollTop: ($("#mobhead").offset().top)
+                                }, "slow");
+								
+							}else{
+								$("#sidebar").prepend('<img src="<?php echo $cimage[0]; ?>">');
+							}
+							
+							
+							
+						});
+					</script>
+					<noscript>
+						<img src="<?php echo $cimage[0]; ?>">
+					</noscript>
+
+						
+						<?php
+						
+						
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
 						if ($clinicianservices){
 							echo "<div class='sidebox'><h3>Services</h3><ul>";
