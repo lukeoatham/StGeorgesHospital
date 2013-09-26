@@ -4,7 +4,6 @@
 get_header();
 
 $hospsite = $_GET['hospsite'];
-$paged = $_GET['paged'];
  ?>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
@@ -35,69 +34,121 @@ $paged = $_GET['paged'];
 					<h1><?php the_title() ; ?></h1>
 				<?php the_content(); ?>
 					
-					<ul class="nav nav-pills">
-					<?php //display filter terms
-				 
-				 $blogtypes = get_terms('sites'); 
-				 foreach ($blogtypes as $blogtype){
-					 
-					 echo "<li";
-					 if ($blogtype->slug == $hospsite) echo " class='active'";
-					 echo "><a href='/patients-and-visitors/our-wards/?hospsite=".$blogtype->slug."'>".$blogtype->name."</a></li>";
-				 }
-					 echo "<li";
-					 if (!$hospsite) echo " class='active'";
-					 echo "><a href='/patients-and-visitors/our-wards/'>All</a></li>";
-				 
-				 ?>
 					
 					
-					</ul>
-
-
-
-					
-<ul class="nav nav-list">
-<?php
-				//list all wards
-				if ($hospsite){
+					<?php //get all ward results, sort into associative array ready for parsing later on in page 
+						
 						$wards = new WP_query(
 							array(
 							"post_type" => "ward",
 							"posts_per_page" => -1,
 							"orderby" => "title",
-							"order" => "ASC",
-							"paged"=>$paged,
-							"tax_query"=> array(array(
-							"taxonomy"=>"sites",
-							"terms"=>$hospsite,
-							"field"=>"slug"
-							)
-							)
-							)
-						);
-						} else {
-							$wards = new WP_query(
-							array(
-							"post_type" => "ward",
-							"posts_per_page" => -1,
-							"orderby" => "title",
-							"order" => "ASC",
-							"paged"=>$paged
-							));
+							"order" => "ASC"
+						));
+							
+						$sites = array();
 
-						}
-
-						//check each element in the array to see if it matches this service
-						while ($wards->have_posts()) {
-							$wards->the_post();
-									echo "<li><a href='".$post->guid."'>".$post->post_title."</a></li>";
+						foreach($wards->posts as $ward){
+							$wardObj = array();
+							$wardObj["title"] = $ward->post_title;
+							$wardObj["link"] = $ward->guid;
+							$wardObj["id"] = $ward->ID;
+							$wSites = get_the_terms($ward->ID, 'sites');
+						
+							if($wSites){
+								foreach($wSites as $k => $val){
+									$key = $val->slug;
+									if($sites[$key]){
+										array_push($sites[$key], $wardObj);
+									}else{
+										$sites[$key] = array();
+										$sites[$key]["fullname"] = $val->name;
+										array_push($sites[$key], $wardObj);
+									}
 								}
-?>
-</ul>	
+							}
+						}
+						
+						
+					?>
 					
-					</div>
+				
 					
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#" data-toggle="tab" id="allServs">All sites</a></li>
+					
+					
+					
+							<?php //display filter terms
+					
+							foreach($sites as $key => $value){
+								echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".$sites[$key]["fullname"]."</a></li>";
+							} 
+				 
+							?>
+					
+					
+						</ul>
+
+						<div class="tab-content" id="service-tabs">
+							<?php
+							
+							foreach($sites as $key => $value){
+								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
+								
+								echo "<h3>".$sites[$key]["fullname"]."</h3>";
+								
+								foreach($value as $serv){
+									echo "<div class=\"media\">";
+									
+									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
+									
+									if(!$postThumb){
+										$postThumb = "http://placehold.it/75x75";
+									}else{
+										$postThumb = $postThumb[0];
+									}
+									
+									echo "<a href=\"".$serv["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object service-thumbnail\"></a>";
+									
+									echo "<div class=\"media-body\">";
+									
+									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+									
+									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
+									
+									echo "</div>";
+									
+									echo "</div>";
+								}
+								echo "</div>";
+								
+							}
+							
+							?>
+						</div>
+					</div>	
+					
+					<script type="text/javascript">
+						$('#allServs').click(function (e) {
+							//e.preventDefault();
+							$("#allServs").addClass('active');
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+						
+						$('.serviceTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content .media").show();
+							
+						});
+					</script>
+					
+									
 					<div class="span3">
 
 					<?php 

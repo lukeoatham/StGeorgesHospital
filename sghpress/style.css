@@ -1102,6 +1102,10 @@ select{
 }*/
 
 
+.nav-tabs li{
+	list-style-type: none !important;
+}
+
 /* ------------------
 Mobile
 ----------- */
@@ -1256,11 +1260,17 @@ ul.xoxo li {
 	width: 100%;
 }
 
+#content ul li a, #content ol li a{
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	display: block;
+}
+
 .nav-tabs li{
 	list-style-type: none !important;
 }
 
-.nav-tabs li, .nav-tabs li a{
+.nav-tabs li, .nav-tabs li a, .nav-pills li, .nav-pills li a{
 	width: auto !important;
 }
 
