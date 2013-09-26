@@ -84,7 +84,7 @@ $newstype = $_GET['type'];
 																       
 							?>
 					</div>
-					<div class="span3">
+					<div class="span3 events">
 						<h3>Events</h3>
 						<?php
 						$tdate= getdate();
@@ -123,8 +123,9 @@ $newstype = $_GET['type'];
 									$eventquery->the_post();
 								echo "<div class='media'>";
 									
-									
-									 the_post_thumbnail(array(50,50),array('class'=>'pull-left'));
+									echo "<a href='" .get_permalink() . "' class=\"pull-left\">";
+									 the_post_thumbnail(array(50,50),array('class'=>'media-object'));
+									echo "</a>";
 									echo "<div class='media-body'>";
 									echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
 									$thisdate =  get_post_meta($post->ID,'event_start_date',true); //print_r($thisdate);
@@ -141,7 +142,6 @@ $newstype = $_GET['type'];
 							}
 							
 						?>
-						<br>
 						<p><a href-"/news/events/">More events</a></p>
 						
 						<h3>Gazette</h3>

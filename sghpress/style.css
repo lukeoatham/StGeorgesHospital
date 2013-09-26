@@ -1478,7 +1478,7 @@ to {
 	border-radius: 10px;
 }
 
-#service-tabs .media, .newsContent .media{
+#service-tabs .media, .newsContent .media, .events .media{
 	position: relative;
 	box-shadow: 0 3px 5px #888;
 	border-right: 1px solid #ccc;
@@ -1488,13 +1488,13 @@ to {
 	height: 100%;
 }
 
-#service-tabs .media .pull-left, .newsContent .media .pull-left{
+#service-tabs .media .pull-left, .newsContent .media .pull-left, .events .media .pull-left{
 	/*position: absolute;*/
 	width: 100%;
 	padding-bottom: 50%; /* Change this value to change how much the .media-body is overlayed */
 }
 
-#service-tabs .media .media-object, .newsContent .media .pull-left img{
+#service-tabs .media .media-object, .newsContent .media .pull-left img, .events .media .media-object{
 	width: 100% !important;
 	height: inherit !important;
 	position: absolute;
@@ -1502,6 +1502,8 @@ to {
 	display: block;
 
 }
+
+
 
 #service-tabs .media .media-body{
 	position: relative;
@@ -1512,7 +1514,7 @@ to {
 	left: 0px;
 }
 
-.newsContent .media .media-body{
+.newsContent .media .media-body, .events .media .media-body{
 	position: relative;
 	background-color: white;
 	width: 91% !important;
@@ -1527,6 +1529,30 @@ i{
 .label-info{
 	width: auto !important;
 }
+
+.span3.events{
+	width: 97%;
+	padding: 5%;
+}
+
+.events .showbullets{
+	margin-left: 5%;
+}
+
+.wp-pagenavi{
+	text-align: center;
+}
+
+
+.wp-pagenavi .previouspostslink, .wp-pagenavi .nextpostslink, .wp-pagenavi .last, .wp-pagenavi .current{
+	padding: 0.5em;
+	font-size: 1.5em;
+}
+
+.wp-pagenavi .extend, .wp-pagenavi .larger, .wp-pagenavi .smaller, .wp-pagenavi .pages{
+	display: none;
+}
+
 
 #homethumbs{
 	display: -webkit-box;
