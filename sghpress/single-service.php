@@ -34,7 +34,7 @@ get_header(); ?>
 					</div>
 
 					<?php 
-					the_content();
+					
 					//check the various sidebar boxes
 					$contactnumber = get_post_meta($post->ID, 'contact_number', true);
 					$openinghours = get_post_meta($post->ID, 'opening_hours', true);
@@ -72,10 +72,12 @@ get_header(); ?>
 					$linksbox = get_post_meta($post->ID, 'links_box', true);
 					
 					
+					
 					// turn the clinician results into an array we can parse later (and check against)
 					$clinicianObjects = array();
 					foreach ($clinicians as $clinician) {
-					setup_postdata($clinician); 
+					//var_dump($clinician);
+					//setup_postdata($clinician); 
 						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false);
 						foreach ($clinicianservices as $clinicianservice){ 
 							if ( in_array($mainid, $clinicianservice) ){
@@ -87,10 +89,12 @@ get_header(); ?>
 						}
 					}
 					
+					
+					
 					//run through each referrals to check if assigned to this service
 					$referralObjects = array();				
 					foreach ($referrals as $referral) {
-						setup_postdata($referral); 
+						//setup_postdata($referral); 
 						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
 						foreach ($referralservices as $referralservice){ 
 
@@ -103,8 +107,8 @@ get_header(); ?>
 						}
 					}
 					
-
 					
+
 					
 					?>
 					<h4 class="visible-phone">On this page:</h4>
@@ -112,7 +116,7 @@ get_header(); ?>
 						<li><a href="#mcontent">Main content</a></li>
 						<?php
 							if($contactnumber){
-								echo '<li><a href="#contactnumber">Contact detailss</a></li>';
+								echo '<li><a href="#contactnumber">Contact details</a></li>';
 							}
 							if($openinghours){
 								echo '<li><a href="#openinghours">Opening hours</a></li>';
@@ -120,9 +124,9 @@ get_header(); ?>
 							if($servicelocations){
 								echo '<li><a href="#servicelocations">Locations</a></li>';
 							}
-							/*if($treatments != ''){
+							if($treatments != ''){
 								echo '<li><a href="#treatments">Treatments</a></li>';
-							}*/
+							}
 							if($team != ''){
 								echo '<li><a href="#team">Staff members</a></li>';
 							}
@@ -136,12 +140,15 @@ get_header(); ?>
 								echo '<li><a href="#wards">Wards</a></li>';
 							}
 							if(count($referralObjects) > 0){
-								echo '<li><a href="#referrals">Referral forms</a></li>';
+								echo '<li><a href="#referralforms">Referral forms</a></li>';
 							}
 						?>
 					</ul>
 					<?php
 					
+					echo "<div id='mcontent'>";
+					the_content(); 
+					echo "</div>";
 					
 					//display contact information
 					if ($contactnumber){
@@ -229,9 +236,7 @@ get_header(); ?>
 						echo "</div>";
 					}
 										
-					echo "<div id='mcontent'>";
-					the_content(); 
-					echo "</div>";
+					
 					
 					if ($treatments !=''){
 						echo "<div class='sidebox' id='treatments'><h3 class='sideboxhead'>Treatments</h3>";
@@ -311,24 +316,6 @@ get_header(); ?>
 				
 				<?php
 				}
-				//display clinicians associated with this service
-				
-				
-
-					//run through each clinician to check if assigned to this service
-					//$querystr = "
-								//SELECT wpostmeta.post_id, wpostmeta.meta_key
-								//FROM $wpdb->posts wposts INNER JOIN $wpdb->postmeta wpostmeta ON wposts.ID = wpostmeta.post_id WHERE wposts.ID = ".$mainid;
-								
-					/*$querystr = "SELECT * FROM $wpdb->postmeta wpostmeta WHERE meta_key = 'service-relationship' AND meta_value LIKE '%$mainid%'"; <- gets all things from post meta that have the service id: SPITS OUT REVISIONS OF CONTENT!
-					
-					$pageposts = $wpdb->get_results($querystr, OBJECT);
-					
-					foreach($pageposts as $clin){
-						echo "<a href=\"".get_permalink($clin->post_id)."\">".get_the_title($clin->post_id)."</a>";
-					}
-					
-					var_dump($pageposts);*/
 					foreach ($clinicianObjects as $clinObj){ 
 						if (!$donetitle){
 							echo "<div class='sidebox' id='clinicians'><h3 class='sideboxhead'>Clinicians</h3><ul>";

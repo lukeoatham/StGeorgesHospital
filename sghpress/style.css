@@ -1416,6 +1416,23 @@ to {
 	margin-bottom: 1em;
 }
 
+.sidebox{
+	width: 95% !important;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.sideboxhead{
+	margin-left: -5%;
+	padding-left: 5% !important;
+	padding-right: 5% !important;
+}
+
+.sidebox ul, .sidebox ol{
+	width: 85% !important;
+}
+
+
 .sidebox p{
 	margin-left: 0px;
 	padding-left: 0px;
