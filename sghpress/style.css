@@ -1478,7 +1478,7 @@ to {
 	border-radius: 10px;
 }
 
-#service-tabs .media{
+#service-tabs .media, .newsContent .media{
 	position: relative;
 	box-shadow: 0 3px 5px #888;
 	border-right: 1px solid #ccc;
@@ -1488,13 +1488,13 @@ to {
 	height: 100%;
 }
 
-#service-tabs .media .pull-left{
+#service-tabs .media .pull-left, .newsContent .media .pull-left{
 	/*position: absolute;*/
 	width: 100%;
 	padding-bottom: 50%; /* Change this value to change how much the .media-body is overlayed */
 }
 
-#service-tabs .media .media-object{
+#service-tabs .media .media-object, .newsContent .media .pull-left img{
 	width: 100% !important;
 	height: inherit !important;
 	position: absolute;
@@ -1510,6 +1510,22 @@ to {
 	padding: 2%;
 	bottom: 0px;
 	left: 0px;
+}
+
+.newsContent .media .media-body{
+	position: relative;
+	background-color: white;
+	width: 91% !important;
+	padding: 5%;
+	bottom: 0px;
+	left: 0px;
+}
+
+i{
+	width: 16px !important;
+}
+.label-info{
+	width: auto !important;
 }
 
 #homethumbs{

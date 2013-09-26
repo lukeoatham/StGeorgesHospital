@@ -54,12 +54,12 @@ $newstype = $_GET['type'];
 							if(function_exists('genarate_ajax_pagination') ) {
 								$cquery=array(
 								"post_type" => "newsitem",
-								"posts_per_page" => 20,
+								"posts_per_page" => 5,
 								);
 							} else {
 								$cquery=array(
 								"post_type" => "newsitem",
-								"posts_per_page" => 20,
+								"posts_per_page" => 5,
 								"paged"=>$paged,
 								);
 							}								
