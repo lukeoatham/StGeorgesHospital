@@ -1508,7 +1508,7 @@ to {
 #service-tabs .media .media-body{
 	position: relative;
 	background-color: white;
-	width: 97%;
+	width: 97% !important;
 	padding: 2%;
 	bottom: 0px;
 	left: 0px;

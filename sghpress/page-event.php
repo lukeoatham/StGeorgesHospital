@@ -6,27 +6,15 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 	<?php
 	$cdir=$_GET['cdir'];
-	$eventcat = $_GET['cat'];
+	$beforeOrAfter = ">=";
 
-			//setup future/past button
-			if ($theme==""){
-				if ($cdir=="b"){
-					$timetravel = "<div class='futureevents'><a href='".home_url( '/' )."events/?cdir=f'>Future events &raquo;</a></div>";
-				}
-				else
-				{
-					$timetravel = "<div class='pastevents'><a href='".home_url( '/' )."events/?cdir=b'>&laquo; Past events</a></div>";
-				}
-			} else {
-				if ($cdir=="b"){
-					$timetravel = "<div class='futureevents'><a href='".home_url( '/' )."events/?cdir=f&theme=".$theme."'>Future events &raquo;</a></div>";
-				}
-					else
-				{
-					$timetravel = "<div class='pastevents'><a href='".home_url( '/' )."events/?cdir=b&theme=".$theme."'>&laquo; Past events</a></div>";
-				}																
-			}
-			
+	if(!$cdir){
+		$timetravel = "<div class='pastevents'><a href='".home_url( '/' )."events/?cdir=b".$cdir."'>&laquo; Past events</a></div>";
+	}else{
+		$timetravel = "<div class='pastevents'><a href='".home_url( '/' )."events/'>Upcoming events &raquo;</a></div>";
+		 $beforeOrAfter = "<=";
+	}
+
 ?>			
 				<div class="row-fluid">
 					<div class="span3" id='secondarynav'>
@@ -53,181 +41,193 @@ get_header(); ?>
  					echo $parentName."Content";
 					
 					?>" id='content'>
-							<?php 
-							echo "<h1>";
-							if ($cdir!='b') {
-								echo "Events";
-							} else { 
+							
+					<?php 
+						echo "<h1>";
+						if (!$cdir) {
+							echo "Events";
+						} else { 
 							echo "Past events" ;
-							}
-
-							$pub = get_terms( 'event-types', 'orderby=count&hide_empty=0' );
-							//print_r($pub);
-							$cat_id = $_GET['cat'] ? $_GET['cat'] : 0;
-							$cat_desc = get_term($cat_id, 'event-type');
-							foreach ($pub as $sc) {
-								if ($cat_id == $sc->term_id) { echo ' - '.$sc->name; } 
-							}
-							echo "</h1>";
-							?>
+						}
+						echo "</h1>";
 							
-
-<ul class="nav nav-pills">
-
-    <li<?php if (!$cat_id) { echo ' class="active"'; } ?>><a href="<?php echo home_url( '/' ); ?>about/events/<?php if ($cdir=='b'){echo '?cdir=b';} ?>">All events</a></li>
-<?php
-	foreach ($pub as $sc) {
-	//print_r($sc);
-	$cat_desc = get_term($sc, 'event-type');
-	?>
-    <li<?php if ($cat_id == $sc->term_id ) { echo ' class="active"'; } ?>><a href="<?php echo home_url( '/' ); ?>events/?cat=<?php echo $sc->term_id; if ($cdir=='b'){echo '&cdir=b';} ?>"><?php echo $sc->name; ?></a></li>
-
-<?php
-	}
-?>
-</ul>
-					
-							<?php the_content(); ?>
 							
-							<?php
-							echo "<br>".$timetravel;							
-							$tdate= getdate();
-							$tdate = $tdate['year']."-".$tdate['mon']."-".$tdate['mday'];
-							$tday = date( 'd' , strtotime($tdate) );
-							$tmonth = date( 'm' , strtotime($tdate) );
-							$tyear= date( 'Y' , strtotime($tdate) );
-							$sdate=$tyear."-".$tmonth."-".$tday." 00:00";
-
-
-							$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-			if ($cat_id!=0){ // show individual theme conferences
-				if ($cdir=="b"){  //past events
-
-				$cquery = array(
-
-				    'tax_query' => array(
-				        array(
-				            'taxonomy' => 'event-types',
-				            'field' => 'term_id',
-				            'terms' => $cat_id,
-					       ),
-					    ),
-	
-				   'meta_query' => array(
-							       array(
-						           		'key' => 'event_start_date',
-						        	   'value' => $sdate,
-						    	       'compare' => '<=',
-						    	       'type' => 'DATE' )  
-					    	        ),   
-								    'orderby' => 'meta_value',
-								    'meta_key' => 'event_start_date',
-								    'order' => 'DESC',
-								    'post_type' => 'event',
-									'posts_per_page' => 10,
-								    'paged' => $paged												
-								)
-								;
-				}
-				else { //future events, single theme
-					$cquery = array(
-
-				    'tax_query' => array(
-				        array(
-				            'taxonomy' => 'event-types',
-				            'field' => 'term_id',
-				            'terms' => $cat_id,
-					       ),
-					    ),	
-
-				   'meta_query' => array(
-							       array(
-						           		'key' => 'event_start_date',
-						        	   'value' => $sdate,
-						    	       'compare' => '>=',
-						    	       'type' => 'DATE' ) 
-					    	        ),   
-								    'orderby' => 'meta_value',
-								    'meta_key' => 'event_start_date',
-								    'order' => 'ASC',
-								    'post_type' => 'event',
-									'posts_per_page' => 10,
-								    'paged' => $paged												
-								)
-								;
-
-				}	
-				}else { //all themes
-			if ($cdir=="b"){ //past events
-			$cquery = array(
-					'post_type' => 'event',
-					'posts_per_page' => 10,
-				   'meta_query' => array(
-			       array(
-		           		'key' => 'event_start_date',
-		        	   'value' => $sdate,
-		    	       'compare' => '<=',
-		    	       'type' => 'DATE' )
-		    	        ),   
-				    'orderby' => 'meta_value',
-				    'meta_key' => 'event_start_date',
-				    'order' => 'DESC',
-				    'paged' => $paged
-					);
-			}
-			else { // future events, all themes
-			$cquery = array(
-					'post_type' => 'event',
-					'posts_per_page' => 10,
-				   'meta_query' => array(
-			       array(
-		           		'key' => 'event_start_date',
-		        	   'value' => $sdate,
-		    	       'compare' => '>=',
-		    	       'type' => 'DATE' )
-		    	        ),   
-				    'orderby' => 'meta_value',
-				    'meta_key' => 'event_start_date',
-				    'order' => 'ASC',
-				    'paged' => $paged
-					);
+						$cat_id = $_GET['cat'] ? $_GET['cat'] : 0;
+						
+												
+						$tdate= getdate();
+						$tdate = $tdate['year']."-".$tdate['mon']."-".$tdate['mday'];
+						$tday = date( 'd' , strtotime($tdate) );
+						$tmonth = date( 'm' , strtotime($tdate) );
+						$tyear= date( 'Y' , strtotime($tdate) );
+						$sdate=$tyear."-".$tmonth."-".$tday." 00:00";
+							
+						$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;	
+							
+						$cquery = array(
+							'post_type' => 'event',
+							'posts_per_page' => 10,
+							'meta_query' => array(
+							array(
+								'key' => 'event_start_date',
+								'value' => $sdate,
+								'compare' => $beforeOrAfter,
+								'type' => 'DATE' )
+							),   
+							'orderby' => 'meta_value',
+							'meta_key' => 'event_start_date',
+							'order' => 'ASC',
+							'paged' => $paged
+						);
 			
-			}
-			}
-			//print_r($cquery);
-							$customquery = new WP_Query($cquery);
+						if($cat_id){
+							$cquery['tax_query'] = array(array('taxonomy'=>'event-types','field'=>'slug','terms'=>$cat_id));
+						}
+			
+						$customquery = new WP_Query($cquery);
+						
+						
+						$events = array();
+						$eventTypes = array();
+						
+						foreach($customquery->posts as $event){
+							$eventObj = array();
+							$eventObj["title"] = $event->post_title;
+							$eventObj["link"] = $event->guid;
+							$eventObj["id"] = $event->ID;
 							
-							if (!$customquery->have_posts()){
-								echo "<p>Nothing to show.</p>";
-							}
+						
+							$eType = get_the_terms($event->ID, 'event-types');
 							
-								
-							if ( $customquery->have_posts() ) {
-				
-								while ( $customquery->have_posts() ) {
-									$customquery->the_post();
-								echo "<div class='featured_story clearfix'>";
-									if ( has_post_thumbnail( $post->ID ) ) {
-										the_post_thumbnail('thumbnail',"class=alignleft");
-									}	
-									
-									echo "<h2><a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
-									//$thisdate = date('d F',get_post_meta($post->ID,'start_date'));
-									$thisdate =  get_post_meta($post->ID,'event_start_date',true); //print_r($thisdate);
-									$thisyear = substr($thisdate[0], 0, 4); 
-									$thismonth = substr($thisdate[0], 4, 2); 
-									$thisday = substr($thisdate[0], 6, 2); 
-//									$thisdate = $thisyear."-".$thismonth."-".$thisday;
-									echo "<strong>".date('j M Y',strtotime($thisdate))."</strong>";
-									the_excerpt();
-									echo "</div><div class='clearfix'></div>";
+							if($eType){
+								$eventObj["types"] = "";
+								foreach($eType as $k => $val){
+									if(!$eventTypes[$val->slug]){
+										$eventTypes[$val->slug] = $val->name;
+									}
+									$eventObj["types"] .= " ".$val->slug;
 								}
 							}
 							
-							wp_reset_query();
+							
+							
+							
+							$eventDate = get_post_meta($event->ID, 'event_start_date', true);
+							$eventObj["date"] = $eventDate;
+							$key = date( 'F' , strtotime($eventDate) )."-".date("Y", strtotime($eventDate));
+							
+							if($events[$key]){
+								array_push($events[$key], $eventObj);
+							}else{
+								$events[$key] = array();
+								array_push($events[$key], $eventObj);
+							}
+						}
+						
+						
+						?>
+						<?php the_content(); ?>
+							
+						<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li<?php if(!$cat_id){ echo " class=\"active\""; }?>><a href="#" data-toggle="tab" id="allTypes">All</a></li>
+							<?php
+								foreach($eventTypes as $key => $servLetter){
+									$activeType = "";
+									if($cat_id && $cat_id == $key){
+										$activeType = " class=\"active\"";
+									}
+									echo "<li".$activeType."><a href=\"/news/events/?cat=".$key."\" data-toggle=\"tab\" class=\"site\">".$servLetter."</a></li>";
+								}
+							
+							?>
+						</ul>
+						
+						
+						<div class="tab-content" id="service-tabs">
+							<?php	
+							echo $timetravel;
+							
+							if(empty($events)){
+									echo "<p>Nothing to show.</p>";
+							}
+							
+							foreach($events as $key => $value){
+								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
+								echo "<h3>".str_replace("-", " ", $key)."</h3>";
+								foreach($value as $serv){
+									echo "<div class=\"media".$serv["types"]."\">";
+									
+									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(150,150), false);
+									
+									if(!$postThumb){
+										$postThumb = "http://placehold.it/75x75";
+									}else{
+										$postThumb = $postThumb[0];
+									}
+									
+									echo "<a href=\"".$serv["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object item-thumbnail\"></a>";
+									
+									echo "<div class=\"media-body\">";
+									
+									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+									echo "<strong>".date('l jS F Y',strtotime($serv["date"]))."</strong>";
+									
+									echo pippin_excerpt_by_id($serv["id"], 20);
+									
+									
+									
+									echo "</div>";
+									
+									echo "</div>";
+								}
+								echo "</div>";	
+							}
+							
+							
 							
 							echo $timetravel;
 							?>
+					
+					<script type="text/javascript">
+						$('#allServs').click(function (e) {
+							//e.preventDefault();
+							$("#allServs").addClass('active');
+							$(".tab-content .media").show();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+							});
+						});
+						
+						$(".site").click(function(e){
+							e.preventDefault();
+							var selectedSite = $(this).attr("href");
+							selectedSite = selectedSite.replace("/news/events/?cat=", "");
+							$(".nav-tabs li").removeClass("active");
+							$(this).parent("li").addClass("active");
+							$(".tab-content .media").hide();
+							$(".tab-pane").each(function(i, t){
+								$(".serviceTab").removeClass("active");
+								$(this).addClass('active');
+								if($(this).children("." + selectedSite).length == 0){
+									$(this).removeClass('active');
+								}
+							});
+							$("." + selectedSite).show();
+						});
+						
+						$('.serviceTab').click(function (e) {
+							e.preventDefault();
+							$(".tab-content .media").show();
+							
+						});
+
+					</script>	
+					
+					
+					
+					
 					
 						
 						<?php if (  $customquery->max_num_pages > 1 ) : ?>
@@ -238,8 +238,8 @@ get_header(); ?>
 								<?php previous_posts_link('Newer items &rarr;', $customquery->max_num_pages); ?>						
 							<?php endif; ?>
 						<?php endif; ?>
-	
-				
+						</div>
+						</div>
 					</div>
 					<div class="span3">
 					
