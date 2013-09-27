@@ -728,19 +728,35 @@ function renderLeftNav($outputcontent="TRUE") {
 		if($postType == "newsitem"){
 			$postSection = "news";
 			$postSectionID = 93;
+			$eType = get_the_terms($postID, 'news-type');
+			foreach($eType as $k => $val){
+				if($val->slug == "press-releases"){
+					array_push($before, 3545);
+				}
+				if($val->slug == "blog-posts"){
+					array_push($before, 3543);
+				}
+			}
+		
 		}
+		
 		
 		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
 		
+		//Grab the menu
 		$mainid = $postID;
 		$navParams = array(
 			'theme_location' => 'primary',
 			'menu_id' => 'nav',
 			'echo' => false
 		);
+		
+		//Store the menu in a string
 		$navItems = wp_nav_menu($navParams);
-			
+		
+		//Set all menu items to only be visible on mobile
 		$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
+		//For the section we're on we want to be visible everywhere
 		$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection, $navItems); 
 			
 			
@@ -761,6 +777,8 @@ function renderLeftNav($outputcontent="TRUE") {
 				break; //we're done with the parents
 			};
 			
+			
+			
 			$navarray = array_reverse($navarray);
 			$ancestorNav = count($navarray) + 1;
 			//is the current page at the end of the branch?
@@ -776,8 +794,6 @@ function renderLeftNav($outputcontent="TRUE") {
 				$menuid = $currentpost->post_parent;
 				$navarray[] = -1;	//set marker in array for subsequent children styling
 			}
-						
-			
 			
 			if($menuid != 0){
 				$allNavParams = array(
@@ -808,7 +824,6 @@ function renderLeftNav($outputcontent="TRUE") {
 			}
 			
 			$subs=false;
-			//var_dump($navarray);
 			if($postType == "people" || count($navarray) == 1){
 				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
 				if ($relatedposts) {
@@ -840,12 +855,15 @@ function renderLeftNav($outputcontent="TRUE") {
 				}
 			}
 			
+			
+			
 			if ($relatedposts) {
 				$subnavString .= $relatedposts;
 			}
 			
 			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
 			$postSectionTitle = str_replace("and", "&#038;", $postSectionTitle);
+			
 					
 			$navItems = str_replace($postSectionTitle."</a>", $postSectionTitle."</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
 			echo($navItems);
