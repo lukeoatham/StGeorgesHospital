@@ -97,7 +97,6 @@ h1, h2, h3, h4, h5 {
     line-height: 1.2;
     font-weight: bold;
     display: block;
-    text-shadow: 0 0 0 #f00, 0px 0 1px transparent;
     padding-bottom:  .5em;
 }
 h1 {
@@ -235,7 +234,6 @@ ul#menu-top-tasks li {
 	text-align: left;
 	background: none;
 	border: none;
-	text-shadow: none;
 	font-size: 16px;
 	padding-top: 8px;
 	padding-right: 12px;
@@ -572,8 +570,8 @@ body.home #secondarynav {
 	background-color: white;
 }
 
-.newsContent h1, .newsContent h2, .newsContent h3, .newsContent h4, .newsContent h5, .newsContent h6{
-	color: rgb(33,65,142);
+.newsContent h1, .newsContent h2, .newsContent h3, .newsContent h4, .newsContent h5, .newsContent h6, #newsposts .sidebox h3, #newsposts .sidebox h3 a{
+	color: rgb(33,65,142) !important;
 } 
 
 .news a{
@@ -1109,6 +1107,15 @@ select{
 
 .personContent .sidebox{
 	background: none !important;
+}
+
+#newsposts .sidebox{
+	background: none;
+}
+
+#newsposts .sidebox i, #newsposts .sidebox p{
+	margin: 0px;
+	padding: 0px;
 }
 
 
