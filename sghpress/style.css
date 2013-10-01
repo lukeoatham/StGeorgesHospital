@@ -1754,7 +1754,23 @@ h1,h2,h3,h4,h5,h6{
 	text-shadow:none;
 }
 
-.workContent .well{
+.workContent .well, .searchContent .well{
+	width: 90% !important;
+}
+
+.searchContent .well input{
+	width: 32px !important;
+	height: 32px;
+	float: left;
+}
+
+.searchContent .well .labelForCheck{
+	width: 70% !important;
+	margin-left: 5%;
+	line-height: 40px;
+}
+
+.newsContent .visible-phone .btn-large{
 	width: 90% !important;
 }
 

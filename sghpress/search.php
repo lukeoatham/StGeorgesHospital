@@ -16,7 +16,7 @@ get_header(); ?>
 						</div>
 					</div>
 				<div class="row-fluid">
-					<div class="span8" id='content'>
+					<div class="span8 newsContent" id='content'>
 
 <?php if ( have_posts() ) : ?>
 				<h1><?php printf( __( 'Search results for: %s', 'twentyten' ), '' . get_search_query() . '' ); ?></h1>
@@ -24,6 +24,11 @@ get_header(); ?>
 				if ($wp_query->found_posts>1){
 				echo "<p class='conference_date'>Found ".$wp_query->found_posts." results</p>";
 				}
+				?>
+				
+				<p class="visible-phone"><a href="#advanced" class="btn btn-large btn-info">Advanced search</a></p>
+				
+				<?php
 				/* Run the loop for the search to output the results.
 				 * If you want to overload this in a child theme then include a file
 				 * called loop-search.php and that will be used instead.
@@ -62,9 +67,9 @@ $q = $_GET['s'];
 
 					</div>
 
-					<div class="span4" id='sidebar'>
+					<div class="span4 searchContent" id='sidebar'>
 						<div class="well">
-							<h3>Advanced search</h3>
+							<h3 id="advanced">Advanced search</h3>
 							<form role="search" method="get" action="<?php echo home_url('/'); ?>">
 								<input type="hidden" name="s" value=<?php echo $_GET['s']; ?>>
 								<h4>Filter by content type</h4>
@@ -80,13 +85,13 @@ $q = $_GET['s'];
 											$checkbox .= "checked=\"checked\"";
 										}
 										
-										$checkbox .= '> '. $pt->labels->search_items .'<br>';
+										$checkbox .= '> <span class="labelForCheck">'. $pt->labels->search_items .'</span><br>';
 									}
 								}
 								echo $checkbox;
 								?>
 								<br>
-								<button type="btn">Refine search</button>
+								<button type="btn" class="btn btn-success">Refine search</button>
 							</form>
 						</div>
 						<ul class="xoxo">
