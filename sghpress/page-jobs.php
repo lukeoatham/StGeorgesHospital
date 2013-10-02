@@ -199,11 +199,12 @@ $types = array();
 //$locations = array();	
 
 $status = $xml->status->number_of_jobs_found;
+$jobsadded = 0;
 if($status != 0){
-	$jobsadded = 0;
 	
 	foreach($xml->vacancy_details as $vacancy){
 		//Make variables for each object
+		$jobsadded++;
 		$vacObj = array();
 		$vacObj["id"] = $vacancy->id;
 		$vacObj["ref"] = $vacancy->job_reference;
@@ -291,7 +292,7 @@ if($status != 0){
 						echo " value=\"".$GETs["keyword"]."\"";
 					}
 					 ?>>
-					<button type="submit" class="btn">Search</button>
+					<button type="submit" class="btn" id="keywordSearchSubmit">Search</button>
 					<?php 
 						foreach($GETs as $key => $val){
 							if($key != "keyword" && $key != "pay"){
@@ -325,10 +326,10 @@ if($status != 0){
 					?>
 					<dd>
 						<div class="btn-group">
-							<a href="<?php echo $typeURL; ?>type=all" class="btn<?php if($GETs["type"] == "all" || (!$GETs["type"])){echo " active";}?>">All</a>
+							<a href="<?php echo $typeURL; ?>type=all" id="all" class="btn typeButton<?php if($GETs["type"] == "all" || (!$GETs["type"])){echo " active";}?>">All</a>
 							<?php 
 							foreach($types as $type){
-								echo "<a href=\"".$typeURL."type=".$type."\" class=\"btn";
+								echo "<a href=\"".$typeURL."type=".$type."\" id=\"".$type."\" class=\"btn typeButton";
 								/*if(!in_array($type, $types)){
 									echo " disabled";
 								}*/
@@ -370,14 +371,14 @@ if($status != 0){
 					 ?>
 					<dd>
 						<div class="btn-group">
-							<a href="<?php echo $sortURL; ?>sort=recent" class="btn<?php if($GETs["sort"] == "recent" || (!$GETs["sort"])){ echo " active"; }?>">Most recent first</a>
-							<a href="<?php echo $sortURL; ?>sort=high" class="btn<?php if($GETs["sort"] == "high"){ echo " active"; }?>">Highest paid first</a>
-							<a href="<?php echo $sortURL; ?>sort=low" class="btn<?php if($GETs["sort"] == "low"){ echo " active"; }?>">Lowest paid first</a>
+							<a href="<?php echo $sortURL; ?>sort=recent" id="recent" class="btn sortButton<?php if($GETs["sort"] == "recent" || (!$GETs["sort"])){ echo " active"; }?>">Most recent first</a>
+							<a href="<?php echo $sortURL; ?>sort=high" id="high" class="btn sortButton<?php if($GETs["sort"] == "high"){ echo " active"; }?>">Highest paid first</a>
+							<a href="<?php echo $sortURL; ?>sort=low" id="low" class="btn sortButton<?php if($GETs["sort"] == "low"){ echo " active"; }?>">Lowest paid first</a>
   						</div>
 					</dd>
 					<dt>Pay/Salary/Band</dt>
 					<dd>
-						<select name="pay" class="input-xlarge">
+						<select name="pay" class="input-xlarge" id="pay">
 							<option value="any"<?php if($GETs["pay"] == "any" || (!$GETs["pay"])){ echo " selected"; }?>>All</option>
 							<optgroup label="Salary range">
 								<option value="A02"<?php if($GETs["pay"] == "A02"){ echo " selected"; }?>>at least &pound;10,000 a year</option>
@@ -425,7 +426,7 @@ if($status != 0){
 								<option value="SM"<?php if($GETs["pay"] == "SM"){ echo " selected"; }?>>Senior Management positions</option>
 							</optgroup>
 						</select>
-						<button type="submit" class="btn">Apply</button>
+						<button type="submit" id="paySubmit" class="btn">Apply</button>
 					</dd>
 					</form>
 					<dt>Newly qualified?</dt>
@@ -458,100 +459,26 @@ if($status != 0){
 						<p>
 						 <?php
 						 	if($GETs["new"] != "true"){?>
-						 		<a href="<?php echo $newURL; ?>new=true" class="btn">Show posts suitable for newly qualified staff</a>
+						 		<a href="<?php echo $newURL; ?>new=true" id="newSubmit" class="btn true">Show posts suitable for newly qualified staff</a>
 						<?php }else{
 						 ?>
-						 		<a href="<?php echo $newURL; ?>" class="btn"><i class="icon-remove"></i> Show all posts</a>
+						 		<a href="<?php echo $newURL; ?>" id="newSubmit" class="btn false"><i class="icon-remove"></i> Show all posts</a>
 						 <?php
 						 }
 						 ?>
 						</p>
 					</dd>
 				</dl>
-				<p><a href="<?php the_permalink($post->ID); ?>" class="btn btn-danger pull-right"><i class="icon-remove icon-white"></i> Reset search</a><br></p>
+				<p><span id="jobsFound"><?php echo $jobsadded; ?> jobs found </span><a href="<?php the_permalink($post->ID); ?>" id="resetSearch" class="btn btn-danger pull-right"><i class="icon-remove icon-white"></i> Reset search</a><br></p>
 			</div>
+			<div id="jobsListing">
 			<?php echo $htmlToReturn; ?>
+			</div>
 		</div>
 		</div>
 					
 				
 
 <?php endwhile; ?>
-
-<script type="text/javascript">
-	var currentType = "<?php if($GETtype){ echo $GETtype;}else{echo "all";}; ?>";
-	var currentLocation = "<?php if($GETlocation){ echo $GETlocation;}else{echo "all";}; ?>";
-	
-	$("#keywordSearch").keyup(function(e){
-		var stringToSearch  = $("#keywordSearch").val();
-		$.ajaxSetup({accepts:'text/xml',cache:false});
-		$.ajax({
-			url: "http://www.jobs.nhs.uk/extsearch?client_id=121185&infonly=1&skill_keywords="+stringToSearch+"&skill_match=ALL",
-			type: "GET",
-			cache: false,
-			dataType: 'xml',
-            contentType: 'text/xml',
-            mimeType: 'text/xml',
-            crossDomain: true,
-			scriptCharset: "ISO-8859-1",
-			success: function (response, status, xhr) {
-				var ct = xhr.getResponseHeader("content-type") || "";
-				if (ct.indexOf('html') > -1) {
-					// returned result is of type html, so act accordingly
-					console.log("is html");
-				}
-				else if (ct.indexOf('xml') > -1) {
-					// returned result is of type xml, so act accordingly
-					console.log("is xml");
-				}
-			}
-			})
-			});
-	
-	$(".type").click(function(e){
-		e.preventDefault();
-		$(".type").parent("li").removeClass("active");
-		$(this).parent("li").addClass("active");
-		var typeOfJob = $(this).attr("data-option");
-		currentType = typeOfJob;
-		$(".job").hide();
-		if(typeOfJob != "all"){
-			if(currentLocation == "all"){
-				$("."+typeOfJob).show();
-			}else{
-				$("."+typeOfJob+"."+currentLocation).show();
-			}
-		}else{
-			if(currentLocation == "all"){
-				$(".job").show();
-			}else{
-				$("."+currentLocation).show();
-			}
-		}
-		console.log("type:" + currentType+ " location:" + currentLocation);
-	});
-	$(".location").click(function(e){
-		e.preventDefault();
-		$(".location").parent("li").removeClass("active");
-		$(this).parent("li").addClass("active");
-		var locationOfJob = $(this).attr("data-option");
-		currentLocation = locationOfJob;
-		$(".job").hide();
-		if(locationOfJob != "all"){
-			if(currentType == "all"){
-				$("."+locationOfJob).show();
-			}else{
-				$("."+currentType+"."+locationOfJob).show();
-			}
-		}else{
-			if(currentType == "all"){
-				$(".job").show();
-			}else{
-				$("."+currentType).show();
-			}
-		}
-		console.log("type:" + currentType+ " location:" + currentLocation);
-	});
-</script>
 
 <?php get_footer(); ?>
