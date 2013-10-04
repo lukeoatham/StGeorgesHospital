@@ -692,6 +692,9 @@ function renderLeftNav($outputcontent="TRUE") {
 		$postType = $post->post_type;
 		$before = array();
 		
+	
+		
+				
 		if($postType == "ward"){
 			$postSection = "patient";
 			$postSectionID = 9;
@@ -738,6 +741,22 @@ function renderLeftNav($outputcontent="TRUE") {
 				}
 			}
 		
+		}
+		
+		if($postType == "attachment"){
+			$cats = get_the_category($postID);
+			$catToUse = $cats[0]->slug;
+			if($catToUse == "referral-forms"){
+				$postSection = "gp";
+				$postSectionID = 36;
+				array_push($before, 167);
+			}
+			if($catToUse == "patient-information-leaflets"){
+				$postSection = "patient";
+				$postSectionID = 9;
+				array_push($before, 203);
+				
+			} 
 		}
 		
 		
@@ -817,11 +836,15 @@ function renderLeftNav($outputcontent="TRUE") {
 				$navarray[] = $navItem->ID;
 			}	 
 			
+			
+			
 			$ancestorCount = 0;
 			foreach($before as $beforeItem){
 				$subnavString .= "<li class='level-".$ancestorCount."'><a href='".get_permalink($beforeItem)."'>".get_the_title($beforeItem)."</a></li>"; //top level menu item
 				$ancestorCount++;
 			}
+			
+			//var_dump($subnavString);
 			
 			$subs=false;
 			if($postType == "people" || count($navarray) == 1){
@@ -830,6 +853,8 @@ function renderLeftNav($outputcontent="TRUE") {
 					$subnavString .= $relatedposts;
 				}
 			}else{
+			
+		
 			
 			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
 				if ($nav == -1) {
@@ -863,6 +888,11 @@ function renderLeftNav($outputcontent="TRUE") {
 			
 			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
 			$postSectionTitle = str_replace("and", "&#038;", $postSectionTitle);
+			
+			
+			if($postType == "attachment" && $catToUse == "referral-forms"){
+				$postSectionTitle = "area";
+			}
 			
 					
 			$navItems = str_replace($postSectionTitle."</a>", $postSectionTitle."</a><ul class=\"children\">".$subnavString."</ul>", $navItems);

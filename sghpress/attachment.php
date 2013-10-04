@@ -12,10 +12,22 @@ get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 			<div class="row-fluid">
+			
+			
+					
+				<div class="span3" id='secondarynav'>
+
+										
+							<?php renderLeftNav() ?>
+												
+					</div>	
 				
-					<div class="span9 offset1" id="content">
+					<div class="span9" id="content">
 
 					<h2><?php the_title(); ?></h2>
+					
+					
+					
 					<ul>
 <?php if ( wp_attachment_is_image() ) :
 	$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
