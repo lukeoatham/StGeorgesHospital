@@ -72,7 +72,12 @@ $paged = $_GET['$paged'];
 						$itemObj["link"] = $item->guid;
 						$itemObj["id"] = $item->ID;
 						$itemObj["thumbnail"] = wp_get_attachment_image_src(get_post_thumbnail_id($item->ID),'thumbnail',false);//removed [0] 
-						$posttags = get_the_tags($item->ID);	
+						$posttags = get_the_tags($item->ID);
+						$custom = (get_post_custom($item->ID));	
+						$itemObj["price"] = $custom["cost"][0];
+						$itemObj["cpd"] = $custom["cpd_points"][0];
+						$itemObj["location"] = $custom["venue"][0];
+						$itemObj["audience"] =  $custom["target_audience"][0];
 						$tagstr="";
 						if ($posttags) {
 							foreach($posttags as $tag) {
@@ -152,9 +157,29 @@ $paged = $_GET['$paged'];
 									
 									echo pippin_excerpt_by_id($item["id"], 20);
 									
+									echo "<ul class=\"inline\">";
+									
 									if($item["tags"]){
-										echo " <i class='icon-tags'></i> Tags: ".$item["tags"];
+										echo "<li><i class='icon-tags'></i> <strong>Tags:</strong> ".$item["tags"]."</li>";
 									}
+									
+									if($item["price"] != ""){
+										echo "<li><strong>Price:</strong> ".$item["price"]."</li>";
+									}
+									
+									if($item["cpd"] != ""){
+										echo "<li><strong>CPD points:</strong> ".$item["cpd"]."</li>";
+									}
+									
+									if($item["location"] != ""){
+										echo "<li><strong>Location:</strong> ".$item["location"]."</li>";
+									}
+									
+									if($item["audience"] != ""){
+										echo "<li><strong>Audience:</strong> ".$item["audience"]."</li>";
+									}
+									
+									echo "</ul>";
 									
 									echo "</div>";
 									
