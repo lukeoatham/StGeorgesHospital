@@ -681,12 +681,12 @@ ul.showbullets {
 }
 
 .gp .level-0 a, #menu-primary-navigation .gp a:hover{
-    background-color: rgb(25, 25, 25) !important;
+    background-color: rgb(75, 75, 75) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
 .gp .level-1 a{
-    background-color: rgb(50, 50, 50) !important;
+    background-color: rgb(125, 125, 125) !important;
     color: white !important;
     border-top-width: 0px !important;
 }
