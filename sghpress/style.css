@@ -1774,4 +1774,31 @@ h1,h2,h3,h4,h5,h6{
 	width: 90% !important;
 }
 
+.jobsFilter .btn{
+	display: block;
+	width: 90% !important;
+}
+
+.jobsFilter .btn-group .active{
+	margin-left: -1px !important;
+}
+
+.jobsFilter .btn-group a:first-child{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px;
+}
+
+.jobsFilter .btn-group a{
+	border-top: 0px solid white;
+}
+
+.jobsFilter .btn-group a:last-child{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
 }

@@ -281,7 +281,7 @@ if($status != 0){
 			<h1><?php the_title(); ?></h1>
 			<?php the_content(); ?>
 			<div class="searchResults"></div>
-			<div class="well">
+			<div class="well jobsFilter">
 				<h4>Filter results</h4>
 				<form class="form-search" action="" method="GET">
 				<dl class="dl-horizontal">
