@@ -1485,7 +1485,7 @@ to {
 	border-radius: 10px;
 }
 
-#service-tabs .media, .newsContent .media, .events .media, .job{
+#service-tabs .media, .newsContent .media, .events .media, .job, .contactContent .media{
 	position: relative;
 	box-shadow: 0 3px 5px #888;
 	border-right: 1px solid #ccc;
@@ -1495,13 +1495,13 @@ to {
 	height: 100%;
 }
 
-#service-tabs .media .pull-left, .newsContent .media .pull-left, .events .media .pull-left{
+#service-tabs .media .pull-left, .newsContent .media .pull-left, .events .media .pull-left, .contactContent .media .pull-left{
 	/*position: absolute;*/
 	width: 100%;
 	padding-bottom: 50%; /* Change this value to change how much the .media-body is overlayed */
 }
 
-#service-tabs .media .media-object, .newsContent .media .pull-left img, .events .media .media-object{
+#service-tabs .media .media-object, .newsContent .media .pull-left img, .events .media .media-object, .contactContent .media .media-object{
 	width: 100% !important;
 	height: inherit !important;
 	position: absolute;
@@ -1521,7 +1521,7 @@ to {
 	left: 0px;
 }
 
-.newsContent .media .media-body, .events .media .media-body{
+.newsContent .media .media-body, .events .media .media-body, .contactContent .media .media-body{
 	position: relative;
 	background-color: white;
 	width: 91% !important;

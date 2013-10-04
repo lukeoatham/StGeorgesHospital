@@ -48,6 +48,16 @@ $site = $_GET['site'];
 							$siteFIid = $site_meta[0]->option_value;
 							
 							
+							$q = "select option_value from wp_options where option_name = 'sites_".$s->term_id."_site_address'";
+    
+							 $site_meta = $wpdb->get_results( $q );		
+							 $siteData = explode("|",wpautop($site_meta[0]->option_value));
+
+							 $q = "select option_value from wp_options where option_name = 'sites_".$s->term_id."_site_contact'";
+							 $site_meta = $wpdb->get_results( $q );
+							 $siteTel = wpautop($site_meta[0]->option_value);
+							
+							
 							$postThumb = wp_get_attachment_image_src($siteFIid, array(75,75));
 							
 							if(!$postThumb){
@@ -58,7 +68,17 @@ $site = $_GET['site'];
 							
 							echo "<div class=\"media-object pull-left\"><a href='/contact-and-find-us/find-us/sites/?site=".$s->slug."'><img src=\"".$postThumb."\" class=\"service-thumbnail\"></a></div>";
 							
-							echo "<div class=\"media-body\"><h4><a href=\"/contact-and-find-us/find-us/sites/?site=".$s->slug."\">".$s->name."</a></h4></div>";
+							echo "<div class=\"media-body\"><h4><a href=\"/contact-and-find-us/find-us/sites/?site=".$s->slug."\">".$s->name."</a></h4>";
+							
+							echo "<div class=\"row-fluid\">";
+							
+							echo "<div class=\"span3\">".str_replace("<p>","<p><strong>Address:</strong><br>",$siteData[0])."</div>";
+							
+							echo "<div class=\"span5\">".preg_replace("/<p>/","<p><strong>Tel:</strong><br>",$siteTel, 1)."</div>";
+							
+							echo "</div>";
+							
+							echo "</div>";
 							
 							echo "</div>";
 						}
