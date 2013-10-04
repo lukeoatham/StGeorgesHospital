@@ -198,6 +198,7 @@ $paged = $_GET['$paged'];
 					
 					
 				</div>
+				</div>
 
 					
 					
