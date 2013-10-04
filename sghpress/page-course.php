@@ -139,7 +139,7 @@ $paged = $_GET['$paged'];
 									if(!$item["thumbnail"]){
 										$postThumb = "http://placehold.it/150x150";
 									}else{
-										$postThumb = $item["thumbnail"];
+										$postThumb = $item["thumbnail"][0];
 									}
 									
 									echo "<a href=\"".$item["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object course-thumbnail\"></a>";
