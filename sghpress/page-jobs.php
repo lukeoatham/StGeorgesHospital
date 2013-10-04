@@ -243,13 +243,13 @@ if($status != 0){
 		//build the html to return	
 		$htmlToReturn .= "<div".$hidder." class=\"row job ".str_replace(" ", "", strtolower($vac["type"]))."\">";
 		$htmlToReturn .= "<h3><a href=\"".$vac["url"]."\">".$vac["title"]."</a></h3>";
-		$htmlToReturn .= "<p>".$vac["desc"]."</p>";
+		$htmlToReturn .= "<p class=\"jobDesc\">".$vac["desc"]."</p>";
 		$htmlToReturn .= "<dl class=\"dl-horizontal\">";
 		$htmlToReturn .= "<dt>Job Type</dt><dd>".$vac["type"]."</dd>";
 		$htmlToReturn .= "<dt>Salary</dt><dd>".$vac["salary"]."</dd>";
 		$htmlToReturn .= "<dt>Close date</dt><dd>".$vac["close"]."</dd>";
 		$htmlToReturn .= "</dl>";
-		$htmlToReturn .= "<p><a href=\"".$vac["url"]."\" class=\"btn btn-info pull-right\">Apply now</a></p>";
+		$htmlToReturn .= "<p class=\"applyButton\"><a href=\"".$vac["url"]."\" class=\"btn btn-info pull-right\">Apply now</a></p>";
 		$htmlToReturn .= "</div>"; 
 	}
 }else{
@@ -429,7 +429,7 @@ if($status != 0){
 						<button type="submit" id="paySubmit" class="btn">Apply</button>
 					</dd>
 					</form>
-					<dt>Newly qualified?</dt>
+					<!--<dt>Newly qualified?</dt>
 					<dd>
 					<?php
 					$GETcounter = 0; 
@@ -467,7 +467,7 @@ if($status != 0){
 						 }
 						 ?>
 						</p>
-					</dd>
+					</dd>-->
 				</dl>
 				<p><span id="jobsFound"><?php echo $jobsadded; ?> jobs found </span><a href="<?php the_permalink($post->ID); ?>" id="resetSearch" class="btn btn-danger pull-right"><i class="icon-remove icon-white"></i> Reset search</a><br></p>
 			</div>

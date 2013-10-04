@@ -1485,7 +1485,7 @@ to {
 	border-radius: 10px;
 }
 
-#service-tabs .media, .newsContent .media, .events .media{
+#service-tabs .media, .newsContent .media, .events .media, .job{
 	position: relative;
 	box-shadow: 0 3px 5px #888;
 	border-right: 1px solid #ccc;
@@ -1779,15 +1779,12 @@ h1,h2,h3,h4,h5,h6{
 	width: 90% !important;
 }
 
-.jobsFilter .btn-group .active{
-	margin-left: -1px !important;
-}
-
 .jobsFilter .btn-group a:first-child{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 0px !important;
 	border-bottom-right-radius: 0px;
+	margin-left: -1px !important;
 }
 
 .jobsFilter .btn-group a{
@@ -1801,4 +1798,20 @@ h1,h2,h3,h4,h5,h6{
 	border-bottom-right-radius: 5px;
 }
 
+.job h3, .job dt, .job dd, .job .applyButton, .job .jobDesc, .job .jobDescMore{
+	padding-left: 5%;
+	padding-right: 5%;
+	width: 90% !important;
+}
+
+.job .applyButton a{
+	float: none;
+	clear: both;
+	width: 90% !important;
+}
+.job .jobDesc{
+	border-bottom: 16px solid white;
+	-webkit-border-image:url("images/nhsjobsborder.png") 100 16 stretch; /* Safari 5 */
+	-o-border-image:url("images/nhsjobsborder.png") 100 16 stretch; /* Opera */
+	border-image:url("images/nhsjobsborder.png") 100 16 stretch;
 }
