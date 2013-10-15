@@ -743,21 +743,6 @@ function renderLeftNav($outputcontent="TRUE") {
 		
 		}
 		
-		if($postType == "attachment"){
-			$cats = get_the_category($postID);
-			$catToUse = $cats[0]->slug;
-			if($catToUse == "referral-forms"){
-				$postSection = "gp";
-				$postSectionID = 36;
-				array_push($before, 167);
-			}
-			if($catToUse == "patient-information-leaflets"){
-				$postSection = "patient";
-				$postSectionID = 9;
-				array_push($before, 203);
-				
-			} 
-		}
 		
 		
 		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
@@ -773,11 +758,15 @@ function renderLeftNav($outputcontent="TRUE") {
 		//Store the menu in a string
 		$navItems = wp_nav_menu($navParams);
 		
-		//Set all menu items to only be visible on mobile
-		$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
-		//For the section we're on we want to be visible everywhere
-		$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection, $navItems); 
-			
+		if($post){
+			//Set all menu items to only be visible on mobile
+			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
+			//For the section we're on we want to be visible everywhere
+			$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection, $navItems); 
+		}else{
+			//Set all menu items to only be visible on mobile
+			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
+		}
 			
 		
 			
@@ -844,8 +833,6 @@ function renderLeftNav($outputcontent="TRUE") {
 				$ancestorCount++;
 			}
 			
-			//var_dump($subnavString);
-			
 			$subs=false;
 			if($postType == "people" || count($navarray) == 1){
 				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
@@ -879,8 +866,6 @@ function renderLeftNav($outputcontent="TRUE") {
 				$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
 				}
 			}
-			
-			
 			
 			if ($relatedposts) {
 				$subnavString .= $relatedposts;
@@ -993,13 +978,13 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		$this->currentPostAncestors = array_reverse($currentPost->ancestors);
 		$this->currentPostParent = end($this->currentPostAncestors);
 		$this->sectionID = (end($currentPost->ancestors) ? end($currentPost->ancestors) : $this->currentPostID);
+		$this->postType = $currentPost->post_type;
 	}
 
 	function start_el(&$output, $item, $depth, $args){
 		global $wp_query;
 		
 		$currentSection = false;
-		
 		
 		if($item->object_id == $this->currentPostID || $item->object_id == $this->sectionID && $this->sectionID != 0){
 			$currentSection = true;
@@ -1072,6 +1057,9 @@ class mobileNav_walker extends Walker_Nav_Menu{
 				}
 				if (strlen($subpages)>0 && !is_search() ) {
 					$output .= "{$subpages}";
+				}
+				if($this->postType == "attachment"){
+					$output .= "<li class=\"current_page_item\"><a href=\"#\">".get_the_title()."</a></li>";
 				}
 			$output .= '</ul>';
 		}
