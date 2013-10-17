@@ -6,7 +6,7 @@
 	        echo $_GET["s"];
         }
          ?>" name="s" id="appendedPrependedInput" class="searchbox twelvecol"  />
-         <button class="tbn" type="button"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.svg" alt="Search"></button>
+         <button class="tbn" type="submit"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.svg" alt="Search"></button>
         <!-- <input type="submit" id="searchsubmit" value="Search" /> -->
     </div>
 </form>
