@@ -121,27 +121,6 @@ $site = $_GET['site'];
 ?>
 
 			<div class="row-fluid">
-				<div class="span4">
-					<h4>Address</h4>
-					<address>
-					<?php echo $siteData[0];  ?>
-					</address>
-					<h4>Contact details</h4>
-					<?php  echo $siteTel; 
-					if ($siteService):	
-					?>
-					<h4>Service information</h4>
-					<?php  echo $siteService; 
-					endif;
-					if ($siteTravel):
-					?>
-					<h4>Travel information</h4>
-					<?php  echo $siteTravel; 
-					endif;
-					?>
-				</div>
-				<div class="span1"></div>
-				<div class="span7">
 				<?php if ($loc): ?>
 					<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 						<script>
@@ -165,13 +144,27 @@ $site = $_GET['site'];
 							google.maps.event.addDomListener(window, 'load', initialize);
 						</script>
 						
-						<div id="map-canvas" class="google_map span11"></div>
+						<div id="map-canvas" class="google_map pull-right span7"></div>
 						<?php endif; ?>
-				</div>
-			</div>
+					<h4>Address</h4>
+					<address>
+					<?php echo $siteData[0];  ?>
+					</address>
+					<h4>Contact details</h4>
+					<?php  echo $siteTel; 
+					if ($siteService):	
+					?>
+					<h4>Service information</h4>
+					<?php  echo $siteService; 
+					endif;
+					if ($siteTravel):
+					?>
+					<h4>Travel information</h4>
+					<?php  echo $siteTravel; 
+					endif;
+					?>
 			
-			<div class="row-fluid">
-	
+				
 				<?php echo wpautop($showsite->description);?>
 			</div>
 						
