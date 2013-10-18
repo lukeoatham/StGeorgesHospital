@@ -176,39 +176,43 @@ $hospsite = $_GET['hospsite'];
 							foreach($sites as $key => $value){
 								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
 								
+								
+								
 								echo "<h3>".$sites[$key]["fullname"]."</h3>";
 								
 								foreach($value as $serv){
-									echo "<div class=\"media\">";
-									
-									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
-									
-									if(!$postThumb){
-										$postThumb = "http://placehold.it/75x75";
-									}else{
-										$postThumb = $postThumb[0];
+									if(!$serv["fullname"]){
+										echo "<div class=\"media\">";
+										
+										$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
+										
+										if(!$postThumb){
+											$postThumb = "http://placehold.it/75x75";
+										}else{
+											$postThumb = $postThumb[0];
+										}
+										
+										echo "<a href=\"".$serv["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object service-thumbnail\"></a>";
+										
+										echo "<div class=\"media-body\">";
+										
+										echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
+										
+										if($serv["opening"] != ""){
+											echo "<p><strong>Visiting hours:</strong> ".$serv["opening"]."</p>";
+										}
+										if($serv["tel"] != ""){
+											echo "<p><strong>Telephone:</strong> ".$serv["tel"]."</p>";
+										}
+										
+										echo "<p><strong>Location:</strong> ".$serv["location"]."</p>";
+										
+										//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
+										
+										echo "</div>";
+										
+										echo "</div>";
 									}
-									
-									echo "<a href=\"".$serv["link"]."\" class=\"pull-left\"><img src=\"".$postThumb."\" class=\"media-object service-thumbnail\"></a>";
-									
-									echo "<div class=\"media-body\">";
-									
-									echo "<h4><a href=\"".$serv["link"]."\">".$serv["title"]."</a></h4>";
-									
-									if($serv["opening"] != ""){
-										echo "<p><strong>Visiting hours:</strong> ".$serv["opening"]."</p>";
-									}
-									if($serv["tel"] != ""){
-										echo "<p><strong>Telephone:</strong> ".$serv["tel"]."</p>";
-									}
-									
-									echo "<p><strong>Location:</strong> ".$serv["location"]."</p>";
-									
-									//echo "<p>".get_post_meta($serv["id"], "contact_details", true)."</p>";
-									
-									echo "</div>";
-									
-									echo "</div>";
 								}
 								echo "</div>";
 								
