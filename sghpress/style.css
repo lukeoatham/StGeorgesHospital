@@ -978,7 +978,9 @@ li.comment .comment-body {
     text-align: left;
     font-size: 90%;
     }
-    
+li h3 a {
+	color: black !important;
+}    
 #footer h3 {
 	color: white;
 	font-size: 110%
@@ -986,7 +988,12 @@ li.comment .comment-body {
 #footer ul.xoxo {
     margin-bottom: 3em;
 }
-
+#footer h3 a   {
+ text-decoration: underline;
+}
+#footer label {
+	color: white;
+}
 #doitonline {
     background: #4DB848;
     padding: 0px;

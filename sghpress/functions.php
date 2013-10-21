@@ -510,6 +510,15 @@ function twentyten_widgets_init() {
 		'after_title' => '</h3>',
 	) );
 	register_sidebar( array(
+		'name' => __( 'Footer Feedback', 'twentyten' ),
+		'id' => 'footer-widget-feedback',
+		'description' => __( 'Footer feedback area', 'twentyten' ),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
 		'name' => __( 'Emergency', 'twentyten' ),
 		'id' => 'emergency_message',
 		'description' => __( 'Emergency message area', 'twentyten' ),

@@ -30,8 +30,40 @@
 				</div>
 
 				<div class="container-fluid">
+				
+				<?php if (is_front_page() || is_home()) : //DISPLAY HOMEPAGE FOOTER ?>
+									
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
+						</ul>
+					</div>
+					<div class="span3">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'footer-widget-area4' ); ?>
+						</ul>
+					</div>
+
+				<?php else:   // DISPLAY REGULAR FOOTER ?>
+				
 					<div class="span5">
+							<div class="well">
+<?php 							dynamic_sidebar( 'footer-widget-feedback' ); ?>
+							</div>
+
+
 						<h3>News</h3>
+
 						<?php
 							$customquery = new WP_Query(array(
 							"post_type" => "newsitem",
@@ -41,29 +73,12 @@
 							);
 								
 							if ( $customquery->have_posts() ) {
-								$k=0; //counter to check first 2
+								echo "<ul>";
 								while ( $customquery->have_posts() ) {
 									$customquery->the_post();
-									$k++;
-									echo "<div class='media'>";?>
-										    <?php
-									if ( has_post_thumbnail( $post->ID ) && $k<3 ) {
-										    echo "<a class='pull-left' href=".get_permalink().">";
-										    //$mediaimage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),'clinicianthumb');
-										    //echo "<img class='media-object' src='".$mediaimage[0]."'>";
-										    the_post_thumbnail('clinicianthumb');
-											echo "</a>";
-	    									}
-	    									?>
-										<?php 
-										echo "<div class='media-body'><strong><a href='" .get_permalink() . "'>" . get_the_title() . "</a></strong>";
-										if ($k<3){
-										the_excerpt();
-										}
-?></div></div>
-<?php
-
+										echo "<li><a href='" .get_permalink() . "'>" . get_the_title() . "</a></li>";
 								}
+								echo "</ul>";
 							}
 							
 							wp_reset_query();
@@ -144,7 +159,6 @@
 							  <button class="btn" type="button" onclick="goToPage('selectf4')">Go</button>
 							</div>	
 
-							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
 							
 							
 					</div>
@@ -164,6 +178,8 @@
 				wp_nav_menu( $defaults );
 				?>
 					</div>
+				<?php endif; ?>
+
 				</div>
 			</div>
 
