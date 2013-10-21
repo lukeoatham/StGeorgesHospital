@@ -62,6 +62,9 @@
 							</div>
 
 
+					</div>
+					<div class="span4">
+
 						<h3>News</h3>
 
 						<?php
@@ -73,7 +76,7 @@
 							);
 								
 							if ( $customquery->have_posts() ) {
-								echo "<ul>";
+								echo "<ul class='footernews'>";
 								while ( $customquery->have_posts() ) {
 									$customquery->the_post();
 										echo "<li><a href='" .get_permalink() . "'>" . get_the_title() . "</a></li>";
@@ -84,8 +87,8 @@
 							wp_reset_query();
 
 						?>
-					</div>
-					<div class="span4">
+
+<!--
 						<h3>All services A-Z</h3> 
 				<div class="input-append">
 				  <label for="selectf3">Jump to:</label>
@@ -159,6 +162,7 @@
 							  <button class="btn" type="button" onclick="goToPage('selectf4')">Go</button>
 							</div>	
 
+-->
 							
 							
 					</div>

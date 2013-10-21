@@ -991,8 +991,9 @@ li h3 a {
 #footer h3 a   {
  text-decoration: underline;
 }
-#footer label {
-	color: white;
+.footernews li  {
+	list-style: circle;
+	padding-bottom: 0.1em;
 }
 #doitonline {
     background: #4DB848;
