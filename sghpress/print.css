@@ -4,12 +4,31 @@
 	color: black !important;
 }
 
-ul.xoxo, #respond, #access, #searchcontainer, #topheader, .reply , .sharebuttonsanywhere, #promobar, #primarynav, .jumptocomments, .printfriendly, #footer {
-	display: none;
+body{
+	font-family: serif;
+	font-size: 12pt;
+	line-height: 1;
+	margin: 0px;
+	padding: 0px;
 }
 
-#utilitystrip .container {
-	padding-left: none !important;
+ul.xoxo, #respond, #access, #searchcontainer, #topheader, .reply , .sharebuttonsanywhere, #promobar, #primarynav, .jumptocomments, .printfriendly, #footer, .menu-primary-navigation-container, .breadcrumbs, #searchblock, .visible-phone, #ourvalues, #contentOverlay, #navigation{
+	display: none !important;
+}
+
+.quick-links li:first-child{
+	display: inline-block;
+	float: left;
+	font-size: 14pt;
+	border: 0px solid white;
+}
+
+.quick-links li a:after{
+	content: none;
+}
+
+.quick-links li{
+	display: none;
 }
 
 p.printonlyheadline {
@@ -19,6 +38,19 @@ p.printonlyheadline {
 	left: 0 !important;
 	font-weight: bold;
 	padding: 0.5em 0;
+}
+
+#mainlogo{
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+	top: -15px;
+	right: 0px;
+	float: right;
+	display: inline-block;
+}
+#mainlogo a:after{
+	content: none;
 }
 
 #content a:link:after, #content a:visited:after, #sidebar a:link:after, #sidebar a:visited:after { 
