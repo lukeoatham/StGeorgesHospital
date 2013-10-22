@@ -718,10 +718,10 @@ function renderLeftNav($outputcontent="TRUE") {
 		
 		
 		if ($postType == "service") {
-			//Iterate through the top level items - Primary Nav with a walker
+			//Iterate through the top level items - Primary Nav with a walker uncomment line below if including service A-Z page
 			$postSection = "service";
 			$postSectionID = 7;
-			array_push($before, 230);
+			//array_push($before, 230);
 		}
 		
 		if($postType == "course"){
