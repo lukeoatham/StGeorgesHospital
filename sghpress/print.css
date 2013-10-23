@@ -10,7 +10,7 @@ body{
 	padding: 0px;
 }
 
-ul.xoxo, #respond, #access, #searchcontainer, #topheader, .reply , .sharebuttonsanywhere, #promobar, #primarynav, .jumptocomments, .printfriendly, #footer, .menu-primary-navigation-container, .breadcrumbs, #searchblock, .visible-phone, #ourvalues, #contentOverlay, #navigation, #secondarynav, #sidebar{
+ul.xoxo, #respond, #access, #searchcontainer, #topheader, .reply , .sharebuttonsanywhere, #promobar, #primarynav, .jumptocomments, .printfriendly, #footer, .menu-primary-navigation-container, .breadcrumbs, #searchblock, .visible-phone, #ourvalues, #contentOverlay, #navigation, #secondarynav{
 	display: none !important;
 }
 
@@ -49,6 +49,11 @@ p.printonlyheadline {
 }
 #mainlogo a:after{
 	content: none;
+}
+
+#sidebar{
+	display: block;
+	width: 100%;
 }
 
 #content a:link:after, #content a:visited:after, #sidebar a:link:after, #sidebar a:visited:after { 
