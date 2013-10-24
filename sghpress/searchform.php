@@ -6,7 +6,16 @@
 	        echo $_GET["s"];
         }
          ?>" name="s" id="appendedPrependedInput" class="searchbox twelvecol"  />
-         <button class="tbn" type="submit"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.svg" alt="Search"></button>
-        <!-- <input type="submit" id="searchsubmit" value="Search" /> -->
+         <button class="btn searchButton" type="submit">
+	         <script type="text/javascript">
+				var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/search";
+				if (Modernizr.svg){
+					$(".searchButton").html("<img src=\"" + imageURL + ".svg\" alt=\"Search\">");
+				}else{
+					$(".searchButton").html("<img src=\"" + imageURL + ".gif\" alt=\"Search\">");
+				}
+			</script>
+			<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.gif" alt="Search"></noscript>
+		</button>
     </div>
 </form>

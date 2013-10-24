@@ -23,23 +23,18 @@ session_start();
 	
 		?></title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	<link href="<?php echo get_stylesheet_directory_uri(); ?>/css/bootstrap.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 	<link rel="stylesheet" type="text/css" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/print.css" />
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.js"></script>
-
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-			
+    <script src="http://code.jquery.com/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bootstrap.js" type="text/javascript"></script>
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/modernizr.js" type="text/javascript"></script>
 		<?php
 		/* We add some JavaScript to pages with the comment form
 		 * to support sites with threaded comments (when in use).
 		 */
-		if ( is_singular() && get_option( 'thread_comments' ) )
+		if (is_singular() && get_option( 'thread_comments' ) )
 			wp_enqueue_script( 'comment-reply' );
 	
 		/* Always have wp_head() just before the closing </head>
@@ -51,41 +46,38 @@ session_start();
 	?>
 
 </head>
-
 <body <?php body_class($parentpageclass); 
 
-if(!is_single()){
- echo 'id="mobhead"';
-}
-
-
+	if(!is_single()){
+		// If the page isn't single then we set the body as the start of the page for mobile
+		echo 'id="mobhead"';
+	}
 ?> >
-
-
-		 <?php // include(get_stylesheet_directory() . "/sidebar-cookiebar.php"); ?>
-<input type="checkbox" name="mobileNav" id="mobileNav" <?php
-
-if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
-	echo "checked=\"checked\"";
-}
-
-?> />
-			<div class="container-fluid" id="mobMove">
-			<div class="row-fluid quick-links">
+	<input type="checkbox" name="mobileNav" id="mobileNav" <?php
+		// This checkbox shows and hides the mobile menu, it uses a cookie to keep things persistant
+		if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
+			echo "checked=\"checked\"";
+		}
+	?> />
+	
+	<div class="container-fluid" id="mobMove">
+		<div class="row-fluid quick-links">
 			<?php dynamic_sidebar( 'utilities-widget-area' ); ?>
-			</div>								
-			<div class="row-fluid header">
-				<div id='header' class="row">
-					<div id='masthead'>
-						
-						<p id='mainlogo'>
-							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-								<!--[if !IE]> -->
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.svg" alt="St George's Healthcare NHS Trust">
-								<!-- <![endif]-->
-								<!--[if IE]>
-								<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif" alt="St George's Healthcare NHS Trust">
-								<![endif]-->
+		</div>								
+		<div class="row-fluid header">
+			<div id='header' class="row">
+				<div id='masthead'>
+					<p id='mainlogo'>
+						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+							<script type="text/javascript">
+								var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/logo";
+								if (Modernizr.svg){
+									$("#mainlogo a").html("<img src=\"" + imageURL + ".svg\" alt=\"St George's Healthcare NHS Trust\">");
+								}else{
+									$("#mainlogo a").html("<img src=\"" + imageURL + ".gif\" alt=\"St George's Healthcare NHS Trust\">");
+								}
+							</script>
+							<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif" alt="St George's Healthcare NHS Trust"></noscript>
 							</a>
 						</p>
 						
@@ -98,15 +90,12 @@ if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 									<!-- end label to control checkbox -->
 						</div>							
 					</div>
-						
 					<div id='navigation' class="row">
 						<div class="span12">
 							<div class='menu-header'>
-								
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
-									<a href="#maincontent" class='hiddentext' accesskey='s' title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a>
-		
-								<div id="primarynav" role="navigation" class="touchdown-list eightcol">
+									<a href="#content" class='hiddentext' accesskey='s' title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a>
+								<div id="primarynav" role="navigation" class="eightcol">
 									<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 									<?php 
 										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
@@ -120,33 +109,6 @@ if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 					<label id="contentOverlay" for="mobileNav"></label>
 				<!-- end label for side menu -->
 				
-				<!-- start navigation for sidebar
-				<div class="sideNav">
-				<ul>
-				<?php
-				
-				global $post;
-				/*
-				
-					//Renders the left nav of pages with left navs
-				if($post->ID == $item->object_id || $post->post_parent == $item->object_id || in_array($item->object_id, $post->ancestors)){
-				//if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ){
-					if(!is_front_page() && !is_404() && !is_search()){
-						echo('<li class="subSideNav">');
-						renderLeftNav();
-						echo('</li>');
-					}else{
-						echo('<li class="subSideNav visible-phone">'); 
-						wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); 
-						echo('</li>');
-
-					}
-				}*/
-				?>
-				</ul>
-				</div>
-				
-				end navigation for sidebar -->
 			</div>
 			
 			<?php if ( is_active_sidebar( 'emergency_message' ) ) : ?>

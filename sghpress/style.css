@@ -246,7 +246,8 @@ ul#menu-top-tasks li {
     border-right: none;
     padding: .5em;
     padding-right: 0;
-    width: 220px;
+    width: 220px !important;
+    height: 1.7em;
 }
 
 #searchblock .input-append button{
@@ -257,6 +258,7 @@ ul#menu-top-tasks li {
 	border-left: none;
 	padding-top: .35em;
 	padding-bottom: .35em;
+	height: 3em;
 }
 
 #searchblock .input-append button img{
@@ -1026,22 +1028,9 @@ li h3 a {
 	margin-right: 16px;
 }
 
-.sidebox {
-	background: #f1f8ff;
-}
-h3.sideboxhead  {
-	background: #1972B5;
-	padding: 0.5em;
-	color: white;
-	font-size: 1.1em;
-	font-weight: 300;
-}
 .sidebox ul, .sidebox p {
 	margin-left: 0.5em;
 	padding: 0.5em;
-}
-.sidebox h3 a {
-	color: white !important;
 }
 .sidebox i {
 	margin-left:  1em;
@@ -1084,6 +1073,10 @@ h3.sideboxhead  {
 .google_map{
 	width: 100%;
 	height: 300px;
+}
+
+.google_map *{
+	width: auto;
 }
 
 .service-thumbnail{
@@ -1442,6 +1435,11 @@ to {
 	width: 95% !important;
 	padding-left: 5%;
 	padding-right: 5%;
+}
+
+.patientContent .sidebox{
+	padding-left: 0px;
+	background-color: white;
 }
 
 .sideboxhead{
