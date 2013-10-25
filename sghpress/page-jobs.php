@@ -429,45 +429,6 @@ if($status != 0){
 						<button type="submit" id="paySubmit" class="btn">Apply</button>
 					</dd>
 					</form>
-					<!--<dt>Newly qualified?</dt>
-					<dd>
-					<?php
-					$GETcounter = 0; 
-					$newURL = get_permalink($post->ID);
-					foreach($GETs as $key => $val){
-						if($key != "new"){
-							if($GETcounter != 0){
-								$newURL .= "&";
-							}else{
-								$newURL .= "?";
-							}
-							$newURL .= $key."=".$val;
-							$GETcounter++;
-						}
-					}
-					
-					if($GETs["new"] != "true"){
-						if($GETcounter != 0){
-							$newURL .= "&";
-						}else{
-							$newURL .= "?";
-						}
-					}
-
-					
-					 ?>
-						<p>
-						 <?php
-						 	if($GETs["new"] != "true"){?>
-						 		<a href="<?php echo $newURL; ?>new=true" id="newSubmit" class="btn true">Show posts suitable for newly qualified staff</a>
-						<?php }else{
-						 ?>
-						 		<a href="<?php echo $newURL; ?>" id="newSubmit" class="btn false"><i class="icon-remove"></i> Show all posts</a>
-						 <?php
-						 }
-						 ?>
-						</p>
-					</dd>-->
 				</dl>
 				<p><span id="jobsFound"><?php echo $jobsadded; ?> jobs found </span><a href="<?php the_permalink($post->ID); ?>" id="resetSearch" class="btn btn-danger pull-right"><i class="icon-remove icon-white"></i> Reset search</a><br></p>
 			</div>
