@@ -28,6 +28,7 @@ body {
 
 .caption {
 	font-size: 80%;
+	display: block;
 }
 .attachment-newssubhead, .attachment-newsheadline {
 	width: 100%;
