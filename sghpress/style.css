@@ -28,6 +28,7 @@ body {
 
 .caption {
 	font-size: 80%;
+	display: block;
 }
 .attachment-newssubhead, .attachment-newsheadline {
 	width: 100%;
@@ -259,6 +260,9 @@ ul#menu-top-tasks li {
 	padding-top: .35em;
 	padding-bottom: .35em;
 	height: 3em;
+	*margin-top: 1px;
+	*background-color: url('/wp-content/themes/sghpress/images/search.gif');
+	*background-repeat: no-repeat;
 }
 
 #searchblock .input-append button img{
