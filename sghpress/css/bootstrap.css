@@ -621,7 +621,7 @@ h6 {
   font-weight: bold;
   line-height: 20px;
   color: inherit;
-  text-rendering: optimizelegibility;
+  /*text-rendering: optimizelegibility;*/
 }
 h1 small,
 h2 small,
