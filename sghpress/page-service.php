@@ -30,16 +30,9 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					?>" id="content">
 						<h1><?php the_title() ; ?></h1>
 					<div class="row-fluid">
-						<form action="/" class="hidden-phone">
-						<div class="input-append">
-						  <input class="span12" name="s" id="appendedInputButton" type="text">
-						  <button class="btn" type="button">Search services</button>
-						  <input type="hidden" value="service" name="post_type">
-						</div>
-						</form>
 
 <?php
-					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=title&order=ASC');
+					$gtermsa = new WP_Query('post_type=service&posts_per_page=-1&orderby=title&order=ASC&post_status=publish');
 					
 					$servs = array();
 					$sites = array();
@@ -53,13 +46,25 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$servObj["id"] = $serv->ID;
 						$sSites = get_the_terms($serv->ID, 'sites');
 						
+						
+						
 						if($sSites){
 							$servObj["sites"] = array();
 							foreach($sSites as $k => $val){
-								if(!$sites[$val->slug]){
-									$sites[$val->slug] = $val->name;
+								$siteType = get_option("sites_". $val->term_id . "_site_type");
+								if($siteType != "Hospital"){
+									if(!$sites["csw"]){
+										$sites["csw"] = "Community Services";
+									}
+									array_push($servObj["sites"], "csw");
+									
+								}else{
+									if(!$sites[$val->slug]){
+										$sites[$val->slug] = $val->name;
+									}
+									array_push($servObj["sites"], $val->slug);
 								}
-								array_push($servObj["sites"], $val->slug);
+								
 							}
 						}
 						
@@ -85,34 +90,33 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						}
 					}		
 					
+					
 					?>	
 					
-					<div class="tabbable">
-						<ul class="nav nav-tabs">
+						<h2>Filter services</h2>
+						<h3>Site</h3>
+						<ul class="nav site-pills nav-pills">
+							<li class="active"><a href="#" data-toggle="tab" id="allSites">All sites</a></li>
+							<?php	foreach($sites as $siteKey => $siteVal){
+								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
+							}?>
+						</ul>
+						<h3>Service</h3>
+						<ul class="nav letter-pills nav-pills">
 							<li class="active"><a href="#" data-toggle="tab" id="allServs">All services</a></li>
 							<?php
-							
-							foreach($servs as $key => $servLetter){
-								echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
-							}
-							
-							foreach($sites as $siteKey => $siteVal){
-								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
-							}
-							
-							
+								foreach($servs as $key => $servLetter){
+									echo "<li><a href=\"#tab".$key."\" data-toggle=\"tab\" class=\"serviceTab\">".strtoupper($key)."</a></li>";
+								}
 							?>
 						</ul>
-						
-						
 						<div class="tab-content" id="service-tabs">
 							<?php
 							
 							foreach($servs as $key => $value){
 								echo "<div class=\"tab-pane active\" id=\"tab".$key."\">";
 								
-								echo "<h3>".strtoupper($key)."</h3>";
-								
+								echo "<h3>".strtoupper($key)."</h3>";								
 								foreach($value as $serv){
 									if($serv["sites"]){
 										$sites = "";
@@ -152,156 +156,116 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 							}
 							
 							?>
+							<div id="none-found">Sorry no results were found for your query</div>
 						</div>
 					</div>
 					
 					<script type="text/javascript">
+						var selectedSite = "all";
+						var selectedLetter = "all";
+						$("#none-found").hide();
+						
 						$('#allServs').click(function (e) {
 							//e.preventDefault();
+							selectedLetter = "all";
+							$(".letter-pills li").removeClass("active");
 							$("#allServs").addClass('active');
-							$(".tab-content .media").show();
+							$("#none-found").hide();
 							$(".tab-pane").each(function(i, t){
-								$(".serviceTab").removeClass("active");
+								if(selectedSite != "all"){
+									$(this).children(".media").hide();
+									$(this).children("."+selectedSite).show();
+									if($(this).children("." + selectedSite).length == 0){
+										$(this).hide();
+									}
+								}else{
+									$(this).show();
+									$(this).children(".media").show();
+								}
 								$(this).addClass('active');
 							});
+						});
+						
+						$("#allSites").click(function(e){
+							selectedSite = "all";
+							$(".site-pills li").removeClass("active");
+							$(this).addClass("active");
+							$(".letter-pills li").show();
+							$("#none-found").hide();
+							if(selectedLetter != "all"){
+								$(".tab-pane").hide();
+								$(".tab-pane .media").hide();
+								$("#tab"+selectedLetter).show();
+								$("#tab" + selectedLetter + " .media").show();
+							}else{
+								$(".tab-pane").show();
+								$(".tab-pane .media").show();
+							}
 						});
 						
 						$(".site").click(function(e){
 							e.preventDefault();
-							var selectedSite = $(this).attr("href");
-							selectedSite = selectedSite.replace("/services/a-z/?site=", "");
-							$(".nav-tabs li").removeClass("active");
+							var selectSite = $(this).attr("href");
+							selectedSite = selectSite.replace("/services/a-z/?site=", "");
+							$(".site-pills li").removeClass("active");
 							$(this).parent("li").addClass("active");
-							$(".tab-content .media").hide();
-							$(".tab-pane").each(function(i, t){
-								$(".serviceTab").removeClass("active");
-								$(this).addClass('active');
-								if($(this).children("." + selectedSite).length == 0){
-									$(this).removeClass('active');
+							$(".tab-pane .media").hide();
+							if(selectedLetter != "all"){
+								$(".tab-pane").hide();
+								$(".tab-pane .media").hide();
+								$("#tab"+selectedLetter).show();
+								$("#tab"+selectedLetter+ " ."+selectedSite).show();
+								if($("#tab"+selectedLetter+ " ."+selectedSite).length == 0){
+									$("#tab"+selectedLetter).hide();
+									$("#none-found").show();
+								}else{
+									$("#none-found").hide();
 								}
-							});
-							$("." + selectedSite).show();
+								$(".letter-pills li").show();
+								$(".tab-pane").each(function(i,t){
+									if($(this).children("." + selectedSite).length == 0){
+										var letterToHide = $(this).attr("id");
+										$(".letter-pills li a[href='#" + letterToHide + "']").parent("li").hide();
+									}
+								});
+							}else{
+								$(".tab-pane").show();
+								$("#none-found").hide();
+								$(".tab-pane .media").hide();
+								$(".tab-pane ."+selectedSite).show();
+								$(".letter-pills li").show();
+								$(".tab-pane").each(function(i,t){
+									if($(this).children("." + selectedSite).length == 0){
+										$(this).hide();
+										var letterToHide = $(this).attr("id");
+										$(".letter-pills li a[href='#" + letterToHide + "']").parent("li").hide();
+									}
+								});
+							}
 						});
 						
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
-							$(".tab-content .media").show();
+							selectedLetter = $(this).attr("href").replace("#tab", "");
+							console.log("l:"+selectedLetter+" s:"+selectedSite);
+							$(".tab-pane").hide();
+							$(".tab-pane .media").hide();
+							if(selectedSite != "all"){
+								$("#tab"+selectedLetter+" .media").hide();
+								$("#tab"+selectedLetter+" ."+selectedSite).show();
+								$("#tab"+selectedLetter).show();
+								
+							}else{
+								$("#tab"+selectedLetter+" .media").show();
+								$("#tab"+selectedLetter).show();
+							}
+							
 							
 						});
 
 					</script>			
 					
-					<!-- <div class="pagination">
-					<ul>
-					<li class='atoz<?php if ($show=='ALL' || $show=='') echo ' active'; ?>'><a href='?show=ALL&amp;hospsite=<?php echo $hospsite; ?>'>All services</a></li>
-					<?php
 					
-					$gterms = new WP_Query('post_type=service&posts_per_page=-1&orderby=name&order=ASC');
-					
-					$counter = 0;
-							
-					if ( $gterms->have_posts() ) while ( $gterms->have_posts() ) : $gterms->the_post(); ?>
-																	
-					<?php 
-						
-						$title = get_the_title();
-						$thisletter = strtoupper(substr($title,0,1));	
-													
-						$hasentries[$thisletter] = $hasentries[$thisletter] + 1;
-						
-						if (!$_REQUEST['show'] || (strtoupper($thisletter) == strtoupper($_REQUEST['show']) ) ) {
-							
-							$html .= "\r\r<div class='letterinfo'>\r<h3>".get_the_title()."</h3><div>" . wpautop(get_the_content()) . "</div></div>";
-							
-							$counter++;
-																														
-						}
-						
-						$activeletter = ($show == strtoupper($thisletter)) ? "active" : null;
-
-						$letterlink[$thisletter] = ($hasentries[$thisletter] > 0) ? "<li class='atoz {$thisletter} {$activeletter}'><a href='?show=".$thisletter."&amp;hospsite=".$hospsite."'>".$thisletter."</a></li>" : "<li class='atoz  emptyletter {$thisletter} {$activeletter}'><a href='#'>".$thisletter."</a></li>";
-					
-					?>
-							
-						
-					<?php endwhile; ?>
-					
-					<?php 
-						//print_r($letterlink); 
-						echo @implode("",$letterlink); 
-					
-					
-					if ($show==''){
-						$show="ALL";
-					}
-			
-					?>
-					</ul>
-					</div>
-					
-
-					<ul class="nav nav-pills">
-<?php //display filter terms
-				 
-				 $sites = get_terms('sites'); 
-				 foreach ($sites as $site){
-					 
-					 echo "<li";
-					 if ($site->slug == $hospsite) echo " class='active'";
-					 echo "><a href='/services/a-z/?hospsite=".$site->slug."&show=".$show."'>".$site->name."</a></li>";
-				 }
-					 echo "<li";
-					 if (!$hospsite) echo " class='active'";
-					 echo "><a href='/services/a-z/?show=".$show."'>All</a></li>";
-				 
-				 ?>
-					</ul>
-		<?php 
-							the_content(); ?>
-
-					
-
-<ul class="nav nav-list">
-<?php
-					if ($show=='ALL'){
-						$show="";
-					}
-
-				//list all services
-						if ($hospsite){
-						$allservices = get_posts(
-							array(
-							"post_type" => "service",
-							"posts_per_page" => -1,
-							"orderby" => "title",
-							"order" => "ASC",
-							"tax_query"=> array(array(
-							"taxonomy"=>"sites",
-							"terms"=>$hospsite,
-							"field"=>"slug"
-							)
-							)							
-							)
-						);
-						} else {
-						$allservices = get_posts(
-							array(
-							"post_type" => "service",
-							"posts_per_page" => -1,
-							"orderby" => "title",
-							"order" => "ASC",
-							)
-						);							
-							
-						}
-						
-					foreach ($allservices as $service){
-						if (($show && strtoupper(substr($service->post_title, 0,1)) == strtoupper($show)) || !$show ){
-							echo "<li class='page_item'><a href='".$service->guid."'>".sghpress_custom_title($service->post_title)."</a></li>";
-						}
-					} 
-?>
-</ul>	-->
 					</div> 
 					</div>
 
