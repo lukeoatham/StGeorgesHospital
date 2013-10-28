@@ -57,7 +57,7 @@
 				<?php else:   // DISPLAY REGULAR FOOTER ?>
 				
 					<div class="span5">
-							<div class="well">
+							<div class="footerfeedback">
 <?php 							dynamic_sidebar( 'footer-widget-feedback' ); ?>
 							</div>
 
