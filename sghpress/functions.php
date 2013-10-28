@@ -894,7 +894,7 @@ function renderLeftNav($outputcontent="TRUE") {
 		}else{
 		//Iterate through the top level items - Primary Nav with a walker
 		
-		if(!(pageHasChildren($post->ID)) && $post->post_parent == 0){
+		if(!(pageHasChildren($post->ID)) && $post->post_parent == 0 && (!is_front_page() && !is_404() && !is_search() )){
 			$navParams = array(
 				'theme_location' => 'primary',
 				'menu_id' => 'nav'
