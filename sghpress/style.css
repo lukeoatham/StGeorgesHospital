@@ -270,6 +270,12 @@ ul#menu-top-tasks li {
     outline: 0;
     box-shadow: none;
 }
+
+.searchButton{
+	*width: 48px;
+	*margin-top: 1px;
+}
+
 #searchblock #mobileMenuButton {
     display: none;
 }
