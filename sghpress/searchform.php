@@ -10,9 +10,10 @@
 	         <script type="text/javascript">
 				var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/search";
 				if (Modernizr.svg){
-					$(".searchButton").html("<img src=\"" + imageURL + ".svg\" alt=\"Search\">");
+					jQuery(".searchButton").html("<img src=\"" + imageURL + ".svg\" alt=\"Search\">");
 				}else{
-					$(".searchButton").html("<img src=\"" + imageURL + ".gif\" alt=\"Search\">");
+					
+					jQuery(".searchButton").html("<img src=\"" + imageURL + ".gif\" alt=\"Search\">");
 				}
 			</script>
 			<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.gif" alt="Search"></noscript>

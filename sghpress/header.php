@@ -72,9 +72,9 @@ session_start();
 							<script type="text/javascript">
 								var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/logo";
 								if (Modernizr.svg){
-									$("#mainlogo a").html("<img src=\"" + imageURL + ".svg\" alt=\"St George's Healthcare NHS Trust\">");
+									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".svg\" alt=\"St George's Healthcare NHS Trust\">");
 								}else{
-									$("#mainlogo a").html("<img src=\"" + imageURL + ".gif\" alt=\"St George's Healthcare NHS Trust\">");
+									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".gif\" alt=\"St George's Healthcare NHS Trust\">");
 								}
 							</script>
 							<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif" alt="St George's Healthcare NHS Trust"></noscript>
