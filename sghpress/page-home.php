@@ -162,7 +162,7 @@ function goToPage( id ) {
 							<h3>Find us</h3>
 						</div>
 						<div class="row-fluid">
-							<div class="span3 googlemap">
+							<div class="span3 googlemap" role="presentation">
 								<?php if ( is_active_sidebar( 'find-us-1-area' ) ) : ?>
 
 								<?php dynamic_sidebar( 'find-us-1-area' ); ?>
@@ -185,9 +185,9 @@ function goToPage( id ) {
 								<?php endif; ?>
 							</div>
 							<div class="span3" id="findlocal">
-								<h4>Find a local health centre </h4> 
+								<h4 id="select3Label">Find a local health centre </h4> 
 								<div class="input-append">
-									<select id="select3" >
+									<select id="select3" aria-labelledby="select3Label">
 										<?php  
 											$allservices = get_terms("sites",
 											array(
