@@ -129,6 +129,11 @@ get_header(); ?>
 						<?php the_content(); ?>
 							
 						<div class="tabbable">
+						
+						<?php
+							if(count(array_keys($eventTypes)) > 1){
+						?>
+						
 						<ul class="nav nav-tabs">
 							<li<?php if(!$cat_id){ echo " class=\"active\""; }?>><a href="#" data-toggle="tab" id="allTypes">All</a></li>
 							<?php
@@ -143,13 +148,20 @@ get_header(); ?>
 							?>
 						</ul>
 						
+						<?php
+						
+						}
+						
+						?>
 						
 						<div class="tab-content" id="service-tabs">
 							<?php	
-							echo $timetravel;
+							
 							
 							if(empty($events)){
-									echo "<p>Nothing to show.</p>";
+									echo "<p>No events currently scheduled.</p>";
+							}else{
+								echo $timetravel;
 							}
 							
 							foreach($events as $key => $value){

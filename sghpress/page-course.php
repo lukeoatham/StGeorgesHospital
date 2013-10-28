@@ -84,7 +84,9 @@ $paged = $_GET['$paged'];
 								$tagurl = $tag->slug;
 								$tagstr=$tagstr."<a href='/tag/{$tagurl}'><span class='label label-info'>" . str_replace(' ', '&nbsp;' , $tag->name) ."</span></a>";
 							}
-							$itemObj["tags"] = $tagstr;
+							if($tagstr != ""){
+								$itemObj["tags"] = $tagstr;
+							}
 						}
 					
 						$courseType = wp_get_post_terms($item->ID, 'course-types');
@@ -103,26 +105,32 @@ $paged = $_GET['$paged'];
 					
 					?>
 					
-					
+					<?php
+						if(count(array_keys($items)) > 1){
+					?>
 					<div class="tabbable">
 					
 					
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#" data-toggle="tab" id="allItems">All courses</a></li>
 							<?php
-							
-							foreach($items as $key => $itemLetter){
-								$activator = "";
-								if(count($itemLetter) < 1 ){
-									echo "<li class=\"disabled\"><a>".ucfirst($key)."</a></li>";
-
-								}else{
-									echo "<li><a href=\"#tab".strtolower(str_replace(" ","",$key))."\" data-toggle=\"tab\" class=\"azTab\">".ucfirst($key)."</a></li>";
+								foreach($items as $key => $itemLetter){
+									$activator = "";
+									if(count($itemLetter) < 1 ){
+										echo "<li class=\"disabled\"><a>".ucfirst($key)."</a></li>";
+	
+									}else{
+										echo "<li><a href=\"#tab".strtolower(str_replace(" ","",$key))."\" data-toggle=\"tab\" class=\"azTab\">".ucfirst($key)."</a></li>";
+									}
 								}
-							}
 							
 							?>
 						</ul>
+					<?php
+					
+					}
+					
+					?>
 					
 					<div class="tab-content" id="service-tabs">
 							<?php
