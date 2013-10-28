@@ -1299,6 +1299,10 @@ ul.xoxo li {
 	display: block;
 }
 
+
+#content a{
+	word-wrap: break-word !important;
+}
 .nav-tabs li{
 	list-style-type: none !important;
 }
