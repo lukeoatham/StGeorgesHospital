@@ -1112,6 +1112,10 @@ select{
 	padding-bottom: 1.2em;
 }*/
 
+.homepage-section-find-us .span3 p strong{
+	*margin-left: -1em !important;
+}
+
 
 .nav-tabs li{
 	list-style-type: none !important;
