@@ -258,7 +258,14 @@ ul#menu-top-tasks li {
 	border-left: none;
 	padding-top: .35em;
 	padding-bottom: .35em;
-	height: 3em;
+	height: 2.99em;
+}
+
+#select3, #select2{
+	width: 80%;
+}
+.newsarchive select{
+	width: 100% !important;
 }
 
 #searchblock .input-append button img{
@@ -1867,8 +1874,58 @@ h1,h2,h3,h4,h5,h6{
 .courseBooking a{
 	width: 100% !important;
 }
+}
 
+/* iPad little fixes */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
+	.row{
+		min-width: inherit !important;
+	}
+	
+	#primarynav ul li{
+		width: 10.5% !important;
+	}
+	
+	#masthead #mainlogo{
+		margin-left: 0px !important;
+	}
+	
+	.jobsFilter .btn{
+		display: block;
+	}
+	
+	.jobsFilter .btn-group{
+		width: 100%;
+	}
+	
+	.jobsFilter .search-query{
+		width: 50%;
+		float: left;
+	}
+	
+	.jobsFilter .btn-group a:first-child{
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-left-radius: 0px !important;
+		border-bottom-right-radius: 0px;
+		margin-left: -1px !important;
+	}
 
+	.jobsFilter .btn-group a{
+		border-top: 0px solid white;
+	}
 
+	.jobsFilter .btn-group a:last-child{
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px !important;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
 
+	.job h3, .job dt, .job dd, .job .applyButton, .job .jobDesc, .job .jobDescMore{
+		padding-left: 5%;
+		padding-right: 5%;
+		width: 90% !important;
+	}
+	
 }
