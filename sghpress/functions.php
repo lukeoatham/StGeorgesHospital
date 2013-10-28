@@ -1190,3 +1190,8 @@ function type_to_array($query){
 		}
 	}
 }
+
+// remove comment feeds and next & prev links etc
+remove_action('wp_head', 'feed_links_extra', 3 );
+remove_action('wp_head', 'feed_links', 2 );
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
