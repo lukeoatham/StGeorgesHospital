@@ -325,9 +325,9 @@ body.home #secondarynav {
 }
 
 #secondarynav .current_page_item a{
-	*background-image: url('images/nav-icon-white.gif');
-	*background-repeat: no-repeat;
-	*background-position: left center;
+	background-image: url('images/nav-icon-white.gif')\9;
+	background-repeat: no-repeat\9;
+	background-position: left center\9;
 }
 
 #secondarynav .current_page_item:before{
@@ -380,7 +380,7 @@ body.home #secondarynav {
 }
 
 .patient .current_page_item a{
-	*background-image: url('images/nav-icon-d-red.gif') !important;
+	background-image: url('images/nav-icon-d-red.gif')\9 !important;
 }
 
 .patient .level-0.current_page_item:before, .patient .level-1.current_page_item:before, .patient .level-2.current_page_item:before, .patient .level-3.current_page_item:before{
@@ -388,7 +388,7 @@ body.home #secondarynav {
 }
 
 .patient .level-0.current_page_item a, .patient .level-1.current_page_item a, .patient .level-2.current_page_item a, .patient .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 /* Services */
@@ -429,7 +429,7 @@ body.home #secondarynav {
 }
 
 .service .current_page_item a{
-	*background-image: url('images/nav-icon-green.gif') !important;
+	background-image: url('images/nav-icon-green.gif')\9 !important;
 }
 
 .service .level-0.current_page_item:before, .service .level-1.current_page_item:before, .service .level-2.current_page_item:before, .service .level-3.current_page_item:before{
@@ -437,7 +437,7 @@ body.home #secondarynav {
 }
 
 .service .level-0.current_page_item a, .service .level-1.current_page_item a, .service .level-2.current_page_item a, .service .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 /* Work */
@@ -472,7 +472,7 @@ body.home #secondarynav {
 }
 
 .work .current_page_item a{
-	*background-image: url('images/nav-icon-d-purple.gif') !important;
+	background-image: url('images/nav-icon-d-purple.gif')\9 !important;
 }
 
 .work .level-0.current_page_item:before, .work .level-1.current_page_item:before, .work .level-2.current_page_item:before, .work .level-3.current_page_item:before{
@@ -480,7 +480,7 @@ body.home #secondarynav {
 }
 
 .work .level-0.current_page_item a, .work .level-1.current_page_item a, .work .level-2.current_page_item a, .work .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 /* About */
@@ -515,7 +515,7 @@ body.home #secondarynav {
 }
 
 .about .current_page_item a{
-	*background-image: url('images/nav-icon-l-blue.gif') !important;
+	background-image: url('images/nav-icon-l-blue.gif')\9 !important;
 }
 
 .about .level-0.current_page_item:before, .about .level-1.current_page_item:before, .about .level-2.current_page_item:before, .about .level-3.current_page_item:before{
@@ -523,7 +523,7 @@ body.home #secondarynav {
 }
 
 .about .level-0.current_page_item a, .about .level-1.current_page_item a, .about .level-2.current_page_item a, .about .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 
@@ -560,7 +560,7 @@ body.home #secondarynav {
 }
 
 .education .current_page_item a{
-	*background-image: url('images/nav-icon-orange.gif') !important;
+	background-image: url('images/nav-icon-orange.gif')\9 !important;
 }
 
 .education .level-0.current_page_item:before, .education .level-1.current_page_item:before, .education .level-2.current_page_item:before, .education .level-3.current_page_item:before{
@@ -568,7 +568,7 @@ body.home #secondarynav {
 }
 
 .education .level-0.current_page_item a, .education .level-1.current_page_item a, .education .level-2.current_page_item a, .education .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 
@@ -604,7 +604,7 @@ body.home #secondarynav {
 }
 
 .news .current_page_item a{
-	*background-image: url('images/nav-icon-d-blue.gif') !important;
+	background-image: url('images/nav-icon-d-blue.gif')\9 !important;
 }
 
 .news .level-0.current_page_item:before, .news .level-1.current_page_item:before, .news .level-2.current_page_item:before, .news .level-3.current_page_item:before{
@@ -612,7 +612,7 @@ body.home #secondarynav {
 }
 
 .news .level-0.current_page_item a, .news .level-1.current_page_item a, .news .level-2.current_page_item a, .news .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 ul.showbullets {
@@ -652,7 +652,7 @@ ul.showbullets {
 }
 
 .contact .current_page_item a{
-	*background-image: url('images/nav-icon-l-red.gif') !important;
+	background-image: url('images/nav-icon-l-red.gif')\9 !important;
 }
 
 .contact .level-0.current_page_item:before, .contact .level-1.current_page_item:before, .contact .level-2.current_page_item:before, .contact .level-3.current_page_item:before{
@@ -660,7 +660,7 @@ ul.showbullets {
 }
 
 .contact .level-0.current_page_item a, .contact .level-1.current_page_item a, .contact .level-2.current_page_item a, .contact .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 .ajaxpaging-separator {
@@ -704,7 +704,7 @@ ul.showbullets {
 }
 
 .gp .current_page_item a{	
-	*background-image: url('images/nav-icon-black.gif') !important;
+	background-image: url('images/nav-icon-black.gif')\9 !important;
 }
 
 .gp .level-0.current_page_item:before, .gp .level-1.current_page_item:before, .gp .level-2.current_page_item:before, .gp .level-3.current_page_item:before{
@@ -712,7 +712,7 @@ ul.showbullets {
 }
 
 .gp .level-0.current_page_item a, .gp .level-1.current_page_item a, .gp .level-2.current_page_item a, .gp .level-3.current_page_item a{
-	*background-image: url('images/nav-icon-white.gif') !important;
+	background-image: url('images/nav-icon-white.gif')\9 !important;
 }
 
 .homeicon {
@@ -1132,8 +1132,7 @@ select{
 }
 
 /* IE 8 issue with consultant profiles fix */
-
-.serviceContent #service-tabs .media .pull-left{
+#service-tabs .media .pull-left{
 	width: 75px\9;
 	height: 75px\9;
 }
