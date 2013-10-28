@@ -1131,6 +1131,13 @@ select{
 	padding: 0px;
 }
 
+/* IE 8 issue with consultant profiles fix */
+
+.serviceContent #service-tabs .media .pull-left{
+	width: 75px\9;
+	height: 75px\9;
+}
+
 
 
 /* ------------------
