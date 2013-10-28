@@ -20,9 +20,9 @@ get_header();
 
 				<div class="row-fluid">
 
-					<div class="span3" id='secondarynav'>
+					<div class="span3<?php if(!(pageHasChildren($post->ID)) && $post->post_parent == 0){ echo " visible-phone"; }?>" id='secondarynav'>
 
-						<?php global $post; if ( (pageHasChildren() || pageHasChildren($post->post_parent)) && (!is_front_page() && !is_404() && !is_search() ) ) : ?>
+						<?php global $post; if ((!is_front_page() && !is_404() && !is_search() ) ) : ?>
 				
 							<?php renderLeftNav(); ?>
 						

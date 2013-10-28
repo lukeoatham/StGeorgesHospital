@@ -893,12 +893,22 @@ function renderLeftNav($outputcontent="TRUE") {
 			echo($navItems);
 		}else{
 		//Iterate through the top level items - Primary Nav with a walker
-		$navParams = array(
-			'theme_location' => 'primary',
-			'menu_id' => 'nav',
-			'walker' => new mobileNav_walker($post)
-		);
-		wp_nav_menu($navParams);
+		
+		if(!(pageHasChildren($post->ID)) && $post->post_parent == 0){
+			$navParams = array(
+				'theme_location' => 'primary',
+				'menu_id' => 'nav'
+				);
+			wp_nav_menu($navParams);
+		}else{
+		
+			$navParams = array(
+				'theme_location' => 'primary',
+				'menu_id' => 'nav',
+				'walker' => new mobileNav_walker($post)
+				);
+			wp_nav_menu($navParams);
+		}
 	}
 	
 	
