@@ -1186,7 +1186,7 @@ Mobile
     background: 0;
 }
 #searchblock form {
-    padding-top: 1.7em;
+    padding-top: 2em;
 }
 .searchbox {
     padding: .5em!important;
@@ -1221,15 +1221,10 @@ Mobile
     padding-bottom: 1.5em;
     background: 0;
     color: white;
-}
-#mobileMenuButton h6 {
-    width: 100%;
     text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
     font-size: 1.2em;
-    color: white;
 }
+
 #primarynavmenu {
     margin: 1em;
     width: 99%;
