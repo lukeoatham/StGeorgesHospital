@@ -700,6 +700,7 @@ function renderLeftNav($outputcontent="TRUE") {
 		$postID = $post->ID;
 		$postType = $post->post_type;
 		$before = array();
+		$mainid = $post->ID;
 		
 	
 		
@@ -752,148 +753,118 @@ function renderLeftNav($outputcontent="TRUE") {
 		
 		}
 		
-		
-		
-		//echo "postSection:".$postSection." postSectionTitle:".$postSectionTitle." postID:".$postID." postType:".$postType;
-		
-		//Grab the menu
-		$mainid = $postID;
-		$navParams = array(
-			'theme_location' => 'primary',
-			'menu_id' => 'nav',
-			'echo' => false
-		);
-		
-		//Store the menu in a string
-		$navItems = wp_nav_menu($navParams);
-		
-		if($post){
-			//Set all menu items to only be visible on mobile
-			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
-			//For the section we're on we want to be visible everywhere
-			$navItems = str_replace("<li class=\"visible-phone ".$postSection, "<li class=\"".$postSection, $navItems); 
-		}else{
-			//Set all menu items to only be visible on mobile
-			$navItems = str_replace("<li class=\"", "<li class=\"visible-phone ", $navItems);
-		}
+			// REDEV
+			// create containing elements
+			$postMenu = "<div class=\"menu-primary-navigation-container\">";
+			$postMenu .= "<ul id=\"nav\" class=\"menu\">";
+			// grab menu items + go through them
+			$postMenuItems = wp_get_nav_menu_items("Primary navigation");
+			foreach((array)$postMenuItems as $key => $menu_item){
+				// if the menu item is the current section do some stuff, if not then make it visible to mobiles only
+				if($menu_item->object_id == $postSectionID){
+					$postMenu .= "<li id=\"menu-item-".$menu_item->id."\" class=\"".$menu_item->classes[0]."\"><a href=\"".$menu_item->url."\">".$menu_item->title."</a>";
+					//Construct any child navigation
+					$postMenu .= "<ul class=\"children\">";
+					$navarray = array();
+					$currentpost = get_post($postID);
+					while (true){
+						//iteratively get the post's parent until we reach the top of the hierarchy
+						$post_parent = $currentpost->post_parent; 
+						if ($post_parent!=0){	//if found a parent
+							$navarray[] = $post_parent;
+							$currentpost = get_post($post_parent);
+							continue; //loop round again
+						}
+						break; //we're done with the parents
+					};
 			
-		
-			
-			//build the left hand navigation based on the current page
-			$navarray = array();
-			$currentpost = get_post($postID);
+					$navarray = array_reverse($navarray);
+					$ancestorNav = count($navarray) + 1;
+					//is the current page at the end of the branch?
+					$currentpost = get_post($mainid);
 						
-			while (true){
-				//iteratively get the post's parent until we reach the top of the hierarchy
-				$post_parent = $currentpost->post_parent; 
-				if ($post_parent!=0){	//if found a parent
-					$navarray[] = $post_parent;
-					$currentpost = get_post($post_parent);
-					continue; //loop round again
-				}
-				break; //we're done with the parents
-			};
-			
-			
-			
-			$navarray = array_reverse($navarray);
-			$ancestorNav = count($navarray) + 1;
-			//is the current page at the end of the branch?
-			$currentpost = get_post($mainid);
-						
-			if (postHasChildren($mainid)){
-			//echo "has children";
-				$menuid = $mainid;
-				$navarray[] = $mainid;	//set current page in the nav array
-				$navarray[] = -1;	//set marker for children styling
-			} else {
-			//echo "end of the branch";
-				$menuid = $currentpost->post_parent;
-				$navarray[] = -1;	//set marker in array for subsequent children styling
-			}
-			
-			if($menuid != 0){
-				$allNavParams = array(
-					"post_type" => $postType,
-					"posts_per_page" => -1,
-					"orderby" => "menu_order title",
-					"order" => "ASC",
-					"post_parent" => $menuid
-				);
-			}
-			
-			
-			//get children pages
-			//if ($menuid!=0){
-				$allnavItems = get_posts($allNavParams);
-			//}
-			
-			$subnavString = "";
-						
-			foreach ($allnavItems as $navItem){ //fill the nav array with the child pages
-				$navarray[] = $navItem->ID;
-			}	 
-			
-			
-			
-			$ancestorCount = 0;
-			foreach($before as $beforeItem){
-				$subnavString .= "<li class='level-".$ancestorCount."'><a href='".get_permalink($beforeItem)."'>".get_the_title($beforeItem)."</a></li>"; //top level menu item
-				$ancestorCount++;
-			}
-			
-			$subs=false;
-			if($postType == "people" || count($navarray) == 1){
-				$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
-				if ($relatedposts) {
-					$subnavString .= $relatedposts;
-				}
-			}else{
-			
-		
-			
-			foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
-				if ($nav == -1) {
-					$subs=true;
-					continue;
-				}
-				$currentpost = get_post($nav);
-				
-				
-				if ($nav == $mainid){
-					if(postHasChildren($mainid)){
-						$subnavString .= "<li class='current_page_item level-".$ancestorNav."'>";
-					}else{
-						$subnavString .= "<li class='current_page_item'>"; //current page
+					if (postHasChildren($mainid)){
+						//echo "has children";
+						$menuid = $mainid;
+						$navarray[] = $mainid;	//set current page in the nav array
+						$navarray[] = -1;	//set marker for children styling
+					} else {
+						//echo "end of the branch";
+						$menuid = $currentpost->post_parent;
+						$navarray[] = -1;	//set marker in array for subsequent children styling
 					}
-				} elseif ($subs) {
-					$subnavString .= "<li class='page-item'>"; //child page
-				} else {
-					$subnavString .= "<li class='page_item menu-item menu-item-type-post_type menu-item-object-page level-".$ancestorCount."'>"; //parent page
-					$ancestorCount++;
-				}
-				$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
-				}
-			}
-			
-			if ($relatedposts) {
-				$subnavString .= $relatedposts;
-			}
-			
-			$postSectionTitle = str_replace("&", "&#038;", get_the_title($postSectionID));	
-			$postSectionTitle = str_replace("and", "&#038;", $postSectionTitle);
-			
-			
-			if($postType == "attachment" && $catToUse == "referral-forms"){
-				$postSectionTitle = "area";
-			}
-			
 					
-			$navItems = str_replace($postSectionTitle."</a>", $postSectionTitle."</a><ul class=\"children\">".$subnavString."</ul>", $navItems);
-			echo($navItems);
-		}else{
+					if($menuid != 0){
+						$allNavParams = array(
+							"post_type" => $postType,
+							"posts_per_page" => -1,
+							"orderby" => "menu_order title",
+							"order" => "ASC",
+							"post_parent" => $menuid
+						);
+					}
+			
+					$allnavItems = get_posts($allNavParams);
+			
+					$subnavString = "";
+						
+					foreach ($allnavItems as $navItem){ //fill the nav array with the child pages
+						$navarray[] = $navItem->ID;
+					}	 
+			
+					$ancestorCount = 0;
+					foreach($before as $beforeItem){
+						$subnavString .= "<li class='level-".$ancestorCount."'><a href='".get_permalink($beforeItem)."'>".get_the_title($beforeItem)."</a></li>"; //top level menu item
+						$ancestorCount++;
+					}
+			
+					$subs=false;
+					if($postType == "people" || count($navarray) == 1){
+						$subnavString .= "<li class='current_page_item'><a href=\"".get_permalink($postID)."\">".get_the_title($postID)."</a></li>";
+						if ($relatedposts) {
+							$subnavString .= $relatedposts;
+							}
+					}else{
+						foreach ($navarray as $nav){ //loop through nav array outputting menu options as appropriate (parent, current or child)
+							if ($nav == -1) {
+								$subs=true;
+								continue;
+							}
+							$currentpost = get_post($nav);
+							if ($nav == $mainid){
+								if(postHasChildren($mainid)){
+									$subnavString .= "<li class='current_page_item level-".$ancestorNav."'>";
+								}else{
+									$subnavString .= "<li class='current_page_item'>"; //current page
+								}
+							} elseif ($subs) {
+								$subnavString .= "<li class='page-item'>"; //child page
+							} else {
+								$subnavString .= "<li class='page_item level-".$ancestorCount."'>"; //parent page
+								$ancestorCount++;
+							}
+							$subnavString .=  "<a href='".$currentpost->guid."'>".$currentpost->post_title."</a></li>";
+						}
+						if ($relatedposts) {
+							$subnavString .= $relatedposts;
+						}
+					}
+					$postMenu .= $subnavString;
+					$postMenu .= "</ul></li>";
+				}else{
+					$postMenu .= "<li id=\"menu-item-".$menu_item->id."\" class=\"".$menu_item->classes[0]." visible-phone\"><a href=\"".$menu_item->url."\">".$menu_item->title."</a></li>";
+				}
+			}
+			$postMenu .= "</ul>";
+			$postMenu .= "</div>";
+			echo $postMenu;
+			
+			
+			
+			
+			
+	}else{
 		//Iterate through the top level items - Primary Nav with a walker
-		
 		if(!(pageHasChildren($post->ID)) && $post->post_parent == 0 && (!is_front_page() && !is_404() && !is_search() )){
 			$navParams = array(
 				'theme_location' => 'primary',
@@ -1195,3 +1166,40 @@ function type_to_array($query){
 remove_action('wp_head', 'feed_links_extra', 3 );
 remove_action('wp_head', 'feed_links', 2 );
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
+
+// Custom nav walker to make it awesome on mobile while keeping it awesome on desktop
+class accessibleNav_walker extends Walker_Nav_Menu{
+
+	function start_el(&$output, $item, $depth, $args){
+		
+		$class_names = $value = '';  
+  
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;  
+  
+        $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );  
+        $class_names = ' class="'. esc_attr( $class_names ) . '"';
+		
+		$output .= '<li'.$class_names.'>';
+		
+		$link_title = $item->title;
+        $link_title = str_replace("<br>", " ", $link_title);
+		
+		
+		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';  
+        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';  
+        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';  
+        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : ''; 
+        $attributes .= 'role="link" aria-label="'.$link_title.'"'; 
+        $description  = ! empty( $item->description ) ? '<span>'.esc_attr( $item->description ).'</span>' : '';
+		
+		$item_output = $args->before;  
+        $item_output .= '<a'. $attributes .'>'; 
+        
+        $item_output .= $args->link_before .$link_title;  
+        $item_output .= $description.$args->link_after;  
+        $item_output .= '</a>';  
+        $item_output .= $args->after;
+        
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+	}
+}
