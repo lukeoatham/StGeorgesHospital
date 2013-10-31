@@ -53,10 +53,13 @@ session_start();
 		echo 'id="mobhead"';
 	}
 ?> >
-	<input type="checkbox" name="mobileNav" id="mobileNav" <?php
+	<input type="checkbox" role="checkbox" name="mobileNav" id="mobileNav" <?php
 		// This checkbox shows and hides the mobile menu, it uses a cookie to keep things persistant
 		if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
 			echo "checked=\"checked\"";
+			echo "aria-checked=\"true\"";
+		}else{
+			echo "aria-checked=\"false\"";
 		}
 	?> />
 	
@@ -64,28 +67,37 @@ session_start();
 		<div class="row-fluid quick-links">
 			<?php dynamic_sidebar( 'utilities-widget-area' ); ?>
 		</div>								
-		<div class="row-fluid header">
+		<div class="row-fluid header" role="banner">
 			<div id='header' class="row">
 				<div id='masthead'>
 					<p id='mainlogo'>
-						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" role="link" aria-labelledby="mainLogoLabel">
 							<script type="text/javascript">
 								var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/logo";
 								if (Modernizr.svg){
-									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".svg\" alt=\"St George's Healthcare NHS Trust\">");
+									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".svg\" alt=\"St George's Healthcare NHS Trust\" role=\"presentation\">");
 								}else{
-									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".gif\" alt=\"St George's Healthcare NHS Trust\">");
+									jQuery("#mainlogo a").html("<img src=\"" + imageURL + ".gif\" alt=\"St George's Healthcare NHS Trust\" role=\"presentation\">");
 								}
 							</script>
 							<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif" alt="St George's Healthcare NHS Trust"></noscript>
 							</a>
+							<span class="hiddentext" id="mainLogoLabel">Go to Homepage</span>
 						</p>
 						
 						<div id='searchblock'>
 									<?php get_search_form(true); ?>
 									<!-- label to control checbox -->
-									<label id="mobileMenuButton" for="mobileNav" onclick>
-										<h6>Menu</h6>
+									<label id="mobileMenuButton" for="mobileNav" tabindex="0" role="button" <?php
+		// This checkbox shows and hides the mobile menu, it uses a cookie to keep things persistant
+		if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
+			echo "aria-pressed=\"true\"";
+		}else{
+			echo "aria-pressed=\"false\"";
+		}
+	?>å
+ aria-controls="mobileNav">
+										Menu
 									</label>
 									<!-- end label to control checkbox -->
 						</div>							
@@ -95,10 +107,10 @@ session_start();
 							<div class='menu-header'>
 								  <?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff */ ?>
 									<a href="#content" class='hiddentext' accesskey='s' title="<?php esc_attr_e( 'Skip to content', 'twentyten' ); ?>"><?php _e( 'Skip to content', 'twentyten' ); ?></a>
-								<div id="primarynav" role="navigation" class="eightcol">
+								<div id="primarynav" class="eightcol">
 									<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
 									<?php 
-										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
+										wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary', 'items_wrap' => '<ul role="navigation" tabindex="2" aria-label="Top level navigation">%3$s</ul>', 'walker' => new accessibleNav_walker() ) ); ?>
 								</div>
 							</div>						
 						</div>
@@ -106,7 +118,14 @@ session_start();
 				
 				</div>
 				<!-- label to display the content when bringing in side menu -->
-					<label id="contentOverlay" for="mobileNav"></label>
+					<label id="contentOverlay" for="mobileNav" tabindex="0" aria-hidden="false" role="button" <?php
+		// This checkbox shows and hides the mobile menu, it uses a cookie to keep things persistant
+		if($_COOKIE["sgh_mobile_nav"] && $_COOKIE["sgh_mobile_nav"] != "null"){
+			echo "aria-pressed=\"true\"";
+		}else{
+			echo "aria-pressed=\"false\"";
+		}
+	?> aria-controls="mobileNav"></label>
 				<!-- end label for side menu -->
 				
 			</div>
@@ -128,7 +147,7 @@ session_start();
 			<?php endif; ?>
 		
 			<?php if( function_exists('bcn_display') && (!is_front_page() && !is_home() ) ) : ?>
-				<div class="row-fluid breadcrumbs">
+				<div class="row-fluid breadcrumbs" aria-hidden="true">
 					<div class="span12">
 							<div class='breadcrumb'>
 								<?php bcn_display(); ?>

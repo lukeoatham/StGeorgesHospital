@@ -762,9 +762,9 @@ function renderLeftNav($outputcontent="TRUE") {
 			foreach((array)$postMenuItems as $key => $menu_item){
 				// if the menu item is the current section do some stuff, if not then make it visible to mobiles only
 				if($menu_item->object_id == $postSectionID){
-					$postMenu .= "<li id=\"menu-item-".$menu_item->id."\" class=\"".$menu_item->classes[0]."\"><a href=\"".$menu_item->url."\">".$menu_item->title."</a>";
+					$postMenu .= "<li id=\"menu-item-".$menu_item->id."\" class=\"".$menu_item->classes[0]." current_section\"><a href=\"".$menu_item->url."\">".$menu_item->title."</a>";
 					//Construct any child navigation
-					$postMenu .= "<ul class=\"children\">";
+					$postMenu .= "<ul class=\"children\" role=\"navigation\">";
 					$navarray = array();
 					$currentpost = get_post($postID);
 					while (true){
@@ -1016,7 +1016,7 @@ class mobileNav_walker extends Walker_Nav_Menu{
 		
 		if($currentSection){
 			
-			$output .= '<ul class="children">';
+			$output .= '<ul class="children" role="navigation">';
 			
 				$ancestors = 0;
 				//See if the page has ancestors

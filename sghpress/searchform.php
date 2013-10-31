@@ -5,8 +5,8 @@
         if(is_search()){
 	        echo $_GET["s"];
         }
-         ?>" name="s" id="appendedPrependedInput" class="searchbox twelvecol" role="search" aria-labelledby="searchLabel" />
-         <button class="btn searchButton" type="submit">
+         ?>" name="s" id="appendedPrependedInput" class="searchbox twelvecol" aria-labelledby="searchLabel" />
+         <button class="btn searchButton" type="submit" role="button" aria-pressed="false" aria-controls="appendedPreprendedInput" tabindex="0" aria-labelledby="searchLabel">
 	         <script type="text/javascript">
 				var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/search";
 				if (Modernizr.svg){

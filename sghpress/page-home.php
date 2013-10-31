@@ -13,7 +13,7 @@ get_header(); ?>
 						
 						?>
 					</div>
-				<div class="row-fluid" id="homethumbs">
+				<div class="row-fluid" id="homethumbs" role="main">
 				
 
 
