@@ -177,6 +177,8 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 									$(this).children("."+selectedSite).show();
 									if($(this).children("." + selectedSite).length == 0){
 										$(this).hide();
+									}else{
+										$(this).show();
 									}
 								}else{
 									$(this).show();
@@ -247,7 +249,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 						$('.serviceTab').click(function (e) {
 							e.preventDefault();
 							selectedLetter = $(this).attr("href").replace("#tab", "");
-							console.log("l:"+selectedLetter+" s:"+selectedSite);
+							//console.log("l:"+selectedLetter+" s:"+selectedSite);
 							$(".tab-pane").hide();
 							$(".tab-pane .media").hide();
 							if(selectedSite != "all"){
