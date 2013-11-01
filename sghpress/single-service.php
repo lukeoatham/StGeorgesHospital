@@ -177,17 +177,47 @@ get_header(); ?>
 						}
 						echo "<div id=\"map-canvas\" class=\"google_map\"></div>";
 						if(count($servicelocations) > 1){
-							echo "<ul class=\"inline\">";
+							echo "<div class=\"btn-group btn-group-vertical span6\">";
 								$j = 0;
 								foreach ($servicelocations as $servicelocation){
-									echo "<li><a href=\"#\" id=\"site".$j."\" class=\"btn btn-link btn-large\">".$servicelocation["service_site"]->name."</a></li>";
+									echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$servicelocation["service_site"]->name."</button>";
 									$j++;
 								}
-								echo "<li><a href=\"#\" id=\"allSitesZoom\" class=\"btn btn-link btn-large\">Show all sites</a></li>";
-								echo "</ul>";
+								echo "<button id=\"allSitesZoom\" class=\"btn btn-link\">Show all sites</button>";
+								echo "</div>";
 						}
 						?>
-						
+						<div id="startDest" class="span4">
+							<div class="input-append">
+								<input type="text" id="postcode" aria-labelledby="PostcodeSearchLabel" />
+								<button class="btn dirButton" type="submit" id="dirBut">
+								<script type="text/javascript">
+									var imageURL = "<?php echo get_stylesheet_directory_uri(); ?>/images/search";
+									if (Modernizr.svg){
+										jQuery(".dirButton").html("<img src=\"" + imageURL + ".svg\" alt=\"Search\">");
+									}else{
+										jQuery(".dirButton").html("<img src=\"" + imageURL + ".gif\" alt=\"Search\">");
+									}
+									</script>
+									<noscript><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/search.gif" alt="Search"></noscript>
+								</button>
+						</div>
+						<p class="dirs"><strong>Get directions</strong><br>
+						<small>Enter your postcode into the box above for directions</small></p>
+						<p id="map_error" class="alert" style="display: none;"><strong>No routes found</strong> The location entered couldn't be found, please check for typo or try a broader search.</p>
+						<p id="tech_error" class="alert alert-error" style="display: none;"><strong>Technical error</strong> There's been a problem with the Google Map. Please <a href="mailto:communications@stgeorges.nhs.uk?subject=Google%20Maps%20Error%">email the communications team</a> and let them know.</p>
+						</div>
+						<div class="clearfix"></div>
+						<div id="advanced" style="display: none;">
+							<h4>Travel mode</h4>
+							<select id="travelMode" onchange="calcRoute();">
+								<option value="DRIVING" selected>Driving</option>
+								<option value="WALKING">Walking</option>
+								<option value="BICYCLING">Bicycling</option>
+								<option value="TRANSIT">Public transport</option>
+							</select>
+						</div>
+						<div id="directions-panel"></div>
 						<script>
 							var markers = new Array();
 							<?php
@@ -254,25 +284,41 @@ get_header(); ?>
 								?>
 
 							var map;
+							var directionsDisplay;
+							var activeMarker = "";
+							var directionsService;
+							
 							function initialize() {
+								directionsDisplay = new google.maps.DirectionsRenderer();
+								directionsService = new google.maps.DirectionsService();
 								var mapOptions = {
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
 								
 								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+								
+								
+								directionsDisplay.setMap(map);
+								directionsDisplay.setPanel(document.getElementById("directions-panel"));
+								
 								<?php
 								$k = 0;
 								foreach ($servicelocations as $servicelocation){
 								?>
-								
-								var mapButton<?php echo $k; ?> = document.getElementById("site<?php echo $k; ?>");
-								
+								<?php if(count($servicelocations) > 1){ ?>
+									var mapButton<?php echo $k; ?> = document.getElementById("site<?php echo $k; ?>");
+								<?php } ?>
 								<?php
 								$k++;
 								}
 								?>
 								
-								var allSitesButton = document.getElementById("allSitesZoom");
+								<?php if(count($servicelocations) > 1){ ?>
+									var allSitesButton = document.getElementById("allSitesZoom");
+								<?php } ?>
+								var startDest = document.getElementById("startDest");
+								var postcodeBox = document.getElementById("postcode");
+								var dirbut = document.getElementById("dirBut");
 								
 								var markerBounds = new google.maps.LatLngBounds();
 								
@@ -309,9 +355,11 @@ get_header(); ?>
 								if(markers.length > 1){
 									map.fitBounds(markerBounds);
 									map.panBy(0,-40);
+									activeMarker = siteMarker0.getPosition();
 								}else{
 									map.setCenter(siteMarker0.getPosition());
 									map.setZoom(17);
+									activeMarker = siteMarker0.getPosition();
 								}
 								
 							
@@ -324,17 +372,25 @@ get_header(); ?>
 										map.setCenter(siteMarker<?php echo $k; ?>.getPosition());
 										siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
 										siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+										activeMarker = siteMarker<?php echo $k; ?>.getPosition();
+										if(postcodeBox.value != ""){
+											calcRoute();
+										}
 									});
 									
-									
+									<?php if(count($servicelocations) > 1){ ?>
 									google.maps.event.addDomListener(mapButton<?php echo $k; ?>, 'click', function(e){
 										e.preventDefault();
 										map.setZoom(17);
 										map.setCenter(siteMarker<?php echo $k; ?>.getPosition());
 										siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
 										siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+										activeMarker = siteMarker<?php echo $k; ?>.getPosition();
+										if(postcodeBox.value != ""){
+											calcRoute();
+										}
 									});
-									
+									<?php } ?>
 									
 
 								<?php
@@ -343,10 +399,17 @@ get_header(); ?>
 								?>
 								
 								
-								google.maps.event.addDomListener(allSitesButton, 'click', function(e){
+								<?php if(count($servicelocations) > 1){ ?>
+									google.maps.event.addDomListener(allSitesButton, 'click', function(e){
 										e.preventDefault();
-										map.fitBounds(markerBounds);
-										<?php 
+										if(markers.length > 1){
+											map.fitBounds(markerBounds);
+											activeMarker = siteMarker0.getPosition();
+										}else{
+											map.setCenter(siteMarker0.getPosition());
+											map.setZoom(17);
+											activeMarker = siteMarker0.getPosition();
+										}										<?php 
 											$k = 0;
 											foreach ($servicelocations as $servicelocation){
 										?>
@@ -356,7 +419,7 @@ get_header(); ?>
 											}
 										?>
 									});
-
+								<?php } ?>
 								
 								google.maps.event.addListener(map, 'zoom_changed', function(){
 										var zoomLevel = map.getZoom();
@@ -382,8 +445,49 @@ get_header(); ?>
 										?>
 										}
 									});
+									
+								google.maps.event.addDomListener(dirbut, 'click', function(e){
+									calcRoute();
+								});
+									
 								
 								
+								
+							}
+							
+							
+							function calcRoute(){
+								var start = document.getElementById("postcode").value;
+								var travelMode = document.getElementById("travelMode").value;
+								var end = activeMarker;
+								var request = {
+									origin: start,
+									destination: end,
+									travelMode: google.maps.TravelMode[travelMode]
+								};
+								directionsService.route(request, function(response, status){
+									if(status == google.maps.DirectionsStatus.OK){
+										document.getElementById("map_error").style.display = "none";
+										document.getElementById("tech_error").style.display = "none";
+										document.getElementById("advanced").style.display = "block";
+										document.getElementById("directions-panel").style.display = "block";
+										directionsDisplay.setDirections(response);
+									}
+									if(status == google.maps.DirectionsStatus.INVALID_REQUEST || status == google.maps.DirectionsStatus.NOT_FOUND || status == google.maps.DirectionsStatus.ZERO_RESULTS){
+										//Do something to tell the user that their request returned no results and to use their postcode
+										document.getElementById("map_error").style.display = "block";
+										document.getElementById("tech_error").style.display = "none";
+										document.getElementById("advanced").style.display = "none";
+										document.getElementById("directions-panel").style.display = "none";
+									}
+									if(status == google.maps.DirectionsStatus.OVER_QUERY_LIMIT || status == google.maps.DirectionsStatus.REQUEST_DENIED || status == google.maps.DirectionsStatus.UNKNOWN_ERROR){
+										// Do something to tell the user that their was a technical fault and to send and email
+										document.getElementById("map_error").style.display = "none";
+										document.getElementById("tech_error").style.display = "block";
+										document.getElementById("advanced").style.display = "none";
+										document.getElementById("directions-panel").style.display = "none";
+									}
+								});
 							}
 							
 							function loadScript(){
@@ -395,7 +499,6 @@ get_header(); ?>
 							
 							window.onload = loadScript;
 							
-							//google.maps.event.addDomListener(window, 'load', initialize);
 						</script>
 						<?php
 						
@@ -405,7 +508,7 @@ get_header(); ?>
 					}
 					
 
-										
+					echo "<div class=\"clearfix\"></div>";				
 					
 					
 					if ($treatments !=''){

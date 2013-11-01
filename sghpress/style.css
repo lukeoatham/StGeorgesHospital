@@ -282,6 +282,19 @@ ul#menu-top-tasks li {
 	width: 48px;
 	*margin-top: 1px;
 }
+.dirButton{
+	width: 28px;
+	*margin-top: 1px;
+	padding: 0px;
+}
+
+.dirs{
+	width: 250px;
+}
+
+#map_error, #tech_error{
+	width: 200px;
+}
 
 #searchblock #mobileMenuButton {
     display: none;
@@ -1102,6 +1115,9 @@ li h3 a {
 	display: inline;
 }
 
+#startDest{
+	padding-top: 0.5em;
+}
 
 .service-thumbnail{
 	width: 75px;
