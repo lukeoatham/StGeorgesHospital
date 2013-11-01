@@ -176,14 +176,16 @@ get_header(); ?>
 							echo "<h3 class='sideboxhead'>Location</h3>";
 						}
 						echo "<div id=\"map-canvas\" class=\"google_map\"></div>";
-						echo "<ul class=\"inline\">";
-							$j = 0;
-							foreach ($servicelocations as $servicelocation){
-								echo "<li><a href=\"#\" id=\"site".$j."\" class=\"btn btn-link btn-large\">".$servicelocation["service_site"]->name."</a></li>";
-								$j++;
-							}
-							echo "<li><a href=\"#\" id=\"allSitesZoom\" class=\"btn btn-link btn-large\">Show all sites</a></li>";
-							echo "</ul>";
+						if(count($servicelocations) > 1){
+							echo "<ul class=\"inline\">";
+								$j = 0;
+								foreach ($servicelocations as $servicelocation){
+									echo "<li><a href=\"#\" id=\"site".$j."\" class=\"btn btn-link btn-large\">".$servicelocation["service_site"]->name."</a></li>";
+									$j++;
+								}
+								echo "<li><a href=\"#\" id=\"allSitesZoom\" class=\"btn btn-link btn-large\">Show all sites</a></li>";
+								echo "</ul>";
+						}
 						?>
 						
 						<script>
@@ -304,8 +306,13 @@ get_header(); ?>
 									$k++;
 									}
 									?>
-								map.fitBounds(markerBounds);
-								map.panBy(0,-40);
+								if(markers.length > 1){
+									map.fitBounds(markerBounds);
+									map.panBy(0,-40);
+								}else{
+									map.setCenter(siteMarker0.getPosition());
+									map.setZoom(17);
+								}
 								
 							
 								<?php 
