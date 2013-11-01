@@ -168,73 +168,236 @@ get_header(); ?>
 					
 					//display location information
 					$k=0;
-					foreach ($servicelocations as $servicelocation){
+					if(count($servicelocations) > 0){
 						echo "<div class='sidebox' id='servicelocations'>";
-						echo "<h3 class='sideboxhead'>Location</h3><p>";
-						
-						
-						$floor = $servicelocation['service_floor'];
-						switch ($floor) {
-						    case 5:
-						        echo "5th floor ";
-						        break;
-						    case 4:
-						        echo "4th floor ";
-						        break;
-						    case 3:
-						        echo "3rd floor ";
-						        break;
-						    case 2:
-						        echo "2nd floor ";
-						        break;
-						    case 1:
-						        echo "1st floor ";
-						        break;
-						    case 'G':
-						        echo "Ground floor ";
-						        break;
-						    case 'B':
-						        echo "Basement floor ";
-						        break;
+						if(count($servicelocations) > 1){
+							echo "<h3 class='sideboxhead'>Locations</h3>";
+						}else{
+							echo "<h3 class='sideboxhead'>Location</h3>";
 						}
-						if ($servicelocation['service_wing']->name){	
-							echo ", ".$servicelocation['service_wing']->name.", ";
-						}
-						echo "<a href='/contact-and-find-us/find-us/sites/?site=".$servicelocation['service_site']->slug."'>".$servicelocation['service_site']->name."</a></p>";
-						$loc='';
-						$loc = $servicelocation['service_long_lat'];
-						if ($loc):
+						echo "<div id=\"map-canvas\" class=\"google_map\"></div>";
+						echo "<ul class=\"inline\">";
+							$j = 0;
+							foreach ($servicelocations as $servicelocation){
+								echo "<li><a href=\"#\" id=\"site".$j."\" class=\"btn btn-link btn-large\">".$servicelocation["service_site"]->name."</a></li>";
+								$j++;
+							}
+							echo "<li><a href=\"#\" id=\"allSitesZoom\" class=\"btn btn-link btn-large\">Show all sites</a></li>";
+							echo "</ul>";
 						?>
 						
-						<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 						<script>
+							var markers = new Array();
+							<?php
+								foreach ($servicelocations as $servicelocation){
+									?>
+									var marker<?php echo $k; ?> = new Object();
+									
+									<?php
+									$floor = $servicelocation['service_floor'];
+									$floorTitle = "";
+									switch ($floor) {
+										case 5:
+											$floorTitle .= "5th floor ";
+											break;
+										case 4:
+											$floorTitle .= "4th floor ";
+											break;
+										case 3:
+											$floorTitle .= "3rd floor ";
+											break;
+										case 2:
+											$floorTitle .= "2nd floor ";
+						        			break;
+										case 1:
+											$floorTitle .= "1st floor ";
+											break;
+										case 'G':
+											$floorTitle .= "Ground floor ";
+											break;
+										case 'B':
+											$floorTitle .= "Basement floor ";
+											break;
+									}
+										
+									if ($servicelocation['service_wing']->name){	
+										$floorTitle .= ", ".$servicelocation['service_wing']->name.", ";
+									}
+									
+									
+									$floorTitle .= $servicelocation['service_site']->name;
+									
+									?>
+									
+									marker<?php echo $k; ?>.locationName = "<?php echo $floorTitle; ?>";
+									marker<?php echo $k; ?>.siteName = "<?php echo $servicelocation['service_site']->name; ?>";
+									
+									<?php	
+									//echo "<a href='/contact-and-find-us/find-us/sites/?site=".$servicelocation['service_site']->slug."'>".$servicelocation['service_site']->name."</a></p>";
+									
+									$loc='';
+									$loc = $servicelocation['service_long_lat'];
+									if ($loc):
+										?>
+											marker<?php echo $k; ?>.locationLL = "<?php echo $loc; ?>";
+											
+										<?php
+										endif;
+									?>
+										markers.push(marker<?php echo $k; ?>);
+									<?php
+										$k++;
+										
+								}
+								?>
+
 							var map;
 							function initialize() {
 								var mapOptions = {
-									zoom: 18,
-									center: new google.maps.LatLng(<?php echo $loc; ?>),
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
-								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 								
-								var marker = new google.maps.Marker({
-									position: new google.maps.LatLng(<?php echo $loc; ?>),
-									map: map,
-									title: '<?php echo "title"; ?>',
-									animation: google.maps.Animation.DROP
-								});
+								map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+								<?php
+								$k = 0;
+								foreach ($servicelocations as $servicelocation){
+								?>
+								
+								var mapButton<?php echo $k; ?> = document.getElementById("site<?php echo $k; ?>");
+								
+								<?php
+								$k++;
+								}
+								?>
+								
+								var allSitesButton = document.getElementById("allSitesZoom");
+								
+								var markerBounds = new google.maps.LatLngBounds();
+								
+								for(var i = 0; i < markers.length; i++){
+									var LL = markers[i].locationLL.split(",");
+									var markerLLforBounds = new google.maps.LatLng(LL[0], LL[1]);
+									markerBounds.extend(markerLLforBounds);
+								}
+								
+								
+								
+									<?php
+									$k = 0;
+									foreach ($servicelocations as $servicelocation){
+									?>
+										var LL = markers[<?php echo $k; ?>].locationLL.split(",");
+										var siteMarker<?php echo $k; ?> = new google.maps.Marker({
+											position: new google.maps.LatLng(LL[0], LL[1]),
+											map: map,
+											title: markers[<?php echo $k; ?>].locationName,
+											animation: google.maps.Animation.DROP
+										});
+										
+										var siteInfoWindow<?php echo $k; ?> = new google.maps.InfoWindow({
+											content: markers[<?php echo $k; ?>].siteName
+										});
+										
+										siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+									
+									<?php
+									$k++;
+									}
+									?>
+								map.fitBounds(markerBounds);
+								map.panBy(0,-40);
+								
+							
+								<?php 
+								$k = 0;
+								foreach ($servicelocations as $servicelocation){
+								?>
+									google.maps.event.addListener(siteMarker<?php echo $k; ?>, 'click', function(){
+										map.setZoom(17);
+										map.setCenter(siteMarker<?php echo $k; ?>.getPosition());
+										siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
+										siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+									});
+									
+									
+									google.maps.event.addDomListener(mapButton<?php echo $k; ?>, 'click', function(e){
+										e.preventDefault();
+										map.setZoom(17);
+										map.setCenter(siteMarker<?php echo $k; ?>.getPosition());
+										siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
+										siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+									});
+									
+									
+
+								<?php
+								$k++;
+								}
+								?>
+								
+								
+								google.maps.event.addDomListener(allSitesButton, 'click', function(e){
+										e.preventDefault();
+										map.fitBounds(markerBounds);
+										<?php 
+											$k = 0;
+											foreach ($servicelocations as $servicelocation){
+										?>
+											siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
+										<?php
+											$k++;
+											}
+										?>
+									});
+
+								
+								google.maps.event.addListener(map, 'zoom_changed', function(){
+										var zoomLevel = map.getZoom();
+										if(zoomLevel < 14){
+										<?php 
+											$k = 0;
+											foreach ($servicelocations as $servicelocation){
+										?>
+											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].siteName);
+										<?php
+											$k++;
+											}
+										?>
+										}else{
+											<?php 
+											$k = 0;
+											foreach ($servicelocations as $servicelocation){
+										?>
+											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
+										<?php
+											$k++;
+											}
+										?>
+										}
+									});
+								
+								
 							}
-
-							google.maps.event.addDomListener(window, 'load', initialize);
+							
+							function loadScript(){
+								var script = document.createElement('script');
+								script.type = "text/javascript";
+								script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initialize";
+								document.body.appendChild(script);
+							}
+							
+							window.onload = loadScript;
+							
+							//google.maps.event.addDomListener(window, 'load', initialize);
 						</script>
-						
-						<div id="map-canvas" class="google_map"></div>
-						
 						<?php
-						endif;
-
+						
+						
 						echo "</div>";
+							
 					}
+					
+
 										
 					
 					
@@ -285,7 +448,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span3" id='sidebar'>
+				<div class="span3 serviceContent" id='sidebar'>
 				
 				<?php 
 					$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium');
