@@ -55,7 +55,9 @@
 						</ul>
 					</div>
 
-
+				</div>
+			</div>
+			
 		
 		<div id="backToTop" class="visible-phone">
 			<a href="#mobhead">^</a>
