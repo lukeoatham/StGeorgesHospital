@@ -1100,7 +1100,9 @@ li h3 a {
 	margin-top: 0;
 }
 
-
+.siteHeading{
+	font-size: 18px;
+}
 
 .google_map{
 	width: 100%;
