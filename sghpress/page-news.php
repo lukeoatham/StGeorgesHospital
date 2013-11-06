@@ -85,7 +85,6 @@ $newstype = $_GET['type'];
 							?>
 					</div>
 					<div class="span3 events">
-						<h3>Events</h3>
 						<?php
 						$tdate= getdate();
 							$tdate = $tdate['year']."-".$tdate['mon']."-".$tdate['mday'];
@@ -112,10 +111,9 @@ $newstype = $_GET['type'];
 					
 					$eventquery = new WP_Query($equery);
 							
-							if (!$eventquery->have_posts()){
-								echo "<p>Nothing to show.</p>";
+							if ($eventquery->have_posts()){
+								echo "<h3>Events</h3>";
 							}
-							
 								
 							if ( $eventquery->have_posts() ) {
 				
@@ -136,13 +134,12 @@ $newstype = $_GET['type'];
 									echo "</div>
 									</div>";
 								}
-								
-							} else {
-								echo "No forthcoming events.";
 							}
-							
+
+							if ($eventquery->have_posts()){
+								echo "<p><a href='/news/events/'>More events</a></p>";							
+							}							
 						?>
-						<p><a href="/news/events/">More events</a></p>
 						
 						<h3>Gazette</h3>
 						

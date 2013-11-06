@@ -31,14 +31,17 @@
 
 				<div class="container-fluid">
 				
-				<?php if (is_front_page() || is_home()) : //DISPLAY HOMEPAGE FOOTER ?>
-									
+					<div class="span6">
+							<div class="footerfeedback">
+<?php 							dynamic_sidebar( 'footer-widget-feedback' ); ?>
+							</div>
+
+					</div>
+
 					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
 						</ul>
-					</div>
-					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
 						</ul>
@@ -47,146 +50,14 @@
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
 						</ul>
-					</div>
-					<div class="span3">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area4' ); ?>
 						</ul>
 					</div>
 
-				<?php else:   // DISPLAY REGULAR FOOTER ?>
-				
-					<div class="span5">
-							<div class="footerfeedback">
-<?php 							dynamic_sidebar( 'footer-widget-feedback' ); ?>
-							</div>
-
-
-					</div>
-					<div class="span4">
-
-						<h3>News</h3>
-
-						<?php
-							$customquery = new WP_Query(array(
-							"post_type" => "newsitem",
-							"posts_per_page" => 5,
-							)
-
-							);
-								
-							if ( $customquery->have_posts() ) {
-								echo "<ul class='footernews'>";
-								while ( $customquery->have_posts() ) {
-									$customquery->the_post();
-										echo "<li><a href='" .get_permalink() . "'>" . get_the_title() . "</a></li>";
-								}
-								echo "</ul>";
-							}
-							
-							wp_reset_query();
-
-						?>
-
-<!--
-						<h3>All services A-Z</h3> 
-				<div class="input-append">
-				  <label for="selectf3">Jump to:</label>
-				  <select id="selectf3" >
-				<?php  
-					$allservices = get_posts(
-							array(
-							"post_type" => "service",
-							"posts_per_page" => -1,
-							"orderby" => "title",
-							"order" => "ASC",
-							"post_parent" => 0
-							)
-						);
-						echo "<option value=''>Choose a service</option>"; 
-					foreach ($allservices as $service){
-						echo  '<option ';
-						
-						echo ' value="'.$service->guid.'">'.$service->post_title.' </option>';
-					}
-					?>
-					  </select>
-					  <button class="btn" type="button" onclick="goToPage('selectf3')">Go</button>
-					</div>					
-
-		
-					<script>
-					function goToPage( id ) {
-					
-					  var node = document.getElementById( id );
-					  
-					  // Check to see if valid node and if node is a SELECT form control
-					  
-					  if( node &&
-					    node.tagName == "SELECT" ) {
-					
-					    // Go to web page defined by the VALUE attribute of the OPTION element
-					
-					    window.location.href = node.options[node.selectedIndex].value;
-					    
-					  } // endif
-					  
-					}
-					</script>	
-					
-					<h3>Find a local health centre</h3> 
-						<div class="input-append">
-						  <select id="selectf4" >
-						<?php  
-							$allservices = get_terms("sites",
-									array(
-									"orderby" => "name",
-									"order" => "ASC",
-									"hide_empty"=>false
-									)
-								);
-								echo "<option value=''>Choose a health centre</option>"; 
-							foreach ($allservices as $service){// print_r($service);
-					  		    $themeid = $service->term_id;
-					  		    $q = "select option_value from wp_options where option_name = 'sites_".$themeid."_site_type'";
-					  		    global $wpdb;
-					  		    $theme_term = $wpdb->get_results( $q );					
-								if ($theme_term[0]->option_value == "Health Centre"){
-									echo  '<option ';
-									echo ' value="/contact-and-find-us/find-us/sites/?site='.$service->slug.'">'.$service->name.' </option>';
-								}
-							}
-							
-							?>
-							  </select>
-							  <button class="btn" type="button" onclick="goToPage('selectf4')">Go</button>
-							</div>	
-
--->
-							
-							
-					</div>
-					<div class="span3">
-						<h3>Do it online</h3>
-							<?php
-					$defaults = array(
-					'menu'            => 'do-it-online',
-					'container'       => 'div',
-					'menu_class'      => 'menu',
-					'echo'            => true,
-					'fallback_cb'     => 'wp_page_menu',
-					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-					'depth'           => 0,
-				);
-				
-				wp_nav_menu( $defaults );
-				?>
-					</div>
-				<?php endif; ?>
-
 				</div>
 			</div>
-
+			
 		
 		<div id="backToTop" class="visible-phone">
 			<a href="#mobhead">^</a>
