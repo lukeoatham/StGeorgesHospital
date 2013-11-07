@@ -37,10 +37,10 @@
 							</div>
 
 					</div>
-	<div class="span6">
+					<div class="span6">
 
 	<?php if (!is_front_page() && !is_home()) : //DISPLAY HOMEPAGE FOOTER ?>
-	<div class="row">
+	<div class="row-fluid">
 					<div class="span6">
  
 						<h3>News</h3>
@@ -84,11 +84,11 @@
 				wp_nav_menu( $defaults );
 				?>
 					</div>
-	</div>
+				</div>
 				
 				<?php endif; ?>
-	<div class="row">
-					<div class="span6 clearfix">
+				<div class="row-fluid">
+					<div class="span6">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
 						</ul>
@@ -96,7 +96,8 @@
 							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
 						</ul>
 					</div>
-					<div class="span6 clearfix">
+
+					<div class="span6">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
 						</ul>
@@ -106,8 +107,9 @@
 					</div>
 				</div>
 				</div>
+				</div>
 			</div>
-			</div>
+
 		
 		<div id="backToTop" class="visible-phone">
 			<a href="#mobhead">^</a>
