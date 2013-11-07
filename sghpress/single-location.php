@@ -68,7 +68,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span3" id='sidebar'>
+				<div class="span3 contactContent" id='sidebar'>
 				
 				<?php the_post_thumbnail('medium'); 
 				

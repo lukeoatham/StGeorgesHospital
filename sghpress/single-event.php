@@ -40,7 +40,7 @@ get_header(); ?>
 				
 				</div>
 				
-				<div class="span3" id='sidebar'>
+				<div class="span3 newsContent" id='sidebar'>
 <?php					$cimage = get_the_post_thumbnail($post->ID, 'thumbnail', array('class' => 'alignleft'));
 					echo $cimage;
 				?>

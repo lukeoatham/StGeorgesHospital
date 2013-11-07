@@ -168,6 +168,20 @@ get_header(); ?>
 					
 					//display location information
 					$k=0;
+					$sitesArray = array();
+					$sameSiteMode = false;
+					foreach ($servicelocations as $servicelocation){
+						$keyToUse = $servicelocation["service_site"]->name;
+						if($sitesArray[$keyToUse]){
+							$sameSiteMode = true;
+							array_push($sitesArray[$keyToUse], $servicelocation);
+						}else{
+							$sitesArray[$keyToUse] = array();
+							array_push($sitesArray[$keyToUse], $servicelocation);
+						}
+					}
+					
+					
 					if(count($servicelocations) > 0){
 						echo "<div class='sidebox' id='servicelocations'>";
 						if(count($servicelocations) > 1){
@@ -176,16 +190,37 @@ get_header(); ?>
 							echo "<h3 class='sideboxhead'>Location</h3>";
 						}
 						echo "<div id=\"map-canvas\" class=\"google_map\"></div>";
+						echo "<div class=\"btn-group btn-group-vertical span6\">";
 						if(count($servicelocations) > 1){
-							echo "<div class=\"btn-group btn-group-vertical span6\">";
 								$j = 0;
-								foreach ($servicelocations as $servicelocation){
-									echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$servicelocation["service_site"]->name."</button>";
-									$j++;
+								$printedSites = array();
+								foreach ($sitesArray as $key => $val){
+									if($sameSiteMode){
+										if(!in_array($key, $printedSites)){
+											echo "<h4 class=\"siteHeading\">".$key."</h4>";
+											array_push($key, $printedSites);
+										}
+										foreach($sitesArray[$key] as $serv){
+											if($serv["service_wing"]->name){
+												echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$serv["service_wing"]->name."</button>";
+											}else{
+												echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$serv["service_site"]->name."</button>";
+											}
+											$j++;
+										}
+										
+									}else{
+										echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$servicelocation["service_site"]->name."</button>";
+										$j++;
+									}
+								}
+								if($sameSiteMode){
+									echo "<h4 class=\"siteHeading\">Show all sites</h4>";
 								}
 								echo "<button id=\"allSitesZoom\" class=\"btn btn-link\">Show all sites</button>";
-								echo "</div>";
+								
 						}
+						echo "</div>";
 						?>
 						<div id="startDest" class="span4">
 							<div class="input-append">
@@ -221,12 +256,13 @@ get_header(); ?>
 						<script>
 							var markers = new Array();
 							<?php
-								foreach ($servicelocations as $servicelocation){
+								foreach ($sitesArray as $key => $val){
+									foreach($sitesArray[$key] as $serv){
 									?>
 									var marker<?php echo $k; ?> = new Object();
 									
 									<?php
-									$floor = $servicelocation['service_floor'];
+									$floor = $serv['service_floor'];
 									$floorTitle = "";
 									switch ($floor) {
 										case 5:
@@ -252,23 +288,23 @@ get_header(); ?>
 											break;
 									}
 										
-									if ($servicelocation['service_wing']->name){	
-										$floorTitle .= ", ".$servicelocation['service_wing']->name.", ";
+									if ($serv['service_wing']->name){	
+										$floorTitle .= ", ".$serv['service_wing']->name.", ";
 									}
 									
 									
-									$floorTitle .= $servicelocation['service_site']->name;
+									$floorTitle .= $serv['service_site']->name;
 									
 									?>
 									
 									marker<?php echo $k; ?>.locationName = "<?php echo $floorTitle; ?>";
-									marker<?php echo $k; ?>.siteName = "<?php echo $servicelocation['service_site']->name; ?>";
+									marker<?php echo $k; ?>.siteName = "<?php echo $serv['service_site']->name; ?>";
 									
 									<?php	
 									//echo "<a href='/contact-and-find-us/find-us/sites/?site=".$servicelocation['service_site']->slug."'>".$servicelocation['service_site']->name."</a></p>";
 									
 									$loc='';
-									$loc = $servicelocation['service_long_lat'];
+									$loc = $serv['service_long_lat'];
 									if ($loc):
 										?>
 											marker<?php echo $k; ?>.locationLL = "<?php echo $loc; ?>";
@@ -279,7 +315,7 @@ get_header(); ?>
 										markers.push(marker<?php echo $k; ?>);
 									<?php
 										$k++;
-										
+									}
 								}
 								?>
 
@@ -303,13 +339,15 @@ get_header(); ?>
 								
 								<?php
 								$k = 0;
-								foreach ($servicelocations as $servicelocation){
+								foreach ($sitesArray as $key => $val){
+									foreach($sitesArray[$key] as $serv){
 								?>
 								<?php if(count($servicelocations) > 1){ ?>
 									var mapButton<?php echo $k; ?> = document.getElementById("site<?php echo $k; ?>");
 								<?php } ?>
 								<?php
 								$k++;
+								}
 								}
 								?>
 								
@@ -332,7 +370,8 @@ get_header(); ?>
 								
 									<?php
 									$k = 0;
-									foreach ($servicelocations as $servicelocation){
+									foreach ($sitesArray as $key => $val){
+										foreach($sitesArray[$key] as $serv){
 									?>
 										var LL = markers[<?php echo $k; ?>].locationLL.split(",");
 										var siteMarker<?php echo $k; ?> = new google.maps.Marker({
@@ -351,6 +390,7 @@ get_header(); ?>
 									<?php
 									$k++;
 									}
+									}
 									?>
 								if(markers.length > 1){
 									map.fitBounds(markerBounds);
@@ -365,7 +405,8 @@ get_header(); ?>
 							
 								<?php 
 								$k = 0;
-								foreach ($servicelocations as $servicelocation){
+								foreach ($sitesArray as $key => $val){
+									foreach($sitesArray[$key] as $serv){
 								?>
 									google.maps.event.addListener(siteMarker<?php echo $k; ?>, 'click', function(){
 										map.setZoom(17);
@@ -396,6 +437,7 @@ get_header(); ?>
 								<?php
 								$k++;
 								}
+								}
 								?>
 								
 								
@@ -411,11 +453,13 @@ get_header(); ?>
 											activeMarker = siteMarker0.getPosition();
 										}										<?php 
 											$k = 0;
-											foreach ($servicelocations as $servicelocation){
+											foreach ($sitesArray as $key => $val){
+												foreach($sitesArray[$key] as $serv){
 										?>
 											siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
 										<?php
 											$k++;
+											}
 											}
 										?>
 									});
@@ -426,21 +470,24 @@ get_header(); ?>
 										if(zoomLevel < 14){
 										<?php 
 											$k = 0;
-											foreach ($servicelocations as $servicelocation){
-										?>
+											foreach ($sitesArray as $key => $val){
+												foreach($sitesArray[$key] as $serv){										?>
 											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].siteName);
 										<?php
 											$k++;
+											}
 											}
 										?>
 										}else{
 											<?php 
 											$k = 0;
-											foreach ($servicelocations as $servicelocation){
+											foreach ($sitesArray as $key => $val){
+												foreach($sitesArray[$key] as $serv){
 										?>
 											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
 										<?php
 											$k++;
+											}
 											}
 										?>
 										}

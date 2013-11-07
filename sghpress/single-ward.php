@@ -194,7 +194,7 @@ switch ($floor) {
 				
 				</div>
 				
-				<div class="span3" id='sidebar'>
+				<div class="span3 patientContent" id='sidebar'>
 <?php	
 //display services associated with this ward
 				
