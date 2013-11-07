@@ -168,7 +168,7 @@ $newstype = $_GET['type'];
 
 							
 						?>
-						<a href="/about/publications/the-gazette/">Older Gazettes</a>
+						<a href="/news/publications/the-gazette/">Older Gazettes</a>
 					</div>
 				</div>
 

@@ -37,8 +37,58 @@
 							</div>
 
 					</div>
+	<div class="span6">
 
-					<div class="span3">
+	<?php if (!is_front_page() && !is_home()) : //DISPLAY HOMEPAGE FOOTER ?>
+	<div class="row">
+					<div class="span6">
+ 
+						<h3>News</h3>
+ 
+						<?php
+							$customquery = new WP_Query(array(
+							"post_type" => "newsitem",
+							"posts_per_page" => 5,
+							)
+ 
+							);
+								
+							if ( $customquery->have_posts() ) {
+								echo "<ul class='footernews'>";
+								while ( $customquery->have_posts() ) {
+									$customquery->the_post();
+										echo "<li><a href='" .get_permalink() . "'>" . get_the_title() . "</a></li>";
+								}
+								echo "</ul>";
+							}
+							
+							wp_reset_query();
+ 
+	?>
+							
+							
+					</div>
+					<div class="span6">
+						<h3>Do it online</h3>
+							<?php
+					$defaults = array(
+					'menu'            => 'do-it-online',
+					'container'       => 'div',
+					'menu_class'      => 'menu',
+					'echo'            => true,
+					'fallback_cb'     => 'wp_page_menu',
+					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					'depth'           => 0,
+				);
+				
+				wp_nav_menu( $defaults );
+				?>
+					</div>
+	</div>
+				
+				<?php endif; ?>
+	<div class="row">
+					<div class="span6 clearfix">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area1' ); ?>
 						</ul>
@@ -46,7 +96,7 @@
 							<?php dynamic_sidebar( 'footer-widget-area2' ); ?>
 						</ul>
 					</div>
-					<div class="span3">
+					<div class="span6 clearfix">
 						<ul class="xoxo">
 							<?php dynamic_sidebar( 'footer-widget-area3' ); ?>
 						</ul>
@@ -54,10 +104,10 @@
 							<?php dynamic_sidebar( 'footer-widget-area4' ); ?>
 						</ul>
 					</div>
-
+				</div>
 				</div>
 			</div>
-			
+			</div>
 		
 		<div id="backToTop" class="visible-phone">
 			<a href="#mobhead">^</a>
