@@ -8,7 +8,7 @@ Author URI: http://www.helpfultechnology.com
 Tags: bootstrap
 */
 
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
 
 
 body {
@@ -1167,6 +1167,12 @@ select{
 #newsposts .sidebox i, #newsposts .sidebox p{
 	margin: 0px;
 	padding: 0px;
+}
+
+#headbanner {
+	background: rgb(246, 134, 32);
+	padding: 0.25em 0.5em;
+	color: white;
 }
 
 /* IE 8 issue with consultant profiles fix */

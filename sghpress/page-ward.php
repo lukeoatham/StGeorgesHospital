@@ -187,7 +187,7 @@ $hospsite = $_GET['hospsite'];
 										$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
 										
 										if(!$postThumb){
-											$postThumb = "http://placehold.it/75x75";
+											//$postThumb = "http://placehold.it/75x75";
 										}else{
 											$postThumb = $postThumb[0];
 										}

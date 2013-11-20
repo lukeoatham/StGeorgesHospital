@@ -5,14 +5,12 @@ get_header();
 
 $hospsite = $_GET['site'];
 
-
-
 if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<div class="row-fluid">
 <div class="span3" id='secondarynav'>
 
-										<?php renderLeftNav(); ?>				
+					<?php renderLeftNav(); ?>				
 												
 					</div>				
 					<div class="span9 <?php
@@ -132,7 +130,7 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 									$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
 									
 									if(!$postThumb){
-										$postThumb = "http://placehold.it/75x75";
+										//$postThumb = "https://placehold.it/75x75";
 									}else{
 										$postThumb = $postThumb[0];
 									}

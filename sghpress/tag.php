@@ -10,7 +10,7 @@
 get_header(); ?>
 <div class="row-fluid visible-phone">
 			<div class="span3" id="secondarynav">
-				<?php renderLeftNav(); ?>
+				<?php //renderLeftNav(); ?>
 			</div>
 		</div>
 				<div class="row-fluid">

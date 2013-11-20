@@ -150,7 +150,7 @@ $paged = $_GET['$paged'];
 									
 									
 									if(!$item["thumbnail"]){
-										$postThumb = "http://placehold.it/150x150";
+										// $postThumb = "http://placehold.it/150x150";
 									}else{
 										$postThumb = $item["thumbnail"][0];
 									}

@@ -15,7 +15,13 @@ get_header(); ?>
 ?>
 	<?php 
 		$wpLink = get_permalink($post->ID);
-		$siteURL = "http://".$_SERVER["HTTP_HOST"]."".$_SERVER["REQUEST_URI"];
+		if ($_SERVER["HTTPS"]) {
+			$protocol = "https://";
+		} else {
+			$protocol = "http://";
+		}
+
+		$siteURL = $protocol.$_SERVER["HTTP_HOST"]."".$_SERVER["REQUEST_URI"];
 		if($wpLink == $siteURL ){
 	
 	 ?>
@@ -75,12 +81,12 @@ get_header(); ?>
 					
 					// turn the clinician results into an array we can parse later (and check against)
 					$clinicianObjects = array();
-					foreach ($clinicians as $clinician) {
+					foreach ((array)$clinicians as $clinician) {
 					//var_dump($clinician);
 					//setup_postdata($clinician); 
-						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false);
-						foreach ($clinicianservices as $clinicianservice){ 
-							if ( in_array($mainid, $clinicianservice) ){
+						$clinicianservices=get_post_meta($clinician->ID, 'service-relationship',false); 
+						foreach ((array)$clinicianservices as $clinicianservice){ 
+							if (@in_array($mainid, $clinicianservice) ){
 								$clinicianObject = array();
 								$clinicianObject["guid"] = $clinician->guid;
 								$clinicianObject["post_title"] = $clinician->post_title;
@@ -93,12 +99,12 @@ get_header(); ?>
 					
 					//run through each referrals to check if assigned to this service
 					$referralObjects = array();				
-					foreach ($referrals as $referral) {
+					foreach ((array)$referrals as $referral) {
 						//setup_postdata($referral); 
 						$referralservices=get_post_meta($referral->ID, 'service-relationship',false); //print_r($referralservices);
-						foreach ($referralservices as $referralservice){ 
+						foreach ((array)$referralservices as $referralservice){ 
 
-							if ( in_array($mainid, $referralservice) ){
+							if (@in_array($mainid, $referralservice) ){
 								$referralObject = array();
 								$referralObject["referrallink"] = get_attachment_link($referral->ID);
 								$referralObject["referral_title"] = $referral->post_title;
@@ -170,7 +176,7 @@ get_header(); ?>
 					$k=0;
 					$sitesArray = array();
 					$sameSiteMode = false;
-					foreach ($servicelocations as $servicelocation){
+					foreach ((array)$servicelocations as $servicelocation){
 						$keyToUse = $servicelocation["service_site"]->name;
 						if($sitesArray[$keyToUse]){
 							$sameSiteMode = true;
@@ -194,13 +200,13 @@ get_header(); ?>
 						if(count($servicelocations) > 1){
 								$j = 0;
 								$printedSites = array();
-								foreach ($sitesArray as $key => $val){
+								foreach ((array)$sitesArray as $key => $val){
 									if($sameSiteMode){
 										if(!in_array($key, $printedSites)){
 											echo "<h4 class=\"siteHeading\">".$key."</h4>";
 											array_push($key, $printedSites);
 										}
-										foreach($sitesArray[$key] as $serv){
+										foreach((array)$sitesArray[$key] as $serv){
 											if($serv["service_wing"]->name){
 												echo "<button id=\"site".$j."\" class=\"btn btn-link\">".$serv["service_wing"]->name."</button>";
 											}else{
@@ -256,8 +262,8 @@ get_header(); ?>
 						<script>
 							var markers = new Array();
 							<?php
-								foreach ($sitesArray as $key => $val){
-									foreach($sitesArray[$key] as $serv){
+								foreach ((array)$sitesArray as $key => $val){
+									foreach((array)$sitesArray[$key] as $serv){
 									?>
 									var marker<?php echo $k; ?> = new Object();
 									
@@ -339,8 +345,8 @@ get_header(); ?>
 								
 								<?php
 								$k = 0;
-								foreach ($sitesArray as $key => $val){
-									foreach($sitesArray[$key] as $serv){
+								foreach ((array)$sitesArray as $key => $val){
+									foreach((array)$sitesArray[$key] as $serv){
 								?>
 								<?php if(count($servicelocations) > 1){ ?>
 									var mapButton<?php echo $k; ?> = document.getElementById("site<?php echo $k; ?>");
@@ -370,8 +376,8 @@ get_header(); ?>
 								
 									<?php
 									$k = 0;
-									foreach ($sitesArray as $key => $val){
-										foreach($sitesArray[$key] as $serv){
+									foreach ((array)$sitesArray as $key => $val){
+										foreach((array)$sitesArray[$key] as $serv){
 									?>
 										var LL = markers[<?php echo $k; ?>].locationLL.split(",");
 										var siteMarker<?php echo $k; ?> = new google.maps.Marker({
@@ -405,8 +411,8 @@ get_header(); ?>
 							
 								<?php 
 								$k = 0;
-								foreach ($sitesArray as $key => $val){
-									foreach($sitesArray[$key] as $serv){
+								foreach ((array)$sitesArray as $key => $val){
+									foreach((array)$sitesArray[$key] as $serv){
 								?>
 									google.maps.event.addListener(siteMarker<?php echo $k; ?>, 'click', function(){
 										map.setZoom(17);
@@ -453,8 +459,8 @@ get_header(); ?>
 											activeMarker = siteMarker0.getPosition();
 										}										<?php 
 											$k = 0;
-											foreach ($sitesArray as $key => $val){
-												foreach($sitesArray[$key] as $serv){
+											foreach ((array)$sitesArray as $key => $val){
+												foreach((array)$sitesArray[$key] as $serv){
 										?>
 											siteInfoWindow<?php echo $k; ?>.open(map, siteMarker<?php echo $k; ?>);
 										<?php
@@ -470,8 +476,8 @@ get_header(); ?>
 										if(zoomLevel < 14){
 										<?php 
 											$k = 0;
-											foreach ($sitesArray as $key => $val){
-												foreach($sitesArray[$key] as $serv){										?>
+											foreach ((array)$sitesArray as $key => $val){
+												foreach((array)$sitesArray[$key] as $serv){		?>
 											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].siteName);
 										<?php
 											$k++;
@@ -481,8 +487,8 @@ get_header(); ?>
 										}else{
 											<?php 
 											$k = 0;
-											foreach ($sitesArray as $key => $val){
-												foreach($sitesArray[$key] as $serv){
+											foreach ((array)$sitesArray as $key => $val){
+												foreach((array)$sitesArray[$key] as $serv){
 										?>
 											siteInfoWindow<?php echo $k; ?>.setContent(markers[<?php echo $k; ?>].locationName);
 										<?php
@@ -578,7 +584,7 @@ get_header(); ?>
 					
 					if ($leaflets !=''){
 						echo "<h3 id='leaflets'>Leaflets</h3><ul>";
-						foreach ($leaflets as $leaflet){
+						foreach ((array)$leaflets as $leaflet){
 						$attachlink = wp_get_attachment_url($leaflet);
 							echo "<li><a href='".$attachlink."'>";
 							echo get_the_title($leaflet);
@@ -636,7 +642,7 @@ get_header(); ?>
 				
 				<?php
 				}
-					foreach ($clinicianObjects as $clinObj){ 
+					foreach ((array)$clinicianObjects as $clinObj){ 
 						if (!$donetitle){
 							echo "<div class='sidebox' id='clinicians'><h3 class='sideboxhead'>Clinicians</h3><ul>";
 							$donetitle=true;
@@ -650,7 +656,7 @@ get_header(); ?>
 					
 					if ($wards){
 						$donetitle=false;
-						foreach ($wards as $ward){
+						foreach ((array)$wards as $ward){
 							if (!$donetitle){
 								echo "<div class='sidebox' id='wards'><h3 class='sideboxhead'>Wards</h3><ul>";
 								$donetitle=true;
@@ -666,7 +672,7 @@ get_header(); ?>
 
 					//run through each referrals to check if assigned to this service
 					$donetitle=false;					
-					foreach ($referralObjects as $referral) {
+					foreach ((array)$referralObjects as $referral) {
 						if (!$donetitle){
 							echo "<div class='sidebox' id='referralforms'><h3 class='sideboxhead'>Referral forms</h3><ul>";
 							$donetitle=true;

@@ -80,7 +80,7 @@
 										if ($post->post_type=='event') {$context = "Events";}
 										$terms = get_the_terms( $post->ID, 'sites' );
 										$serviceterms='';
-										foreach ($terms as $tm){
+										foreach ((array)$terms as $tm){
 											$serviceterms.=$tm->name.", ";
 										}
 										$serviceterms=substr($serviceterms, 0, strlen($serviceterms)-2);
@@ -102,8 +102,8 @@
 										if(get_post_type() == 'people'){
 											$itemService = get_post_meta($post->ID, "service-relationship");
 											$clinicianservice = "";
-											foreach($itemService as $serviceArray){
-												foreach($serviceArray as $service){
+											foreach((array)$itemService as $serviceArray){
+												foreach((array)$serviceArray as $service){
 													if($clinicianservice != ""){ $clinicianservice .= ", "; }
 													$clinicianservice .= get_the_title($service);
 												}
@@ -129,7 +129,7 @@
 										$foundtags=false;	
 										$tagstr="";
 									if ($posttags) {
-									  	foreach($posttags as $tag) {
+									  	foreach((array)$posttags as $tag) {
 									  			$foundtags=true;
 									  			$tagurl = $tag->slug;
 										    	$tagstr=$tagstr."
