@@ -19,7 +19,11 @@ get_header(); ?>
 
 				<h1><?php _e( 'Not found', 'twentyten' ); ?></h1>
 
-				<p><?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', 'twentyten' ); ?></p>
+				<p>
+				Apologies, but the page you requested could not be found. </p>
+				<p>We've just launched our new website and some pages have been moved around.
+				</p>
+				<p>What you are looking for may still be on the site. Please try searching or using the menu.</p>
 				<p class='aligncenter'><?php get_search_form(); ?></p>
 
 	<script type="text/javascript">

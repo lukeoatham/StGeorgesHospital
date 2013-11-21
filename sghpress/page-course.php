@@ -150,7 +150,7 @@ $paged = $_GET['$paged'];
 									
 									
 									if(!$item["thumbnail"]){
-										// $postThumb = "http://placehold.it/150x150";
+										$postThumb = "/wp-content/themes/sghpress/images/1x1.png";
 									}else{
 										$postThumb = $item["thumbnail"][0];
 									}

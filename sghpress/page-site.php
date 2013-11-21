@@ -61,7 +61,7 @@ $site = $_GET['site'];
 							$postThumb = wp_get_attachment_image_src($siteFIid, array(75,75));
 							
 							if(!$postThumb){
-								//$postThumb = "http://placehold.it/75x75";
+								$postThumb = "/wp-content/themes/sghpress/images/1x1.png";
 							}else{
 								$postThumb = $postThumb[0];
 							}

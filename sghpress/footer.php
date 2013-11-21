@@ -227,6 +227,7 @@
 </script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.hammer.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+	/*
 	var checkon = jQuery("#content").hammer();
 	var checkoff = jQuery("#secondarynav").hammer();
 	// the whole area
@@ -246,7 +247,7 @@
 	});
 	
 	
-	/*checkon.on("pinchin", function(ev){
+	checkon.on("pinchin", function(ev){
 		jQuery("#content").css({
 			"font-size": function( index, value ) {
 				console.log("font is" + value);
@@ -262,7 +263,7 @@
 				return parseFloat( value ) - 1;
 			}
 		});
-	});*/
+	});
 	
 	
 	checkon.on("swiperight", function(ev) {
@@ -270,12 +271,13 @@
 		jQuery("#mobileNav").prop('checked', true);
 		jQuery.cookie("sgh_mobile_nav", "true",{path:"/"});
 	});
+	*/
 </script>
 <?php
 	wp_footer();
 ?>
 
 
-<div class="visible-phone"></div>
+<div class="visible-phone"><a href="/feedback/">Feedback</a></div>
 </body>
 </html>

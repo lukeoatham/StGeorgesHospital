@@ -187,7 +187,7 @@ $hospsite = $_GET['hospsite'];
 										$postThumb = wp_get_attachment_image_src(get_post_thumbnail_id($serv["id"]), array(75,75), false);
 										
 										if(!$postThumb){
-											//$postThumb = "http://placehold.it/75x75";
+											$postThumb = "/wp-content/themes/sghpress/images/1x1.png";
 										}else{
 											$postThumb = $postThumb[0];
 										}

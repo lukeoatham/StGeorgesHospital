@@ -55,17 +55,19 @@ function gaTrackDownloadableFiles() {
 
 	for(var i = 0; i < links.length; i++) {
 		if (links[i].href.indexOf('.pdf') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'PDF', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		} else if (links[i].href.indexOf('.csv') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'CSV', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		} else if (links[i].href.indexOf('.doc') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'DOC', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		} else if (links[i].href.indexOf('.ppt') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'PPT', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		} else if (links[i].href.indexOf('.rtf') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'RTF', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		} else if (links[i].href.indexOf('.xls') != "-1") {
-			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackEvent', 'Downloads', 'XLS', '"+links[i].href+"']);");
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
+		} else if (links[i].href.indexOf('.rtf') != "-1") {
+			$(links[i]).attr("onclick","javascript: _gaq.push(['_trackPageview', '"+links[i].href+"']);");
 		}
 	}
 

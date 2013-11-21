@@ -893,9 +893,9 @@ body.page-template-page-threecol-php #sidebar {
 ul.xoxo {
     margin-bottom: 2em;
 }
-h2 a:link, h3 a:link, h2 a:visited, h3 a:visited {
-/*    text-decoration: none!important;
-    color: black!important; */
+.search h2 a:link, .search h3 a:link, .search h2 a:visited, .search h3 a:visited {
+    text-decoration: underline!important;
+    color: black!important; 
 }
 h2 a:hover, h3 a:hover {
     text-decoration: underline;
@@ -1479,7 +1479,9 @@ to {
 	padding-bottom: 0.2em;
 	display: inline-block;
 }
+#recaptcha_table tbody td {
 
+}
 #content table, #content table tr, #content table td{
 	border: 0px solid white;
 }
