@@ -893,7 +893,7 @@ body.page-template-page-threecol-php #sidebar {
 ul.xoxo {
     margin-bottom: 2em;
 }
-.search h2 a:link, .search h3 a:link, .search h2 a:visited, .search h3 a:visited {
+.search h2 a:link, .search h2 a:visited {
     text-decoration: underline!important;
     color: black!important; 
 }

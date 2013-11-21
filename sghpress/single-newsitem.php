@@ -98,6 +98,19 @@ get_header(); ?>
 										  	<p>&nbsp;</p>
 										  	<?php
 
+					$relatedpages = get_post_meta ($post->ID, 'related_pages', true);
+					if ($relatedpages){
+						echo "<h3>Related pages</h3><ul>";
+						foreach ((array)$relatedpages as $rp){
+							$rptitle = get_the_title($rp);
+							$rppost = get_post($rp);
+							$rpperm = get_permalink($rp);
+							echo "<li><a href='".$rpperm."'>".$rptitle."</a></li>";
+						}
+						echo "</ul>";
+					}
+
+
 			echo "<div id='newsposts'>";
 			$category = wp_get_post_terms( $post->ID, 'news-type'); $thiscat = $category[0]->slug;
 			$recentitems = new WP_Query(array(
@@ -147,6 +160,7 @@ get_header(); ?>
 					echo "</div>";
 				}
 			endwhile; 
+
 ?>
 
 							

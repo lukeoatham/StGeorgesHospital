@@ -227,6 +227,18 @@ switch ($floor) {
 						}
 					}
 					echo "</ul></div>";
+										$relatedpages = get_post_meta ($post->ID, 'related_pages', true);
+					if ($relatedpages){
+						echo "<h3>Related pages</h3><ul>";
+						foreach ((array)$relatedpages as $rp){
+							$rptitle = get_the_title($rp);
+							$rppost = get_post($rp);
+							$rpperm = get_permalink($rp);
+							echo "<li><a href='".$rpperm."'>".$rptitle."</a></li>";
+						}
+						echo "</ul>";
+					}
+
 	?>				
 	
 				</div>

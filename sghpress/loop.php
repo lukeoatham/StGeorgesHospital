@@ -52,8 +52,21 @@
 			    							}
 
 										echo "<div class='media-body'><h2 class='media-heading'>";
-										//if (get_post_type() == 'people') echo "<i class='icon-user'></i>";
-										echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
+										if ($post->post_type=='sites'){
+											echo "<a href='".$post->link."'>" . get_the_title() . "</a></h2>";	
+											$thissite = get_term_by('id', $post->term_id, 'sites');
+											global $wpdb;
+										    $q = "select option_value from wp_options where option_name = 'sites_".$post->term_id."_site_address'";
+										    $site_meta = $wpdb->get_results( $q );		
+										    $siteData = explode("|",wpautop($site_meta[0]->option_value));
+										    echo $siteData[0];
+										    $q = "select option_value from wp_options where option_name = 'sites_".$post->term_id."_site_contact'";
+										    $site_meta = $wpdb->get_results( $q );
+										    $siteTel = wpautop($site_meta[0]->option_value);
+											echo $siteTel;													
+										} else {
+											echo "<a href='" .get_permalink() . "'>" . get_the_title() . "</a></h2>";
+										}
 										echo "<p>";
 									
 										$context='';

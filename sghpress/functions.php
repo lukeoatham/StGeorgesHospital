@@ -1203,3 +1203,27 @@ class accessibleNav_walker extends Walker_Nav_Menu{
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 }
+
+function myfeed_request($qv) {
+	if (isset($qv['feed'])) {
+		$qv['post_type'] = array('newsitem','service','event','course','ward','page');
+		if ($_GET['post_type']=='newsitem'){
+			$qv['post_type'] = 'newsitem';
+		}
+		if ($_GET['post_type']=='service'){
+			$qv['post_type'] = 'service';
+		}
+		if ($_GET['post_type']=='event'){
+			$qv['post_type'] = 'event';
+		}
+		if ($_GET['post_type']=='course'){
+			$qv['post_type'] = 'course';
+		}
+		if ($_GET['post_type']=='ward'){
+			$qv['post_type'] = 'ward';
+		}
+		
+		}
+	return $qv;
+}
+add_filter('request', 'myfeed_request');

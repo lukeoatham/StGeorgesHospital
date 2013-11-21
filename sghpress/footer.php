@@ -227,7 +227,7 @@
 </script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.hammer.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	/*
+
 	var checkon = jQuery("#content").hammer();
 	var checkoff = jQuery("#secondarynav").hammer();
 	// the whole area
@@ -247,6 +247,7 @@
 	});
 	
 	
+	/*
 	checkon.on("pinchin", function(ev){
 		jQuery("#content").css({
 			"font-size": function( index, value ) {
@@ -265,13 +266,14 @@
 		});
 	});
 	
+	*/
 	
 	checkon.on("swiperight", function(ev) {
 		//$(this).highlight();
 		jQuery("#mobileNav").prop('checked', true);
 		jQuery.cookie("sgh_mobile_nav", "true",{path:"/"});
 	});
-	*/
+
 </script>
 <?php
 	wp_footer();
