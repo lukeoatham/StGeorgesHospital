@@ -1,9 +1,9 @@
 function markDocumentLinks() {
-	jQuery('a[href*=".pdf"]:not(.no-mark)').addClass('pdfdocument').append(' (PDF document)');
-	jQuery('a[href*=".xls"]:not(.no-mark)').addClass('xlsdocument').append(' (Excel document)');
-	jQuery('a[href*=".doc"]:not(.no-mark)').addClass('docdocument').append(' (Word document)');
-	jQuery('a[href*=".txt"]:not(.no-mark)').addClass('txtdocument').append(' (Text document)');
-	jQuery('a[href*=".csv"]:not(.no-mark)').addClass('docdocument').append(' (CSV document)');
+	jQuery('a[href*=".pdf"]:not(.no-mark)').addClass('pdfdocument').append(' (PDF)');
+	jQuery('a[href*=".xls"]:not(.no-mark)').addClass('xlsdocument').append(' (Excel)');
+	jQuery('a[href*=".doc"]:not(.no-mark)').addClass('docdocument').append(' (Word)');
+	jQuery('a[href*=".txt"]:not(.no-mark)').addClass('txtdocument').append(' (TXT)');
+	jQuery('a[href*=".csv"]:not(.no-mark)').addClass('docdocument').append(' (CSV)');
 	return true;	
 }
 

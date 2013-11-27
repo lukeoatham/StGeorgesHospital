@@ -140,6 +140,15 @@ switch ($floor) {
 							echo $m->post_title;
 							echo "</a></p>";
 						}
+						$wardmanagers = get_post_meta($post->ID, 'ward_manager', true);
+						foreach ($wardmanagers as $wardmanager){
+							// display location details 
+							echo "<p><strong>Ward manager: </strong>";
+							$m = get_post($wardmanager);
+							echo "<a href='".$m->guid."'>";
+							echo $m->post_title;
+							echo "</a></p>";
+						}
 
 						$sisters = get_post_meta($post->ID, 'sister_in_charge', true);
 						foreach ($sisters as $sister){

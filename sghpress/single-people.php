@@ -147,12 +147,14 @@ get_header(); ?>
 						
 						
 						$clinicianservices=get_post_meta($post->ID, 'service-relationship',true);
-						if ($clinicianservices){
+						if ($clinicianservices !=''){
 							echo "<div class='sidebox'><h3>Services</h3><ul>";
 							//check each element in the array to see if it matches this service
 							foreach ($clinicianservices as $clinicianservice){ 
 								$thisservice = get_post($clinicianservice);
+								if ($thisservice->post_status == "publish"){
 								echo "<li><a href='".$thisservice->guid."'>".$thisservice->post_title."</a></li>";
+								}
 							}
 							echo "</ul></div>";
 						}

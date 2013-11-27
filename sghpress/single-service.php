@@ -586,7 +586,7 @@ get_header(); ?>
 						echo "<h3 id='leaflets'>Leaflets</h3><ul>";
 						foreach ((array)$leaflets as $leaflet){
 						$attachlink = wp_get_attachment_url($leaflet);
-							echo "<li><a href='".$attachlink."'>";
+							echo "<li class='no-bullet'><a href='".$attachlink."'>";
 							echo get_the_title($leaflet);
 							echo "</a></li>";
 						}
@@ -705,7 +705,10 @@ get_header(); ?>
 				}
 						
 							?>	
-
+				<h3>Further information for GPs</h3>
+				<ul>
+				<li><a href="https://www.stgeorges.nhs.uk/gps-and-clinicians/services/outpatient-service-directory/">Outpatient service delivery</a></li>
+				</ul>
 	
 				</div>
 	

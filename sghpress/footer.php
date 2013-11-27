@@ -275,11 +275,11 @@
 	});
 
 </script>
+
 <?php
 	wp_footer();
 ?>
 
 
-<div class="visible-phone"><a href="/feedback/">Feedback</a></div>
 </body>
 </html>

@@ -195,18 +195,53 @@ function twentyten_filter_wp_title( $title, $separator ) {
 
 	if ( is_search() ) {
 		// If we're a search, let's start over:
-		$title = sprintf( __( 'Search results for %s', 'twentyten' ), '"' . get_search_query() . '"' );
+		$title = sprintf( __( 'Search for %s', 'twentyten' ), '"' . get_search_query() . '"' );
 		// Add a page number if we're on page 2 or more:
 		if ( $paged >= 2 )
 			$title .= " $separator " . sprintf( __( 'Page %s', 'twentyten' ), $paged );
 		// Add the site name to the end:
-		$title .= " $separator " . get_bloginfo( 'name', 'display' );
+		//$title .= " $separator " . get_bloginfo( 'name', 'display' );
 		// We're done. Let's send the new title back to wp_title():
 		return $title;
 	}
 
 	// Otherwise, let's start by adding the site name to the end:
 	$title .= get_bloginfo( 'name', 'display' );
+	
+	global $post;
+	$pt = $post->post_type;
+
+	if ($pt == "newsitem"  ) {
+		$title .= " news" ;
+	}
+	else if ($pt == "service"  ) {
+		$title .= " services" ;
+	}
+	else if ($pt == "people"  ) {
+		$title .= " clinicians" ;
+	}
+	else if ($pt == "ward"  ) {
+		$title .= " wards" ;
+	}
+	else if ($pt == "events"  ) {
+		$title .= " events" ;
+	}
+	else if ($pt == "course"  ) {
+		$title .= " courses" ;
+	}
+	else if ($pt == "blog"  ) {
+		$title .= " blog" ;
+	}
+	else if ($pt == "page"  ) {
+		if ($_GET['site']){
+			$sitetax = get_term_by('slug',$_GET['site'],'sites',ARRAY_A);
+			$title = $sitetax['name'] . " contacts, address and travel information ";
+		}
+	} 
+	else {
+		$title .= " ".$pt;
+	}
+
 
 	// If we have a site description and we're on the home/front page, add the description:
 	$site_description = get_bloginfo( 'description', 'display' );

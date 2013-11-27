@@ -979,10 +979,23 @@ li.comment .comment-body {
     padding-bottom: 1em!important;
 }
 .pdfdocument {
-    padding-left: 2em;
-    background: url('images/pdf-trans.png') no-repeat;
+    padding-left: 1.5em;
+    background: url('images/pdf.gif') no-repeat;
 }
-
+.docdocument {
+    padding-left: 1.5em;
+    background: url('images/doc.gif') no-repeat;
+}
+#sidebar .no-bullet, #content .no-bullett {
+	list-style: none !important;
+	margin-left: 0 !important;
+	line-height: 1.61em;
+}
+.listnone li{
+	list-style: none !important;
+	margin-left: 0 !important;
+	line-height: 1.61em;
+}
 #ourvalues {
     background: #A01F61;	
     margin-top: 1em;

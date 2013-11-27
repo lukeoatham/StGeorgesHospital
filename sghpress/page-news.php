@@ -146,29 +146,29 @@ $newstype = $_GET['type'];
 						<?php  
 							
 							$docs = get_posts(
-		array(
-		"post_type" => "attachment",
-		"posts_per_page" => 3,
-		"orderby"=>"title",
-		"order"=>"DESC",
-		"tax_query" => array(array(
-			"taxonomy" => "category",
-			"terms" => 'gazette',
-			"field" => "slug"
-			)
-			),
-	));
-	$taxname =  get_term_by( "slug", $doccat, "category" ) ;
-	$output .= "<ul class='showbullets'>";
-	foreach((array)$docs as $c) {
-		$output .= "<li><a href='".wp_get_attachment_url($c->ID)."'>".get_the_title($c->ID)."</a></li>";
-	}
-	$output .= "</ul>";
-	echo "<div class='htpeoplepageblock'>" . $output . "</div>";
+								array(
+								"post_type" => "attachment",
+								"posts_per_page" => 3,
+								"orderby"=>"title",
+								"order"=>"DESC",
+								"tax_query" => array(array(
+									"taxonomy" => "category",
+									"terms" => 'gazette',
+									"field" => "slug"
+									)
+									),
+							));
+							$taxname =  get_term_by( "slug", $doccat, "category" ) ;
+							$output .= "<ul class='showbullets'>";
+							foreach((array)$docs as $c) {
+								$output .= "<li class='no-bullet'><a href='".wp_get_attachment_url($c->ID)."'>".get_the_title($c->ID)."</a></li>";
+							}
+							$output .= "</ul>";
+							echo "<div class='htpeoplepageblock'>" . $output . "</div>";
 
 							
 						?>
-						<a href="/news/publications/the-gazette/">Older Gazettes</a>
+						<a href="/news/publications/the-gazette/">Older Gazettes &raquo;</a>
 					</div>
 				</div>
 
