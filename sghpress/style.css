@@ -986,7 +986,7 @@ li.comment .comment-body {
     padding-left: 1.5em;
     background: url('images/doc.gif') no-repeat;
 }
-#sidebar .no-bullet, #content .no-bullett {
+#sidebar .no-bullet, #content .no-bullet {
 	list-style: none !important;
 	margin-left: 0 !important;
 	line-height: 1.61em;
