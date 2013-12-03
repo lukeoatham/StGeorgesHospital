@@ -59,8 +59,12 @@ get_header();
 
 					the_post_thumbnail('medium');
 					
+					$sidebox = get_post_meta ($post->ID, 'page_sidebox', true);
+					if ($sidebox){
+						echo wpautop($sidebox);
+					}
+
 					$relatedpages = get_post_meta ($post->ID, 'related_pages', true);
-//					print_r($relatedpages);
 					if ($relatedpages){
 						echo "<h3>Related pages</h3><ul>";
 						foreach ((array)$relatedpages as $rp){
