@@ -93,14 +93,14 @@ if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 					?>	
 					
 						<h2>Filter services</h2>
-						<h3>Site</h3>
+						<h4>Site</h4>
 						<ul class="nav site-pills nav-pills">
 							<li class="active"><a href="#" data-toggle="tab" id="allSites">All sites</a></li>
 							<?php	foreach($sites as $siteKey => $siteVal){
 								echo "<li><a href=\"/services/a-z/?site=".$siteKey."\" class=\"site\">".$siteVal."</a></li>";
 							}?>
 						</ul>
-						<h3>Service</h3>
+						<h4>Service</h4>
 						<ul class="nav letter-pills nav-pills">
 							<li class="active"><a href="#" data-toggle="tab" id="allServs">All services</a></li>
 							<?php

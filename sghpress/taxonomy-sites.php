@@ -1,5 +1,4 @@
 <?php
-/* Template name: Sites page */
 
 get_header();
 
@@ -7,7 +6,7 @@ $r = $_SERVER['REQUEST_URI'];
 $r = explode('/', $r);
 $site=$r[2];
 
-wp_redirect( home_url()."/contact-and-find-us/find-us/sites/?site=".$r[2],301 ); exit;
+wp_redirect( home_url()."/contact-and-find-us/find-us/?site=".$r[2],301 ); exit;
  ?>
 
 <?php 

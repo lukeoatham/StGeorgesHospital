@@ -66,9 +66,9 @@ $site = $_GET['site'];
 								$postThumb = $postThumb[0];
 							}
 							
-							echo "<div class=\"media-object pull-left\"><a href='/contact-and-find-us/find-us/sites/?site=".$s->slug."'><img src=\"".$postThumb."\" class=\"service-thumbnail\"></a></div>";
+							echo "<div class=\"media-object pull-left\"><a href='/contact-and-find-us/find-us/?site=".$s->slug."'><img src=\"".$postThumb."\" class=\"service-thumbnail\"></a></div>";
 							
-							echo "<div class=\"media-body\"><h4><a href=\"/contact-and-find-us/find-us/sites/?site=".$s->slug."\">".$s->name."</a></h4>";
+							echo "<div class=\"media-body\"><h4><a href=\"/contact-and-find-us/find-us/?site=".$s->slug."\">".$s->name."</a></h4>";
 							
 							echo "<div class=\"row-fluid\">";
 							
