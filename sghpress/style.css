@@ -918,6 +918,9 @@ tr td {
     border-top: 1px solid #e7e7e7;
     padding: .5em 1em;
 }
+.tablepress img {
+	padding: 0 1em 0 0 !important;
+}
 .paginationnav {
     text-align: center;
 }
